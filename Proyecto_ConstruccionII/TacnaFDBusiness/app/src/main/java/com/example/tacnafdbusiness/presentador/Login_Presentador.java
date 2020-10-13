@@ -1,5 +1,7 @@
 package com.example.tacnafdbusiness.presentador;
 
+import android.content.Context;
+
 import com.example.tacnafdbusiness.interactor.Login_Interactor;
 import com.example.tacnafdbusiness.interactor.RegistroUsuario_Interactor;
 import com.example.tacnafdbusiness.interfaces.Login;
@@ -22,10 +24,24 @@ public class Login_Presentador implements Login.Presenter, Login.onOperationList
     }
 
     @Override
-    public void onSuccess() {
-        mView.onLogInSuccessful();
+    public void SaveSession(Context context, String correo_electronico, String nombre_usuario, String id_usuario) {
+        mInteractor.performSaveSession(context, correo_electronico, nombre_usuario, id_usuario);
     }
 
+    @Override
+    public void CheckSession(Context context) {
+        mInteractor.performCheckSession(context);
+    }
+
+    @Override
+    public void onSuccessCheck() {
+        mView.onSuccessfulCheck();
+    }
+
+    @Override
+    public void onSuccess(String nombre_usuario, String id_usuario) {
+        mView.onLogInSuccessful(nombre_usuario, id_usuario);
+    }
     @Override
     public void onFailure() {
         mView.onLogInFailure();

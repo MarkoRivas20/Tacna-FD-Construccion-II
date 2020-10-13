@@ -3,9 +3,11 @@ package com.example.tacnafdbusiness.vista;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
@@ -20,10 +22,15 @@ public class IngresarCodigo_Vista extends AppCompatActivity {
 
     PinView pinView;
 
+    Window window;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingresar_codigo__vista);
+
+        this.window=getWindow();
+        window.setStatusBarColor(Color.parseColor("#003152"));
 
         Bundle datos = this.getIntent().getExtras();
         Codigo = datos.getInt("codigo");

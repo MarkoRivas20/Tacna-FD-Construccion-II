@@ -1,16 +1,16 @@
 package com.example.tacnafdbusiness.presentador;
 
 import com.example.tacnafdbusiness.interactor.RegistroUsuario_Interactor;
-import com.example.tacnafdbusiness.interfaces.Registro;
+import com.example.tacnafdbusiness.interfaces.RegistrarUsuario;
 import com.example.tacnafdbusiness.modelo.Usuario_Modelo;
 import com.google.firebase.database.DatabaseReference;
 
-public class RegistroUsuario_Presentador implements Registro.Presenter, Registro.onOperationListener {
+public class RegistroUsuario_Presentador implements RegistrarUsuario.Presenter, RegistrarUsuario.onOperationListener {
 
-    private Registro.View mView;
+    private RegistrarUsuario.View mView;
     private RegistroUsuario_Interactor mInteractor;
 
-    public RegistroUsuario_Presentador(Registro.View mView) {
+    public RegistroUsuario_Presentador(RegistrarUsuario.View mView) {
         this.mView = mView;
         mInteractor=new RegistroUsuario_Interactor(this);
     }

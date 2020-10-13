@@ -2,20 +2,22 @@ package com.example.tacnafdbusiness.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tacnafdbusiness.R;
-import com.example.tacnafdbusiness.interfaces.Registro;
+import com.example.tacnafdbusiness.interfaces.RegistrarUsuario;
 import com.example.tacnafdbusiness.modelo.Usuario_Modelo;
 import com.example.tacnafdbusiness.presentador.RegistroUsuario_Presentador;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class RegistroUsuario_Vista extends AppCompatActivity implements Registro.View {
+public class RegistroUsuario_Vista extends AppCompatActivity implements RegistrarUsuario.View {
 
     public RegistroUsuario_Presentador mPresenter;
     public DatabaseReference mReference;
@@ -30,10 +32,15 @@ public class RegistroUsuario_Vista extends AppCompatActivity implements Registro
 
     Button BtnCrear;
 
+    Window window;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario__vista);
+
+        this.window=getWindow();
+        window.setStatusBarColor(Color.parseColor("#003152"));
 
         mPresenter=new RegistroUsuario_Presentador(this);
         mReference= FirebaseDatabase.getInstance().getReference().child("Usuario_Propietario");

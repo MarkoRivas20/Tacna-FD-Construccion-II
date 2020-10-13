@@ -41,6 +41,8 @@ public class Login_Vista extends AppCompatActivity implements Login.View {
         mPresenter=new Login_Presentador(this);
         mReference= FirebaseDatabase.getInstance().getReference().child("Usuario_Propietario");
 
+        mPresenter.CheckSession(getApplicationContext());
+
         TxtEmail = (EditText) findViewById(R.id.txtemail);
         TxtClave = (EditText) findViewById(R.id.txtclave);
 
@@ -76,13 +78,24 @@ public class Login_Vista extends AppCompatActivity implements Login.View {
     }
 
     @Override
-    public void onLogInSuccessful() {
-        Toast.makeText(getApplicationContext(),"Nuevo Usuario creado",Toast.LENGTH_SHORT).show();
+    public void onLogInSuccessful(String nombre_usuario, String id_usuario) {
+        mPresenter.SaveSession(getApplicationContext(), TxtEmail.getText().toString(), nombre_usuario, id_usuario);
+
+        Intent intent = new Intent(getApplicationContext(), PantallaPrincipal_Vista.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
     public void onLogInFailure() {
         TxtEmail.setError("Credenciales invalidas");
         TxtClave.setError("Credenciales invalidas");
+    }
+
+    @Override
+    public void onSuccessfulCheck() {
+        Intent intent = new Intent(getApplicationContext(), PantallaPrincipal_Vista.class);
+        startActivity(intent);
+        finish();
     }
 }

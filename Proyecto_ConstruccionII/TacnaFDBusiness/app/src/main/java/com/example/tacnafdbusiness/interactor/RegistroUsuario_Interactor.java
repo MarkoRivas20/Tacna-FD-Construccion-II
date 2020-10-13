@@ -2,7 +2,7 @@ package com.example.tacnafdbusiness.interactor;
 
 import androidx.annotation.NonNull;
 
-import com.example.tacnafdbusiness.interfaces.Registro;
+import com.example.tacnafdbusiness.interfaces.RegistrarUsuario;
 import com.example.tacnafdbusiness.modelo.Usuario_Modelo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -14,13 +14,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class RegistroUsuario_Interactor implements Registro.Interactor {
+public class RegistroUsuario_Interactor implements RegistrarUsuario.Interactor {
 
-    private Registro.onOperationListener mListener;
+    private RegistrarUsuario.onOperationListener mListener;
 
     private ArrayList<Usuario_Modelo> usuario_modelos=new ArrayList<>();
 
-    public RegistroUsuario_Interactor(Registro.onOperationListener mListener) {
+    public RegistroUsuario_Interactor(RegistrarUsuario.onOperationListener mListener) {
         this.mListener = mListener;
     }
 

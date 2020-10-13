@@ -1,5 +1,8 @@
 package com.example.tacnafdbusiness.interactor;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import androidx.annotation.NonNull;
 
 import com.example.tacnafdbusiness.interfaces.Login;
@@ -17,6 +20,8 @@ public class Login_Interactor implements Login.Interactor {
     private Login.onOperationListener mListener;
 
     private ArrayList<Usuario_Modelo> usuario_modelos=new ArrayList<>();
+
+    private String Nombre_Usuario = "";
 
     public Login_Interactor(Login.onOperationListener mListener) {
         this.mListener = mListener;
@@ -39,7 +44,8 @@ public class Login_Interactor implements Login.Interactor {
 
                     if(usuario_modelo.getContrasena().equals(contrasena)){
                         booleano = true;
-                        mListener.onSuccess();
+                        Nombre_Usuario = usuario_modelo.getNombre() + " " + usuario_modelo.getApellido();
+                        mListener.onSuccess(Nombre_Usuario, usuario_modelo.getID_Usuario());
                     }
                 }
 
@@ -53,5 +59,26 @@ public class Login_Interactor implements Login.Interactor {
                 mListener.onFailure();
             }
         });
+    }
+    @Override
+    public void performSaveSession(Context context, String correo_electronico, String nombre_usuario, String id_usuario) {
+
+        SharedPreferences sharedPref = context.getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("correo_electronico", correo_electronico);
+        editor.putString("nombre_usuario", nombre_usuario);
+        editor.putString("id_usuario", id_usuario);
+        editor.apply();
+
+    }
+
+    @Override
+    public void performCheckSession(Context context) {
+
+        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
+        String Correo_Electronico = sharedPref.getString("correo_electronico","");
+        if(Correo_Electronico.length() != 0){
+            mListener.onSuccessCheck();
+        }
     }
 }

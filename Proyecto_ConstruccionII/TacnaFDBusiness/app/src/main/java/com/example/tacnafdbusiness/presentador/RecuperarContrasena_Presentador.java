@@ -1,9 +1,7 @@
 package com.example.tacnafdbusiness.presentador;
 
 import com.example.tacnafdbusiness.interactor.RecuperarContrasena_Interactor;
-import com.example.tacnafdbusiness.interactor.RegistroUsuario_Interactor;
 import com.example.tacnafdbusiness.interfaces.RecuperarContrasena;
-import com.example.tacnafdbusiness.interfaces.Registro;
 import com.google.firebase.database.DatabaseReference;
 
 public class RecuperarContrasena_Presentador implements RecuperarContrasena.Presenter, RecuperarContrasena.onOperationListener {

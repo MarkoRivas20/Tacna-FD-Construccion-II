@@ -3,6 +3,7 @@
     package="com.example.tacnafdbusiness">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -11,18 +12,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".vista.PantallaPrincipal_Vista"></activity>
         <activity android:name=".vista.RecuperarContrasena_Vista"></activity>
         <activity android:name=".vista.IngresarCodigo_Vista" />
-        <activity android:name=".vista.BuscarEmail_Vista"></activity>
+        <activity android:name=".vista.BuscarEmail_Vista" />
         <activity android:name=".vista.RegistroUsuario_Vista" />
         <activity android:name=".vista.Login_Vista">
+
+        </activity>
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
 
 </manifest>

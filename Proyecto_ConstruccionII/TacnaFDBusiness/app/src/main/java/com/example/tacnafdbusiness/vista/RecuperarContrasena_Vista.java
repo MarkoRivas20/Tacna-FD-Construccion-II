@@ -3,8 +3,10 @@ package com.example.tacnafdbusiness.vista;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,10 +30,15 @@ public class RecuperarContrasena_Vista extends AppCompatActivity implements Recu
 
     String Correo_Electronico;
 
+    Window window;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recuperar_contrasena__vista);
+
+        this.window=getWindow();
+        window.setStatusBarColor(Color.parseColor("#003152"));
 
         Bundle datos = this.getIntent().getExtras();
         Correo_Electronico = datos.getString("correo_electronico");

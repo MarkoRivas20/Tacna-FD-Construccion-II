@@ -5,7 +5,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
-public interface Registro {
+public interface RegistrarUsuario {
 
     interface View{
         void onCreateUserSuccessful();
