@@ -27,6 +27,16 @@ public class ListarEstablecimiento_Presentador implements ListarEstablecimiento.
     }
 
     @Override
+    public void SaveEstablishmentInfo(Context context, String Id_Establecimiento, String Nombre_Establecimiento, String Url_Logo, String Url_Documento) {
+        mInteractor.performSaveEstablishmentInfo(context, Id_Establecimiento, Nombre_Establecimiento, Url_Logo, Url_Documento);
+    }
+
+    @Override
+    public void FilterEstablishment(ArrayList<Establecimiento_Modelo> establecimientos, String Nombre_Establecimiento) {
+        mInteractor.performFilterEstablishment(establecimientos, Nombre_Establecimiento);
+    }
+
+    @Override
     public void GetSessionData(Context context) {
         mInteractor.performGetSessionData(context);
     }
@@ -44,5 +54,10 @@ public class ListarEstablecimiento_Presentador implements ListarEstablecimiento.
     @Override
     public void onSuccessGetSessionData(String ID_Usuario) {
         mView.onSessionDataSuccessful(ID_Usuario);
+    }
+
+    @Override
+    public void onSuccessFilter(ArrayList<Establecimiento_Modelo> establecimientos, Boolean buscar_establecimiento) {
+        mView.onFilterSuccessful(establecimientos, buscar_establecimiento);
     }
 }

@@ -17,6 +17,7 @@ import com.example.tacnafdbusiness.vista.Login_Vista;
 
 public class MainActivity extends AppCompatActivity {
 
+
     ImageView Imagen_Tacna;
     ImageView Imagen_Business;
 
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         },5000);
-
+        
 
     }
 }

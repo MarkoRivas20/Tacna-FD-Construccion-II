@@ -15,12 +15,27 @@ import com.example.tacnafdbusiness.R;
 import com.example.tacnafdbusiness.modelo.Establecimiento_Modelo;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Establecimiento_Adaptador extends RecyclerView.Adapter<Establecimiento_Adaptador.Establecimiento_ViewHolder> {
+public class Establecimiento_Adaptador extends RecyclerView.Adapter<Establecimiento_Adaptador.Establecimiento_ViewHolder> implements View.OnClickListener {
 
     private List<Establecimiento_Modelo> Items;
     private Context Contexto;
+    private View.OnClickListener Listener;
+
+    @Override
+    public void onClick(View v) {
+        if (Listener != null)
+        {
+            Listener.onClick(v);
+        }
+
+    }
+
+    public void setOnClickListener (View.OnClickListener listener){
+        this.Listener = listener;
+    }
 
 
     public static class Establecimiento_ViewHolder extends RecyclerView.ViewHolder{
@@ -63,13 +78,18 @@ public class Establecimiento_Adaptador extends RecyclerView.Adapter<Establecimie
     @Override
     public Establecimiento_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_establecimientos, parent, false);
-
+        v.setOnClickListener(this);
         return new Establecimiento_ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Establecimiento_Adaptador.Establecimiento_ViewHolder holder, int position) {
         holder.bindData(Items.get(position), Contexto);
+    }
+
+    public void  filterlist (ArrayList<Establecimiento_Modelo> filtereslist){
+        Items = filtereslist;
+        notifyDataSetChanged();
     }
 
     @Override

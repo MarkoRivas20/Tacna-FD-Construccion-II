@@ -21,7 +21,11 @@ public class ListarEstablecimineto_Interactor implements ListarEstablecimiento.I
 
     private ListarEstablecimiento.onOperationListener mListener;
 
-    private ArrayList<Establecimiento_Modelo> establecimiento_modelos=new ArrayList<>();
+    private ArrayList<Establecimiento_Modelo> establecimiento_modelos = new ArrayList<>();
+
+    private ArrayList<Establecimiento_Modelo> lista_filtrada;
+
+    Boolean buscar_establecimiento = false;
 
     public ListarEstablecimineto_Interactor(ListarEstablecimiento.onOperationListener mListener) {
         this.mListener = mListener;
@@ -72,5 +76,31 @@ public class ListarEstablecimineto_Interactor implements ListarEstablecimiento.I
             mListener.onFailure();
         }
 
+    }
+
+    @Override
+    public void performSaveEstablishmentInfo(Context context, String Id_Establecimiento, String Nombre_Establecimiento, String Url_Logo, String Url_Documento) {
+        SharedPreferences sharedPref = context.getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("id_establecimiento", Id_Establecimiento);
+        editor.putString("nombre_establecimiento", Nombre_Establecimiento);
+        editor.putString("url_logo", Url_Logo);
+        editor.putString("url_documento", Url_Documento);
+        editor.apply();
+    }
+
+    @Override
+    public void performFilterEstablishment(ArrayList<Establecimiento_Modelo> establecimientos, String Nombre_Establecimiento) {
+        lista_filtrada = new ArrayList<>();
+
+        for (Establecimiento_Modelo item:establecimientos)
+        {
+            if(item.getNombre().toLowerCase().contains(Nombre_Establecimiento.toLowerCase()))
+            {
+                lista_filtrada.add(item);
+                buscar_establecimiento = true;
+            }
+        }
+        mListener.onSuccessFilter(lista_filtrada, buscar_establecimiento);
     }
 }

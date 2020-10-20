@@ -118,13 +118,14 @@
                     </ImageView>
 
                     <TextView
-                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/convergence"
+                        android:text="Establecimientos"
                         android:textAlignment="center"
                         android:textColor="#fff"
-                        android:textStyle="bold"
-                        android:text="Establecimientos">
+                        android:textStyle="bold">
 
                     </TextView>
                 </LinearLayout>
@@ -199,13 +200,14 @@
                     </ImageView>
 
                     <TextView
-                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/convergence"
+                        android:text="Ventas"
                         android:textAlignment="center"
                         android:textColor="#fff"
-                        android:textStyle="bold"
-                        android:text="Ventas">
+                        android:textStyle="bold">
 
                     </TextView>
                 </LinearLayout>
@@ -281,14 +283,15 @@
                     </ImageView>
 
                     <TextView
-                        android:layout_marginTop="7dp"
-                        android:layout_marginLeft="30dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="7dp"
+                        android:fontFamily="@font/convergence"
+                        android:text="Establecimiento con mayor ventas del mes"
                         android:textAlignment="center"
                         android:textColor="#fff"
-                        android:textStyle="bold"
-                        android:text="Establecimiento con mayor ventas del mes">
+                        android:textStyle="bold">
 
                     </TextView>
                 </LinearLayout>
@@ -364,14 +367,15 @@
                     </ImageView>
 
                     <TextView
-                        android:layout_marginTop="7dp"
-                        android:layout_marginLeft="30dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="7dp"
+                        android:fontFamily="@font/convergence"
+                        android:text="Establecimiento mejor calificado"
                         android:textAlignment="center"
                         android:textColor="#fff"
-                        android:textStyle="bold"
-                        android:text="Establecimiento mejor calificado">
+                        android:textStyle="bold">
 
                     </TextView>
                 </LinearLayout>
@@ -449,14 +453,15 @@
                     </ImageView>
 
                     <TextView
-                        android:layout_marginTop="7dp"
-                        android:layout_marginLeft="30dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="7dp"
+                        android:fontFamily="@font/convergence"
+                        android:text="Establecimiento con mas comentarios"
                         android:textAlignment="center"
                         android:textColor="#fff"
-                        android:textStyle="bold"
-                        android:text="Establecimiento con mas comentarios">
+                        android:textStyle="bold">
 
                     </TextView>
                 </LinearLayout>

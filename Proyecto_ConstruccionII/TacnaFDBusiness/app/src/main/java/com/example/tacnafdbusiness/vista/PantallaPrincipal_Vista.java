@@ -46,7 +46,7 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
         setContentView(R.layout.activity_pantalla_principal__vista);
 
         this.window=getWindow();
-        window.setStatusBarColor(Color.parseColor("#003152"));
+        window.setStatusBarColor(Color.parseColor("#0031A8"));
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
