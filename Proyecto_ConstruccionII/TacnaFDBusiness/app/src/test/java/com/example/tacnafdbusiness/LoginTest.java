@@ -34,9 +34,9 @@ public class LoginTest {
 
     @Before
     public void setUp() throws Exception{
-        login_presentador = new Login_Presentador(login_vista);
-            mReference= FirebaseDatabase.getInstance().getReference().child("Usuario_Propietario");
 
+        login_presentador = new Login_Presentador(login_vista);
+        mReference= FirebaseDatabase.getInstance().getReference().child("Usuario_Propietario");
 
     }
 

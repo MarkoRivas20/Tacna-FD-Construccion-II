@@ -41,22 +41,19 @@ public class ListarEstablecimineto_Interactor implements ListarEstablecimiento.I
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                Boolean booleano = false;
+                Boolean Existe_Establecimiento = false;
 
                 for(DataSnapshot postSnapshot : snapshot.getChildren()){
-                    booleano = true;
+                    Existe_Establecimiento = true;
                     Establecimiento_Modelo establecimiento_modelo = postSnapshot.getValue(Establecimiento_Modelo.class);
                     establecimiento_modelos.add(establecimiento_modelo);
                 }
-                if(booleano){
-                    mListener.onSuccess(establecimiento_modelos);
-                }else{
-                    mListener.onFailure();
-                }
+                mListener.onSuccess(establecimiento_modelos, Existe_Establecimiento);
+
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(DatabaseError error) {
                 mListener.onFailure();
             }
         });

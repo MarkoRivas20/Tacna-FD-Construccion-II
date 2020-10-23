@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public interface ListarEstablecimiento {
 
     interface View{
-        void onSearchEstablishmentSuccessful(ArrayList<Establecimiento_Modelo> establecimiento);
+        void onSearchEstablishmentSuccessful(ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento);
         void onSearchEstablishmentFailure();
         void onSessionDataSuccessful(String ID_Usuario);
         void onFilterSuccessful(ArrayList<Establecimiento_Modelo> establecimientos, Boolean buscar_establecimiento);
@@ -31,7 +31,7 @@ public interface ListarEstablecimiento {
     }
 
     interface onOperationListener{
-        void onSuccess(ArrayList<Establecimiento_Modelo> establecimiento);
+        void onSuccess(ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento);
         void onFailure();
         void onSuccessGetSessionData(String ID_Usuario);
         void onSuccessFilter(ArrayList<Establecimiento_Modelo> establecimientos, Boolean buscar_establecimiento);

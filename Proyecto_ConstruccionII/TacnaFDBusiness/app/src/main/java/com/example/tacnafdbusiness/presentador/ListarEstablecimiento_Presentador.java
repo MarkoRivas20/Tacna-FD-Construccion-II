@@ -42,8 +42,8 @@ public class ListarEstablecimiento_Presentador implements ListarEstablecimiento.
     }
 
     @Override
-    public void onSuccess(ArrayList<Establecimiento_Modelo> establecimiento) {
-        mView.onSearchEstablishmentSuccessful(establecimiento);
+    public void onSuccess(ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento) {
+        mView.onSearchEstablishmentSuccessful(establecimiento, Existe_Establecimiento);
     }
 
     @Override

@@ -58,6 +58,7 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
     ArrayList<Establecimiento_Modelo> filtrar_establecimientos = new ArrayList<>();
 
     Boolean buscar_establecimiento;
+    Boolean Existe_Establecimiento = false;
 
 
     @Override
@@ -87,6 +88,7 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
         BtnRegistro_Establecimiento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TxtBuscar.setText("");
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, registrarEstablecimiento_vista).addToBackStack(null).commit();
             }
         });
@@ -104,7 +106,9 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
 
             @Override
             public void afterTextChanged(Editable s) {
-                mPresenter.FilterEstablishment(establecimientos,s.toString());
+                if(Existe_Establecimiento){
+                    mPresenter.FilterEstablishment(establecimientos,s.toString());
+                }
 
             }
         });
@@ -113,23 +117,22 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
     }
 
     @Override
-    public void onSearchEstablishmentSuccessful(final ArrayList<Establecimiento_Modelo> establecimiento) {
+    public void onSearchEstablishmentSuccessful(final ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento) {
 
         establecimientos=establecimiento;
-        LblNo_Establecimiento.setVisibility(View.GONE);
-        Adaptador = new Establecimiento_Adaptador(establecimiento, getActivity().getApplicationContext());
+        Adaptador = new Establecimiento_Adaptador(establecimiento, getActivity());
         Adaptador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(!buscar_establecimiento){
-                    mPresenter.SaveEstablishmentInfo(getActivity().getApplicationContext(),establecimiento.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento(),
+                    mPresenter.SaveEstablishmentInfo(getActivity(),establecimiento.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento(),
                             establecimiento.get(Recycler_View.getChildAdapterPosition(v)).getNombre(), establecimiento.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Logo(),
                             establecimiento.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Documento());
                 }
                 else
                 {
-                    mPresenter.SaveEstablishmentInfo(getActivity().getApplicationContext(),filtrar_establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento(),
+                    mPresenter.SaveEstablishmentInfo(getActivity(),filtrar_establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento(),
                             filtrar_establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getNombre(), filtrar_establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Logo(),
                             filtrar_establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Documento());
                 }
@@ -142,12 +145,22 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
         Recycler_View.setLayoutManager(Layout_Manager);
         Recycler_View.setAdapter(Adaptador);
 
+        if(Existe_Establecimiento)
+        {
+            LblNo_Establecimiento.setVisibility(View.GONE);
+            this.Existe_Establecimiento = true;
+        }
+        else
+        {
+            LblNo_Establecimiento.setVisibility(View.VISIBLE);
+            this.Existe_Establecimiento = false;
+        }
 
     }
 
     @Override
     public void onSearchEstablishmentFailure() {
-        LblNo_Establecimiento.setVisibility(View.VISIBLE);
+        Toast.makeText(getActivity().getApplicationContext(),"Algo paso...", Toast.LENGTH_SHORT).show();
 
     }
 
