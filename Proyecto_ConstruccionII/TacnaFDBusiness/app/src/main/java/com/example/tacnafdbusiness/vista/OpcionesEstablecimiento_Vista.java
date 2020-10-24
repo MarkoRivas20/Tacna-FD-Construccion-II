@@ -30,9 +30,11 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
     ImageView Logo_Establecimiento;
     ImageView ImgDatos_Generales;
     ImageView ImgImagenes;
+    ImageView ImgRepartidores;
 
     ModificarEstablecimiento_Vista modificarEstablecimiento_vista;
-    CRUDImagenes_Vista CRUDImagenes_vista;
+    CRUDImagenes_Vista crudImagenes_vista;
+    CRUDRepartidor_Vista crudRepartidor_vista;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,9 +46,11 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
         Logo_Establecimiento = (ImageView) view.findViewById(R.id.logo_establecimiento);
         ImgDatos_Generales = (ImageView) view.findViewById(R.id.ImgDatos_Generales);
         ImgImagenes = (ImageView) view.findViewById(R.id.ImgImagenes);
+        ImgRepartidores = (ImageView) view.findViewById(R.id.ImgRepartidores);
 
         modificarEstablecimiento_vista = new ModificarEstablecimiento_Vista();
-        CRUDImagenes_vista = new CRUDImagenes_Vista();
+        crudImagenes_vista = new CRUDImagenes_Vista();
+        crudRepartidor_vista = new CRUDRepartidor_Vista();
 
         mPresenter=new OpcionesEstablecimiento_Presentador(this);
 
@@ -62,7 +66,14 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
         ImgImagenes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, CRUDImagenes_vista).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, crudImagenes_vista).addToBackStack(null).commit();
+            }
+        });
+
+        ImgRepartidores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, crudRepartidor_vista).addToBackStack(null).commit();
             }
         });
 
