@@ -3,9 +3,7 @@ package com.example.tacnafdbusiness.presentador;
 import android.content.Context;
 import android.net.Uri;
 
-import com.example.tacnafdbusiness.interactor.RecuperarContrasena_Interactor;
 import com.example.tacnafdbusiness.interactor.RegistrarEstablecimiento_Interactor;
-import com.example.tacnafdbusiness.interfaces.RecuperarContrasena;
 import com.example.tacnafdbusiness.interfaces.RegistrarEstablecimiento;
 import com.example.tacnafdbusiness.modelo.Establecimiento_Modelo;
 import com.google.firebase.database.DatabaseReference;

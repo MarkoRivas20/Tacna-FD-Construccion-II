@@ -3,12 +3,9 @@ package com.example.tacnafdbusiness.interactor;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import androidx.annotation.NonNull;
 
 import com.example.tacnafdbusiness.interfaces.ListarEstablecimiento;
-import com.example.tacnafdbusiness.interfaces.Login;
 import com.example.tacnafdbusiness.modelo.Establecimiento_Modelo;
-import com.example.tacnafdbusiness.modelo.Usuario_Modelo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

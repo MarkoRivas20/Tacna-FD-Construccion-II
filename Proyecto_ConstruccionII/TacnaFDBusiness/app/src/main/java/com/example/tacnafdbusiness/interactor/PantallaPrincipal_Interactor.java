@@ -3,7 +3,6 @@ package com.example.tacnafdbusiness.interactor;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.tacnafdbusiness.interfaces.ModificarUsuario;
 import com.example.tacnafdbusiness.interfaces.PantallaPrincipal;
 
 public class PantallaPrincipal_Interactor implements PantallaPrincipal.Interactor {

@@ -2,9 +2,7 @@ package com.example.tacnafdbusiness.presentador;
 
 import android.content.Context;
 
-import com.example.tacnafdbusiness.interactor.ModificarUsuario_Interactor;
 import com.example.tacnafdbusiness.interactor.PantallaPrincipal_Interactor;
-import com.example.tacnafdbusiness.interfaces.ModificarUsuario;
 import com.example.tacnafdbusiness.interfaces.PantallaPrincipal;
 
 public class PantallaPrincipal_Presentador implements PantallaPrincipal.onOperationListener, PantallaPrincipal.Presenter {

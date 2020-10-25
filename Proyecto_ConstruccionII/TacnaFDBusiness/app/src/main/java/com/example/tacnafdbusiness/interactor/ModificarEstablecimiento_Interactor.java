@@ -6,10 +6,8 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
-import com.example.tacnafdbusiness.interfaces.Login;
 import com.example.tacnafdbusiness.interfaces.ModificarEstablecimiento;
 import com.example.tacnafdbusiness.modelo.Establecimiento_Modelo;
-import com.example.tacnafdbusiness.modelo.Usuario_Modelo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -17,15 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.ListResult;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.ArrayList;
 
 public class ModificarEstablecimiento_Interactor implements ModificarEstablecimiento.Interactor {
 

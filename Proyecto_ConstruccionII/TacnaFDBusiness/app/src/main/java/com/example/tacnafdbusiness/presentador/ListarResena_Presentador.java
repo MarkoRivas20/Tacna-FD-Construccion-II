@@ -2,9 +2,7 @@ package com.example.tacnafdbusiness.presentador;
 
 import android.content.Context;
 
-import com.example.tacnafdbusiness.interactor.ListarEstablecimineto_Interactor;
 import com.example.tacnafdbusiness.interactor.ListarResena_Interactor;
-import com.example.tacnafdbusiness.interfaces.ListarEstablecimiento;
 import com.example.tacnafdbusiness.interfaces.ListarResena;
 import com.example.tacnafdbusiness.modelo.Resena_Modelo;
 import com.google.firebase.database.DatabaseReference;

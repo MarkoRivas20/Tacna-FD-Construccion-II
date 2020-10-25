@@ -7,9 +7,7 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 
 import com.example.tacnafdbusiness.interfaces.RegistrarEstablecimiento;
-import com.example.tacnafdbusiness.interfaces.RegistrarUsuario;
 import com.example.tacnafdbusiness.modelo.Establecimiento_Modelo;
-import com.example.tacnafdbusiness.modelo.Usuario_Modelo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

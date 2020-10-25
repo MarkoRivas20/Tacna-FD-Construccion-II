@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import com.example.tacnafdbusiness.interfaces.CRUDRepartidores;
 import com.example.tacnafdbusiness.modelo.RepartidorEstablecimiento_Modelo;
 import com.example.tacnafdbusiness.modelo.Repartidor_Modelo;
-import com.example.tacnafdbusiness.modelo.Usuario_Modelo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -17,7 +16,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 

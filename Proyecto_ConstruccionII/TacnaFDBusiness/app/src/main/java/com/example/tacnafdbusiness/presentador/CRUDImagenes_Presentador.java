@@ -3,9 +3,7 @@ package com.example.tacnafdbusiness.presentador;
 import android.content.Context;
 import android.net.Uri;
 
-import com.example.tacnafdbusiness.interactor.BuscarEmail_Interactor;
 import com.example.tacnafdbusiness.interactor.CRUDImagenes_Interactor;
-import com.example.tacnafdbusiness.interfaces.BuscarEmail;
 import com.example.tacnafdbusiness.interfaces.CRUDImagenes;
 import com.example.tacnafdbusiness.modelo.ImagenEstablecimiento_Modelo;
 import com.google.firebase.database.DatabaseReference;

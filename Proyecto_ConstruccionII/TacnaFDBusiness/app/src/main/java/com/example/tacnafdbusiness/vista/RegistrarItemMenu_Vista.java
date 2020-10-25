@@ -129,7 +129,7 @@ public class RegistrarItemMenu_Vista extends Fragment implements RegistrarItemMe
 
     @Override
     public void onSaveItemMenuSuccessful() {
-        Toast.makeText(getActivity().getApplicationContext(),"Item Registrado",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getApplicationContext(),"Item Registrado Satisfactoriamente",Toast.LENGTH_SHORT).show();
         getActivity().getSupportFragmentManager().popBackStack();
     }
 

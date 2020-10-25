@@ -2,7 +2,7 @@ package com.example.tacnafdbusiness.interfaces;
 
 import android.content.Context;
 
-import com.google.firebase.database.DatabaseReference;
+
 
 public interface PantallaPrincipal {
 

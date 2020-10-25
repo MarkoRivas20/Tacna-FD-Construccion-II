@@ -2,7 +2,6 @@ package com.example.tacnafdbusiness.interactor;
 
 import androidx.annotation.NonNull;
 
-import com.example.tacnafdbusiness.interfaces.BuscarEmail;
 import com.example.tacnafdbusiness.interfaces.RecuperarContrasena;
 import com.example.tacnafdbusiness.modelo.Usuario_Modelo;
 import com.google.android.gms.tasks.OnCompleteListener;

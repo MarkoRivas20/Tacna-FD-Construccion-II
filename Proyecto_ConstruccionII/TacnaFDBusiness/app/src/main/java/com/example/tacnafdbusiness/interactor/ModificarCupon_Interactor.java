@@ -4,8 +4,8 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
-import com.example.tacnafdbusiness.interfaces.ModificarItemMenu;
-import com.example.tacnafdbusiness.modelo.ItemMenu_Modelo;
+import com.example.tacnafdbusiness.interfaces.ModificarCupon;
+import com.example.tacnafdbusiness.modelo.Cupon_Modelo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,30 +18,29 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+public class ModificarCupon_Interactor implements ModificarCupon.Interactor {
 
-public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interactor {
-
-    private ModificarItemMenu.onOperationListener mListener;
+    private ModificarCupon.onOperationListener mListener;
     private ValueEventListener valueEventListener;
 
-    public ModificarItemMenu_Interactor(ModificarItemMenu.onOperationListener mListener) {
+    public ModificarCupon_Interactor(ModificarCupon.onOperationListener mListener) {
         this.mListener = mListener;
     }
 
     @Override
-    public void performUpdateItemMenuData(DatabaseReference reference, ItemMenu_Modelo itemMenu_modelo) {
+    public void performUpdateCouponData(DatabaseReference reference, Cupon_Modelo cupon_modelo) {
 
-        reference.child(itemMenu_modelo.getID_Item_Menu()).setValue(itemMenu_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child(cupon_modelo.getId_Cupon()).setValue(cupon_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
 
-                    mListener.onSuccessUpdateItemMenuData();
+                    mListener.onSuccessUpdateCouponData();
 
                 }
                 else
                 {
-                    mListener.onFailureUpdateItemMenuData();
+                    mListener.onFailureUpdateCouponData();
                 }
             }
         });
@@ -49,15 +48,15 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
     }
 
     @Override
-    public void performUpdateItemMenuImage(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final String Url_Imagen_Actual, String Id_Establecimiento, final String Id_Item_Menu, Uri Imagen_Uri) {
+    public void performUpdateCouponImage(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final String Url_Imagen_Actual, String Id_Establecimiento, final String Id_Cupon, Uri Imagen_Uri) {
 
-        final StorageReference filePath = Storage_Reference.child(Id_Establecimiento).child("ItemMenu").child(Imagen_Uri.getLastPathSegment());
+        final StorageReference filePath = Storage_Reference.child(Id_Establecimiento).child("Cupon").child(Imagen_Uri.getLastPathSegment());
 
         filePath.putFile(Imagen_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
 
-                mListener.onFailureUpdateItemMenuImage();
+                mListener.onFailureUpdateCouponImage();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -67,17 +66,17 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
                     @Override
                     public void onSuccess(final Uri uri) {
 
-                        Database_Reference.child(Id_Item_Menu).child("url_Imagen").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        Database_Reference.child(Id_Cupon).child("url_Imagen").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
 
-                                    mListener.onSuccessUpdateItemMenuImage(uri.toString());
+                                    mListener.onSuccessUpdateCouponImage(uri.toString());
 
                                 }
                                 else
                                 {
-                                    mListener.onFailureUpdateItemMenuImage();
+                                    mListener.onFailureUpdateCouponImage();
                                 }
                             }
                         });
@@ -99,23 +98,24 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
     }
 
     @Override
-    public void performGetItemMenuData(final DatabaseReference Database_Reference, final String Id_Item_Menu) {
+    public void performGetCouponData(final DatabaseReference Database_Reference, final String Id_Cupon) {
 
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                ItemMenu_Modelo itemMenu_modelo = snapshot.getValue(ItemMenu_Modelo.class);
-                mListener.onSuccessGetItemMenuData(itemMenu_modelo);
+                Cupon_Modelo cupon_modelo = snapshot.getValue(Cupon_Modelo.class);
+                mListener.onSuccessGetCouponData(cupon_modelo);
 
-                Database_Reference.child(Id_Item_Menu).removeEventListener(valueEventListener);
+                Database_Reference.child(Id_Cupon).removeEventListener(valueEventListener);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                mListener.onFailureGetItemMenuData();
+                mListener.onFailureGetCouponData();
             }
         };
-        Database_Reference.child(Id_Item_Menu).addValueEventListener(valueEventListener);
+        Database_Reference.child(Id_Cupon).addValueEventListener(valueEventListener);
+
     }
 }

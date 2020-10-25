@@ -3,7 +3,6 @@ package com.example.tacnafdbusiness.interfaces;
 import com.example.tacnafdbusiness.modelo.Usuario_Modelo;
 import com.google.firebase.database.DatabaseReference;
 
-import java.util.ArrayList;
 
 public interface RegistrarUsuario {
 

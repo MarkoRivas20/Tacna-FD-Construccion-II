@@ -3,11 +3,9 @@ package com.example.tacnafdbusiness.interfaces;
 import android.content.Context;
 import android.net.Uri;
 
-import com.example.tacnafdbusiness.modelo.ImagenEstablecimiento_Modelo;
 import com.example.tacnafdbusiness.modelo.RepartidorEstablecimiento_Modelo;
 import com.example.tacnafdbusiness.modelo.Repartidor_Modelo;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 

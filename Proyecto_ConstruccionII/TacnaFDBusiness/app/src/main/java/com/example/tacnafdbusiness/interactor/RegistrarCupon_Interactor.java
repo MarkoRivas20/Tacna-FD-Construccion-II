@@ -6,8 +6,8 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
-import com.example.tacnafdbusiness.interfaces.RegistrarItemMenu;
-import com.example.tacnafdbusiness.modelo.ItemMenu_Modelo;
+import com.example.tacnafdbusiness.interfaces.RegistrarCupon;
+import com.example.tacnafdbusiness.modelo.Cupon_Modelo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -16,42 +16,42 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class RegistrarItemMenu_Interactor implements RegistrarItemMenu.Interactor {
+public class RegistrarCupon_Interactor implements RegistrarCupon.Interactor {
 
-    private RegistrarItemMenu.onOperationListener mListener;
+    private RegistrarCupon.onOperationListener mListener;
 
-    public RegistrarItemMenu_Interactor(RegistrarItemMenu.onOperationListener mListener) {
+    public RegistrarCupon_Interactor(RegistrarCupon.onOperationListener mListener) {
         this.mListener = mListener;
     }
 
     @Override
-    public void performSaveItemMenu(DatabaseReference Database_Reference, ItemMenu_Modelo itemMenu) {
+    public void performSaveCoupon(DatabaseReference Database_Reference, Cupon_Modelo cupon_modelo) {
 
-        Database_Reference.child(itemMenu.getID_Item_Menu()).setValue(itemMenu).addOnCompleteListener(new OnCompleteListener<Void>() {
+        Database_Reference.child(cupon_modelo.getId_Cupon()).setValue(cupon_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
 
-                    mListener.onSuccessSaveItemMenu();
+                    mListener.onSuccessSaveCoupon();
 
                 }
                 else
                 {
-                    mListener.onFailureSaveItemMenu();
+                    mListener.onFailureSaveCoupon();
                 }
             }
         });
     }
 
     @Override
-    public void performUploadItemMenuImage(StorageReference Storage_Reference, String Id_Establecimiento, Uri Imagen_Uri) {
+    public void performUploadCouponImage(StorageReference Storage_Reference, String Id_Establecimiento, Uri Imagen_Uri) {
 
-        final StorageReference filePath = Storage_Reference.child(Id_Establecimiento).child("ItemMenu").child(Imagen_Uri.getLastPathSegment());
+        final StorageReference filePath = Storage_Reference.child(Id_Establecimiento).child("Cupon").child(Imagen_Uri.getLastPathSegment());
 
         filePath.putFile(Imagen_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                mListener.onFailureUploadItemMenuImage();
+                mListener.onFailureUploadCouponImage();
 
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -62,12 +62,11 @@ public class RegistrarItemMenu_Interactor implements RegistrarItemMenu.Interacto
                     @Override
                     public void onSuccess(Uri uri) {
 
-                        mListener.onSuccessUploadItemMenuImage(uri.toString());
+                        mListener.onSuccessUploadCouponImage(uri.toString());
                     }
                 });
             }
         });
-
     }
 
     @Override

@@ -2,9 +2,7 @@ package com.example.tacnafdbusiness.presentador;
 
 import android.content.Context;
 
-import com.example.tacnafdbusiness.interactor.CRUDImagenes_Interactor;
 import com.example.tacnafdbusiness.interactor.CRUDRepartidores_Interactor;
-import com.example.tacnafdbusiness.interfaces.CRUDImagenes;
 import com.example.tacnafdbusiness.interfaces.CRUDRepartidores;
 import com.example.tacnafdbusiness.modelo.RepartidorEstablecimiento_Modelo;
 import com.example.tacnafdbusiness.modelo.Repartidor_Modelo;

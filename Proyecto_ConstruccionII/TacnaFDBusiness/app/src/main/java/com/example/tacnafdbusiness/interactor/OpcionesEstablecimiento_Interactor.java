@@ -3,11 +3,8 @@ package com.example.tacnafdbusiness.interactor;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.tacnafdbusiness.interfaces.ListarEstablecimiento;
 import com.example.tacnafdbusiness.interfaces.OpcionesEstablecimiento;
-import com.example.tacnafdbusiness.modelo.Establecimiento_Modelo;
 
-import java.util.ArrayList;
 
 public class OpcionesEstablecimiento_Interactor implements OpcionesEstablecimiento.Interactor {
 

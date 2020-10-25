@@ -33,12 +33,14 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
     ImageView ImgRepartidores;
     ImageView ImgResenas;
     ImageView ImgMenu;
+    ImageView ImgCupon;
 
     ModificarEstablecimiento_Vista modificarEstablecimiento_vista;
     CRUDImagenes_Vista crudImagenes_vista;
     CRUDRepartidor_Vista crudRepartidor_vista;
     ListarResena_Vista listarResena_vista;
     ListarItemMenu_Vista listarItemMenu_vista;
+    ListarCupon_Vista listarCupon_vista;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,12 +55,14 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
         ImgRepartidores = (ImageView) view.findViewById(R.id.ImgRepartidores);
         ImgResenas = (ImageView) view.findViewById(R.id.ImgResenas);
         ImgMenu = (ImageView) view.findViewById(R.id.ImgMenu);
+        ImgCupon = (ImageView) view.findViewById(R.id.ImgCupon);
 
         modificarEstablecimiento_vista = new ModificarEstablecimiento_Vista();
         crudImagenes_vista = new CRUDImagenes_Vista();
         crudRepartidor_vista = new CRUDRepartidor_Vista();
         listarResena_vista = new ListarResena_Vista();
         listarItemMenu_vista = new ListarItemMenu_Vista();
+        listarCupon_vista = new ListarCupon_Vista();
 
         mPresenter=new OpcionesEstablecimiento_Presentador(this);
 
@@ -96,6 +100,13 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, listarItemMenu_vista).addToBackStack(null).commit();
+            }
+        });
+
+        ImgCupon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, listarCupon_vista).addToBackStack(null).commit();
             }
         });
 

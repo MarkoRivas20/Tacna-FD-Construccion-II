@@ -2,9 +2,7 @@ package com.example.tacnafdbusiness.presentador;
 
 import android.content.Context;
 
-import com.example.tacnafdbusiness.interactor.Login_Interactor;
 import com.example.tacnafdbusiness.interactor.OpcionesEstablecimiento_Interactor;
-import com.example.tacnafdbusiness.interfaces.Login;
 import com.example.tacnafdbusiness.interfaces.OpcionesEstablecimiento;
 
 public class OpcionesEstablecimiento_Presentador implements OpcionesEstablecimiento.Presenter, OpcionesEstablecimiento.onOperationListener {

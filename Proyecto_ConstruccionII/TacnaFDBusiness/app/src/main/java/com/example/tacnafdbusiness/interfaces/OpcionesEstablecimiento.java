@@ -2,8 +2,6 @@ package com.example.tacnafdbusiness.interfaces;
 
 import android.content.Context;
 
-import com.example.tacnafdbusiness.modelo.Usuario_Modelo;
-import com.google.firebase.database.DatabaseReference;
 
 public interface OpcionesEstablecimiento {
 

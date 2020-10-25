@@ -1,9 +1,7 @@
 package com.example.tacnafdbusiness.presentador;
 
 import com.example.tacnafdbusiness.interactor.BuscarEmail_Interactor;
-import com.example.tacnafdbusiness.interactor.Login_Interactor;
 import com.example.tacnafdbusiness.interfaces.BuscarEmail;
-import com.example.tacnafdbusiness.interfaces.Login;
 import com.google.firebase.database.DatabaseReference;
 
 public class BuscarEmail_Presentador implements BuscarEmail.Presenter, BuscarEmail.onOperationListener {
