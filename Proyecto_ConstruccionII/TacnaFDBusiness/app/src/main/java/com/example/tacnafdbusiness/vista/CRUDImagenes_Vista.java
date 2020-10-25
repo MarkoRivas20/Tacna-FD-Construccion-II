@@ -142,7 +142,7 @@ public class CRUDImagenes_Vista extends Fragment implements CRUDImagenes.View {
         Adaptador.setOnItemClickListener(new Imagen_Adaptador.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                Toast.makeText(getActivity(),"Mantenga Presionado...", Toast.LENGTH_SHORT).show();
             }
 
             @Override

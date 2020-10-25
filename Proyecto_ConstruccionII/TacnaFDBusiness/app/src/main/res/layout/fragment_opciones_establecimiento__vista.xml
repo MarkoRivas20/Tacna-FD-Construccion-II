@@ -104,7 +104,7 @@
             </ImageView>
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/ImgMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -126,11 +126,11 @@
             </ImageView>
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/ImgResenas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/resenas2"
-                app:layout_constraintStart_toStartOf="@+id/imageView7"
+                app:layout_constraintStart_toStartOf="@+id/ImgMenu"
                 app:layout_constraintTop_toTopOf="@+id/imageView6">
 
             </ImageView>
@@ -151,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/repartidores"
-                    app:layout_constraintStart_toStartOf="@+id/imageView8"
+                    app:layout_constraintStart_toStartOf="@+id/ImgResenas"
                     app:layout_constraintTop_toTopOf="@+id/ImgImagenes">
 
                 </ImageView>

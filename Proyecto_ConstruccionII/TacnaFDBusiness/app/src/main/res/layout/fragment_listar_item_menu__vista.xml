@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".vista.CRUDRepartidor_Vista">
+    tools:context=".vista.ListarItemMenu_Vista">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/convergence"
-                android:text="Repartidores"
+                android:text="Menú"
                 android:textColor="#fff"
                 android:textSize="40sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -44,74 +44,34 @@
 
             </TextView>
 
-            <LinearLayout
-                android:id="@+id/linearLayout5"
+            <Button
+                android:id="@+id/BtnAgregar_Item_Menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/textView10"
                 android:layout_marginTop="52dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/shape_botonnaranja"
+                android:elevation="6dp"
+                android:fontFamily="@font/convergence"
+                android:text="Agregar Item"
+                android:textColor="#fff"
+                app:layout_constraintTop_toBottomOf="@+id/textView10">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center">
-
-                    <EditText
-                        android:id="@+id/TxtCorreo_Electronico_Repartidor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/shape_textboxregistro"
-                        android:padding="10dp"
-                        android:singleLine="true"
-                        android:textColor="#003152"
-                        android:textColorHighlight="#0F77F6"
-                        android:textColorHint="#DDDEE0"
-                        android:layout_marginLeft="20dp"
-                        android:elevation="3dp"
-                        android:hint="Correo E. del Repartidor">
-
-                    </EditText>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5">
-
-                    <Button
-                        android:id="@+id/BtnBuscar_Repartidor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:background="@drawable/shape_botonnaranja"
-                        android:elevation="12dp"
-                        android:fontFamily="@font/convergence"
-                        android:text="Buscar"
-                        android:textColor="#fff" />
-                </LinearLayout>
-
-
-
-
-
-            </LinearLayout>
+            </Button>
 
             <TextView
-                android:id="@+id/LblNo_Repartidores"
+                android:id="@+id/LblNo_Items_Menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No tiene ningun repartidor"
+                android:text="Su menú esta vacio"
                 android:textColor="#000"
                 android:layout_marginTop="10dp"
                 android:visibility="gone"
                 android:fontFamily="@font/convergence"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+                app:layout_constraintTop_toBottomOf="@+id/BtnAgregar_Item_Menu" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -123,7 +83,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/Recycler_RepartidoresEstablecimiento"
+                android:id="@+id/Recycler_Items_Menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="25dp"

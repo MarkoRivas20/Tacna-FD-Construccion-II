@@ -92,7 +92,6 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
     EditText Txttelefono;
     EditText Txtdescripcion;
 
-    ListarEstablecimiento_Vista listarEstablecimiento_vista;
 
 
     @Override
@@ -100,8 +99,6 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_registro_establecimiento__vista, container, false);
-
-        listarEstablecimiento_vista = new ListarEstablecimiento_Vista();
 
         mPresenter =new RegistrarEstablecimiento_Presentador(this);
         mReference = FirebaseDatabase.getInstance().getReference().child("Establecimiento");
@@ -137,8 +134,16 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
             @Override
             public void onClick(View v) {
 
-                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(gallery, PICK_IMAGE);
+                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(),Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+
+                    Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                    startActivityForResult(gallery, PICK_IMAGE);
+                }
+                else
+                {
+                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                }
+
 
             }
         });
@@ -155,17 +160,8 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
             @Override
             public void onClick(View v) {
 
-                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(),Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-
-                    ID_Establecimiento=mReference.push().getKey();
-                    mPresenter.UploadLogo(mStorageReference,ID_Establecimiento,Image_Uri);
-                }
-                else
-                {
-                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
-                }
-
-
+                ID_Establecimiento=mReference.push().getKey();
+                mPresenter.UploadLogo(mStorageReference,ID_Establecimiento,Image_Uri);
 
             }
         });
@@ -222,7 +218,7 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
     @Override
     public void onCreateEstablishmentSuccessful() {
         Toast.makeText(getActivity().getApplicationContext(),"Establecimiento Registrado",Toast.LENGTH_SHORT).show();
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, listarEstablecimiento_vista).addToBackStack(null).commit();
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 
     @Override

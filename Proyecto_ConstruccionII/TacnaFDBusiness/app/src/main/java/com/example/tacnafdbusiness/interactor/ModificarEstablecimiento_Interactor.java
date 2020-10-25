@@ -31,7 +31,7 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
 
     private ModificarEstablecimiento.onOperationListener mListener;
 
-    private ArrayList<Establecimiento_Modelo> establecimiento_modelos = new ArrayList<>();
+    private ValueEventListener valueEventListener;
 
     public ModificarEstablecimiento_Interactor(ModificarEstablecimiento.onOperationListener mListener) {
         this.mListener = mListener;
@@ -172,25 +172,25 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
     }
 
     @Override
-    public void performGetEstablishmentData(DatabaseReference reference, String Id_Establecimiento) {
+    public void performGetEstablishmentData(final DatabaseReference reference, final String Id_Establecimiento) {
 
-
-        reference.child(Id_Establecimiento).addValueEventListener(new ValueEventListener() {
+        valueEventListener = new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 Establecimiento_Modelo establecimiento_modelo = snapshot.getValue(Establecimiento_Modelo.class);
-                establecimiento_modelos.add(establecimiento_modelo);
+                mListener.onSuccessGetEstablishmentData(establecimiento_modelo);
 
-                mListener.onSuccessGetEstablishmentData(establecimiento_modelos);
-
+                reference.child(Id_Establecimiento).removeEventListener(valueEventListener);
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 mListener.onFailureGetEstablishmentData();
             }
-        });
+        };
+        reference.child(Id_Establecimiento).addValueEventListener(valueEventListener);
+
     }
 
     @Override

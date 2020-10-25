@@ -20,7 +20,7 @@ public interface ModificarEstablecimiento {
         void onUpdateEstablismentDocumentFailure();
         void onUpdateEstablismentDocumentSuccessful(String Url_Documento);
         void onGetEstablishmentInfoSuccessful(String Id_Establecimiento,String Url_Logo, String Url_Documento);
-        void onGetEstablishmentDataSuccessful(ArrayList<Establecimiento_Modelo> establecimiento);
+        void onGetEstablishmentDataSuccessful(Establecimiento_Modelo establecimiento);
         void onGetEstablishmentDataFailure();
         void onGetSessionDataSuccessful(String Id_Usuario);
         void onUpdateEstablishmentInfoSuccessful();
@@ -54,7 +54,7 @@ public interface ModificarEstablecimiento {
         void onSuccessUpdateEstablismentDocument(String Url_Documento);
         void onFailureUpdateEstablismentDocument();
         void onSuccessGetEstablishmentInfo(String Id_Establecimiento, String Url_Logo, String Url_Documento);
-        void onSuccessGetEstablishmentData(ArrayList<Establecimiento_Modelo> establecimiento);
+        void onSuccessGetEstablishmentData(Establecimiento_Modelo establecimiento);
         void onFailureGetEstablishmentData();
         void onSuccessGetSessionData(String Id_Usuario);
         void onSuccessUpdateEstablishmentInfo();

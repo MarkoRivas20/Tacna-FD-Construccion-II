@@ -281,26 +281,26 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
     }
 
     @Override
-    public void onGetEstablishmentDataSuccessful(ArrayList<Establecimiento_Modelo> establecimiento) {
-        Nombre_Establecimiento = establecimiento.get(0).getNombre();
-        Txtnombre.setText(establecimiento.get(0).getNombre());
-        Txtdescripcion.setText(establecimiento.get(0).getDescripcion());
-        Txtdireccion.setText(establecimiento.get(0).getDireccion());
-        Txttelefono.setText(establecimiento.get(0).getTelefono());
-        Punto_Geografico = establecimiento.get(0).getPuntoGeografico();
-        Total_Resenas = establecimiento.get(0).getTotalResenas();
-        Puntuacion = establecimiento.get(0).getPuntuacion();
+    public void onGetEstablishmentDataSuccessful(Establecimiento_Modelo establecimiento) {
+        Nombre_Establecimiento = establecimiento.getNombre();
+        Txtnombre.setText(establecimiento.getNombre());
+        Txtdescripcion.setText(establecimiento.getDescripcion());
+        Txtdireccion.setText(establecimiento.getDireccion());
+        Txttelefono.setText(establecimiento.getTelefono());
+        Punto_Geografico = establecimiento.getPuntoGeografico();
+        Total_Resenas = establecimiento.getTotalResenas();
+        Puntuacion = establecimiento.getPuntuacion();
         LblDocumento.setText("Imagen: " + Url_Documento_Actual.substring(Url_Documento_Actual.indexOf("o%2F") + 4, Url_Documento_Actual.indexOf("?alt=")));
 
         for(int i=0; i<categorias.length; i++){
-            if(establecimiento.get(0).getCategoria().equals(categorias[i])){
+            if(establecimiento.getCategoria().equals(categorias[i])){
                 Spinner_Categoria.setSelection(i);
                 break;
             }
         }
 
         for(int i=0; i<distritos.length; i++){
-            if(establecimiento.get(0).getDistrito().equals(distritos[i])){
+            if(establecimiento.getDistrito().equals(distritos[i])){
                 Spinner_Distrito.setSelection(i);
                 break;
             }
@@ -308,7 +308,7 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
 
         for (int i=0; i<estados.length; i++)
         {
-            if (establecimiento.get(0).getEstado().equals(estados[i]))
+            if (establecimiento.getEstado().equals(estados[i]))
             {
                 Spinner_Estado.setSelection(i);
                 break;

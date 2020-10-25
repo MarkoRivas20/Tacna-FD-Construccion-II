@@ -51,6 +51,8 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
 
     EditText TxtCorreo_Electronico_Repartidor;
 
+    TextView LblNo_Repartidores;
+
     Button BtnBuscar_Repartidor;
 
     AlertDialog.Builder Mensaje;
@@ -69,6 +71,7 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
         TxtCorreo_Electronico_Repartidor = (EditText) view.findViewById(R.id.TxtCorreo_Electronico_Repartidor);
         BtnBuscar_Repartidor = (Button) view.findViewById(R.id.BtnBuscar_Repartidor);
         Recycler_View = (RecyclerView) view.findViewById(R.id.Recycler_RepartidoresEstablecimiento);
+        LblNo_Repartidores = (TextView) view.findViewById(R.id.LblNo_Repartidores);
 
         mPresenter =new CRUDRepartidor_Presentador(this);
         mReference = FirebaseDatabase.getInstance().getReference().child("Repartidor_Establecimiento");
@@ -177,11 +180,13 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
 
         if(Existe_Repartidor_Establecimiento)
         {
+            LblNo_Repartidores.setVisibility(View.GONE);
             mReference = FirebaseDatabase.getInstance().getReference().child("Usuario_Repartidor");
             mPresenter.SearchDeliveryManInfo(mReference, repartidorEstablecimiento_modelos);
         }
         else
         {
+            LblNo_Repartidores.setVisibility(View.VISIBLE);
             repartidor_modelos.clear();
             Adaptador = new Repartidor_Adaptador(repartidor_modelos, getActivity());
             Layout_Manager = new GridLayoutManager(getActivity(), 2);
@@ -204,7 +209,7 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
         Adaptador.setOnItemClickListener(new Repartidor_Adaptador.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                Toast.makeText(getActivity(),"Mantenga Presionado...", Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -31,10 +31,14 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
     ImageView ImgDatos_Generales;
     ImageView ImgImagenes;
     ImageView ImgRepartidores;
+    ImageView ImgResenas;
+    ImageView ImgMenu;
 
     ModificarEstablecimiento_Vista modificarEstablecimiento_vista;
     CRUDImagenes_Vista crudImagenes_vista;
     CRUDRepartidor_Vista crudRepartidor_vista;
+    ListarResena_Vista listarResena_vista;
+    ListarItemMenu_Vista listarItemMenu_vista;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,10 +51,14 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
         ImgDatos_Generales = (ImageView) view.findViewById(R.id.ImgDatos_Generales);
         ImgImagenes = (ImageView) view.findViewById(R.id.ImgImagenes);
         ImgRepartidores = (ImageView) view.findViewById(R.id.ImgRepartidores);
+        ImgResenas = (ImageView) view.findViewById(R.id.ImgResenas);
+        ImgMenu = (ImageView) view.findViewById(R.id.ImgMenu);
 
         modificarEstablecimiento_vista = new ModificarEstablecimiento_Vista();
         crudImagenes_vista = new CRUDImagenes_Vista();
         crudRepartidor_vista = new CRUDRepartidor_Vista();
+        listarResena_vista = new ListarResena_Vista();
+        listarItemMenu_vista = new ListarItemMenu_Vista();
 
         mPresenter=new OpcionesEstablecimiento_Presentador(this);
 
@@ -74,6 +82,20 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, crudRepartidor_vista).addToBackStack(null).commit();
+            }
+        });
+
+        ImgResenas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, listarResena_vista).addToBackStack(null).commit();
+            }
+        });
+
+        ImgMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, listarItemMenu_vista).addToBackStack(null).commit();
             }
         });
 

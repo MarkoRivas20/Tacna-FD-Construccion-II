@@ -96,7 +96,7 @@ public class ModificarEstablecimiento_Presentador implements ModificarEstablecim
     }
 
     @Override
-    public void onSuccessGetEstablishmentData(ArrayList<Establecimiento_Modelo> establecimiento) {
+    public void onSuccessGetEstablishmentData(Establecimiento_Modelo establecimiento) {
         mView.onGetEstablishmentDataSuccessful(establecimiento);
     }
 
