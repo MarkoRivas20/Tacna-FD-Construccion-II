@@ -18,28 +18,51 @@ import com.google.firebase.database.ValueEventListener;
 public class ModificarUsuario_Interactor  implements ModificarUsuario.Interactor{
 
     private ModificarUsuario.onOperationListener mListener;
+    private ValueEventListener valueEventListener;
 
     public ModificarUsuario_Interactor(ModificarUsuario.onOperationListener mListener) {
         this.mListener = mListener;
     }
 
     @Override
-    public void performUpdateUser(DatabaseReference reference, Usuario_Modelo usuario_modelo) {
+    public void performUpdateUser(final DatabaseReference reference, final Usuario_Modelo usuario_modelo) {
 
-        reference.child(usuario_modelo.getID_Usuario()).setValue(usuario_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+        final Query query = reference.orderByChild("id_Usuario").equalTo(usuario_modelo.getID_Usuario());
+
+        valueEventListener = new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if(task.isSuccessful()){
-                    mListener.onSuccess();
-                }
-                else
-                {
-                    mListener.onFailure();
-                }
+                for(DataSnapshot postsnapshot : snapshot.getChildren()){
 
+                    reference.child(usuario_modelo.getID_Usuario()).setValue(usuario_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            if(task.isSuccessful()){
+                                mListener.onSuccess();
+                            }
+                            else
+                            {
+                                mListener.onFailure();
+                            }
+
+                        }
+                    });
+                    query.removeEventListener(valueEventListener);
+
+                }
             }
-        });
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                mListener.onFailure();
+            }
+        };
+
+        query.addListenerForSingleValueEvent(valueEventListener);
+
+
 
 
     }

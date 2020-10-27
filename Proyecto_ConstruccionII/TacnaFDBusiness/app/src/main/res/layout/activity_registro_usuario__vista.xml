@@ -125,23 +125,6 @@
         android:singleLine="true"
         app:layout_constraintTop_toBottomOf="@+id/txtcelular"
         tools:layout_editor_absoluteX="16dp" />
-    <EditText
-        android:id="@+id/txtcodigopaypal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="12dp"
-        android:background="@drawable/shape_textboxregistro"
-        android:drawableLeft="@drawable/ic_paypal"
-        android:drawablePadding="10dp"
-        android:hint="CodigoPaypal"
-        android:padding="15dp"
-        android:textColor="#003152"
-        android:textColorHighlight="#0F77F6"
-        android:textColorHint="#DDDEE0"
-        android:singleLine="true"
-        app:layout_constraintTop_toBottomOf="@+id/txtruc"
-        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/textView"

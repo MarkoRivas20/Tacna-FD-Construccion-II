@@ -38,7 +38,6 @@ public class ModificarUsuario_Vista extends Fragment implements ModificarUsuario
     EditText TxtApellido;
     EditText TxtCelular;
     EditText TxtRuc;
-    EditText TxtCodigo_Paypal;
 
     Button BtnModificar;
 
@@ -66,7 +65,6 @@ public class ModificarUsuario_Vista extends Fragment implements ModificarUsuario
         TxtApellido = (EditText) v.findViewById(R.id.txtapellido);
         TxtCelular = (EditText) v.findViewById(R.id.txtcelular);
         TxtRuc = (EditText) v.findViewById(R.id.txtruc);
-        TxtCodigo_Paypal = (EditText) v.findViewById(R.id.txtcodigopaypal);
 
 
 
@@ -80,7 +78,7 @@ public class ModificarUsuario_Vista extends Fragment implements ModificarUsuario
 
                 Usuario_Modelo usuario_modelo=new Usuario_Modelo(Id_Usuario,TxtNombre.getText().toString(),TxtApellido.getText().toString(),
                         TxtEmail.getText().toString(),TxtClave.getText().toString(),TxtCelular.getText().toString(),
-                        TxtRuc.getText().toString(),TxtCodigo_Paypal.getText().toString());
+                        TxtRuc.getText().toString());
                 mPresenter.UpdateUser(mReference,usuario_modelo);
             }
         });
@@ -112,7 +110,6 @@ public class ModificarUsuario_Vista extends Fragment implements ModificarUsuario
         TxtApellido.setText(usuario_modelo.getApellido());
         TxtCelular.setText(usuario_modelo.getCelular());
         TxtRuc.setText(usuario_modelo.getRuc());
-        TxtCodigo_Paypal.setText(usuario_modelo.getCodigo_Paypal());
 
     }
 

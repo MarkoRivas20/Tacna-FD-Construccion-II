@@ -28,7 +28,6 @@ public class RegistroUsuario_Vista extends AppCompatActivity implements Registra
     EditText TxtApellido;
     EditText TxtCelular;
     EditText TxtRuc;
-    EditText TxtCodigo_Paypal;
 
     Button BtnCrear;
 
@@ -51,7 +50,6 @@ public class RegistroUsuario_Vista extends AppCompatActivity implements Registra
         TxtApellido = (EditText) findViewById(R.id.txtapellido);
         TxtCelular = (EditText) findViewById(R.id.txtcelular);
         TxtRuc = (EditText) findViewById(R.id.txtruc);
-        TxtCodigo_Paypal = (EditText) findViewById(R.id.txtcodigopaypal);
 
         BtnCrear = (Button) findViewById(R.id.btncrear);
 
@@ -61,7 +59,7 @@ public class RegistroUsuario_Vista extends AppCompatActivity implements Registra
                 String ID_Usuario=mReference.push().getKey();
                 Usuario_Modelo usuario_modelo=new Usuario_Modelo(ID_Usuario,TxtNombre.getText().toString(),TxtApellido.getText().toString(),
                         TxtEmail.getText().toString(),TxtClave.getText().toString(),TxtCelular.getText().toString(),
-                        TxtRuc.getText().toString(),TxtCodigo_Paypal.getText().toString());
+                        TxtRuc.getText().toString());
                 mPresenter.CreateNewUser(mReference,usuario_modelo);
             }
         });

@@ -151,8 +151,17 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
         BtnCargar_Documento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(gallery, PICK_IMAGE_DOCUMENT);
+
+                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(),Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+
+                    Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                    startActivityForResult(gallery, PICK_IMAGE_DOCUMENT);
+                }
+                else
+                {
+                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                }
+
             }
         });
 

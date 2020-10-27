@@ -157,13 +157,23 @@
                 </ImageView>
 
                 <ImageView
+                    android:id="@+id/ImgPedidos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/pedidos"
                     android:layout_marginTop="15dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/pedidos"
+                    app:layout_constraintStart_toStartOf="@+id/ImgImagenes"
                     app:layout_constraintTop_toBottomOf="@+id/ImgImagenes">
+
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/ImgMetodosPago"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mododepago"
+                    app:layout_constraintStart_toStartOf="@+id/ImgRepartidores"
+                    app:layout_constraintTop_toTopOf="@+id/ImgPedidos">
 
                 </ImageView>
 

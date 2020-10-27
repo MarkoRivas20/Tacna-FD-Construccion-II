@@ -2,6 +2,7 @@ package com.example.tacnafdbusiness.modelo;
 
 public class Establecimiento_Modelo {
 
+
     private String ID_Establecimiento;
     private String ID_Usuario_Propietario;
     private String Nombre;
@@ -16,8 +17,14 @@ public class Establecimiento_Modelo {
     private String Url_Imagen_Documento;
     private String PuntoGeografico;
     private String Estado;
+    private String Codigo_Paypal;
+    private String Codigo_Culqi;
+    private String Url_Qr;
 
-    public Establecimiento_Modelo(String ID_Usuario_Propietario, String nombre, String distrito, String categoria, String direccion, String telefono, String descripcion, int totalResenas, Double puntuacion, String url_Imagen_Logo, String url_Imagen_Documento, String puntoGeografico, String estado) {
+    public Establecimiento_Modelo(String ID_Establecimiento, String ID_Usuario_Propietario, String nombre, String distrito, String categoria,
+                                  String direccion, String telefono, String descripcion, int totalResenas, Double puntuacion, String url_Imagen_Logo,
+                                  String url_Imagen_Documento, String puntoGeografico, String estado, String codigo_Paypal, String codigo_Culqi, String url_Qr) {
+        this.ID_Establecimiento = ID_Establecimiento;
         this.ID_Usuario_Propietario = ID_Usuario_Propietario;
         Nombre = nombre;
         Distrito = distrito;
@@ -31,9 +38,14 @@ public class Establecimiento_Modelo {
         Url_Imagen_Documento = url_Imagen_Documento;
         PuntoGeografico = puntoGeografico;
         Estado = estado;
+        Codigo_Paypal = codigo_Paypal;
+        Codigo_Culqi = codigo_Culqi;
+        Url_Qr = url_Qr;
     }
 
-    public Establecimiento_Modelo(String ID_Establecimiento, String ID_Usuario_Propietario, String nombre, String distrito, String categoria, String direccion, String telefono, String descripcion, int totalResenas, Double puntuacion, String url_Imagen_Logo, String url_Imagen_Documento, String puntoGeografico, String estado) {
+    public Establecimiento_Modelo(String ID_Establecimiento, String ID_Usuario_Propietario, String nombre, String distrito, String categoria,
+                                  String direccion, String telefono, String descripcion, int totalResenas, Double puntuacion, String url_Imagen_Logo,
+                                  String url_Imagen_Documento, String puntoGeografico, String estado) {
         this.ID_Establecimiento = ID_Establecimiento;
         this.ID_Usuario_Propietario = ID_Usuario_Propietario;
         Nombre = nombre;
@@ -49,6 +61,7 @@ public class Establecimiento_Modelo {
         PuntoGeografico = puntoGeografico;
         Estado = estado;
     }
+
 
     public Establecimiento_Modelo(){
 
@@ -164,6 +177,30 @@ public class Establecimiento_Modelo {
 
     public void setEstado(String estado) {
         Estado = estado;
+    }
+
+    public String getCodigo_Paypal() {
+        return Codigo_Paypal;
+    }
+
+    public void setCodigo_Paypal(String codigo_Paypal) {
+        Codigo_Paypal = codigo_Paypal;
+    }
+
+    public String getCodigo_Culqi() {
+        return Codigo_Culqi;
+    }
+
+    public void setCodigo_Culqi(String codigo_Culqi) {
+        Codigo_Culqi = codigo_Culqi;
+    }
+
+    public String getUrl_Qr() {
+        return Url_Qr;
+    }
+
+    public void setUrl_Qr(String url_Qr) {
+        Url_Qr = url_Qr;
     }
 
 

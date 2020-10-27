@@ -80,10 +80,6 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
         mPresenter=new PantallaPrincipal_Presentador(this);
         mPresenter.GetSessionData(getApplicationContext());
 
-
-
-
-
     }
 
     @Override

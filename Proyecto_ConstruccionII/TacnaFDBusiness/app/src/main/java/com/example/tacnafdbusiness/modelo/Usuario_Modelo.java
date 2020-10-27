@@ -9,9 +9,9 @@ public class Usuario_Modelo {
     private String Contrasena;
     private String Celular;
     private String Ruc;
-    private String Codigo_Paypal;
 
-    public Usuario_Modelo(String ID_Usuario, String nombre, String apellido, String correo_Electronico, String contrasena, String celular, String ruc, String codigo_Paypal) {
+
+    public Usuario_Modelo(String ID_Usuario, String nombre, String apellido, String correo_Electronico, String contrasena, String celular, String ruc) {
         this.ID_Usuario = ID_Usuario;
         Nombre = nombre;
         Apellido = apellido;
@@ -19,17 +19,15 @@ public class Usuario_Modelo {
         Contrasena = contrasena;
         Celular = celular;
         Ruc = ruc;
-        Codigo_Paypal = codigo_Paypal;
     }
 
-    public Usuario_Modelo(String nombre, String apellido, String correo_Electronico, String contrasena, String celular, String ruc, String codigo_Paypal) {
+    public Usuario_Modelo(String nombre, String apellido, String correo_Electronico, String contrasena, String celular, String ruc) {
         Nombre = nombre;
         Apellido = apellido;
         Correo_Electronico = correo_Electronico;
         Contrasena = contrasena;
         Celular = celular;
         Ruc = ruc;
-        Codigo_Paypal = codigo_Paypal;
     }
 
     public Usuario_Modelo(){
@@ -92,13 +90,7 @@ public class Usuario_Modelo {
         Ruc = ruc;
     }
 
-    public String getCodigo_Paypal() {
-        return Codigo_Paypal;
-    }
 
-    public void setCodigo_Paypal(String codigo_Paypal) {
-        Codigo_Paypal = codigo_Paypal;
-    }
 
 
 
