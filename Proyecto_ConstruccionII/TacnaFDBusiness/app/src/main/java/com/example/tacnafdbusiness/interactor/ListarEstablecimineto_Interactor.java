@@ -33,12 +33,11 @@ public class ListarEstablecimineto_Interactor implements ListarEstablecimiento.I
 
         Query query=reference.orderByChild("id_Usuario_Propietario").startAt(ID_Usuario);
 
-
-
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 Boolean Existe_Establecimiento = false;
+                establecimiento_modelos.clear();
 
                 for(DataSnapshot postSnapshot : snapshot.getChildren()){
                     Existe_Establecimiento = true;

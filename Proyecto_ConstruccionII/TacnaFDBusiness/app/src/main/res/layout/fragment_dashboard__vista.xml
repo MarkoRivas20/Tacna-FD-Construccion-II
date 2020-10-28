@@ -74,9 +74,10 @@
                         android:gravity="center">
 
                         <TextView
+                            android:id="@+id/TxtEstablecimientos"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2"
+                            android:text="0"
                             android:textColor="#fff"
                             android:textSize="80sp">
 
@@ -157,9 +158,10 @@
                         android:gravity="center">
 
                         <TextView
+                            android:id="@+id/TxtVentas_Mes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="10"
+                            android:text="0"
                             android:textColor="#fff"
                             android:textSize="80sp">
 
@@ -200,11 +202,12 @@
                     </ImageView>
 
                     <TextView
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/convergence"
-                        android:text="Ventas"
+                        android:text="Ventas del mes"
                         android:textAlignment="center"
                         android:textColor="#fff"
                         android:textStyle="bold">
@@ -239,9 +242,10 @@
                         android:paddingLeft="20dp">
 
                         <TextView
+                            android:id="@+id/TxtEstablecimiento_Mas_Ventas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pizza Hut"
+                            android:text="Ninguno"
                             android:textSize="25sp"
                             android:textColor="#fff"
                             android:fontFamily="@font/convergence">
@@ -283,6 +287,7 @@
                     </ImageView>
 
                     <TextView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
@@ -323,9 +328,10 @@
                         android:paddingLeft="20dp">
 
                         <TextView
+                            android:id="@+id/TxtEstablecimiento_Mejor_Puntuacion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tunkimayo"
+                            android:text="Ninguno"
                             android:textSize="25sp"
                             android:textColor="#fff"
                             android:fontFamily="@font/convergence">
@@ -407,9 +413,10 @@
                         android:paddingLeft="20dp">
 
                         <TextView
+                            android:id="@+id/TxtEstablecimiento_Mas_Comentarios"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Muelle Sur"
+                            android:text="Ninguno"
                             android:textSize="25sp"
                             android:textColor="#fff"
                             android:fontFamily="@font/convergence">

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ListarEstablecimiento_Presentador implements ListarEstablecimiento.Presenter, ListarEstablecimiento.onOperationListener {
 
     private ListarEstablecimiento.View mView;
-    private ListarEstablecimiento.Interactor mInteractor;
+    private ListarEstablecimineto_Interactor mInteractor;
 
     public ListarEstablecimiento_Presentador(ListarEstablecimiento.View mView) {
         this.mView = mView;
