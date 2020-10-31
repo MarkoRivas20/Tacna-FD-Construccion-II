@@ -2,15 +2,15 @@ package com.example.tacnafddelivery.modelo;
 
 public class Usuario_Modelo {
 
-    private String ID_Usuario;
+    private String ID_Usuario_Repartidor;
     private String Nombre;
     private String Apellido;
     private String Correo_Electronico;
     private String Contrasena;
     private String Url_Foto;
 
-    public Usuario_Modelo(String ID_Usuario, String nombre, String apellido, String correo_Electronico, String contrasena, String url_Foto) {
-        this.ID_Usuario = ID_Usuario;
+    public Usuario_Modelo(String ID_Usuario_Repartidor, String nombre, String apellido, String correo_Electronico, String contrasena, String url_Foto) {
+        this.ID_Usuario_Repartidor = ID_Usuario_Repartidor;
         Nombre = nombre;
         Apellido = apellido;
         Correo_Electronico = correo_Electronico;
@@ -30,12 +30,12 @@ public class Usuario_Modelo {
 
     }
 
-    public String getID_Usuario() {
-        return ID_Usuario;
+    public String getID_Usuario_Repartidor() {
+        return ID_Usuario_Repartidor;
     }
 
-    public void setID_Usuario(String ID_Usuario) {
-        this.ID_Usuario = ID_Usuario;
+    public void setID_Usuario_Repartidor(String ID_Usuario_Repartidor) {
+        this.ID_Usuario_Repartidor = ID_Usuario_Repartidor;
     }
 
     public String getNombre() {
