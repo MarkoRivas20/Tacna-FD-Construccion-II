@@ -22,8 +22,8 @@ public class Login_Presentador implements Login.Presenter, Login.onOperationList
     }
 
     @Override
-    public void SaveSession(Context context, String correo_electronico, String nombre_usuario, String id_usuario) {
-        mInteractor.performSaveSession(context, correo_electronico, nombre_usuario, id_usuario);
+    public void SaveSession(Context context, String correo_electronico, String nombre_usuario, String id_usuario, String Url_Foto) {
+        mInteractor.performSaveSession(context, correo_electronico, nombre_usuario, id_usuario, Url_Foto);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class Login_Presentador implements Login.Presenter, Login.onOperationList
     }
 
     @Override
-    public void onSuccess(String nombre_usuario, String id_usuario) {
-        mView.onLogInSuccessful(nombre_usuario, id_usuario);
+    public void onSuccess(String nombre_usuario, String id_usuario, String Url_Foto) {
+        mView.onLogInSuccessful(nombre_usuario, id_usuario, Url_Foto);
     }
 
     @Override

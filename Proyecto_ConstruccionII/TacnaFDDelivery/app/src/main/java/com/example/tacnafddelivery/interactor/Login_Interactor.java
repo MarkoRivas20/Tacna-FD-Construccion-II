@@ -45,7 +45,7 @@ public class Login_Interactor implements Login.Interactor {
                     if(usuario_modelo.getContrasena().equals(contrasena)){
                         booleano = true;
                         Nombre_Usuario = usuario_modelo.getNombre() + " " + usuario_modelo.getApellido();
-                        mListener.onSuccess(Nombre_Usuario, usuario_modelo.getID_Usuario_Repartidor());
+                        mListener.onSuccess(Nombre_Usuario, usuario_modelo.getID_Usuario_Repartidor(), usuario_modelo.getUrl_Foto());
                     }
                 }
 
@@ -63,13 +63,14 @@ public class Login_Interactor implements Login.Interactor {
     }
 
     @Override
-    public void performSaveSession(Context context, String correo_electronico, String nombre_usuario, String id_usuario) {
+    public void performSaveSession(Context context, String correo_electronico, String nombre_usuario, String id_usuario, String Url_Foto) {
 
         SharedPreferences sharedPref = context.getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("correo_electronico", correo_electronico);
         editor.putString("nombre_usuario", nombre_usuario);
         editor.putString("id_usuario", id_usuario);
+        editor.putString("url_foto", Url_Foto);
         editor.apply();
     }
 

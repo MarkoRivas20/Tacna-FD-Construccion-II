@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Establecimientos">
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_establecimiento"
+                    android:title="Establecimientos"
+                    android:icon="@drawable/ic_store">
+
+                </item>
+
+            </group>
+
+        </menu>
+
+    </item>
+
+    <item
+        android:title="Perfil">
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_datos"
+                    android:title="Mis Datos"
+                    android:icon="@drawable/ic_person_info">
+
+                </item>
+
+                <item
+                    android:id="@+id/nav_sesion"
+                    android:title="Cerrar Sesion"
+                    android:icon="@drawable/ic_exit">
+
+                </item>
+
+            </group>
+
+        </menu>
+
+    </item>
+
+</menu>
