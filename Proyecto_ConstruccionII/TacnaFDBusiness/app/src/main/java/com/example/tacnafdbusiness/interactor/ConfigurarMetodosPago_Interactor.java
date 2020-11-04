@@ -31,18 +31,18 @@ public class ConfigurarMetodosPago_Interactor implements ConfigurarMetodosPago.I
     }
 
     @Override
-    public void performGetPaymentsMethods(final DatabaseReference reference, final String id_establecimiento) {
+    public void performGetPaymentsMethods(final DatabaseReference Database_Reference, final String ID_Establecimiento) {
 
-        final Query query = reference.orderByChild("id_Establecimiento").equalTo(id_establecimiento);
+        final Query query = Database_Reference.orderByChild("id_Establecimiento").equalTo(ID_Establecimiento);
 
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
-                for (DataSnapshot postsnapshot: snapshot.getChildren()){
-
-                    Establecimiento_Modelo establecimiento_modelo = postsnapshot.getValue(Establecimiento_Modelo.class);
-                    mListener.onSuccessGetPaymentsMethods(establecimiento_modelo);
+                for (DataSnapshot postsnapshot: snapshot.getChildren())
+                {
+                    Establecimiento_Modelo Establecimiento = postsnapshot.getValue(Establecimiento_Modelo.class);
+                    mListener.onSuccessGetPaymentsMethods(Establecimiento);
                     query.removeEventListener(valueEventListener);
                 }
             }
@@ -56,27 +56,28 @@ public class ConfigurarMetodosPago_Interactor implements ConfigurarMetodosPago.I
     }
 
     @Override
-    public void performUpdatePaymentsMethods(final DatabaseReference reference, final String id_establecimiento, final String Codigo_Paypal, final String Codigo_Culqi, final String Url_Qr) {
+    public void performUpdatePaymentsMethods(final DatabaseReference Database_Reference, final String ID_Establecimiento, final String Codigo_Paypal, final String Codigo_Culqi, final String Url_Qr) {
 
-        final Query query = reference.orderByChild("id_Establecimiento").equalTo(id_establecimiento);
+        final Query query = Database_Reference.orderByChild("id_Establecimiento").equalTo(ID_Establecimiento);
 
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                for(DataSnapshot postsnapshot : snapshot.getChildren()){
+                for(DataSnapshot postsnapshot : snapshot.getChildren())
+                {
+                    Establecimiento_Modelo Establecimiento = postsnapshot.getValue(Establecimiento_Modelo.class);
 
-                    Establecimiento_Modelo establecimiento = postsnapshot.getValue(Establecimiento_Modelo.class);
+                    Establecimiento.setCodigo_Paypal(Codigo_Paypal);
+                    Establecimiento.setCodigo_Culqi(Codigo_Culqi);
+                    Establecimiento.setUrl_Qr(Url_Qr);
 
-                    establecimiento.setCodigo_Paypal(Codigo_Paypal);
-                    establecimiento.setCodigo_Culqi(Codigo_Culqi);
-                    establecimiento.setUrl_Qr(Url_Qr);
-
-                    reference.child(id_establecimiento).setValue(establecimiento).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    Database_Reference.child(ID_Establecimiento).setValue(Establecimiento).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
-                            if(task.isSuccessful()){
+                            if(task.isSuccessful())
+                            {
                                 mListener.onSuccessUpdatePaymentsMethods();
                             }
                             else
@@ -101,8 +102,8 @@ public class ConfigurarMetodosPago_Interactor implements ConfigurarMetodosPago.I
     }
 
     @Override
-    public void performUpdateQRImage(StorageReference reference, String id_establecimiento, Uri Imagen_Uri) {
-        final StorageReference filePath = reference.child(id_establecimiento).child("MetodosPago").child(Imagen_Uri.getLastPathSegment());
+    public void performUpdateQRImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri) {
+        final StorageReference filePath = Storage_Reference.child(ID_Establecimiento).child("MetodosPago").child(Imagen_Uri.getLastPathSegment());
 
         filePath.putFile(Imagen_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -142,12 +143,14 @@ public class ConfigurarMetodosPago_Interactor implements ConfigurarMetodosPago.I
     }
 
     @Override
-    public void performGetEstablishmentInfo(Context context) {
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
-        String Id_Establecimiento = sharedPref.getString("id_establecimiento","");
+    public void performGetEstablishmentInfo(Context Contexto) {
 
-        if(Id_Establecimiento.length() != 0){
-            mListener.onSuccessGetEstablishmentInfo(Id_Establecimiento);
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
+        String ID_Establecimiento = sharedPref.getString("id_establecimiento","");
+
+        if(ID_Establecimiento.length() != 0)
+        {
+            mListener.onSuccessGetEstablishmentInfo(ID_Establecimiento);
         }
 
     }

@@ -18,31 +18,28 @@ public class RegistroUsuario_Interactor implements RegistrarUsuario.Interactor {
 
     private RegistrarUsuario.onOperationListener mListener;
 
-    private ArrayList<Usuario_Modelo> usuario_modelos=new ArrayList<>();
-
     public RegistroUsuario_Interactor(RegistrarUsuario.onOperationListener mListener) {
         this.mListener = mListener;
     }
 
     @Override
-    public void performCreateUser(final DatabaseReference reference, final Usuario_Modelo usuario_modelo) {
+    public void performCreateUser(final DatabaseReference Database_Reference, final Usuario_Modelo Usuario) {
 
-        Query query=reference.orderByChild("correo_Electronico").equalTo(usuario_modelo.getCorreo_Electronico());
+        Query query = Database_Reference.orderByChild("correo_Electronico").equalTo(Usuario.getCorreo_Electronico());
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Boolean booleano = false;
 
-                for(DataSnapshot postSnapshot : snapshot.getChildren()){
-
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
                     booleano = true;
-
                 }
 
-                if(!booleano){
-
-                    reference.child(usuario_modelo.getID_Usuario()).setValue(usuario_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                if(!booleano)
+                {
+                    Database_Reference.child(Usuario.getID_Usuario()).setValue(Usuario).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
@@ -53,12 +50,11 @@ public class RegistroUsuario_Interactor implements RegistrarUsuario.Interactor {
                             {
                                 mListener.onFailure();
                             }
-
                         }
                     });
-
                 }
-                else {
+                else
+                {
                     mListener.onUsedMail();
                 }
             }

@@ -20,23 +20,23 @@ public class RegistrarEstablecimiento_Presentador implements RegistrarEstablecim
     }
 
     @Override
-    public void CreateNewEstablishment(DatabaseReference reference, Establecimiento_Modelo establecimiento_modelo) {
-        mInteractor.performCreateEstablishment(reference, establecimiento_modelo);
+    public void CreateNewEstablishment(DatabaseReference Database_Reference, Establecimiento_Modelo Establecimiento) {
+        mInteractor.performCreateEstablishment(Database_Reference, Establecimiento);
     }
 
     @Override
-    public void UploadLogo(StorageReference reference, String Id_Establecimiento, Uri Image_Uri) {
-        mInteractor.performUploadLogo(reference, Id_Establecimiento, Image_Uri);
+    public void UploadLogo(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri) {
+        mInteractor.performUploadLogo(Storage_Reference, ID_Establecimiento, Imagen_Uri);
     }
 
     @Override
-    public void UploadDocument(StorageReference reference, String Id_Establecimiento, Uri Document_Uri) {
-        mInteractor.performUploadDocument(reference, Id_Establecimiento, Document_Uri);
+    public void UploadDocument(StorageReference Storage_Reference, String ID_Establecimiento, Uri Documento_Uri) {
+        mInteractor.performUploadDocument(Storage_Reference, ID_Establecimiento, Documento_Uri);
     }
 
     @Override
-    public void GetSessionData(Context context) {
-        mInteractor.performGetSessionData(context);
+    public void GetSessionData(Context Contexto) {
+        mInteractor.performGetSessionData(Contexto);
     }
 
     @Override

@@ -43,7 +43,7 @@ public class ListarResena_Vista extends Fragment implements ListarResena.View {
     public ListarResena_Presentador mPresenter;
     public DatabaseReference mReference;
 
-    String Id_Establecimiento = "";
+    String ID_Establecimiento = "";
 
     TextView LblPuntuacion;
     TextView LblTotal;
@@ -54,7 +54,7 @@ public class ListarResena_Vista extends Fragment implements ListarResena.View {
     ProgressBar ProgressBar_Numero_Tres;
     ProgressBar ProgressBar_Numero_Cuatro;
     ProgressBar ProgressBar_Numero_Cinco;
-    RatingBar ratingbarlistaresenas;
+    RatingBar RatingBar_Lista_Resenas;
 
     int Contador_Numero_Uno = 0;
     int Contador_Numero_Dos = 0;
@@ -64,7 +64,7 @@ public class ListarResena_Vista extends Fragment implements ListarResena.View {
 
     Double total_puntuacion = 0.0;
 
-    ArrayList <Resena_Modelo> resenas = new ArrayList<>();
+    ArrayList <Resena_Modelo> Resenas = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,36 +81,37 @@ public class ListarResena_Vista extends Fragment implements ListarResena.View {
         ProgressBar_Numero_Tres = (ProgressBar) view.findViewById(R.id.progressbar_numero_tres);
         ProgressBar_Numero_Cuatro = (ProgressBar) view.findViewById(R.id.progressbar_numero_cuatro);
         ProgressBar_Numero_Cinco = (ProgressBar) view.findViewById(R.id.progressbar_numero_cinco);
-        ratingbarlistaresenas = (RatingBar) view.findViewById(R.id.ratingbarlistaresenas);
+        RatingBar_Lista_Resenas = (RatingBar) view.findViewById(R.id.ratingbarlistaresenas);
 
         mPresenter=new ListarResena_Presentador(this);
         mReference= FirebaseDatabase.getInstance().getReference().child("Resena");
 
         mPresenter.GetEstablishmentInfo(getActivity());
-        mPresenter.GetReviews(mReference,Id_Establecimiento);
+        mPresenter.GetReviews(mReference,ID_Establecimiento);
 
         return view;
     }
 
     @Override
-    public void onGetReviewsSuccessful(ArrayList<Resena_Modelo> resena_modelos, Boolean Existe_Resena) {
-        resenas = resena_modelos;
+    public void onGetReviewsSuccessful(ArrayList<Resena_Modelo> Resenas, Boolean Existe_Resena) {
+        this.Resenas = Resenas;
 
-        if(Existe_Resena){
+        if(Existe_Resena)
+        {
             LblNo_Resenas.setVisibility(View.GONE);
             mReference= FirebaseDatabase.getInstance().getReference().child("Usuario_Cliente");
-            mPresenter.SearchClientName(mReference,resena_modelos);
+            mPresenter.SearchClientName(mReference,Resenas);
         }
         else
         {
             LblNo_Resenas.setVisibility(View.VISIBLE);
-            resenas.clear();
-            Adaptador = new Resena_Adaptador(resenas, getActivity());
+            Resenas.clear();
+            Adaptador = new Resena_Adaptador(Resenas, getActivity());
             Layout_Manager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
             Recycler_View.setLayoutManager(Layout_Manager);
             Recycler_View.setAdapter(Adaptador);
             LblPuntuacion.setText("0");
-            ratingbarlistaresenas.setRating(0);
+            RatingBar_Lista_Resenas.setRating(0);
             LblTotal.setText("0");
             ProgressBar_Numero_Uno.setProgress(0);
             ProgressBar_Numero_Dos.setProgress(0);
@@ -127,9 +128,9 @@ public class ListarResena_Vista extends Fragment implements ListarResena.View {
     }
 
     @Override
-    public void onSearchClientNameSuccessful(ArrayList<Resena_Modelo> resena_modelos) {
+    public void onSearchClientNameSuccessful(ArrayList<Resena_Modelo> Resenas) {
 
-        Adaptador = new Resena_Adaptador(resena_modelos, getActivity());
+        Adaptador = new Resena_Adaptador(Resenas, getActivity());
         Layout_Manager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         Recycler_View.setLayoutManager(Layout_Manager);
         Recycler_View.setAdapter(Adaptador);
@@ -140,36 +141,37 @@ public class ListarResena_Vista extends Fragment implements ListarResena.View {
         Contador_Numero_Cuatro = 0;
         Contador_Numero_Cinco = 0;
 
-        for(int i = 0; i < resena_modelos.size(); i++){
+        for(int i = 0; i < Resenas.size(); i++)
+        {
 
-            if (resena_modelos.get(i).getCalificacion() <= 1.0)
+            if (Resenas.get(i).getCalificacion() <= 1.0)
             {
                 Contador_Numero_Uno++;
             }
-            else if (resena_modelos.get(i).getCalificacion() <= 2.0)
+            else if (Resenas.get(i).getCalificacion() <= 2.0)
             {
                 Contador_Numero_Dos++;
             }
-            else if (resena_modelos.get(i).getCalificacion() <= 3.0)
+            else if (Resenas.get(i).getCalificacion() <= 3.0)
             {
                 Contador_Numero_Tres++;
             }
-            else if (resena_modelos.get(i).getCalificacion() <= 4.0)
+            else if (Resenas.get(i).getCalificacion() <= 4.0)
             {
                 Contador_Numero_Cuatro++;
             }
-            else if (resena_modelos.get(i).getCalificacion() <= 5.0)
+            else if (Resenas.get(i).getCalificacion() <= 5.0)
             {
                 Contador_Numero_Cinco++;
             }
-            total_puntuacion =+ resena_modelos.get(i).getCalificacion();
+            total_puntuacion =+ Resenas.get(i).getCalificacion();
         }
 
-        ProgressBar_Numero_Uno.setMax(resena_modelos.size());
-        ProgressBar_Numero_Dos.setMax(resena_modelos.size());
-        ProgressBar_Numero_Tres.setMax(resena_modelos.size());
-        ProgressBar_Numero_Cuatro.setMax(resena_modelos.size());
-        ProgressBar_Numero_Cinco.setMax(resena_modelos.size());
+        ProgressBar_Numero_Uno.setMax(Resenas.size());
+        ProgressBar_Numero_Dos.setMax(Resenas.size());
+        ProgressBar_Numero_Tres.setMax(Resenas.size());
+        ProgressBar_Numero_Cuatro.setMax(Resenas.size());
+        ProgressBar_Numero_Cinco.setMax(Resenas.size());
 
         ProgressBar_Numero_Uno.setProgress(Contador_Numero_Uno);
         ProgressBar_Numero_Dos.setProgress(Contador_Numero_Dos);
@@ -177,10 +179,10 @@ public class ListarResena_Vista extends Fragment implements ListarResena.View {
         ProgressBar_Numero_Cuatro.setProgress(Contador_Numero_Cuatro);
         ProgressBar_Numero_Cinco.setProgress(Contador_Numero_Cinco);
 
-        LblTotal.setText(String.valueOf(resena_modelos.size()));
-        total_puntuacion = total_puntuacion/resena_modelos.size();
+        LblTotal.setText(String.valueOf(Resenas.size()));
+        total_puntuacion = total_puntuacion/Resenas.size();
         LblPuntuacion.setText(String.valueOf(total_puntuacion));
-        ratingbarlistaresenas.setRating(total_puntuacion.floatValue());
+        RatingBar_Lista_Resenas.setRating(total_puntuacion.floatValue());
 
     }
 
@@ -190,7 +192,7 @@ public class ListarResena_Vista extends Fragment implements ListarResena.View {
     }
 
     @Override
-    public void onGetEstablishmentInfoSuccessful(String Id_Establecimiento) {
-        this.Id_Establecimiento = Id_Establecimiento;
+    public void onGetEstablishmentInfoSuccessful(String ID_Establecimiento) {
+        this.ID_Establecimiento = ID_Establecimiento;
     }
 }

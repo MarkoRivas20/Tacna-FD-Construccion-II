@@ -28,13 +28,13 @@ public class ModificarCupon_Interactor implements ModificarCupon.Interactor {
     }
 
     @Override
-    public void performUpdateCouponData(DatabaseReference reference, Cupon_Modelo cupon_modelo) {
+    public void performUpdateCouponData(DatabaseReference Database_Reference, Cupon_Modelo Cupon) {
 
-        reference.child(cupon_modelo.getId_Cupon()).setValue(cupon_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+        Database_Reference.child(Cupon.getId_Cupon()).setValue(Cupon).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-
+                if(task.isSuccessful())
+                {
                     mListener.onSuccessUpdateCouponData();
 
                 }
@@ -48,9 +48,9 @@ public class ModificarCupon_Interactor implements ModificarCupon.Interactor {
     }
 
     @Override
-    public void performUpdateCouponImage(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final String Url_Imagen_Actual, String Id_Establecimiento, final String Id_Cupon, Uri Imagen_Uri) {
+    public void performUpdateCouponImage(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final String Url_Imagen_Actual, String ID_Establecimiento, final String ID_Cupon, Uri Imagen_Uri) {
 
-        final StorageReference filePath = Storage_Reference.child(Id_Establecimiento).child("Cupon").child(Imagen_Uri.getLastPathSegment());
+        final StorageReference filePath = Storage_Reference.child(ID_Establecimiento).child("Cupon").child(Imagen_Uri.getLastPathSegment());
 
         filePath.putFile(Imagen_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -66,13 +66,12 @@ public class ModificarCupon_Interactor implements ModificarCupon.Interactor {
                     @Override
                     public void onSuccess(final Uri uri) {
 
-                        Database_Reference.child(Id_Cupon).child("url_Imagen").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        Database_Reference.child(ID_Cupon).child("url_Imagen").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-
+                                if(task.isSuccessful())
+                                {
                                     mListener.onSuccessUpdateCouponImage(uri.toString());
-
                                 }
                                 else
                                 {
@@ -98,16 +97,16 @@ public class ModificarCupon_Interactor implements ModificarCupon.Interactor {
     }
 
     @Override
-    public void performGetCouponData(final DatabaseReference Database_Reference, final String Id_Cupon) {
+    public void performGetCouponData(final DatabaseReference Database_Reference, final String ID_Cupon) {
 
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                Cupon_Modelo cupon_modelo = snapshot.getValue(Cupon_Modelo.class);
-                mListener.onSuccessGetCouponData(cupon_modelo);
+                Cupon_Modelo Cupon = snapshot.getValue(Cupon_Modelo.class);
+                mListener.onSuccessGetCouponData(Cupon);
 
-                Database_Reference.child(Id_Cupon).removeEventListener(valueEventListener);
+                Database_Reference.child(ID_Cupon).removeEventListener(valueEventListener);
             }
 
             @Override
@@ -115,7 +114,7 @@ public class ModificarCupon_Interactor implements ModificarCupon.Interactor {
                 mListener.onFailureGetCouponData();
             }
         };
-        Database_Reference.child(Id_Cupon).addValueEventListener(valueEventListener);
+        Database_Reference.child(ID_Cupon).addValueEventListener(valueEventListener);
 
     }
 }

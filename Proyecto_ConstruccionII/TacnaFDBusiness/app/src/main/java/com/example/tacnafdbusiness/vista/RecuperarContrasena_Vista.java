@@ -40,8 +40,8 @@ public class RecuperarContrasena_Vista extends AppCompatActivity implements Recu
         this.window=getWindow();
         window.setStatusBarColor(Color.parseColor("#003152"));
 
-        Bundle datos = this.getIntent().getExtras();
-        Correo_Electronico = datos.getString("correo_electronico");
+        Bundle Datos = this.getIntent().getExtras();
+        Correo_Electronico = Datos.getString("correo_electronico");
 
         mPresenter = new RecuperarContrasena_Presentador(this);
         mReference = FirebaseDatabase.getInstance().getReference().child("Usuario_Propietario");
@@ -54,14 +54,13 @@ public class RecuperarContrasena_Vista extends AppCompatActivity implements Recu
         BtnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TxtNueva_Clave.getText().toString().equals(TxtNueva_Clave_Repite.getText().toString())){
-
+                if (TxtNueva_Clave.getText().toString().equals(TxtNueva_Clave_Repite.getText().toString()))
+                {
                     mPresenter.RestorePassword(mReference,Correo_Electronico,TxtNueva_Clave.getText().toString());
-
-                }else {
-
+                }
+                else
+                {
                     TxtNueva_Clave_Repite.setError("Las contraseñas deben ser iguales");
-
                 }
 
             }

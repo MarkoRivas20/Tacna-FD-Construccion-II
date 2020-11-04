@@ -20,23 +20,23 @@ public class ListarResena_Presentador implements ListarResena.Presenter, ListarR
     }
 
     @Override
-    public void GetReviews(DatabaseReference reference, String Id_Establecimiento) {
-        mInteractor.performGetReviews(reference, Id_Establecimiento);
+    public void GetReviews(DatabaseReference Database_Reference, String Id_Establecimiento) {
+        mInteractor.performGetReviews(Database_Reference, Id_Establecimiento);
     }
 
     @Override
-    public void SearchClientName(DatabaseReference reference, ArrayList<Resena_Modelo> resena_modelos) {
-        mInteractor.performSearchClientName(reference, resena_modelos);
+    public void SearchClientName(DatabaseReference Database_Reference, ArrayList<Resena_Modelo> Resenas) {
+        mInteractor.performSearchClientName(Database_Reference, Resenas);
     }
 
     @Override
-    public void GetEstablishmentInfo(Context context) {
-        mInteractor.performGetEstablishmentInfo(context);
+    public void GetEstablishmentInfo(Context Contexto) {
+        mInteractor.performGetEstablishmentInfo(Contexto);
     }
 
     @Override
-    public void onSuccessGetReviews(ArrayList<Resena_Modelo> resena_modelos, Boolean Existe_Resena) {
-        mView.onGetReviewsSuccessful(resena_modelos, Existe_Resena);
+    public void onSuccessGetReviews(ArrayList<Resena_Modelo> Resenas, Boolean Existe_Resena) {
+        mView.onGetReviewsSuccessful(Resenas, Existe_Resena);
     }
 
     @Override
@@ -45,8 +45,8 @@ public class ListarResena_Presentador implements ListarResena.Presenter, ListarR
     }
 
     @Override
-    public void onSuccessSearchClientName(ArrayList<Resena_Modelo> resena_modelos) {
-        mView.onSearchClientNameSuccessful(resena_modelos);
+    public void onSuccessSearchClientName(ArrayList<Resena_Modelo> Resenas) {
+        mView.onSearchClientNameSuccessful(Resenas);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ListarResena_Presentador implements ListarResena.Presenter, ListarR
     }
 
     @Override
-    public void onSuccessGetEstablishmentInfo(String Id_Establecimiento) {
-        mView.onGetEstablishmentInfoSuccessful(Id_Establecimiento);
+    public void onSuccessGetEstablishmentInfo(String ID_Establecimiento) {
+        mView.onGetEstablishmentInfoSuccessful(ID_Establecimiento);
     }
 }

@@ -20,28 +20,28 @@ public class ListarEstablecimiento_Presentador implements ListarEstablecimiento.
     }
 
     @Override
-    public void SearchEstablishment(DatabaseReference reference, String ID_Usuario) {
-        mInteractor.performSearchEstablishment(reference, ID_Usuario);
+    public void SearchEstablishment(DatabaseReference Database_Reference, String ID_Usuario) {
+        mInteractor.performSearchEstablishment(Database_Reference, ID_Usuario);
     }
 
     @Override
-    public void SaveEstablishmentInfo(Context context, String Id_Establecimiento, String Nombre_Establecimiento, String Url_Logo, String Url_Documento) {
-        mInteractor.performSaveEstablishmentInfo(context, Id_Establecimiento, Nombre_Establecimiento, Url_Logo, Url_Documento);
+    public void SaveEstablishmentInfo(Context Contexto, String ID_Establecimiento, String Nombre_Establecimiento, String Url_Logo, String Url_Documento) {
+        mInteractor.performSaveEstablishmentInfo(Contexto, ID_Establecimiento, Nombre_Establecimiento, Url_Logo, Url_Documento);
     }
 
     @Override
-    public void FilterEstablishment(ArrayList<Establecimiento_Modelo> establecimientos, String Nombre_Establecimiento) {
-        mInteractor.performFilterEstablishment(establecimientos, Nombre_Establecimiento);
+    public void FilterEstablishment(ArrayList<Establecimiento_Modelo> Establecimientos, String Nombre_Establecimiento) {
+        mInteractor.performFilterEstablishment(Establecimientos, Nombre_Establecimiento);
     }
 
     @Override
-    public void GetSessionData(Context context) {
-        mInteractor.performGetSessionData(context);
+    public void GetSessionData(Context Contexto) {
+        mInteractor.performGetSessionData(Contexto);
     }
 
     @Override
-    public void onSuccess(ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento) {
-        mView.onSearchEstablishmentSuccessful(establecimiento, Existe_Establecimiento);
+    public void onSuccess(ArrayList<Establecimiento_Modelo> Establecimientos, Boolean Existe_Establecimiento) {
+        mView.onSearchEstablishmentSuccessful(Establecimientos, Existe_Establecimiento);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ListarEstablecimiento_Presentador implements ListarEstablecimiento.
     }
 
     @Override
-    public void onSuccessFilter(ArrayList<Establecimiento_Modelo> establecimientos, Boolean buscar_establecimiento) {
-        mView.onFilterSuccessful(establecimientos, buscar_establecimiento);
+    public void onSuccessFilter(ArrayList<Establecimiento_Modelo> Establecimientos, Boolean Buscar_Establecimiento) {
+        mView.onFilterSuccessful(Establecimientos, Buscar_Establecimiento);
     }
 }

@@ -21,8 +21,8 @@ public class CRUDRepartidor_Presentador implements CRUDRepartidores.Presenter, C
     }
 
     @Override
-    public void SaveDeliveryMan(DatabaseReference Database_Reference, RepartidorEstablecimiento_Modelo repartidorEstablecimiento_modelo) {
-        mInteractor.performSaveDeliveryMan(Database_Reference, repartidorEstablecimiento_modelo);
+    public void SaveDeliveryMan(DatabaseReference Database_Reference, RepartidorEstablecimiento_Modelo Repartidor_Establecimiento) {
+        mInteractor.performSaveDeliveryMan(Database_Reference, Repartidor_Establecimiento);
     }
 
     @Override
@@ -31,8 +31,8 @@ public class CRUDRepartidor_Presentador implements CRUDRepartidores.Presenter, C
     }
 
     @Override
-    public void SearchDeliveryManInfo(DatabaseReference Database_Reference, ArrayList<RepartidorEstablecimiento_Modelo> repartidorEstablecimiento_modelos) {
-        mInteractor.performSearchDeliveryManInfo(Database_Reference, repartidorEstablecimiento_modelos);
+    public void SearchDeliveryManInfo(DatabaseReference Database_Reference, ArrayList<RepartidorEstablecimiento_Modelo> Repartidores_Establecimiento) {
+        mInteractor.performSearchDeliveryManInfo(Database_Reference, Repartidores_Establecimiento);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class CRUDRepartidor_Presentador implements CRUDRepartidores.Presenter, C
     }
 
     @Override
-    public void GetEstablishmentInfo(Context context) {
-        mInteractor.performGetEstablishmentInfo(context);
+    public void GetEstablishmentInfo(Context Contexto) {
+        mInteractor.performGetEstablishmentInfo(Contexto);
     }
 
     @Override
@@ -61,8 +61,8 @@ public class CRUDRepartidor_Presentador implements CRUDRepartidores.Presenter, C
     }
 
     @Override
-    public void onSuccessSearchDeliveryMan(Repartidor_Modelo repartidor_modelos, Boolean Existe_Repartidor) {
-        mView.onSearchDeliveryManSuccessful(repartidor_modelos, Existe_Repartidor);
+    public void onSuccessSearchDeliveryMan(Repartidor_Modelo Repartidor, Boolean Existe_Repartidor) {
+        mView.onSearchDeliveryManSuccessful(Repartidor, Existe_Repartidor);
     }
 
     @Override
@@ -81,8 +81,8 @@ public class CRUDRepartidor_Presentador implements CRUDRepartidores.Presenter, C
     }
 
     @Override
-    public void onSuccessListDeliveryMen(ArrayList<RepartidorEstablecimiento_Modelo> repartidorEstablecimiento_modelos, Boolean Existe_Repartidor_Establecimiento) {
-        mView.onListDeliveryMenSuccessful(repartidorEstablecimiento_modelos, Existe_Repartidor_Establecimiento);
+    public void onSuccessListDeliveryMen(ArrayList<RepartidorEstablecimiento_Modelo> Repartidores_Establecimiento, Boolean Existe_Repartidor_Establecimiento) {
+        mView.onListDeliveryMenSuccessful(Repartidores_Establecimiento, Existe_Repartidor_Establecimiento);
     }
 
     @Override
@@ -91,8 +91,8 @@ public class CRUDRepartidor_Presentador implements CRUDRepartidores.Presenter, C
     }
 
     @Override
-    public void onSuccessSearchDeliveryManInfo(ArrayList<Repartidor_Modelo> repartidor_modelos) {
-        mView.onSearchDeliveryManInfoSuccessful(repartidor_modelos);
+    public void onSuccessSearchDeliveryManInfo(ArrayList<Repartidor_Modelo> Repartidor) {
+        mView.onSearchDeliveryManInfoSuccessful(Repartidor);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class CRUDRepartidor_Presentador implements CRUDRepartidores.Presenter, C
     }
 
     @Override
-    public void onSuccessGetEstablishmentInfo(String Id_Establecimiento) {
-        mView.onGetEstablishmentInfoSuccessful(Id_Establecimiento);
+    public void onSuccessGetEstablishmentInfo(String ID_Establecimiento) {
+        mView.onGetEstablishmentInfoSuccessful(ID_Establecimiento);
     }
 }

@@ -16,8 +16,8 @@ public class RegistroUsuario_Presentador implements RegistrarUsuario.Presenter, 
     }
 
     @Override
-    public void CreateNewUser(DatabaseReference reference, Usuario_Modelo usuario_modelo) {
-        mInteractor.performCreateUser(reference,usuario_modelo);
+    public void CreateNewUser(DatabaseReference Database_Reference, Usuario_Modelo Usuario) {
+        mInteractor.performCreateUser(Database_Reference,Usuario);
     }
 
     @Override

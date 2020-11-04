@@ -45,7 +45,7 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
     private Repartidor_Adaptador Adaptador;
     private RecyclerView.LayoutManager Layout_Manager;
 
-    String Id_Establecimiento = "";
+    String ID_Establecimiento = "";
     String ID_Repartidor_Establecimiento = "";
     String ID_Usuario_Repartidor = "";
 
@@ -57,7 +57,7 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
 
     AlertDialog.Builder Mensaje;
 
-    ArrayList <Repartidor_Modelo> repartidor_modelos = new ArrayList<>();
+    ArrayList <Repartidor_Modelo> Repartidores = new ArrayList<>();
 
     Boolean aBoolean = false;
     
@@ -77,25 +77,29 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
         mReference = FirebaseDatabase.getInstance().getReference().child("Repartidor_Establecimiento");
 
         mPresenter.GetEstablishmentInfo(getActivity());
-        mPresenter.ListDeliveryMen(mReference, Id_Establecimiento);
+        mPresenter.ListDeliveryMen(mReference, ID_Establecimiento);
 
         BtnBuscar_Repartidor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 aBoolean = false;
-                if(repartidor_modelos.size() == 0)
+                if(Repartidores.size() == 0)
                 {
                     mReference = FirebaseDatabase.getInstance().getReference().child("Usuario_Repartidor");
                     mPresenter.SearchDeliveryMan(mReference, TxtCorreo_Electronico_Repartidor.getText().toString());
                 }
                 else
                 {
-                    for(int i = 0; i < repartidor_modelos.size(); i++){
-                        if(TxtCorreo_Electronico_Repartidor.getText().toString().equals(repartidor_modelos.get(i).getEmail())){
+                    for(int i = 0; i < Repartidores.size(); i++)
+                    {
+                        if(TxtCorreo_Electronico_Repartidor.getText().toString().equals(Repartidores.get(i).getEmail()))
+                        {
                             aBoolean = true;
                         }
                     }
-                    if(!aBoolean){
+
+                    if(!aBoolean)
+                    {
                         mReference = FirebaseDatabase.getInstance().getReference().child("Usuario_Repartidor");
                         mPresenter.SearchDeliveryMan(mReference, TxtCorreo_Electronico_Repartidor.getText().toString());
                     }
@@ -119,8 +123,8 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
                 mReference = FirebaseDatabase.getInstance().getReference().child("Repartidor_Establecimiento");
                 ID_Repartidor_Establecimiento = mReference.push().getKey();
 
-                RepartidorEstablecimiento_Modelo repartidorEstablecimiento_modelo = new RepartidorEstablecimiento_Modelo(ID_Repartidor_Establecimiento, ID_Usuario_Repartidor, Id_Establecimiento);
-                mPresenter.SaveDeliveryMan(mReference, repartidorEstablecimiento_modelo);
+                RepartidorEstablecimiento_Modelo Repartidor_Establecimiento = new RepartidorEstablecimiento_Modelo(ID_Repartidor_Establecimiento, ID_Usuario_Repartidor, ID_Establecimiento);
+                mPresenter.SaveDeliveryMan(mReference, Repartidor_Establecimiento);
 
             }
         });
@@ -146,11 +150,11 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
     }
 
     @Override
-    public void onSearchDeliveryManSuccessful(Repartidor_Modelo repartidor_modelos, Boolean Existe_Repartidor) {
+    public void onSearchDeliveryManSuccessful(Repartidor_Modelo Repartidor, Boolean Existe_Repartidor) {
         if(Existe_Repartidor)
         {
-            ID_Usuario_Repartidor = repartidor_modelos.getID_Usuario_Repartidor();
-            Mensaje.setMessage("¿Esta seguro que desea añadir a " + repartidor_modelos.getNombre() + " " + repartidor_modelos.getApellido() + "?");
+            ID_Usuario_Repartidor = Repartidor.getID_Usuario_Repartidor();
+            Mensaje.setMessage("¿Esta seguro que desea añadir a " + Repartidor.getNombre() + " " + Repartidor.getApellido() + "?");
             Mensaje.show();
         }
         else
@@ -176,19 +180,19 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
     }
 
     @Override
-    public void onListDeliveryMenSuccessful(final ArrayList<RepartidorEstablecimiento_Modelo> repartidorEstablecimiento_modelos, Boolean Existe_Repartidor_Establecimiento) {
+    public void onListDeliveryMenSuccessful(final ArrayList<RepartidorEstablecimiento_Modelo> Repartidores_Establecimiento, Boolean Existe_Repartidor_Establecimiento) {
 
         if(Existe_Repartidor_Establecimiento)
         {
             LblNo_Repartidores.setVisibility(View.GONE);
             mReference = FirebaseDatabase.getInstance().getReference().child("Usuario_Repartidor");
-            mPresenter.SearchDeliveryManInfo(mReference, repartidorEstablecimiento_modelos);
+            mPresenter.SearchDeliveryManInfo(mReference, Repartidores_Establecimiento);
         }
         else
         {
             LblNo_Repartidores.setVisibility(View.VISIBLE);
-            repartidor_modelos.clear();
-            Adaptador = new Repartidor_Adaptador(repartidor_modelos, getActivity());
+            Repartidores.clear();
+            Adaptador = new Repartidor_Adaptador(Repartidores, getActivity());
             Layout_Manager = new GridLayoutManager(getActivity(), 2);
             Recycler_View.setLayoutManager(Layout_Manager);
             Recycler_View.setAdapter(Adaptador);
@@ -202,10 +206,10 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
     }
 
     @Override
-    public void onSearchDeliveryManInfoSuccessful(final ArrayList<Repartidor_Modelo> repartidor_modelos) {
+    public void onSearchDeliveryManInfoSuccessful(final ArrayList<Repartidor_Modelo> Repartidores) {
 
-        this.repartidor_modelos = repartidor_modelos;
-        Adaptador = new Repartidor_Adaptador(repartidor_modelos, getActivity());
+        this.Repartidores = Repartidores;
+        Adaptador = new Repartidor_Adaptador(Repartidores, getActivity());
         Adaptador.setOnItemClickListener(new Repartidor_Adaptador.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -215,7 +219,7 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
             @Override
             public void onTakeOut(int position) {
                 mReference = FirebaseDatabase.getInstance().getReference().child("Repartidor_Establecimiento");
-                mPresenter.TakeOutDeliveryMan(mReference, repartidor_modelos.get(position).getID_Usuario_Repartidor(), Id_Establecimiento);
+                mPresenter.TakeOutDeliveryMan(mReference, Repartidores.get(position).getID_Usuario_Repartidor(), ID_Establecimiento);
             }
 
             @Override
@@ -234,7 +238,7 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
     }
 
     @Override
-    public void onGetEstablishmentInfoSuccessful(String Id_Establecimiento) {
-        this.Id_Establecimiento=Id_Establecimiento;
+    public void onGetEstablishmentInfoSuccessful(String ID_Establecimiento) {
+        this.ID_Establecimiento=ID_Establecimiento;
     }
 }

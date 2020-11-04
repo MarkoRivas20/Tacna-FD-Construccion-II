@@ -11,11 +11,11 @@ public interface RecuperarContrasena {
     }
 
     interface Presenter{
-        void RestorePassword(DatabaseReference reference, String correo_electronico, String nueva_contrasena);
+        void RestorePassword(DatabaseReference Database_Reference, String Correo_Electronico, String Nueva_Contrasena);
     }
 
     interface Interactor{
-        void performRestorePassword(DatabaseReference reference, String correo_electronico, String nueva_contrasena);
+        void performRestorePassword(DatabaseReference Database_Reference, String Correo_Electronico, String Nueva_Contrasena);
     }
 
     interface onOperationListener{

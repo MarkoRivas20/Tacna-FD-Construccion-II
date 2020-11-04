@@ -22,8 +22,8 @@ public class CRUDImagenes_Presentador implements CRUDImagenes.Presenter, CRUDIma
     }
 
     @Override
-    public void UploadImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, ImagenEstablecimiento_Modelo imagenEstablecimiento_modelo, Uri Imagen_Uri) {
-        mInteractor.performUploadImage(Storage_Reference, Database_Reference, imagenEstablecimiento_modelo, Imagen_Uri);
+    public void UploadImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, ImagenEstablecimiento_Modelo Imagen_Establecimiento, Uri Imagen_Uri) {
+        mInteractor.performUploadImage(Storage_Reference, Database_Reference, Imagen_Establecimiento, Imagen_Uri);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class CRUDImagenes_Presentador implements CRUDImagenes.Presenter, CRUDIma
     }
 
     @Override
-    public void GetEstablishmentInfo(Context context) {
-        mInteractor.performGetEstablishmentInfo(context);
+    public void GetEstablishmentInfo(Context Contexto) {
+        mInteractor.performGetEstablishmentInfo(Contexto);
     }
 
     @Override
@@ -62,8 +62,8 @@ public class CRUDImagenes_Presentador implements CRUDImagenes.Presenter, CRUDIma
     }
 
     @Override
-    public void onSuccessGetAllImages(ArrayList<ImagenEstablecimiento_Modelo> imagenEstablecimiento_modelos, Boolean Existe_Imagen) {
-        mView.onGetAllImagesSuccessful(imagenEstablecimiento_modelos, Existe_Imagen);
+    public void onSuccessGetAllImages(ArrayList<ImagenEstablecimiento_Modelo> Imagenes_Establecimiento, Boolean Existe_Imagen) {
+        mView.onGetAllImagesSuccessful(Imagenes_Establecimiento, Existe_Imagen);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class CRUDImagenes_Presentador implements CRUDImagenes.Presenter, CRUDIma
     }
 
     @Override
-    public void onSuccessGetEstablishmentInfo(String Id_Establecimiento) {
-        mView.onGetEstablishmentInfoSuccessful(Id_Establecimiento);
+    public void onSuccessGetEstablishmentInfo(String ID_Establecimiento) {
+        mView.onGetEstablishmentInfoSuccessful(ID_Establecimiento);
     }
 }

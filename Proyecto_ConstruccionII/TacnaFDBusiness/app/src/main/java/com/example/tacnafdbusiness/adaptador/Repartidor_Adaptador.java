@@ -21,7 +21,7 @@ import java.util.List;
 
 public class Repartidor_Adaptador extends RecyclerView.Adapter<Repartidor_Adaptador.RepartidorViewHolder>{
 
-    private List<Repartidor_Modelo> Items;
+    private List<Repartidor_Modelo> Repartidores;
 
     private Context Contexto;
 
@@ -40,9 +40,9 @@ public class Repartidor_Adaptador extends RecyclerView.Adapter<Repartidor_Adapta
             v.setOnCreateContextMenuListener(this);
         }
 
-        public void bindData (Repartidor_Modelo dataModel, Context context) {
-            Picasso.with(context).load(dataModel.getUrl_Foto()).into(Imagen);
-            TxtNombre.setText(dataModel.getNombre() + " " + dataModel.getApellido());
+        public void bindData (Repartidor_Modelo Repartidor, Context Contexto) {
+            Picasso.with(Contexto).load(Repartidor.getUrl_Foto()).into(Imagen);
+            TxtNombre.setText(Repartidor.getNombre() + " " + Repartidor.getApellido());
         }
 
         @Override
@@ -100,8 +100,8 @@ public class Repartidor_Adaptador extends RecyclerView.Adapter<Repartidor_Adapta
     }
 
 
-    public Repartidor_Adaptador(List<Repartidor_Modelo> items, Context context) {
-        this.Items = items;
+    public Repartidor_Adaptador(List<Repartidor_Modelo> Repartidores, Context context) {
+        this.Repartidores = Repartidores;
         Contexto = context;
     }
 
@@ -114,12 +114,12 @@ public class Repartidor_Adaptador extends RecyclerView.Adapter<Repartidor_Adapta
 
     @Override
     public void onBindViewHolder(@NonNull Repartidor_Adaptador.RepartidorViewHolder holder, int position) {
-        holder.bindData(Items.get(position), Contexto);
+        holder.bindData(Repartidores.get(position), Contexto);
     }
 
     @Override
     public int getItemCount() {
-        return Items.size();
+        return Repartidores.size();
     }
 
     public interface OnItemClickListener{

@@ -10,24 +10,24 @@ import java.util.ArrayList;
 public interface ListarCupon {
 
     interface View{
-        void onListCouponSuccessful(ArrayList<Cupon_Modelo> cupon_modelos, Boolean Existe_Cupon);
+        void onListCouponSuccessful(ArrayList<Cupon_Modelo> Cupones, Boolean Existe_Cupon);
         void onListCouponFailure();
-        void onGetEstablishmentInfoSuccessful(String Id_Establecimiento);
+        void onGetEstablishmentInfoSuccessful(String ID_Establecimiento);
     }
 
     interface Presenter{
-        void ListCoupon(DatabaseReference reference, String Id_Establecimiento);
-        void GetEstablishmentInfo(Context context);
+        void ListCoupon(DatabaseReference Database_Reference, String ID_Establecimiento);
+        void GetEstablishmentInfo(Context Contexto);
     }
 
     interface Interactor{
-        void performListCoupon(DatabaseReference reference, String Id_Establecimiento);
-        void performGetEstablishmentInfo(Context context);
+        void performListCoupon(DatabaseReference Database_Reference, String ID_Establecimiento);
+        void performGetEstablishmentInfo(Context Contexto);
     }
 
     interface onOperationListener{
-        void onSuccessListCoupon(ArrayList<Cupon_Modelo> cupon_modelos, Boolean Existe_Cupon);
+        void onSuccessListCoupon(ArrayList<Cupon_Modelo> Cupones, Boolean Existe_Cupon);
         void onFailureListCoupon();
-        void onSuccessGetEstablishmentInfo(String Id_Establecimiento);
+        void onSuccessGetEstablishmentInfo(String ID_Establecimiento);
     }
 }

@@ -63,7 +63,7 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
     EditText TxtDescripcion;
     EditText TxtPorcentaje_Descuento;
 
-    FloatingActionButton fab;
+    FloatingActionButton Fab;
     Button BtnRegistrar_Cupon;
 
     private static final int PICK_IMAGE = 100;
@@ -74,10 +74,10 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
 
     Spinner Spinner_Estado;
 
-    String[] estados = {"Seleccione un Estado", "Activo", "Inactivo"};
+    String[] Estados = {"Seleccione un Estado", "Activo", "Inactivo"};
 
-    String Id_Establecimiento = "";
-    String Id_Cupoon = "";
+    String ID_Establecimiento = "";
+    String ID_Cupoon = "";
 
     Boolean Imagen_Seleccionada = false;
 
@@ -94,7 +94,7 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
         TxtFecha_Inicio = (EditText) view.findViewById(R.id.txtfecha_inicio);
         TxtFecha_Final = (EditText) view.findViewById(R.id.txtfecha_final);
         Spinner_Estado = (Spinner) view.findViewById(R.id.spinnerestado);
-        fab = (FloatingActionButton) view.findViewById(R.id.fab_cupon);
+        Fab = (FloatingActionButton) view.findViewById(R.id.fab_cupon);
         Imagen_Cupon = (ImageView) view.findViewById(R.id.imagen_cupon);
         BtnRegistrar_Cupon = (Button) view.findViewById(R.id.BtnRegistrar_Cupon);
         TxtDescripcion = (EditText) view.findViewById(R.id.txtdescripcion);
@@ -104,7 +104,7 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
         TxtFecha_Inicio.setFocusable(false);
         TxtFecha_Final.setFocusable(false);
 
-        Spinner_Estado.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, estados));
+        Spinner_Estado.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Estados));
 
         mPresenter.GetEstablishmentInfo(getActivity());
 
@@ -117,11 +117,11 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         final int mesActual = month + 1;
 
-                        String diaFormateado = (dayOfMonth < 10)? CERO + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
+                        String DiaFormateado = (dayOfMonth < 10)? CERO + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
 
-                        String mesFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
+                        String MesFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
 
-                        TxtFecha_Inicio.setText(diaFormateado + BARRA + mesFormateado + BARRA + year);
+                        TxtFecha_Inicio.setText(DiaFormateado + BARRA + MesFormateado + BARRA + year);
                     }
                 }, Anio, Mes , Dia);
                 recogerFecha.show();
@@ -138,11 +138,11 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         final int mesActual = month + 1;
 
-                        String diaFormateado = (dayOfMonth < 10)? CERO + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
+                        String DiaFormateado = (dayOfMonth < 10)? CERO + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
 
-                        String mesFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
+                        String MesFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
 
-                        TxtFecha_Final.setText(diaFormateado + BARRA + mesFormateado + BARRA + year);
+                        TxtFecha_Final.setText(DiaFormateado + BARRA + MesFormateado + BARRA + year);
                     }
                 }, Anio, Mes , Dia);
                 recogerFecha.show();
@@ -150,11 +150,11 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
             }
         });
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        Fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-
+                if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                {
                     Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                     startActivityForResult(gallery, PICK_IMAGE);
                 }
@@ -168,7 +168,7 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
         BtnRegistrar_Cupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.UploadCouponImage(mStorageReference, Id_Establecimiento, Image_Uri);
+                mPresenter.UploadCouponImage(mStorageReference, ID_Establecimiento, Image_Uri);
             }
         });
 
@@ -177,7 +177,8 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE)
+        {
             Image_Uri = data.getData();
             Imagen_Cupon.setImageURI(Image_Uri);
             Imagen_Seleccionada = true;
@@ -199,11 +200,11 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
     @Override
     public void onUploadCouponImageSuccessful(String Url_Imagen) {
 
-        Id_Cupoon = mReference.push().getKey();
-        Cupon_Modelo cupon_modelo = new Cupon_Modelo(Id_Cupoon, Id_Establecimiento, TxtTitulo.getText().toString(), Url_Imagen, TxtDescripcion.getText().toString(),
+        ID_Cupoon = mReference.push().getKey();
+        Cupon_Modelo Cupon = new Cupon_Modelo(ID_Cupoon, ID_Establecimiento, TxtTitulo.getText().toString(), Url_Imagen, TxtDescripcion.getText().toString(),
                 Integer.parseInt(TxtPorcentaje_Descuento.getText().toString()), TxtFecha_Inicio.getText().toString(), TxtFecha_Final.getText().toString(), Spinner_Estado.getSelectedItem().toString());
 
-        mPresenter.SaveCoupon(mReference, cupon_modelo);
+        mPresenter.SaveCoupon(mReference, Cupon);
     }
 
     @Override
@@ -212,7 +213,7 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
     }
 
     @Override
-    public void onGetEstablishmentInfoSuccessful(String Id_Establecimiento) {
-        this.Id_Establecimiento = Id_Establecimiento;
+    public void onGetEstablishmentInfoSuccessful(String ID_Establecimiento) {
+        this.ID_Establecimiento = ID_Establecimiento;
     }
 }

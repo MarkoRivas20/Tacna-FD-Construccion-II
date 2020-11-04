@@ -15,41 +15,63 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class ModificarUsuario_Interactor implements ModificarUsuario.Interactor {
+public class ModificarUsuario_Interactor implements ModificarUsuario.Interactor{
 
     private ModificarUsuario.onOperationListener mListener;
+    private ValueEventListener valueEventListener;
 
     public ModificarUsuario_Interactor(ModificarUsuario.onOperationListener mListener) {
         this.mListener = mListener;
     }
 
     @Override
-    public void performUpdateUserData(DatabaseReference reference, Usuario_Modelo usuario_modelo) {
+    public void performUpdateUser(final DatabaseReference Database_Reference, final Usuario_Modelo Usuario) {
 
-        reference.child(usuario_modelo.getID_Usuario_Cliente()).setValue(usuario_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+        final Query query = Database_Reference.orderByChild("id_Usuario_Cliente").equalTo(Usuario.getID_Usuario_Cliente());
+
+        valueEventListener = new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if(task.isSuccessful()){
-
-                    mListener.onSuccessUpdateUserData();
-
-                }
-                else
+                for(DataSnapshot postsnapshot : snapshot.getChildren())
                 {
-                    mListener.onFailureUpdateUserData();
-                }
+                    Database_Reference.child(Usuario.getID_Usuario_Cliente()).setValue(Usuario).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
 
+                            if(task.isSuccessful())
+                            {
+                                mListener.onSuccessUpdateUser();
+                            }
+                            else
+                            {
+                                mListener.onFailureUpdateUser();
+                            }
+
+                        }
+                    });
+                    query.removeEventListener(valueEventListener);
+
+                }
             }
-        });
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                mListener.onFailureUpdateUser();
+            }
+        };
+
+        query.addListenerForSingleValueEvent(valueEventListener);
+
+
+
+
     }
 
-
-
     @Override
-    public void performShowUserData(DatabaseReference reference, String correo_electronico) {
+    public void performShowUserData(DatabaseReference Database_Reference, String Correo_Electronico) {
 
-        Query query=reference.orderByChild("correo_Electronico").equalTo(correo_electronico);
+        Query query=Database_Reference.orderByChild("correo_Electronico").equalTo(Correo_Electronico);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -57,13 +79,12 @@ public class ModificarUsuario_Interactor implements ModificarUsuario.Interactor 
 
                 Boolean booleano = false;
 
-                for(DataSnapshot postSnapshot : snapshot.getChildren()){
-
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
                     booleano = true;
-                    Usuario_Modelo usuario_modelo = postSnapshot.getValue(Usuario_Modelo.class);
+                    Usuario_Modelo Usuario = postSnapshot.getValue(Usuario_Modelo.class);
 
-                    mListener.onSuccessShowUserData(usuario_modelo);
-
+                    mListener.onSuccessShowUserData(Usuario);
                 }
 
                 if(!booleano){
@@ -80,21 +101,12 @@ public class ModificarUsuario_Interactor implements ModificarUsuario.Interactor 
     }
 
     @Override
-    public void performSaveSession(Context context, String nombre_usuario) {
-
-        SharedPreferences sharedPref = context.getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("nombre_usuario", nombre_usuario);
-        editor.apply();
-        mListener.onSuccessSaveSession();
-    }
-
-    @Override
-    public void performGetSessionData(Context context) {
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
+    public void performGetSessionData(Context Contexto) {
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
         String Correo_Electronico = sharedPref.getString("correo_electronico","");
 
-        if(Correo_Electronico.length() != 0){
+        if(Correo_Electronico.length() != 0)
+        {
             mListener.onSuccessGetSessionData(Correo_Electronico);
         }
     }

@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ItemMenu_Adaptador extends RecyclerView.Adapter<ItemMenu_Adaptador.ItemMenuViewHolder>{
 
-    private List<ItemMenu_Modelo> Items;
+    private List<ItemMenu_Modelo> Items_Menu;
 
     private Context Contexto;
 
@@ -42,10 +42,10 @@ public class ItemMenu_Adaptador extends RecyclerView.Adapter<ItemMenu_Adaptador.
             v.setOnCreateContextMenuListener(this);
         }
 
-        public void bindData (ItemMenu_Modelo dataModel, Context context) {
-            Picasso.with(context).load(dataModel.getUrl_Imagen()).into(Imagen_Recycler_Item_Menu);
-            TxtNombre_Recycler_Item_Menu.setText(dataModel.getNombre());
-            TxtPrecio_Recycler_Item_Menu.setText("S/. " + dataModel.getPrecio());
+        public void bindData (ItemMenu_Modelo Item_Menu, Context Contexto) {
+            Picasso.with(Contexto).load(Item_Menu.getUrl_Imagen()).into(Imagen_Recycler_Item_Menu);
+            TxtNombre_Recycler_Item_Menu.setText(Item_Menu.getNombre());
+            TxtPrecio_Recycler_Item_Menu.setText("S/. " + Item_Menu.getPrecio());
         }
 
         @Override
@@ -110,8 +110,8 @@ public class ItemMenu_Adaptador extends RecyclerView.Adapter<ItemMenu_Adaptador.
     }
 
 
-    public ItemMenu_Adaptador(List<ItemMenu_Modelo> items, Context context) {
-        this.Items = items;
+    public ItemMenu_Adaptador(List<ItemMenu_Modelo> Items_Menu, Context context) {
+        this.Items_Menu = Items_Menu;
         Contexto = context;
     }
 
@@ -124,12 +124,12 @@ public class ItemMenu_Adaptador extends RecyclerView.Adapter<ItemMenu_Adaptador.
 
     @Override
     public void onBindViewHolder(@NonNull ItemMenu_Adaptador.ItemMenuViewHolder holder, int position) {
-        holder.bindData(Items.get(position), Contexto);
+        holder.bindData(Items_Menu.get(position), Contexto);
     }
 
     @Override
     public int getItemCount() {
-        return Items.size();
+        return Items_Menu.size();
     }
 
     public interface OnItemClickListener{

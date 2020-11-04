@@ -14,19 +14,19 @@ public interface RegistrarCupon {
         void onSaveCouponFailure();
         void onUploadCouponImageSuccessful(String Url_Imagen);
         void onUploadCouponImageFailure();
-        void onGetEstablishmentInfoSuccessful(String Id_Establecimiento);
+        void onGetEstablishmentInfoSuccessful(String ID_Establecimiento);
     }
 
     interface Presenter{
-        void SaveCoupon(DatabaseReference Database_Reference, Cupon_Modelo cupon_modelo);
-        void UploadCouponImage(StorageReference Storage_Reference, String Id_Establecimiento, Uri Imagen_Uri);
-        void GetEstablishmentInfo(Context context);
+        void SaveCoupon(DatabaseReference Database_Reference, Cupon_Modelo Cupon);
+        void UploadCouponImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri);
+        void GetEstablishmentInfo(Context Contexto);
     }
 
     interface Interactor{
-        void performSaveCoupon(DatabaseReference Database_Reference, Cupon_Modelo cupon_modelo);
-        void performUploadCouponImage(StorageReference Storage_Reference, String Id_Establecimiento, Uri Imagen_Uri);
-        void performGetEstablishmentInfo(Context context);
+        void performSaveCoupon(DatabaseReference Database_Reference, Cupon_Modelo Cupon);
+        void performUploadCouponImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri);
+        void performGetEstablishmentInfo(Context Contexto);
     }
 
     interface onOperationListener{
@@ -34,6 +34,6 @@ public interface RegistrarCupon {
         void onFailureSaveCoupon();
         void onSuccessUploadCouponImage(String Url_Imagen);
         void onFailureUploadCouponImage();
-        void onSuccessGetEstablishmentInfo(String Id_Establecimiento);
+        void onSuccessGetEstablishmentInfo(String ID_Establecimiento);
     }
 }

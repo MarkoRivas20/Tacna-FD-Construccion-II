@@ -20,23 +20,23 @@ public class ListarItemMenu_Presentador implements ListarItemMenu.Presenter, Lis
     }
 
     @Override
-    public void ListItemMenu(DatabaseReference reference, String Id_Establecimiento) {
-        mInteractor.performListItemMenu(reference, Id_Establecimiento);
+    public void ListItemMenu(DatabaseReference Database_Reference, String ID_Establecimiento) {
+        mInteractor.performListItemMenu(Database_Reference, ID_Establecimiento);
     }
 
     @Override
-    public void DeleteItemMenu(DatabaseReference Database_Reference, String Id_Item_Menu, String Url_Imagen) {
-        mInteractor.performDeleteItemMenu(Database_Reference, Id_Item_Menu, Url_Imagen);
+    public void DeleteItemMenu(DatabaseReference Database_Reference, String ID_Item_Menu, String Url_Imagen) {
+        mInteractor.performDeleteItemMenu(Database_Reference, ID_Item_Menu, Url_Imagen);
     }
 
     @Override
-    public void GetEstablishmentInfo(Context context) {
-        mInteractor.performGetEstablishmentInfo(context);
+    public void GetEstablishmentInfo(Context Contexto) {
+        mInteractor.performGetEstablishmentInfo(Contexto);
     }
 
     @Override
-    public void onSuccessListItemMenu(ArrayList<ItemMenu_Modelo> itemMenu_modelos, Boolean Existe_Item_Menu) {
-        mView.onListItemMenuSuccessful(itemMenu_modelos, Existe_Item_Menu);
+    public void onSuccessListItemMenu(ArrayList<ItemMenu_Modelo> Items_Menu, Boolean Existe_Item_Menu) {
+        mView.onListItemMenuSuccessful(Items_Menu, Existe_Item_Menu);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ListarItemMenu_Presentador implements ListarItemMenu.Presenter, Lis
     }
 
     @Override
-    public void onSuccessGetEstablishmentInfo(String Id_Establecimiento) {
-        mView.onGetEstablishmentInfoSuccessful(Id_Establecimiento);
+    public void onSuccessGetEstablishmentInfo(String ID_Establecimiento) {
+        mView.onGetEstablishmentInfoSuccessful(ID_Establecimiento);
     }
 }

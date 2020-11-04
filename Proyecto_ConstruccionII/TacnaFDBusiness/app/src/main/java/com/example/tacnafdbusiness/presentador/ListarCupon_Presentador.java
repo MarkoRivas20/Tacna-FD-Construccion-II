@@ -20,18 +20,18 @@ public class ListarCupon_Presentador implements ListarCupon.Presenter, ListarCup
     }
 
     @Override
-    public void ListCoupon(DatabaseReference reference, String Id_Establecimiento) {
-        mInteractor.performListCoupon(reference, Id_Establecimiento);
+    public void ListCoupon(DatabaseReference Database_Reference, String ID_Establecimiento) {
+        mInteractor.performListCoupon(Database_Reference, ID_Establecimiento);
     }
 
     @Override
-    public void GetEstablishmentInfo(Context context) {
-        mInteractor.performGetEstablishmentInfo(context);
+    public void GetEstablishmentInfo(Context Contexto) {
+        mInteractor.performGetEstablishmentInfo(Contexto);
     }
 
     @Override
-    public void onSuccessListCoupon(ArrayList<Cupon_Modelo> cupon_modelos, Boolean Existe_Cupon) {
-        mView.onListCouponSuccessful(cupon_modelos, Existe_Cupon);
+    public void onSuccessListCoupon(ArrayList<Cupon_Modelo> Cupones, Boolean Existe_Cupon) {
+        mView.onListCouponSuccessful(Cupones, Existe_Cupon);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ListarCupon_Presentador implements ListarCupon.Presenter, ListarCup
     }
 
     @Override
-    public void onSuccessGetEstablishmentInfo(String Id_Establecimiento) {
-        mView.onGetEstablishmentInfoSuccessful(Id_Establecimiento);
+    public void onSuccessGetEstablishmentInfo(String ID_Establecimiento) {
+        mView.onGetEstablishmentInfoSuccessful(ID_Establecimiento);
     }
 }

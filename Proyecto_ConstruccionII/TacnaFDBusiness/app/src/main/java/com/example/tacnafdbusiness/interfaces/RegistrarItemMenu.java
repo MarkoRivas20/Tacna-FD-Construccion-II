@@ -14,19 +14,19 @@ public interface RegistrarItemMenu {
         void onSaveItemMenuFailure();
         void onUploadItemMenuImageSuccessful(String Url_Imagen);
         void onUploadItemMenuImageFailure();
-        void onGetEstablishmentInfoSuccessful(String Id_Establecimiento);
+        void onGetEstablishmentInfoSuccessful(String ID_Establecimiento);
     }
 
     interface Presenter{
-        void SaveItemMenu(DatabaseReference Database_Reference, ItemMenu_Modelo itemMenu);
-        void UploadItemMenuImage(StorageReference Storage_Reference, String Id_Establecimiento, Uri Imagen_Uri);
-        void GetEstablishmentInfo(Context context);
+        void SaveItemMenu(DatabaseReference Database_Reference, ItemMenu_Modelo Item_Menu);
+        void UploadItemMenuImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri);
+        void GetEstablishmentInfo(Context Contexto);
     }
 
     interface Interactor{
-        void performSaveItemMenu(DatabaseReference Database_Reference, ItemMenu_Modelo itemMenu);
-        void performUploadItemMenuImage(StorageReference Storage_Reference, String Id_Establecimiento, Uri Imagen_Uri);
-        void performGetEstablishmentInfo(Context context);
+        void performSaveItemMenu(DatabaseReference Database_Reference, ItemMenu_Modelo Item_Menu);
+        void performUploadItemMenuImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri);
+        void performGetEstablishmentInfo(Context Contexto);
     }
 
     interface onOperationListener{
@@ -34,6 +34,6 @@ public interface RegistrarItemMenu {
         void onFailureSaveItemMenu();
         void onSuccessUploadItemMenuImage(String Url_Imagen);
         void onFailureUploadItemMenuImage();
-        void onSuccessGetEstablishmentInfo(String Id_Establecimiento);
+        void onSuccessGetEstablishmentInfo(String ID_Establecimiento);
     }
 }

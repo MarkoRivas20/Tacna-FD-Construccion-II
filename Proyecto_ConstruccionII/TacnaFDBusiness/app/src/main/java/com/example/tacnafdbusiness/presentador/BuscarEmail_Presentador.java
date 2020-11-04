@@ -15,8 +15,8 @@ public class BuscarEmail_Presentador implements BuscarEmail.Presenter, BuscarEma
     }
 
     @Override
-    public void SearchEmail(DatabaseReference reference, String correo_electronico, int codigo) {
-        mInteractor.performSearchEmail(reference,correo_electronico,codigo);
+    public void SearchEmail(DatabaseReference Database_Reference, String Correo_Electronico, int Codigo) {
+        mInteractor.performSearchEmail(Database_Reference,Correo_Electronico,Codigo);
     }
 
     @Override

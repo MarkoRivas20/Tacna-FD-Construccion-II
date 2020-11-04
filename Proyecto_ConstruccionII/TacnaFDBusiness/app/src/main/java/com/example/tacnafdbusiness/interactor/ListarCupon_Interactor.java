@@ -19,31 +19,32 @@ public class ListarCupon_Interactor implements ListarCupon.Interactor {
 
     private ListarCupon.onOperationListener mListener;
 
-    private ArrayList<Cupon_Modelo> cupon_modelos = new ArrayList<>();
+    private ArrayList<Cupon_Modelo> Cupones = new ArrayList<>();
 
     public ListarCupon_Interactor(ListarCupon.onOperationListener mListener) {
         this.mListener = mListener;
     }
 
     @Override
-    public void performListCoupon(DatabaseReference reference, String Id_Establecimiento) {
+    public void performListCoupon(DatabaseReference Database_Reference, String ID_Establecimiento) {
 
-        Query query = reference.orderByChild("id_Establecimiento").equalTo(Id_Establecimiento);
+        Query query = Database_Reference.orderByChild("id_Establecimiento").equalTo(ID_Establecimiento);
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 Boolean Existe_Cupon = false;
-                cupon_modelos.clear();
+                Cupones.clear();
 
-                for (DataSnapshot postSnapshot : snapshot.getChildren()){
+                for (DataSnapshot postSnapshot : snapshot.getChildren())
+                {
                     Existe_Cupon = true;
-                    Cupon_Modelo cupon_modelo = postSnapshot.getValue(Cupon_Modelo.class);
-                    cupon_modelos.add(cupon_modelo);
+                    Cupon_Modelo Cupon = postSnapshot.getValue(Cupon_Modelo.class);
+                    Cupones.add(Cupon);
                 }
 
-                mListener.onSuccessListCoupon(cupon_modelos, Existe_Cupon);
+                mListener.onSuccessListCoupon(Cupones, Existe_Cupon);
             }
 
             @Override
@@ -54,13 +55,14 @@ public class ListarCupon_Interactor implements ListarCupon.Interactor {
     }
 
     @Override
-    public void performGetEstablishmentInfo(Context context) {
+    public void performGetEstablishmentInfo(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
-        String Id_Establecimiento = sharedPref.getString("id_establecimiento","");
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
+        String ID_Establecimiento = sharedPref.getString("id_establecimiento","");
 
-        if(Id_Establecimiento.length() != 0){
-            mListener.onSuccessGetEstablishmentInfo(Id_Establecimiento);
+        if(ID_Establecimiento.length() != 0)
+        {
+            mListener.onSuccessGetEstablishmentInfo(ID_Establecimiento);
         }
     }
 }

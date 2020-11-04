@@ -25,15 +25,14 @@ public class RegistrarItemMenu_Interactor implements RegistrarItemMenu.Interacto
     }
 
     @Override
-    public void performSaveItemMenu(DatabaseReference Database_Reference, ItemMenu_Modelo itemMenu) {
+    public void performSaveItemMenu(DatabaseReference Database_Reference, ItemMenu_Modelo Item_Menu) {
 
-        Database_Reference.child(itemMenu.getID_Item_Menu()).setValue(itemMenu).addOnCompleteListener(new OnCompleteListener<Void>() {
+        Database_Reference.child(Item_Menu.getID_Item_Menu()).setValue(Item_Menu).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-
+                if(task.isSuccessful())
+                {
                     mListener.onSuccessSaveItemMenu();
-
                 }
                 else
                 {
@@ -44,9 +43,9 @@ public class RegistrarItemMenu_Interactor implements RegistrarItemMenu.Interacto
     }
 
     @Override
-    public void performUploadItemMenuImage(StorageReference Storage_Reference, String Id_Establecimiento, Uri Imagen_Uri) {
+    public void performUploadItemMenuImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri) {
 
-        final StorageReference filePath = Storage_Reference.child(Id_Establecimiento).child("ItemMenu").child(Imagen_Uri.getLastPathSegment());
+        final StorageReference filePath = Storage_Reference.child(ID_Establecimiento).child("ItemMenu").child(Imagen_Uri.getLastPathSegment());
 
         filePath.putFile(Imagen_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -71,12 +70,13 @@ public class RegistrarItemMenu_Interactor implements RegistrarItemMenu.Interacto
     }
 
     @Override
-    public void performGetEstablishmentInfo(Context context) {
+    public void performGetEstablishmentInfo(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
         String Id_Establecimiento = sharedPref.getString("id_establecimiento","");
 
-        if(Id_Establecimiento.length() != 0){
+        if(Id_Establecimiento.length() != 0)
+        {
             mListener.onSuccessGetEstablishmentInfo(Id_Establecimiento);
         }
     }

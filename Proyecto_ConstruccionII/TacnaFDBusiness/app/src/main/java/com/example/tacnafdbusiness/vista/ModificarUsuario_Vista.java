@@ -43,9 +43,7 @@ public class ModificarUsuario_Vista extends Fragment implements ModificarUsuario
 
     String Correo_Electronico = "";
 
-    String Id_Usuario = "";
-
-    DrawerLayout drawerLayout;
+    String ID_Usuario = "";
 
 
     @Override
@@ -67,7 +65,6 @@ public class ModificarUsuario_Vista extends Fragment implements ModificarUsuario
         TxtRuc = (EditText) v.findViewById(R.id.txtruc);
 
 
-
         mPresenter.ShowUserData(mReference, Correo_Electronico);
 
 
@@ -76,16 +73,12 @@ public class ModificarUsuario_Vista extends Fragment implements ModificarUsuario
             @Override
             public void onClick(View v) {
 
-                Usuario_Modelo usuario_modelo=new Usuario_Modelo(Id_Usuario,TxtNombre.getText().toString(),TxtApellido.getText().toString(),
+                Usuario_Modelo Usuario=new Usuario_Modelo(ID_Usuario,TxtNombre.getText().toString(),TxtApellido.getText().toString(),
                         TxtEmail.getText().toString(),TxtClave.getText().toString(),TxtCelular.getText().toString(),
                         TxtRuc.getText().toString());
-                mPresenter.UpdateUser(mReference,usuario_modelo);
+                mPresenter.UpdateUser(mReference, Usuario);
             }
         });
-
-        drawerLayout = v.findViewById(R.id.drawer_layout);
-
-
 
         return v;
     }
@@ -101,15 +94,15 @@ public class ModificarUsuario_Vista extends Fragment implements ModificarUsuario
     }
 
     @Override
-    public void onShowUserDataSuccessful(Usuario_Modelo usuario_modelo) {
+    public void onShowUserDataSuccessful(Usuario_Modelo Usuario) {
 
-        Id_Usuario = usuario_modelo.getID_Usuario();
-        TxtEmail.setText(usuario_modelo.getCorreo_Electronico());
-        TxtClave.setText(usuario_modelo.getContrasena());
-        TxtNombre.setText(usuario_modelo.getNombre());
-        TxtApellido.setText(usuario_modelo.getApellido());
-        TxtCelular.setText(usuario_modelo.getCelular());
-        TxtRuc.setText(usuario_modelo.getRuc());
+        ID_Usuario = Usuario.getID_Usuario();
+        TxtEmail.setText(Usuario.getCorreo_Electronico());
+        TxtClave.setText(Usuario.getContrasena());
+        TxtNombre.setText(Usuario.getNombre());
+        TxtApellido.setText(Usuario.getApellido());
+        TxtCelular.setText(Usuario.getCelular());
+        TxtRuc.setText(Usuario.getRuc());
 
     }
 
@@ -119,8 +112,8 @@ public class ModificarUsuario_Vista extends Fragment implements ModificarUsuario
     }
 
     @Override
-    public void onSessionDataSuccessful(String correo_electronico) {
-        Correo_Electronico = correo_electronico;
+    public void onSessionDataSuccessful(String Correo_Electronico) {
+        this.Correo_Electronico = Correo_Electronico;
 
     }
 }

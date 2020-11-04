@@ -20,7 +20,7 @@ public class ListarResena_Interactor implements ListarResena.Interactor {
 
     private ListarResena.onOperationListener mListener;
 
-    private ArrayList<Resena_Modelo> resena_modelos = new ArrayList<>();
+    private ArrayList<Resena_Modelo> Resenas = new ArrayList<>();
 
     private ValueEventListener valueEventListener;
 
@@ -29,22 +29,23 @@ public class ListarResena_Interactor implements ListarResena.Interactor {
     }
 
     @Override
-    public void performGetReviews(DatabaseReference reference, String Id_Establecimiento) {
-        Query query = reference.orderByChild("id_Establecimiento").equalTo(Id_Establecimiento);
+    public void performGetReviews(DatabaseReference Database_Reference, String ID_Establecimiento) {
+        Query query = Database_Reference.orderByChild("id_Establecimiento").equalTo(ID_Establecimiento);
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 Boolean Existe_Resena = false;
-                resena_modelos.clear();
+                Resenas.clear();
 
-                for(DataSnapshot postSnapshot : snapshot.getChildren()){
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
                     Existe_Resena = true;
-                    Resena_Modelo resena_modelo = postSnapshot.getValue(Resena_Modelo.class);
-                    resena_modelos.add(resena_modelo);
+                    Resena_Modelo Resena = postSnapshot.getValue(Resena_Modelo.class);
+                    Resenas.add(Resena);
                 }
-                mListener.onSuccessGetReviews(resena_modelos, Existe_Resena);
+                mListener.onSuccessGetReviews(Resenas, Existe_Resena);
             }
 
             @Override
@@ -55,24 +56,24 @@ public class ListarResena_Interactor implements ListarResena.Interactor {
     }
 
     @Override
-    public void performSearchClientName(DatabaseReference reference, final ArrayList<Resena_Modelo> resena_modelos) {
+    public void performSearchClientName(DatabaseReference Database_Reference, final ArrayList<Resena_Modelo> Resenas) {
 
-        for(int i = 0; i < resena_modelos.size(); i++){
+        for(int i = 0; i < Resenas.size(); i++)
+        {
+            final int Posicion = i;
 
-            final int posicion = i;
-
-            final Query query = reference.orderByChild("id_Usuario_Cliente").equalTo(resena_modelos.get(i).getID_Usuario_Cliente());
+            final Query query = Database_Reference.orderByChild("id_Usuario_Cliente").equalTo(Resenas.get(i).getID_Usuario_Cliente());
 
             valueEventListener = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    for(DataSnapshot postSnapshot : snapshot.getChildren()){
-
-                        Cliente_Modelo cliente_modelo = postSnapshot.getValue(Cliente_Modelo.class);
-                        resena_modelos.get(posicion).setNombre_Cliente(cliente_modelo.getNombre() + " " + cliente_modelo.getApellido());
+                    for(DataSnapshot postSnapshot : snapshot.getChildren())
+                    {
+                        Cliente_Modelo Cliente = postSnapshot.getValue(Cliente_Modelo.class);
+                        Resenas.get(Posicion).setNombre_Cliente(Cliente.getNombre() + " " + Cliente.getApellido());
                     }
-                    mListener.onSuccessSearchClientName(resena_modelos);
+                    mListener.onSuccessSearchClientName(Resenas);
                     query.removeEventListener(valueEventListener);
                 }
 
@@ -88,11 +89,12 @@ public class ListarResena_Interactor implements ListarResena.Interactor {
     }
 
     @Override
-    public void performGetEstablishmentInfo(Context context) {
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
+    public void performGetEstablishmentInfo(Context Contexto) {
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
         String Id_Establecimiento = sharedPref.getString("id_establecimiento","");
 
-        if(Id_Establecimiento.length() != 0){
+        if(Id_Establecimiento.length() != 0)
+        {
             mListener.onSuccessGetEstablishmentInfo(Id_Establecimiento);
         }
     }

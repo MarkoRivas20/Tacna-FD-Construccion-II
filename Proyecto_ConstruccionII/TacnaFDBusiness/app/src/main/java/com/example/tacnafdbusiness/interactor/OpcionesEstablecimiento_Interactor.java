@@ -15,16 +15,18 @@ public class OpcionesEstablecimiento_Interactor implements OpcionesEstablecimien
     }
 
     @Override
-    public void performGetEstablishmentInfo(Context context) {
+    public void performGetEstablishmentInfo(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
         String Nombre_Establecimiento = sharedPref.getString("nombre_establecimiento","");
         String Url_Logo = sharedPref.getString("url_logo","");
 
-        if(Nombre_Establecimiento.length() != 0){
+        if(Nombre_Establecimiento.length() != 0)
+        {
             mListener.onSuccess(Nombre_Establecimiento,Url_Logo);
         }
-        else{
+        else
+        {
             mListener.onFailure();
         }
 

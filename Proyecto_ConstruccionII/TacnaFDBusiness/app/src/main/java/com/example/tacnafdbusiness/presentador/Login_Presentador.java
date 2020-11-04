@@ -17,18 +17,18 @@ public class Login_Presentador implements Login.Presenter, Login.onOperationList
     }
 
     @Override
-    public void LogIn(DatabaseReference reference, String correo_electronico, String contrasena) {
-        mInteractor.performLogIn(reference,correo_electronico,contrasena);
+    public void LogIn(DatabaseReference Database_Reference, String Correo_Electronico, String Contrasena) {
+        mInteractor.performLogIn(Database_Reference,Correo_Electronico,Contrasena);
     }
 
     @Override
-    public void SaveSession(Context context, String correo_electronico, String nombre_usuario, String id_usuario) {
-        mInteractor.performSaveSession(context, correo_electronico, nombre_usuario, id_usuario);
+    public void SaveSession(Context Contexto, String Correo_Electronico, String Nombre_Usuario, String ID_Usuario) {
+        mInteractor.performSaveSession(Contexto, Correo_Electronico, Nombre_Usuario, ID_Usuario);
     }
 
     @Override
-    public void CheckSession(Context context) {
-        mInteractor.performCheckSession(context);
+    public void CheckSession(Context Contexto) {
+        mInteractor.performCheckSession(Contexto);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class Login_Presentador implements Login.Presenter, Login.onOperationList
     }
 
     @Override
-    public void onSuccess(String nombre_usuario, String id_usuario) {
-        mView.onLogInSuccessful(nombre_usuario, id_usuario);
+    public void onSuccess(String Nombre_Usuario, String ID_Usuario) {
+        mView.onLogInSuccessful(Nombre_Usuario, ID_Usuario);
     }
 
     @Override

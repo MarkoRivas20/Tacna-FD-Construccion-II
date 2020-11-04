@@ -25,15 +25,14 @@ public class RegistrarCupon_Interactor implements RegistrarCupon.Interactor {
     }
 
     @Override
-    public void performSaveCoupon(DatabaseReference Database_Reference, Cupon_Modelo cupon_modelo) {
+    public void performSaveCoupon(DatabaseReference Database_Reference, Cupon_Modelo Cupon) {
 
-        Database_Reference.child(cupon_modelo.getId_Cupon()).setValue(cupon_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+        Database_Reference.child(Cupon.getId_Cupon()).setValue(Cupon).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-
+                if(task.isSuccessful())
+                {
                     mListener.onSuccessSaveCoupon();
-
                 }
                 else
                 {
@@ -44,9 +43,9 @@ public class RegistrarCupon_Interactor implements RegistrarCupon.Interactor {
     }
 
     @Override
-    public void performUploadCouponImage(StorageReference Storage_Reference, String Id_Establecimiento, Uri Imagen_Uri) {
+    public void performUploadCouponImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri) {
 
-        final StorageReference filePath = Storage_Reference.child(Id_Establecimiento).child("Cupon").child(Imagen_Uri.getLastPathSegment());
+        final StorageReference filePath = Storage_Reference.child(ID_Establecimiento).child("Cupon").child(Imagen_Uri.getLastPathSegment());
 
         filePath.putFile(Imagen_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -70,13 +69,14 @@ public class RegistrarCupon_Interactor implements RegistrarCupon.Interactor {
     }
 
     @Override
-    public void performGetEstablishmentInfo(Context context) {
+    public void performGetEstablishmentInfo(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
-        String Id_Establecimiento = sharedPref.getString("id_establecimiento","");
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
+        String ID_Establecimiento = sharedPref.getString("id_establecimiento","");
 
-        if(Id_Establecimiento.length() != 0){
-            mListener.onSuccessGetEstablishmentInfo(Id_Establecimiento);
+        if(ID_Establecimiento.length() != 0)
+        {
+            mListener.onSuccessGetEstablishmentInfo(ID_Establecimiento);
         }
     }
 }

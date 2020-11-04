@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vista.ModificarUsuario_Vista"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".vista.ModificarUsuario_Vista">
+
 
     <ImageView
         android:layout_width="match_parent"
@@ -102,11 +102,12 @@
                 android:enabled="false"
                 android:hint="Correo Electronico"
                 android:padding="15dp"
+                android:singleLine="true"
                 android:textColor="#003152"
                 android:textColorHighlight="#0F77F6"
                 android:textColorHint="#DDDEE0"
-                android:singleLine="true"
-                app:layout_constraintTop_toBottomOf="@+id/txtapellido" />
+                app:layout_constraintTop_toBottomOf="@+id/txtapellido"
+                tools:layout_editor_absoluteX="25dp" />
 
             <EditText
                 android:id="@+id/txtclave"
@@ -114,18 +115,19 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/shape_textboxregistro"
                 android:drawableLeft="@drawable/ic_padlock"
                 android:drawablePadding="10dp"
                 android:hint="Contraseña"
-                android:inputType="textPassword"
                 android:padding="15dp"
-                android:singleLine="true"
                 android:textColor="#003152"
                 android:textColorHighlight="#0F77F6"
                 android:textColorHint="#DDDEE0"
+                android:inputType="textPassword"
+                android:singleLine="true"
                 app:layout_constraintTop_toBottomOf="@+id/txtemail"
-                tools:layout_editor_absoluteX="25dp" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <Button
                 android:id="@+id/btnmodificar"
@@ -142,5 +144,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
 
 </FrameLayout>

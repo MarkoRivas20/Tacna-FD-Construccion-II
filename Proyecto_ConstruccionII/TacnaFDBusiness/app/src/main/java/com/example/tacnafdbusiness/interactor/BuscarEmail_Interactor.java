@@ -36,26 +36,27 @@ public class BuscarEmail_Interactor implements BuscarEmail.Interactor {
     }
 
     @Override
-    public void performSearchEmail(DatabaseReference reference, final String correo_electronico, final int codigo) {
+    public void performSearchEmail(DatabaseReference Database_Reference, final String Correo_Electronico, final int Codigo) {
 
-        Query query=reference.orderByChild("correo_Electronico").equalTo(correo_electronico);
+        Query query=Database_Reference.orderByChild("correo_Electronico").equalTo(Correo_Electronico);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Boolean booleano = false;
 
-                for(DataSnapshot postSnapshot : snapshot.getChildren()){
-
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
                     booleano = true;
 
-                    performSendEmail(correo_electronico,codigo);
+                    performSendEmail(Correo_Electronico,Codigo);
 
                     mListener.onSuccess();
 
                 }
 
-                if(!booleano){
+                if(!booleano)
+                {
                     mListener.onNotFoundEMail();
                 }
             }
@@ -69,12 +70,12 @@ public class BuscarEmail_Interactor implements BuscarEmail.Interactor {
     }
 
     @Override
-    public void performSendEmail(String correo_electronico, int codigo) {
+    public void performSendEmail(String Correo_Electronico, int Codigo) {
 
 
 
         String Mensaje = "Recientemente ha solicitado restablecer la contraseña de la cuenta asociada con esta dirección de correo electrónico. " +
-                "\n Introduzca este código en página de restablecimiento de contraseñas. \n " + codigo;
+                "\n Introduzca este código en página de restablecimiento de contraseñas. \n " + Codigo;
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -100,14 +101,10 @@ public class BuscarEmail_Interactor implements BuscarEmail.Interactor {
                 Message message = new MimeMessage(Sesion);
                 message.setFrom(new InternetAddress(Correo));
                 message.setSubject("Recuperación de contraseñas");
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correo_electronico));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Correo_Electronico));
                 message.setContent(Mensaje,"text/html; charset=utf-8");
 
                 Transport.send(message);
-
-            }
-            else
-            {
 
             }
 

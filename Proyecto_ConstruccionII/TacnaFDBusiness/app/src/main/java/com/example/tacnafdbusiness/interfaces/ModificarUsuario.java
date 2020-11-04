@@ -10,28 +10,28 @@ public interface ModificarUsuario {
     interface View{
         void onUpdateUserSuccessful();
         void onUpdateUserFailure();
-        void onShowUserDataSuccessful(Usuario_Modelo usuario_modelo);
+        void onShowUserDataSuccessful(Usuario_Modelo Usuario);
         void onShowUserDataFailure();
-        void onSessionDataSuccessful(String correo_electronico);
+        void onSessionDataSuccessful(String Correo_Electronico);
     }
 
     interface Presenter{
-        void UpdateUser(DatabaseReference reference, Usuario_Modelo usuario_modelo);
-        void ShowUserData(DatabaseReference reference, String correo_electronico);
-        void GetSessionData(Context context);
+        void UpdateUser(DatabaseReference Database_Reference, Usuario_Modelo Usuario);
+        void ShowUserData(DatabaseReference Database_Reference, String Correo_Electronico);
+        void GetSessionData(Context Contexto);
     }
 
     interface Interactor{
-        void performUpdateUser(DatabaseReference reference, Usuario_Modelo usuario_modelo);
-        void performShowUserData(DatabaseReference reference, String correo_electronico);
-        void performGetSessionData(Context context);
+        void performUpdateUser(DatabaseReference Database_Reference, Usuario_Modelo Usuario);
+        void performShowUserData(DatabaseReference Database_Reference, String Correo_Electronico);
+        void performGetSessionData(Context Contexto);
     }
 
     interface onOperationListener{
         void onSuccess();
         void onFailure();
-        void onSuccessShowUserData(Usuario_Modelo usuario_modelo);
+        void onSuccessShowUserData(Usuario_Modelo Usuario);
         void onFailureShowUserData();
-        void onSuccess(String correo_electronico);
+        void onSuccess(String Correo_Electronico);
     }
 }

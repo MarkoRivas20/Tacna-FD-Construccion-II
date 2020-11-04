@@ -14,13 +14,14 @@ public class PantallaPrincipal_Interactor implements PantallaPrincipal.Interacto
     }
 
     @Override
-    public void performGetSessionData(Context context) {
+    public void performGetSessionData(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
         String Correo_Electronico = sharedPref.getString("correo_electronico","");
         String Nombre_Usuario = sharedPref.getString("nombre_usuario","");
 
-        if(Correo_Electronico.length() != 0){
+        if(Correo_Electronico.length() != 0)
+        {
             mListener.onSuccess(Correo_Electronico, Nombre_Usuario);
         }
         else{
@@ -29,9 +30,9 @@ public class PantallaPrincipal_Interactor implements PantallaPrincipal.Interacto
     }
 
     @Override
-    public void performCloseSession(Context context) {
+    public void performCloseSession(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Contexto.getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("correo_electronico", "");
         editor.putString("nombre_usuario", "");

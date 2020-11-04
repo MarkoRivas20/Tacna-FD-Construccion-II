@@ -46,7 +46,7 @@ public class ModificarItemMenu_Vista extends Fragment implements ModificarItemMe
     public DatabaseReference mReference;
     public StorageReference mStorageReference;
 
-    FloatingActionButton fab;
+    FloatingActionButton Fab;
     Button BtnModificar_Item_Menu;
 
     EditText TxtNombre;
@@ -61,10 +61,10 @@ public class ModificarItemMenu_Vista extends Fragment implements ModificarItemMe
 
     Spinner Spinner_Estado;
 
-    String[] estados = {"Seleccione un Estado", "Activo", "Inactivo"};
+    String[] Estados = {"Seleccione un Estado", "Activo", "Inactivo"};
 
-    String Id_Establecimiento = "";
-    String Id_Item_Menu = "";
+    String ID_Establecimiento = "";
+    String ID_Item_Menu = "";
     String Url_Imagen = "";
 
     Bundle Item_Menu_Info;
@@ -76,30 +76,30 @@ public class ModificarItemMenu_Vista extends Fragment implements ModificarItemMe
         View view = inflater.inflate(R.layout.fragment_modificar_item_menu__vista, container, false);
 
         Item_Menu_Info = getArguments();
-        Id_Item_Menu = Item_Menu_Info.getString("Id_Item_Menu");
+        ID_Item_Menu = Item_Menu_Info.getString("Id_Item_Menu");
 
         mPresenter =new ModificarItemMenu_Presentador(this);
         mReference = FirebaseDatabase.getInstance().getReference().child("ItemMenu");
         mStorageReference = FirebaseStorage.getInstance().getReference();
 
         Spinner_Estado = (Spinner) view.findViewById(R.id.spinnerestado);
-        fab = (FloatingActionButton) view.findViewById(R.id.fab_item_menu);
+        Fab = (FloatingActionButton) view.findViewById(R.id.fab_item_menu);
         Imagen_Item_Menu = (ImageView) view.findViewById(R.id.imagen_item_menu);
         BtnModificar_Item_Menu = (Button) view.findViewById(R.id.BtnModificar_Item_Menu);
         TxtNombre = (EditText) view.findViewById(R.id.txtnombre);
         TxtPrecio = (EditText) view.findViewById(R.id.txtprecio);
         TxtDescripcion = (EditText) view.findViewById(R.id.txtdescripcion);
 
-        Spinner_Estado.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, estados));
+        Spinner_Estado.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Estados));
 
-        mPresenter.GetItemMenuData(mReference, Id_Item_Menu);
+        mPresenter.GetItemMenuData(mReference, ID_Item_Menu);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        Fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-
+                if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                {
                     Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                     startActivityForResult(gallery, PICK_IMAGE);
                 }
@@ -114,9 +114,9 @@ public class ModificarItemMenu_Vista extends Fragment implements ModificarItemMe
         BtnModificar_Item_Menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ItemMenu_Modelo itemMenu_modelo = new ItemMenu_Modelo(Id_Item_Menu,Id_Establecimiento, TxtNombre.getText().toString(),
+                ItemMenu_Modelo Item_Menu = new ItemMenu_Modelo(ID_Item_Menu,ID_Establecimiento, TxtNombre.getText().toString(),
                         TxtPrecio.getText().toString(), TxtDescripcion.getText().toString(), Url_Imagen, Spinner_Estado.getSelectedItem().toString());
-                mPresenter.UpdateItemMenuData(mReference,itemMenu_modelo);
+                mPresenter.UpdateItemMenuData(mReference,Item_Menu);
             }
         });
 
@@ -127,10 +127,11 @@ public class ModificarItemMenu_Vista extends Fragment implements ModificarItemMe
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE)
+        {
             Image_Uri = data.getData();
             Imagen_Item_Menu.setImageURI(Image_Uri);
-            mPresenter.UpdateItemMenuImage(mStorageReference, mReference, Url_Imagen, Id_Establecimiento,Id_Item_Menu, Image_Uri);
+            mPresenter.UpdateItemMenuImage(mStorageReference, mReference, Url_Imagen, ID_Establecimiento,ID_Item_Menu, Image_Uri);
         }
     }
 
@@ -156,17 +157,19 @@ public class ModificarItemMenu_Vista extends Fragment implements ModificarItemMe
     }
 
     @Override
-    public void onGetItemMenuDataSuccessful(ItemMenu_Modelo itemMenu_modelo) {
+    public void onGetItemMenuDataSuccessful(ItemMenu_Modelo Item_Menu) {
 
-        Picasso.with(getActivity()).load(itemMenu_modelo.getUrl_Imagen()).into(Imagen_Item_Menu);
-        Id_Establecimiento = itemMenu_modelo.getID_Establecimiento();
-        Url_Imagen = itemMenu_modelo.getUrl_Imagen();
-        TxtNombre.setText(itemMenu_modelo.getNombre());
-        TxtPrecio.setText(itemMenu_modelo.getPrecio());
-        TxtDescripcion.setText(itemMenu_modelo.getDescripcion());
+        Picasso.with(getActivity()).load(Item_Menu.getUrl_Imagen()).into(Imagen_Item_Menu);
+        ID_Establecimiento = Item_Menu.getID_Establecimiento();
+        Url_Imagen = Item_Menu.getUrl_Imagen();
+        TxtNombre.setText(Item_Menu.getNombre());
+        TxtPrecio.setText(Item_Menu.getPrecio());
+        TxtDescripcion.setText(Item_Menu.getDescripcion());
 
-        for(int i=0; i<estados.length; i++){
-            if(itemMenu_modelo.getEstado().equals(estados[i])){
+        for(int i=0; i<Estados.length; i++)
+        {
+            if(Item_Menu.getEstado().equals(Estados[i]))
+            {
                 Spinner_Estado.setSelection(i);
                 break;
             }

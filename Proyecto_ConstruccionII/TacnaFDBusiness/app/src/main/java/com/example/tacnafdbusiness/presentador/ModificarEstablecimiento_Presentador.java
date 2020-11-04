@@ -22,38 +22,38 @@ public class ModificarEstablecimiento_Presentador implements ModificarEstablecim
     }
 
     @Override
-    public void UpdateEstablismentData(DatabaseReference reference, Establecimiento_Modelo establecimiento_modelo) {
-        mInteractor.performUpdateEstablismentData(reference, establecimiento_modelo);
+    public void UpdateEstablismentData(DatabaseReference Database_Reference, Establecimiento_Modelo Establecimiento) {
+        mInteractor.performUpdateEstablismentData(Database_Reference, Establecimiento);
     }
 
     @Override
-    public void UpdateEstablismentLogo(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Logo_Actual, String Id_Establecimiento, Uri Logo_Uri) {
-        mInteractor.performUpdateEstablismentLogo(Storage_Reference, Database_Reference, Url_Logo_Actual, Id_Establecimiento, Logo_Uri);
+    public void UpdateEstablismentLogo(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Logo_Actual, String ID_Establecimiento, Uri Logo_Uri) {
+        mInteractor.performUpdateEstablismentLogo(Storage_Reference, Database_Reference, Url_Logo_Actual, ID_Establecimiento, Logo_Uri);
     }
 
     @Override
-    public void UpdateEstablismentDocument(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Document_Actual, String Id_Establecimiento, Uri Documento_Uri) {
-        mInteractor.performUpdateEstablismentDocument(Storage_Reference, Database_Reference, Url_Document_Actual, Id_Establecimiento, Documento_Uri);
+    public void UpdateEstablismentDocument(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Document_Actual, String ID_Establecimiento, Uri Documento_Uri) {
+        mInteractor.performUpdateEstablismentDocument(Storage_Reference, Database_Reference, Url_Document_Actual, ID_Establecimiento, Documento_Uri);
     }
 
     @Override
-    public void GetEstablishmentInfo(Context context) {
-        mInteractor.performGetEstablishmentInfo(context);
+    public void GetEstablishmentInfo(Context Contexto) {
+        mInteractor.performGetEstablishmentInfo(Contexto);
     }
 
     @Override
-    public void GetEstablishmentData(DatabaseReference reference, String Id_Establecimiento) {
-        mInteractor.performGetEstablishmentData(reference, Id_Establecimiento);
+    public void GetEstablishmentData(DatabaseReference Database_Reference, String ID_Establecimiento) {
+        mInteractor.performGetEstablishmentData(Database_Reference, ID_Establecimiento);
     }
 
     @Override
-    public void UpdateEstablishmentInfo(Context context, String Nombre_Establecimiento, String Url_Logo, String Url_Documento) {
-        mInteractor.performUpdateEstablishmentInfo(context, Nombre_Establecimiento, Url_Logo, Url_Documento);
+    public void UpdateEstablishmentInfo(Context Contexto, String Nombre_Establecimiento, String Url_Logo, String Url_Documento) {
+        mInteractor.performUpdateEstablishmentInfo(Contexto, Nombre_Establecimiento, Url_Logo, Url_Documento);
     }
 
     @Override
-    public void GetSessionData(Context context) {
-        mInteractor.performGetSessionData(context);
+    public void GetSessionData(Context Contexto) {
+        mInteractor.performGetSessionData(Contexto);
     }
 
 
@@ -88,13 +88,13 @@ public class ModificarEstablecimiento_Presentador implements ModificarEstablecim
     }
 
     @Override
-    public void onSuccessGetEstablishmentInfo(String Id_Establecimiento, String Url_Logo, String Url_Documento) {
-        mView.onGetEstablishmentInfoSuccessful(Id_Establecimiento, Url_Logo, Url_Documento);
+    public void onSuccessGetEstablishmentInfo(String ID_Establecimiento, String Url_Logo, String Url_Documento) {
+        mView.onGetEstablishmentInfoSuccessful(ID_Establecimiento, Url_Logo, Url_Documento);
     }
 
     @Override
-    public void onSuccessGetEstablishmentData(Establecimiento_Modelo establecimiento) {
-        mView.onGetEstablishmentDataSuccessful(establecimiento);
+    public void onSuccessGetEstablishmentData(Establecimiento_Modelo Establecimiento) {
+        mView.onGetEstablishmentDataSuccessful(Establecimiento);
     }
 
     @Override
@@ -103,8 +103,8 @@ public class ModificarEstablecimiento_Presentador implements ModificarEstablecim
     }
 
     @Override
-    public void onSuccessGetSessionData(String Id_Usuario) {
-        mView.onGetSessionDataSuccessful(Id_Usuario);
+    public void onSuccessGetSessionData(String ID_Usuario) {
+        mView.onGetSessionDataSuccessful(ID_Usuario);
     }
 
     @Override

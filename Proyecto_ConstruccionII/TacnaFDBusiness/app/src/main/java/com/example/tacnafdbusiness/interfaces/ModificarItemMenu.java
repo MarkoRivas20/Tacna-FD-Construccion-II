@@ -16,19 +16,19 @@ public interface ModificarItemMenu {
         void onUpdateItemMenuDataSuccessful();
         void onUpdateItemMenuImageFailure();
         void onUpdateItemMenuImageSuccessful(String Url_Imagen);
-        void onGetItemMenuDataSuccessful(ItemMenu_Modelo itemMenu_modelo);
+        void onGetItemMenuDataSuccessful(ItemMenu_Modelo Item_Menu);
         void onGetItemMenuDataFailure();
     }
 
     interface Presenter{
-        void UpdateItemMenuData(DatabaseReference reference, ItemMenu_Modelo itemMenu_modelo);
-        void UpdateItemMenuImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String Id_Establecimiento, String Id_Item_Menu, Uri Imagen_Uri);
+        void UpdateItemMenuData(DatabaseReference Database_Reference, ItemMenu_Modelo Item_Menu);
+        void UpdateItemMenuImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Item_Menu, Uri Imagen_Uri);
         void GetItemMenuData(DatabaseReference Database_Reference, String Id_Item_Menu);
     }
 
     interface Interactor{
-        void performUpdateItemMenuData(DatabaseReference reference, ItemMenu_Modelo itemMenu_modelo);
-        void performUpdateItemMenuImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String Id_Establecimiento, String Id_Item_Menu, Uri Imagen_Uri);
+        void performUpdateItemMenuData(DatabaseReference Database_Reference, ItemMenu_Modelo Item_Menu);
+        void performUpdateItemMenuImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Item_Menu, Uri Imagen_Uri);
         void performGetItemMenuData(DatabaseReference Database_Reference, String Id_Item_Menu);
     }
 
@@ -37,7 +37,7 @@ public interface ModificarItemMenu {
         void onFailureUpdateItemMenuData();
         void onSuccessUpdateItemMenuImage(String Url_Imagen);
         void onFailureUpdateItemMenuImage();
-        void onSuccessGetItemMenuData(ItemMenu_Modelo itemMenu_modelo);
+        void onSuccessGetItemMenuData(ItemMenu_Modelo Item_Menu);
         void onFailureGetItemMenuData();
     }
 }

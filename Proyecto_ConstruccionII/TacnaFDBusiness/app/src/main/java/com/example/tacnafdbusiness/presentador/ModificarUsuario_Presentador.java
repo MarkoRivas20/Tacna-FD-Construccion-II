@@ -18,18 +18,18 @@ public class ModificarUsuario_Presentador implements ModificarUsuario.Presenter,
     }
 
     @Override
-    public void UpdateUser(DatabaseReference reference, Usuario_Modelo usuario_modelo) {
-        mInteractor.performUpdateUser(reference, usuario_modelo);
+    public void UpdateUser(DatabaseReference Database_Reference, Usuario_Modelo Usuario) {
+        mInteractor.performUpdateUser(Database_Reference, Usuario);
     }
 
     @Override
-    public void ShowUserData(DatabaseReference reference, String correo_electronico) {
-        mInteractor.performShowUserData(reference, correo_electronico);
+    public void ShowUserData(DatabaseReference Database_Reference, String Correo_Electronico) {
+        mInteractor.performShowUserData(Database_Reference, Correo_Electronico);
     }
 
     @Override
-    public void GetSessionData(Context context) {
-        mInteractor.performGetSessionData(context);
+    public void GetSessionData(Context Contexto) {
+        mInteractor.performGetSessionData(Contexto);
     }
 
     @Override
@@ -43,8 +43,8 @@ public class ModificarUsuario_Presentador implements ModificarUsuario.Presenter,
     }
 
     @Override
-    public void onSuccessShowUserData(Usuario_Modelo usuario_modelo) {
-        mView.onShowUserDataSuccessful(usuario_modelo);
+    public void onSuccessShowUserData(Usuario_Modelo Usuario) {
+        mView.onShowUserDataSuccessful(Usuario);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ModificarUsuario_Presentador implements ModificarUsuario.Presenter,
     }
 
     @Override
-    public void onSuccess(String correo_electronico) {
-        mView.onSessionDataSuccessful(correo_electronico);
+    public void onSuccess(String Correo_Electronico) {
+        mView.onSessionDataSuccessful(Correo_Electronico);
     }
 }

@@ -10,30 +10,30 @@ import java.util.ArrayList;
 public interface ListarResena {
 
     interface View{
-        void onGetReviewsSuccessful(ArrayList<Resena_Modelo> resena_modelos, Boolean Existe_Resena);
+        void onGetReviewsSuccessful(ArrayList<Resena_Modelo> Resenas, Boolean Existe_Resena);
         void onGetReviewsFailure();
-        void onSearchClientNameSuccessful(ArrayList<Resena_Modelo> resena_modelos);
+        void onSearchClientNameSuccessful(ArrayList<Resena_Modelo> Resenas);
         void onSearchClientNameFailure();
-        void onGetEstablishmentInfoSuccessful(String Id_Establecimiento);
+        void onGetEstablishmentInfoSuccessful(String ID_Establecimiento);
     }
 
     interface Presenter{
-        void GetReviews(DatabaseReference reference, String Id_Establecimiento);
-        void SearchClientName(DatabaseReference reference, ArrayList<Resena_Modelo> resena_modelos);
-        void GetEstablishmentInfo(Context context);
+        void GetReviews(DatabaseReference Database_Reference, String ID_Establecimiento);
+        void SearchClientName(DatabaseReference Database_Reference, ArrayList<Resena_Modelo> Resenas);
+        void GetEstablishmentInfo(Context Contexto);
     }
 
     interface Interactor{
-        void performGetReviews(DatabaseReference reference, String Id_Establecimiento);
-        void performSearchClientName(DatabaseReference reference, ArrayList<Resena_Modelo> resena_modelos);
-        void performGetEstablishmentInfo(Context context);
+        void performGetReviews(DatabaseReference Database_Reference, String ID_Establecimiento);
+        void performSearchClientName(DatabaseReference Database_Reference, ArrayList<Resena_Modelo> Resenas);
+        void performGetEstablishmentInfo(Context Contexto);
     }
 
     interface onOperationListener{
-        void onSuccessGetReviews(ArrayList<Resena_Modelo> resena_modelos, Boolean Existe_Resena);
+        void onSuccessGetReviews(ArrayList<Resena_Modelo> Resenas, Boolean Existe_Resena);
         void onFailureGetReviews();
-        void onSuccessSearchClientName(ArrayList<Resena_Modelo> resena_modelos);
+        void onSuccessSearchClientName(ArrayList<Resena_Modelo> Resenas);
         void onFailureSearchClientName();
-        void onSuccessGetEstablishmentInfo(String Id_Establecimiento);
+        void onSuccessGetEstablishmentInfo(String ID_Establecimiento);
     }
 }

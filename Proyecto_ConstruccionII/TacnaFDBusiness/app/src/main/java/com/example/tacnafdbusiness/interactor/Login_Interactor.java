@@ -19,8 +19,6 @@ public class Login_Interactor implements Login.Interactor {
 
     private Login.onOperationListener mListener;
 
-    private ArrayList<Usuario_Modelo> usuario_modelos=new ArrayList<>();
-
     private String Nombre_Usuario = "";
 
     public Login_Interactor(Login.onOperationListener mListener) {
@@ -28,9 +26,9 @@ public class Login_Interactor implements Login.Interactor {
     }
 
     @Override
-    public void performLogIn(DatabaseReference reference, String correo_electronico, final String contrasena) {
+    public void performLogIn(DatabaseReference Database_Reference, String Correo_Electronico, final String Contrasena) {
 
-        Query query=reference.orderByChild("correo_Electronico").equalTo(correo_electronico);
+        Query query=Database_Reference.orderByChild("correo_Electronico").equalTo(Correo_Electronico);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -38,14 +36,15 @@ public class Login_Interactor implements Login.Interactor {
 
                 Boolean booleano = false;
 
-                for(DataSnapshot postSnapshot : snapshot.getChildren()){
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
+                    Usuario_Modelo Usuario = postSnapshot.getValue(Usuario_Modelo.class);
 
-                    Usuario_Modelo usuario_modelo = postSnapshot.getValue(Usuario_Modelo.class);
-
-                    if(usuario_modelo.getContrasena().equals(contrasena)){
+                    if(Usuario.getContrasena().equals(Contrasena))
+                    {
                         booleano = true;
-                        Nombre_Usuario = usuario_modelo.getNombre() + " " + usuario_modelo.getApellido();
-                        mListener.onSuccess(Nombre_Usuario, usuario_modelo.getID_Usuario());
+                        Nombre_Usuario = Usuario.getNombre() + " " + Usuario.getApellido();
+                        mListener.onSuccess(Nombre_Usuario, Usuario.getID_Usuario());
                     }
                 }
 
@@ -63,23 +62,25 @@ public class Login_Interactor implements Login.Interactor {
     }
 
     @Override
-    public void performSaveSession(Context context, String correo_electronico, String nombre_usuario, String id_usuario) {
+    public void performSaveSession(Context Contexto, String Correo_Electronico, String Nombre_Usuario, String ID_Usuario) {
 
-        SharedPreferences sharedPref = context.getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Contexto.getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("correo_electronico", correo_electronico);
-        editor.putString("nombre_usuario", nombre_usuario);
-        editor.putString("id_usuario", id_usuario);
+        editor.putString("correo_electronico", Correo_Electronico);
+        editor.putString("nombre_usuario", Nombre_Usuario);
+        editor.putString("id_usuario", ID_Usuario);
         editor.apply();
 
     }
 
     @Override
-    public void performCheckSession(Context context) {
+    public void performCheckSession(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
         String Correo_Electronico = sharedPref.getString("correo_electronico","");
-        if(Correo_Electronico.length() != 0){
+
+        if(Correo_Electronico.length() != 0)
+        {
             mListener.onSuccessCheck();
         }
     }

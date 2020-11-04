@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView Imagen_Tacna;
     ImageView Imagen_Business;
 
-    Animation frombottom;
-    Animation fromtop;
+    Animation From_Bottom;
+    Animation From_Top;
 
     Window window;
 
@@ -31,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
-        fromtop = AnimationUtils.loadAnimation(this,R.anim.fromtop);
+        From_Bottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
+        From_Top = AnimationUtils.loadAnimation(this,R.anim.fromtop);
 
         Imagen_Business = (ImageView) findViewById(R.id.logobusiness);
         Imagen_Tacna = (ImageView) findViewById(R.id.logotacna);
 
-        Imagen_Tacna.startAnimation(fromtop);
-        Imagen_Business.startAnimation(frombottom);
+        Imagen_Tacna.startAnimation(From_Top);
+        Imagen_Business.startAnimation(From_Bottom);
 
         this.window=getWindow();
         window.setStatusBarColor(Color.parseColor("#003152"));

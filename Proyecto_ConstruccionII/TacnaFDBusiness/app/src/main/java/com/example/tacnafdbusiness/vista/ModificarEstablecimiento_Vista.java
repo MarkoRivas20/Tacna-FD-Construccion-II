@@ -65,20 +65,22 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
     Uri Image_Uri;
     Uri Documento_Uri;
 
-    FloatingActionButton fab;
+    FloatingActionButton Fab;
     Button BtnModificar_Establecimiento;
     Button BtnModificar_Documento;
 
-    String Id_Establecimiento = "";
+    String ID_Establecimiento = "";
     String Url_Logo_Actual = "";
     String Url_Documento_Actual = "";
     String Punto_Geografico = "";
     String Nombre_Establecimiento = "";
-    String Id_Usuario = "";
+    String ID_Usuario = "";
+
     int Total_Resenas = 0;
+
     Double Puntuacion = 0.0;
 
-    ImageView logo_establecimiento;
+    ImageView Logo_Establecimiento;
 
     EditText Txtnombre;
     EditText Txtdireccion;
@@ -91,9 +93,9 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
 
     TextView LblDocumento;
 
-    String[] categorias = {"Seleccione una Categoria", "Restaurante", "Cafeteria", "Panaderia", "Cafeteria"};
-    String[] distritos = {"Seleccione un Distrito", "Tacna", "Alto del Alianza", "Calana", "Pachia", "Palca", "Pocollay", "Ciudad Nueva"};
-    String[] estados = {"Seleccione un estado", "Activo", "Inactivo"};
+    String[] Categorias = {"Seleccione una Categoria", "Restaurante", "Cafeteria", "Panaderia", "Cafeteria"};
+    String[] Distritos = {"Seleccione un Distrito", "Tacna", "Alto del Alianza", "Calana", "Pachia", "Palca", "Pocollay", "Ciudad Nueva"};
+    String[] Estados = {"Seleccione un estado", "Activo", "Inactivo"};
 
     OpcionesEstablecimiento_Vista opcionesestablecimiento_vista;
 
@@ -109,7 +111,7 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
         mReference = FirebaseDatabase.getInstance().getReference().child("Establecimiento");
         mStorageReference = FirebaseStorage.getInstance().getReference();
 
-        logo_establecimiento = (ImageView) view.findViewById(R.id.logo_establecimiento);
+        Logo_Establecimiento = (ImageView) view.findViewById(R.id.logo_establecimiento);
         Txtnombre = (EditText) view.findViewById(R.id.txtnombre);
         Txtdireccion = (EditText) view.findViewById(R.id.txtdireccion);
         Txttelefono = (EditText) view.findViewById(R.id.txttelefono);
@@ -118,17 +120,17 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
         Spinner_Distrito = (Spinner) view.findViewById(R.id.spinnerdistrito);
         Spinner_Estado = (Spinner) view.findViewById(R.id.spinnerestado);
         LblDocumento = (TextView) view.findViewById(R.id.LblDocumento);
-        fab = (FloatingActionButton) view.findViewById(R.id.fab_establecimiento);
+        Fab = (FloatingActionButton) view.findViewById(R.id.fab_establecimiento);
         BtnModificar_Establecimiento = (Button) view.findViewById(R.id.BtnModificar_Establecimiento);
         BtnModificar_Documento = (Button) view.findViewById(R.id.BtnModificar_Documento);
 
 
-        Spinner_Categoria.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, categorias));
-        Spinner_Distrito.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, distritos));
-        Spinner_Estado.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, estados));
+        Spinner_Categoria.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Categorias));
+        Spinner_Distrito.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Distritos));
+        Spinner_Estado.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Estados));
 
         mPresenter.GetEstablishmentInfo(getActivity().getApplicationContext());
-        mPresenter.GetEstablishmentData(mReference,Id_Establecimiento);
+        mPresenter.GetEstablishmentData(mReference,ID_Establecimiento);
         mPresenter.GetSessionData(getActivity().getApplicationContext());
 
         Map_View = (CustomMapView) view.findViewById(R.id.customMapView);
@@ -136,12 +138,12 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
         Map_View.onResume();
         Map_View.getMapAsync(this);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        Fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-
+                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                {
                     Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                     startActivityForResult(gallery, PICK_IMAGE);
                 }
@@ -156,11 +158,11 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
         BtnModificar_Establecimiento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Establecimiento_Modelo establecimiento_modelo = new Establecimiento_Modelo(Id_Establecimiento, Id_Usuario,Txtnombre.getText().toString(),
+                Establecimiento_Modelo Establecimiento = new Establecimiento_Modelo(ID_Establecimiento, ID_Usuario,Txtnombre.getText().toString(),
                         Spinner_Distrito.getSelectedItem().toString(),Spinner_Categoria.getSelectedItem().toString(),Txtdireccion.getText().toString(),Txttelefono.getText().toString(),
                         Txtdescripcion.getText().toString(),Total_Resenas,Puntuacion,Url_Logo_Actual, Url_Documento_Actual, Punto_Geografico, Spinner_Estado.getSelectedItem().toString());
 
-                mPresenter.UpdateEstablismentData(mReference, establecimiento_modelo);
+                mPresenter.UpdateEstablismentData(mReference, Establecimiento);
             }
         });
 
@@ -168,8 +170,8 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
             @Override
             public void onClick(View v) {
 
-                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-
+                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                {
                     Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                     startActivityForResult(gallery, PICK_IMAGE_DOCUMENT);
                 }
@@ -188,16 +190,17 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
 
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE)
+        {
             Image_Uri = data.getData();
-            logo_establecimiento.setImageURI(Image_Uri);
-            mPresenter.UpdateEstablismentLogo(mStorageReference, mReference, Url_Logo_Actual, Id_Establecimiento, Image_Uri);
-
+            Logo_Establecimiento.setImageURI(Image_Uri);
+            mPresenter.UpdateEstablismentLogo(mStorageReference, mReference, Url_Logo_Actual, ID_Establecimiento, Image_Uri);
         }
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE_DOCUMENT){
-            Documento_Uri = data.getData();
-            mPresenter.UpdateEstablismentDocument(mStorageReference, mReference, Url_Documento_Actual, Id_Establecimiento, Documento_Uri);
 
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE_DOCUMENT)
+        {
+            Documento_Uri = data.getData();
+            mPresenter.UpdateEstablismentDocument(mStorageReference, mReference, Url_Documento_Actual, ID_Establecimiento, Documento_Uri);
         }
     }
 
@@ -207,27 +210,27 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
         Mapa = googleMap;
 
         String[] ltdlng = Punto_Geografico.split("/");
-        LatLng lugar = new LatLng(Double.parseDouble(ltdlng[0]), Double.parseDouble(ltdlng[1]));
+        LatLng Lugar = new LatLng(Double.parseDouble(ltdlng[0]), Double.parseDouble(ltdlng[1]));
 
-        Mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(lugar, 17));
+        Mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(Lugar, 17));
 
-        MarkerOptions markerOptions = new MarkerOptions();
+        MarkerOptions Marker_Options = new MarkerOptions();
 
-        markerOptions.position(lugar);
+        Marker_Options.position(Lugar);
         Mapa.clear();
-        Mapa.addMarker(markerOptions);
+        Mapa.addMarker(Marker_Options);
 
         Mapa.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
                 Mapa.clear();
-                String latitud = String.valueOf(latLng.latitude);
-                String longitud = String.valueOf(latLng.longitude);
+                String Latitud = String.valueOf(latLng.latitude);
+                String Longitud = String.valueOf(latLng.longitude);
 
-                MarkerOptions marker = new MarkerOptions().position(new LatLng(Double.valueOf(latitud), Double.valueOf(longitud))).title("Aqui");
+                MarkerOptions marker = new MarkerOptions().position(new LatLng(Double.valueOf(Latitud), Double.valueOf(Longitud))).title("Aqui");
                 Mapa.addMarker(marker);
 
-                Punto_Geografico = latitud + "/" + longitud;
+                Punto_Geografico = Latitud + "/" + Longitud;
             }
         });
 
@@ -271,44 +274,48 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
     }
 
     @Override
-    public void onGetEstablishmentInfoSuccessful(String Id_Establecimiento, String Url_Logo, String Url_Documento) {
+    public void onGetEstablishmentInfoSuccessful(String ID_Establecimiento, String Url_Logo, String Url_Documento) {
 
-       this.Id_Establecimiento = Id_Establecimiento;
+       this.ID_Establecimiento = ID_Establecimiento;
        Url_Logo_Actual = Url_Logo;
        Url_Documento_Actual = Url_Documento;
 
-       Picasso.with(getActivity().getApplicationContext()).load(Url_Logo_Actual).into(logo_establecimiento);
+       Picasso.with(getActivity().getApplicationContext()).load(Url_Logo_Actual).into(Logo_Establecimiento);
     }
 
     @Override
-    public void onGetEstablishmentDataSuccessful(Establecimiento_Modelo establecimiento) {
-        Nombre_Establecimiento = establecimiento.getNombre();
-        Txtnombre.setText(establecimiento.getNombre());
-        Txtdescripcion.setText(establecimiento.getDescripcion());
-        Txtdireccion.setText(establecimiento.getDireccion());
-        Txttelefono.setText(establecimiento.getTelefono());
-        Punto_Geografico = establecimiento.getPuntoGeografico();
-        Total_Resenas = establecimiento.getTotalResenas();
-        Puntuacion = establecimiento.getPuntuacion();
+    public void onGetEstablishmentDataSuccessful(Establecimiento_Modelo Establecimiento) {
+        Nombre_Establecimiento = Establecimiento.getNombre();
+        Txtnombre.setText(Establecimiento.getNombre());
+        Txtdescripcion.setText(Establecimiento.getDescripcion());
+        Txtdireccion.setText(Establecimiento.getDireccion());
+        Txttelefono.setText(Establecimiento.getTelefono());
+        Punto_Geografico = Establecimiento.getPuntoGeografico();
+        Total_Resenas = Establecimiento.getTotalResenas();
+        Puntuacion = Establecimiento.getPuntuacion();
         LblDocumento.setText("Imagen: " + Url_Documento_Actual.substring(Url_Documento_Actual.indexOf("o%2F") + 4, Url_Documento_Actual.indexOf("?alt=")));
 
-        for(int i=0; i<categorias.length; i++){
-            if(establecimiento.getCategoria().equals(categorias[i])){
+        for(int i=0; i<Categorias.length; i++)
+        {
+            if(Establecimiento.getCategoria().equals(Categorias[i]))
+            {
                 Spinner_Categoria.setSelection(i);
                 break;
             }
         }
 
-        for(int i=0; i<distritos.length; i++){
-            if(establecimiento.getDistrito().equals(distritos[i])){
+        for(int i=0; i<Distritos.length; i++)
+        {
+            if(Establecimiento.getDistrito().equals(Distritos[i]))
+            {
                 Spinner_Distrito.setSelection(i);
                 break;
             }
         }
 
-        for (int i=0; i<estados.length; i++)
+        for (int i=0; i<Estados.length; i++)
         {
-            if (establecimiento.getEstado().equals(estados[i]))
+            if (Establecimiento.getEstado().equals(Estados[i]))
             {
                 Spinner_Estado.setSelection(i);
                 break;
@@ -322,8 +329,8 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
     }
 
     @Override
-    public void onGetSessionDataSuccessful(String Id_Usuario) {
-        this.Id_Usuario = Id_Usuario;
+    public void onGetSessionDataSuccessful(String ID_Usuario) {
+        this.ID_Usuario = ID_Usuario;
     }
 
     @Override

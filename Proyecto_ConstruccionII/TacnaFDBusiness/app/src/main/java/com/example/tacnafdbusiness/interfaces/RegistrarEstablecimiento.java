@@ -20,17 +20,17 @@ public interface RegistrarEstablecimiento {
     }
 
     interface Presenter{
-        void CreateNewEstablishment(DatabaseReference reference, Establecimiento_Modelo establecimiento_modelo);
-        void UploadLogo(StorageReference reference, String Id_Establecimiento, Uri Image_Uri);
-        void UploadDocument(StorageReference reference, String Id_Establecimiento, Uri Document_Uri);
-        void GetSessionData(Context context);
+        void CreateNewEstablishment(DatabaseReference Database_Reference, Establecimiento_Modelo Establecimiento);
+        void UploadLogo(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri);
+        void UploadDocument(StorageReference Storage_Reference, String ID_Establecimiento, Uri Documento_Uri);
+        void GetSessionData(Context Contexto);
     }
 
     interface Interactor{
-        void performCreateEstablishment(DatabaseReference reference, Establecimiento_Modelo establecimiento_modelo);
-        void performUploadLogo(StorageReference reference, String Id_Establecimiento, Uri Image_Uri);
-        void performUploadDocument(StorageReference reference, String Id_Establecimiento, Uri Document_Uri);
-        void performGetSessionData(Context context);
+        void performCreateEstablishment(DatabaseReference Database_Reference, Establecimiento_Modelo Establecimiento);
+        void performUploadLogo(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri);
+        void performUploadDocument(StorageReference Storage_Reference, String ID_Establecimiento, Uri Documento_Uri);
+        void performGetSessionData(Context Contexto);
     }
 
     interface onOperationListener{

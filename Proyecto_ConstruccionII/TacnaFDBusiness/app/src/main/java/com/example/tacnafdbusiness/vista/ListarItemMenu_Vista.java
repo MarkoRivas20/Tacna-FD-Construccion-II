@@ -45,7 +45,7 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
     private ItemMenu_Adaptador Adaptador;
     private RecyclerView.LayoutManager Layout_Manager;
 
-    String Id_Establecimiento = "";
+    String ID_Establecimiento = "";
 
     Button BtnAgregar_Item_Menu;
 
@@ -73,7 +73,7 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
         mReference = FirebaseDatabase.getInstance().getReference().child("ItemMenu");
 
         mPresenter.GetEstablishmentInfo(getActivity());
-        mPresenter.ListItemMenu(mReference, Id_Establecimiento);
+        mPresenter.ListItemMenu(mReference, ID_Establecimiento);
 
 
         BtnAgregar_Item_Menu.setOnClickListener(new View.OnClickListener() {
@@ -87,9 +87,9 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
     }
 
     @Override
-    public void onListItemMenuSuccessful(final ArrayList<ItemMenu_Modelo> itemMenu_modelos, Boolean Existe_Item_Menu) {
+    public void onListItemMenuSuccessful(final ArrayList<ItemMenu_Modelo> Items_Menu, Boolean Existe_Item_Menu) {
 
-        Adaptador = new ItemMenu_Adaptador(itemMenu_modelos, getActivity());
+        Adaptador = new ItemMenu_Adaptador(Items_Menu, getActivity());
         Adaptador.setOnItemClickListener(new ItemMenu_Adaptador.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -99,14 +99,14 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
             @Override
             public void onUpdate(int position) {
 
-                Item_Menu_Info.putString("Id_Item_Menu", itemMenu_modelos.get(position).getID_Item_Menu());
+                Item_Menu_Info.putString("Id_Item_Menu", Items_Menu.get(position).getID_Item_Menu());
                 modificarItemMenu_vista.setArguments(Item_Menu_Info);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, modificarItemMenu_vista).addToBackStack(null).commit();
             }
 
             @Override
             public void onDelete(int position) {
-                mPresenter.DeleteItemMenu(mReference, itemMenu_modelos.get(position).getID_Item_Menu(), itemMenu_modelos.get(position).getUrl_Imagen());
+                mPresenter.DeleteItemMenu(mReference, Items_Menu.get(position).getID_Item_Menu(), Items_Menu.get(position).getUrl_Imagen());
             }
 
             @Override
@@ -118,8 +118,8 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
         Recycler_View.setLayoutManager(Layout_Manager);
         Recycler_View.setAdapter(Adaptador);
 
-        if(Existe_Item_Menu){
-
+        if(Existe_Item_Menu)
+        {
             LblNo_Items_Menu.setVisibility(View.GONE);
         }
         else
@@ -144,7 +144,7 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
     }
 
     @Override
-    public void onGetEstablishmentInfoSuccessful(String Id_Establecimiento) {
-        this.Id_Establecimiento = Id_Establecimiento;
+    public void onGetEstablishmentInfoSuccessful(String ID_Establecimiento) {
+        this.ID_Establecimiento = ID_Establecimiento;
     }
 }

@@ -27,15 +27,15 @@ public class CRUDImagenes_Interactor implements CRUDImagenes.Interactor {
 
     private CRUDImagenes.onOperationListener mListener;
 
-    private ArrayList<ImagenEstablecimiento_Modelo> imagenEstablecimiento_modelos=new ArrayList<>();
+    private ArrayList<ImagenEstablecimiento_Modelo> Imagenes_Establecimiento = new ArrayList<>();
 
     public CRUDImagenes_Interactor(CRUDImagenes.onOperationListener mListener) {
         this.mListener = mListener;
     }
 
     @Override
-    public void performUploadImage(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final ImagenEstablecimiento_Modelo imagenEstablecimiento_modelo, Uri Imagen_Uri) {
-        final StorageReference filePath = Storage_Reference.child(imagenEstablecimiento_modelo.getID_Establecimiento()).child("Imagenes").child(Imagen_Uri.getLastPathSegment());
+    public void performUploadImage(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final ImagenEstablecimiento_Modelo Imagen_Establecimiento, Uri Imagen_Uri) {
+        final StorageReference filePath = Storage_Reference.child(Imagen_Establecimiento.getID_Establecimiento()).child("Imagenes").child(Imagen_Uri.getLastPathSegment());
 
         filePath.putFile(Imagen_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -51,12 +51,12 @@ public class CRUDImagenes_Interactor implements CRUDImagenes.Interactor {
                     @Override
                     public void onSuccess(Uri uri) {
 
-                        imagenEstablecimiento_modelo.setUrl_Imagen(uri.toString());
-                        Database_Reference.child(imagenEstablecimiento_modelo.getID_Imagen_Establecimiento()).setValue(imagenEstablecimiento_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        Imagen_Establecimiento.setUrl_Imagen(uri.toString());
+                        Database_Reference.child(Imagen_Establecimiento.getID_Imagen_Establecimiento()).setValue(Imagen_Establecimiento).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-
+                                if(task.isSuccessful())
+                                {
                                     mListener.onSuccessUploadImage();
 
                                 }
@@ -113,15 +113,16 @@ public class CRUDImagenes_Interactor implements CRUDImagenes.Interactor {
             public void onDataChange(DataSnapshot snapshot) {
 
                 Boolean Existe_Imagen = false;
-                imagenEstablecimiento_modelos.clear();
+                Imagenes_Establecimiento.clear();
 
-                for (DataSnapshot postSnapshot : snapshot.getChildren()){
+                for (DataSnapshot postSnapshot : snapshot.getChildren())
+                {
                     Existe_Imagen = true;
-                    ImagenEstablecimiento_Modelo imagenEstablecimiento_modelo = postSnapshot.getValue(ImagenEstablecimiento_Modelo.class);
-                    imagenEstablecimiento_modelos.add(imagenEstablecimiento_modelo);
+                    ImagenEstablecimiento_Modelo Imagen_Establecimiento = postSnapshot.getValue(ImagenEstablecimiento_Modelo.class);
+                    Imagenes_Establecimiento.add(Imagen_Establecimiento);
                 }
 
-                mListener.onSuccessGetAllImages(imagenEstablecimiento_modelos, Existe_Imagen);
+                mListener.onSuccessGetAllImages(Imagenes_Establecimiento, Existe_Imagen);
 
             }
 
@@ -135,12 +136,13 @@ public class CRUDImagenes_Interactor implements CRUDImagenes.Interactor {
     }
 
     @Override
-    public void performGetEstablishmentInfo(Context context) {
+    public void performGetEstablishmentInfo(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
         String Id_Establecimiento = sharedPref.getString("id_establecimiento","");
 
-        if(Id_Establecimiento.length() != 0){
+        if(Id_Establecimiento.length() != 0)
+        {
             mListener.onSuccessGetEstablishmentInfo(Id_Establecimiento);
         }
 

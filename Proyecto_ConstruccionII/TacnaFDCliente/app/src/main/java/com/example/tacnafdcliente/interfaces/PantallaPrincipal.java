@@ -5,24 +5,24 @@ import android.content.Context;
 public interface PantallaPrincipal {
 
     interface View{
-        void onSessionDataSuccessful(String correo_electronico, String nombre_usuario);
+        void onSessionDataSuccessful(String Correo_Electronico, String Nombre_Usuario);
         void onSessionDataFailure();
         void onCloseSessionSuccessful();
     }
 
     interface Presenter{
-        void GetSessionData(Context context);
-        void CloseSession(Context context);
+        void GetSessionData(Context Contexto);
+        void CloseSession(Context Contexto);
     }
 
     interface Interactor{
-        void performGetSessionData(Context context);
-        void performCloseSession(Context context);
+        void performGetSessionData(Context Contexto);
+        void performCloseSession(Context Contexto);
     }
 
     interface onOperationListener{
-        void onSuccess(String correo_electronico, String nombre_usuario);
-        void onFailure();
+        void onSuccessSessionData(String Correo_Electronico, String Nombre_Usuario);
+        void onFailureSessionData();
         void onSuccessCloseSession();
     }
 }

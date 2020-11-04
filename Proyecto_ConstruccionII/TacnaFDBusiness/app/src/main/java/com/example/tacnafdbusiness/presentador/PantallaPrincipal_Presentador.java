@@ -16,18 +16,18 @@ public class PantallaPrincipal_Presentador implements PantallaPrincipal.onOperat
     }
 
     @Override
-    public void GetSessionData(Context context) {
-        mInteractor.performGetSessionData(context);
+    public void GetSessionData(Context Contexto) {
+        mInteractor.performGetSessionData(Contexto);
     }
 
     @Override
-    public void CloseSession(Context context) {
-        mInteractor.performCloseSession(context);
+    public void CloseSession(Context Contexto) {
+        mInteractor.performCloseSession(Contexto);
     }
 
     @Override
-    public void onSuccess(String correo_electronico, String nombre_usuario) {
-        mView.onSessionDataSuccessful(correo_electronico, nombre_usuario);
+    public void onSuccess(String Correo_Electronico, String Nombre_Usuario) {
+        mView.onSessionDataSuccessful(Correo_Electronico, Nombre_Usuario);
     }
 
     @Override

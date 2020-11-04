@@ -41,14 +41,14 @@ public class Dashboard_Vista extends Fragment implements Dashboard.View {
     TextView TxtVentas_Mes;
     TextView TxtEstablecimiento_Mas_Ventas;
 
-    String Id_Usuario = "";
+    String ID_Usuario = "";
     String Patron_Fecha = "MM";
     String Numero_Mes = "";
 
     Double Mejor_Puntuacion = 0.0;
     int Posicion_Mejor_Establecimiento = 0;
 
-    ArrayList<Establecimiento_Modelo> establecimiento_modelos = new ArrayList<>();
+    ArrayList<Establecimiento_Modelo> Establecimientos = new ArrayList<>();
 
     SimpleDateFormat simpleDateFormat;
 
@@ -73,7 +73,7 @@ public class Dashboard_Vista extends Fragment implements Dashboard.View {
         TxtEstablecimiento_Mas_Ventas = (TextView) view.findViewById(R.id.TxtEstablecimiento_Mas_Ventas);
 
         mPresenter.GetSessionData(getActivity());
-        mPresenter.SearchEstablishment(mReference_Establecimiento, Id_Usuario);
+        mPresenter.SearchEstablishment(mReference_Establecimiento, ID_Usuario);
 
         return view;
     }
@@ -89,13 +89,6 @@ public class Dashboard_Vista extends Fragment implements Dashboard.View {
             TxtEstablecimiento_Mas_Comentarios.setText(Nombre_Establecimiento_Mas_Comentarios);
         }
 
-        /*
-        for(int i = 0; i < establecimiento_modelos.size(); i++){
-            if(establecimiento_modelos.get(i).getID_Establecimiento().equals(Id_Establecimiento_Mas_Comentarios)){
-                TxtEstablecimiento_Mas_Comentarios.setText(establecimiento_modelos.get(i).getNombre());
-                break;
-            }
-        }*/
     }
 
     @Override
@@ -104,22 +97,24 @@ public class Dashboard_Vista extends Fragment implements Dashboard.View {
     }
 
     @Override
-    public void onSearchEstablishmentSuccessful(ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento) {
-        establecimiento_modelos = establecimiento;
+    public void onSearchEstablishmentSuccessful(ArrayList<Establecimiento_Modelo> Establecimientos, Boolean Existe_Establecimiento) {
+        this.Establecimientos = Establecimientos;
 
-        TxtEstablecimientos.setText(String.valueOf(establecimiento.size()));
+        TxtEstablecimientos.setText(String.valueOf(Establecimientos.size()));
 
         Mejor_Puntuacion = 0.0;
-        for(int i = 0; i < establecimiento.size(); i++){
-
-            if(Double.valueOf(establecimiento.get(i).getPuntuacion()) > Mejor_Puntuacion){
-                Mejor_Puntuacion = Double.valueOf(establecimiento.get(i).getPuntuacion());
+        for(int i = 0; i < Establecimientos.size(); i++)
+        {
+            if(Double.valueOf(Establecimientos.get(i).getPuntuacion()) > Mejor_Puntuacion)
+            {
+                Mejor_Puntuacion = Double.valueOf(Establecimientos.get(i).getPuntuacion());
                 Posicion_Mejor_Establecimiento = i;
             }
         }
 
-        if(Existe_Establecimiento){
-            TxtEstablecimiento_Mejor_Puntuacion.setText(establecimiento.get(Posicion_Mejor_Establecimiento).getNombre());
+        if(Existe_Establecimiento)
+        {
+            TxtEstablecimiento_Mejor_Puntuacion.setText(Establecimientos.get(Posicion_Mejor_Establecimiento).getNombre());
         }
         else
         {
@@ -127,8 +122,8 @@ public class Dashboard_Vista extends Fragment implements Dashboard.View {
         }
 
 
-        mPresenter.GetEstablismentWithMoreReviews(mReference_Resenas, establecimiento);
-        mPresenter.GetMonthSales(mReference_Pedidos, establecimiento, Numero_Mes);
+        mPresenter.GetEstablismentWithMoreReviews(mReference_Resenas, Establecimientos);
+        mPresenter.GetMonthSales(mReference_Pedidos, Establecimientos, Numero_Mes);
 
 
 
@@ -143,7 +138,8 @@ public class Dashboard_Vista extends Fragment implements Dashboard.View {
     public void onGetMonthSalesSuccessful(int Ventas_Mes, String Nombre_Establecimiento_Mas_Ventas) {
         TxtVentas_Mes.setText(String.valueOf(Ventas_Mes));
 
-        if(Nombre_Establecimiento_Mas_Ventas == null){
+        if(Nombre_Establecimiento_Mas_Ventas == null)
+        {
             TxtEstablecimiento_Mas_Ventas.setText("Ninguno");
         }
         else
@@ -162,6 +158,6 @@ public class Dashboard_Vista extends Fragment implements Dashboard.View {
 
     @Override
     public void onSessionDataSuccessful(String ID_Usuario) {
-        Id_Usuario = ID_Usuario;
+        this.ID_Usuario = ID_Usuario;
     }
 }

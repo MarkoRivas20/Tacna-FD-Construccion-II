@@ -7,26 +7,26 @@ import com.google.firebase.database.DatabaseReference;
 public interface Login {
 
     interface View{
-        void onLogInSuccessful(String nombre_usuario, String id_usuario);
+        void onLogInSuccessful(String Nombre_Usuario, String ID_Usuario);
         void onLogInFailure();
         void onSuccessfulCheck();
     }
 
     interface Presenter{
-        void LogIn(DatabaseReference reference, String correo_electronico, String contrasena);
-        void SaveSession(Context context, String correo_electronico, String nombre_usuario, String id_usuario);
-        void CheckSession(Context context);
+        void LogIn(DatabaseReference Database_Reference, String Correo_Electronico, String Contrasena);
+        void SaveSession(Context Contexto, String Correo_Electronico, String Nombre_Usuario, String ID_Usuario);
+        void CheckSession(Context Contexto);
     }
 
     interface Interactor{
-        void performLogIn(DatabaseReference reference, String correo_electronico, String contrasena);
-        void performSaveSession(Context context, String correo_electronico, String nombre_usuario, String id_usuario);
-        void performCheckSession(Context context);
+        void performLogIn(DatabaseReference Database_Reference, String Correo_Electronico, String Contrasena);
+        void performSaveSession(Context Contexto, String Correo_Electronico, String Nombre_Usuario, String ID_Usuario);
+        void performCheckSession(Context Contexto);
     }
 
     interface onOperationListener{
         void onSuccessCheck();
-        void onSuccess(String nombre_usuario, String id_usuario);
+        void onSuccess(String Nombre_Usuario, String ID_Usuario);
         void onFailure();
     }
 }

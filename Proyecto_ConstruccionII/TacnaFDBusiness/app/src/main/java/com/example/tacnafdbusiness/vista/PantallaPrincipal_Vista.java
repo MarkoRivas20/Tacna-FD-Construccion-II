@@ -26,9 +26,9 @@ import com.google.android.material.navigation.NavigationView;
 
 public class PantallaPrincipal_Vista extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PantallaPrincipal.View {
 
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    Toolbar toolbar;
+    DrawerLayout Drawer_Layout;
+    NavigationView Navigation_View;
+    Toolbar Tool_bar;
     Window window;
 
     Dashboard_Vista dashboard_vista;
@@ -48,22 +48,22 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
         this.window=getWindow();
         window.setStatusBarColor(Color.parseColor("#0031A8"));
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
-        toolbar = findViewById(R.id.toolbar);
+        Drawer_Layout = findViewById(R.id.drawer_layout);
+        Navigation_View = findViewById(R.id.nav_view);
+        Tool_bar = findViewById(R.id.toolbar);
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(Tool_bar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setNavigationIcon(R.drawable.icon_toolbar_black);
+        Tool_bar.setNavigationIcon(R.drawable.icon_toolbar_black);
 
-        navigationView.bringToFront();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
+        Navigation_View.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,Drawer_Layout,Tool_bar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        Drawer_Layout.addDrawerListener(toggle);
 
         toggle.syncState();
 
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_dashboard);
+        Navigation_View.setNavigationItemSelectedListener(this);
+        Navigation_View.setCheckedItem(R.id.nav_dashboard);
 
 
         dashboard_vista = new Dashboard_Vista();
@@ -73,7 +73,7 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
         getSupportFragmentManager().beginTransaction().add(R.id.fragmento,dashboard_vista).commit();
 
 
-        View View_Navigation = navigationView.getHeaderView(0);
+        View View_Navigation = Navigation_View.getHeaderView(0);
         LblNombre_Nav = View_Navigation.findViewById(R.id.lblnombre_nav);
         LblEmail_Nav = View_Navigation.findViewById(R.id.lblemail_nav);
 
@@ -84,13 +84,13 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(GravityCompat.START);
+        if(Drawer_Layout.isDrawerOpen(GravityCompat.START))
+        {
+            Drawer_Layout.closeDrawer(GravityCompat.START);
         }
-        else{
-            
+        else
+        {
             super.onBackPressed();
-
         }
     }
 
@@ -102,23 +102,23 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
         switch (item.getItemId()){
 
             case R.id.nav_dashboard:
-                toolbar.setNavigationIcon(R.drawable.icon_toolbar_black);
-                toolbar.setBackground(new ColorDrawable(Color.parseColor("#FFFFFF")));
-                navigationView.setCheckedItem(R.id.nav_dashboard);
+                Tool_bar.setNavigationIcon(R.drawable.icon_toolbar_black);
+                Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#FFFFFF")));
+                Navigation_View.setCheckedItem(R.id.nav_dashboard);
                 transaction.replace(R.id.fragmento,dashboard_vista);
                 break;
 
             case R.id.nav_establecimiento:
-                toolbar.setNavigationIcon(R.drawable.icon_toolbar);
-                toolbar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
-                navigationView.setCheckedItem(R.id.nav_establecimiento);
+                Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
+                Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
+                Navigation_View.setCheckedItem(R.id.nav_establecimiento);
                 transaction.replace(R.id.fragmento,listarEstablecimiento_vista);
                 break;
 
             case R.id.nav_datos:
-                toolbar.setNavigationIcon(R.drawable.icon_toolbar);
-                toolbar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
-                navigationView.setCheckedItem(R.id.nav_datos);
+                Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
+                Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
+                Navigation_View.setCheckedItem(R.id.nav_datos);
                 transaction.replace(R.id.fragmento,modificarUsuario_vista);
                 break;
 
@@ -130,7 +130,7 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
 
         transaction.commit();
 
-        drawerLayout.closeDrawer(GravityCompat.START);
+        Drawer_Layout.closeDrawer(GravityCompat.START);
         return false;
     }
 

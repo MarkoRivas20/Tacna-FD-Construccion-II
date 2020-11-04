@@ -23,28 +23,28 @@ public class Dashboard_Presentador implements Dashboard.Presenter, Dashboard.onO
     }
 
     @Override
-    public void SearchEstablishment(DatabaseReference reference, String ID_Usuario) {
-        mInteractor.performSearchEstablishment(reference, ID_Usuario);
+    public void SearchEstablishment(DatabaseReference Database_Reference, String ID_Usuario) {
+        mInteractor.performSearchEstablishment(Database_Reference, ID_Usuario);
     }
 
     @Override
-    public void GetEstablismentWithMoreReviews(DatabaseReference reference, ArrayList<Establecimiento_Modelo> establecimiento) {
-        mInteractor.performGetEstablismentWithMoreReviews(reference, establecimiento);
+    public void GetEstablismentWithMoreReviews(DatabaseReference Database_Reference, ArrayList<Establecimiento_Modelo> Establecimientos) {
+        mInteractor.performGetEstablismentWithMoreReviews(Database_Reference, Establecimientos);
     }
 
     @Override
-    public void GetMonthSales(DatabaseReference reference, ArrayList<Establecimiento_Modelo> establecimiento, String Numero_Mes) {
-        mInteractor.performGetMonthSales(reference, establecimiento, Numero_Mes);
+    public void GetMonthSales(DatabaseReference Database_Reference, ArrayList<Establecimiento_Modelo> Establecimientos, String Numero_Mes) {
+        mInteractor.performGetMonthSales(Database_Reference, Establecimientos, Numero_Mes);
     }
 
     @Override
-    public void GetSessionData(Context context) {
-        mInteractor.performGetSessionData(context);
+    public void GetSessionData(Context Contexto) {
+        mInteractor.performGetSessionData(Contexto);
     }
 
     @Override
-    public void onSuccessSearchEstablishment(ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento) {
-        mView.onSearchEstablishmentSuccessful(establecimiento, Existe_Establecimiento);
+    public void onSuccessSearchEstablishment(ArrayList<Establecimiento_Modelo> Establecimientos, Boolean Existe_Establecimiento) {
+        mView.onSearchEstablishmentSuccessful(Establecimientos, Existe_Establecimiento);
     }
 
     @Override

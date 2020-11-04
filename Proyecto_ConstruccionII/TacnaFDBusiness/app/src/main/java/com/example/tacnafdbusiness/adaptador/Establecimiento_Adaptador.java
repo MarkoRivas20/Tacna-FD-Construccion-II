@@ -20,7 +20,7 @@ import java.util.List;
 
 public class Establecimiento_Adaptador extends RecyclerView.Adapter<Establecimiento_Adaptador.Establecimiento_ViewHolder> implements View.OnClickListener {
 
-    private List<Establecimiento_Modelo> Items;
+    private List<Establecimiento_Modelo> Establecimientos;
     private Context Contexto;
     private View.OnClickListener Listener;
 
@@ -59,19 +59,19 @@ public class Establecimiento_Adaptador extends RecyclerView.Adapter<Establecimie
 
         }
 
-        public void bindData (Establecimiento_Modelo dataModel, Context context) {
+        public void bindData (Establecimiento_Modelo Establecimiento, Context Contexto) {
 
-            Picasso.with(context).load(dataModel.getUrl_Imagen_Logo()).into(Imagen_Recycler_Establecimiento);
-            Imagen_Circle.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.circle_rating));
-            Imagen_Comentarios.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_person));
-            Txtnombre_Recycler_Establecimiento.setText(dataModel.getNombre());
-            Txtpuntuacion_recycler_Establecimiento.setText(String.valueOf(dataModel.getPuntuacion()));
-            Txttotalreseña_recycler_Establecimiento.setText(String.valueOf(dataModel.getTotalResenas()));
+            Picasso.with(Contexto).load(Establecimiento.getUrl_Imagen_Logo()).into(Imagen_Recycler_Establecimiento);
+            Imagen_Circle.setImageDrawable(ContextCompat.getDrawable(Contexto, R.drawable.circle_rating));
+            Imagen_Comentarios.setImageDrawable(ContextCompat.getDrawable(Contexto, R.drawable.ic_person));
+            Txtnombre_Recycler_Establecimiento.setText(Establecimiento.getNombre());
+            Txtpuntuacion_recycler_Establecimiento.setText(String.valueOf(Establecimiento.getPuntuacion()));
+            Txttotalreseña_recycler_Establecimiento.setText(String.valueOf(Establecimiento.getTotalResenas()));
         }
     }
 
-    public Establecimiento_Adaptador (List<Establecimiento_Modelo> items, Context context) {
-        this.Items = items;
+    public Establecimiento_Adaptador (List<Establecimiento_Modelo> Establecimientos, Context context) {
+        this.Establecimientos = Establecimientos;
         Contexto = context;
     }
 
@@ -84,16 +84,16 @@ public class Establecimiento_Adaptador extends RecyclerView.Adapter<Establecimie
 
     @Override
     public void onBindViewHolder(@NonNull Establecimiento_Adaptador.Establecimiento_ViewHolder holder, int position) {
-        holder.bindData(Items.get(position), Contexto);
+        holder.bindData(Establecimientos.get(position), Contexto);
     }
 
-    public void  filterlist (ArrayList<Establecimiento_Modelo> filtereslist){
-        Items = filtereslist;
+    public void  filterlist (ArrayList<Establecimiento_Modelo> Lista_Filtrada){
+        Establecimientos = Lista_Filtrada;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return Items.size();
+        return Establecimientos.size();
     }
 }

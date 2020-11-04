@@ -20,18 +20,18 @@ public class RegistrarItemMenu_Presentador implements RegistrarItemMenu.Presente
     }
 
     @Override
-    public void SaveItemMenu(DatabaseReference Database_Reference, ItemMenu_Modelo itemMenu) {
-        mInteractor.performSaveItemMenu(Database_Reference, itemMenu);
+    public void SaveItemMenu(DatabaseReference Database_Reference, ItemMenu_Modelo Item_Menu) {
+        mInteractor.performSaveItemMenu(Database_Reference, Item_Menu);
     }
 
     @Override
-    public void UploadItemMenuImage(StorageReference Storage_Reference, String Id_Establecimiento, Uri Imagen_Uri) {
-        mInteractor.performUploadItemMenuImage(Storage_Reference, Id_Establecimiento, Imagen_Uri);
+    public void UploadItemMenuImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri) {
+        mInteractor.performUploadItemMenuImage(Storage_Reference, ID_Establecimiento, Imagen_Uri);
     }
 
     @Override
-    public void GetEstablishmentInfo(Context context) {
-        mInteractor.performGetEstablishmentInfo(context);
+    public void GetEstablishmentInfo(Context Contexto) {
+        mInteractor.performGetEstablishmentInfo(Contexto);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class RegistrarItemMenu_Presentador implements RegistrarItemMenu.Presente
     }
 
     @Override
-    public void onSuccessGetEstablishmentInfo(String Id_Establecimiento) {
-        mView.onGetEstablishmentInfoSuccessful(Id_Establecimiento);
+    public void onSuccessGetEstablishmentInfo(String ID_Establecimiento) {
+        mView.onGetEstablishmentInfoSuccessful(ID_Establecimiento);
     }
 }

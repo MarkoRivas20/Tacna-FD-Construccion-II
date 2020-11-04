@@ -13,11 +13,11 @@ public interface RegistrarUsuario {
     }
 
     interface Presenter{
-        void CreateNewUser(DatabaseReference reference, Usuario_Modelo usuario_modelo);
+        void CreateNewUser(DatabaseReference Database_Reference, Usuario_Modelo Usuario);
     }
 
     interface Interactor{
-        void performCreateUser(DatabaseReference reference, Usuario_Modelo usuario_modelo);
+        void performCreateUser(DatabaseReference Database_Reference, Usuario_Modelo Usuario);
     }
 
     interface onOperationListener{

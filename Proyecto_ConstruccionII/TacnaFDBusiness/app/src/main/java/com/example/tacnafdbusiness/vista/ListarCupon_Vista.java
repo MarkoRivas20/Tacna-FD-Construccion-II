@@ -39,7 +39,7 @@ public class ListarCupon_Vista extends Fragment implements ListarCupon.View {
     private Cupon_Adaptador Adaptador;
     private RecyclerView.LayoutManager Layout_Manager;
 
-    String Id_Establecimiento = "";
+    String ID_Establecimiento = "";
 
     Button BtnAgregar_Cupon;
 
@@ -67,7 +67,7 @@ public class ListarCupon_Vista extends Fragment implements ListarCupon.View {
         mReference = FirebaseDatabase.getInstance().getReference().child("Cupon");
 
         mPresenter.GetEstablishmentInfo(getActivity());
-        mPresenter.ListCoupon(mReference, Id_Establecimiento);
+        mPresenter.ListCoupon(mReference, ID_Establecimiento);
 
         BtnAgregar_Cupon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,8 +80,8 @@ public class ListarCupon_Vista extends Fragment implements ListarCupon.View {
     }
 
     @Override
-    public void onListCouponSuccessful(final ArrayList<Cupon_Modelo> cupon_modelos, Boolean Existe_Cupon) {
-        Adaptador = new Cupon_Adaptador(cupon_modelos, getActivity());
+    public void onListCouponSuccessful(final ArrayList<Cupon_Modelo> Cupones, Boolean Existe_Cupon) {
+        Adaptador = new Cupon_Adaptador(Cupones, getActivity());
         Adaptador.setOnItemClickListener(new Cupon_Adaptador.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -90,7 +90,7 @@ public class ListarCupon_Vista extends Fragment implements ListarCupon.View {
 
             @Override
             public void onUpdate(int position) {
-                Cupon_Info.putString("Id_Cupon", cupon_modelos.get(position).getId_Cupon());
+                Cupon_Info.putString("Id_Cupon", Cupones.get(position).getId_Cupon());
                 modificarCupon_vista.setArguments(Cupon_Info);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, modificarCupon_vista).addToBackStack(null).commit();
             }
@@ -105,8 +105,8 @@ public class ListarCupon_Vista extends Fragment implements ListarCupon.View {
         Recycler_View.setLayoutManager(Layout_Manager);
         Recycler_View.setAdapter(Adaptador);
 
-        if(Existe_Cupon){
-
+        if(Existe_Cupon)
+        {
             LblNo_Cupon.setVisibility(View.GONE);
         }
         else
@@ -122,7 +122,7 @@ public class ListarCupon_Vista extends Fragment implements ListarCupon.View {
     }
 
     @Override
-    public void onGetEstablishmentInfoSuccessful(String Id_Establecimiento) {
-        this.Id_Establecimiento = Id_Establecimiento;
+    public void onGetEstablishmentInfoSuccessful(String ID_Establecimiento) {
+        this.ID_Establecimiento = ID_Establecimiento;
     }
 }

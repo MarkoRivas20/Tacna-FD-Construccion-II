@@ -21,18 +21,18 @@ public class ConfigurarMetodosPago_Presentador implements ConfigurarMetodosPago.
     }
 
     @Override
-    public void GetPaymentsMethods(DatabaseReference reference, String id_usuario) {
-        mInteractor.performGetPaymentsMethods(reference, id_usuario);
+    public void GetPaymentsMethods(DatabaseReference Database_Reference, String ID_Usuario) {
+        mInteractor.performGetPaymentsMethods(Database_Reference, ID_Usuario);
     }
 
     @Override
-    public void UpdatePaymentsMethods(DatabaseReference reference, String id_usuario, String Codigo_Paypal, String Codigo_Culqi, String Url_Qr) {
-        mInteractor.performUpdatePaymentsMethods(reference, id_usuario, Codigo_Paypal, Codigo_Culqi, Url_Qr);
+    public void UpdatePaymentsMethods(DatabaseReference Database_Reference, String ID_Usuario, String Codigo_Paypal, String Codigo_Culqi, String Url_Qr) {
+        mInteractor.performUpdatePaymentsMethods(Database_Reference, ID_Usuario, Codigo_Paypal, Codigo_Culqi, Url_Qr);
     }
 
     @Override
-    public void UpdateQRImage(StorageReference reference, String id_usuario, Uri Imagen_Uri) {
-        mInteractor.performUpdateQRImage(reference, id_usuario, Imagen_Uri);
+    public void UpdateQRImage(StorageReference Storage_Reference, String ID_Usuario, Uri Imagen_Uri) {
+        mInteractor.performUpdateQRImage(Storage_Reference, ID_Usuario, Imagen_Uri);
     }
 
     @Override
@@ -41,13 +41,13 @@ public class ConfigurarMetodosPago_Presentador implements ConfigurarMetodosPago.
     }
 
     @Override
-    public void GetEstablishmentInfo(Context context) {
-        mInteractor.performGetEstablishmentInfo(context);
+    public void GetEstablishmentInfo(Context Contexto) {
+        mInteractor.performGetEstablishmentInfo(Contexto);
     }
 
     @Override
-    public void onSuccessGetPaymentsMethods(Establecimiento_Modelo establecimiento_modelo) {
-        mView.onGetPaymentsMethodsSuccessful(establecimiento_modelo);
+    public void onSuccessGetPaymentsMethods(Establecimiento_Modelo Establecimiento) {
+        mView.onGetPaymentsMethodsSuccessful(Establecimiento);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class ConfigurarMetodosPago_Presentador implements ConfigurarMetodosPago.
     }
 
     @Override
-    public void onSuccessGetEstablishmentInfo(String Id_Establecimiento) {
-        mView.onGetEstablishmentInfoSuccessful(Id_Establecimiento);
+    public void onSuccessGetEstablishmentInfo(String ID_Establecimiento) {
+        mView.onGetEstablishmentInfoSuccessful(ID_Establecimiento);
     }
 }

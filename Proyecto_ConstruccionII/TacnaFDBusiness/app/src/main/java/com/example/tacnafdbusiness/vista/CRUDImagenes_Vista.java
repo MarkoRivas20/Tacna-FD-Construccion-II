@@ -56,8 +56,8 @@ public class CRUDImagenes_Vista extends Fragment implements CRUDImagenes.View {
     private Imagen_Adaptador Adaptador;
     private RecyclerView.LayoutManager Layout_Manager;
 
-    String Id_Establecimiento = "";
-    String Id_Imagen_Establecimiento = "";
+    String ID_Establecimiento = "";
+    String ID_Imagen_Establecimiento = "";
 
     private static final int PICK_IMAGE = 100;
 
@@ -82,14 +82,14 @@ public class CRUDImagenes_Vista extends Fragment implements CRUDImagenes.View {
         mStorageReference = FirebaseStorage.getInstance().getReference();
 
         mPresenter.GetEstablishmentInfo(getActivity());
-        mPresenter.GetAllImages(mReference, Id_Establecimiento);
+        mPresenter.GetAllImages(mReference, ID_Establecimiento);
 
 
         BtnSubir_Imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-
+                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                {
                     Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                     startActivityForResult(gallery, PICK_IMAGE);
                 }
@@ -106,10 +106,11 @@ public class CRUDImagenes_Vista extends Fragment implements CRUDImagenes.View {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
 
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE)
+        {
             Image_Uri = data.getData();
-            Id_Imagen_Establecimiento = mReference.push().getKey();
-            ImagenEstablecimiento_Modelo imagenEstablecimiento_modelo = new ImagenEstablecimiento_Modelo(Id_Imagen_Establecimiento,Id_Establecimiento,"");
+            ID_Imagen_Establecimiento = mReference.push().getKey();
+            ImagenEstablecimiento_Modelo imagenEstablecimiento_modelo = new ImagenEstablecimiento_Modelo(ID_Imagen_Establecimiento,ID_Establecimiento,"");
             mPresenter.UploadImage(mStorageReference, mReference, imagenEstablecimiento_modelo, Image_Uri);
 
         }
@@ -136,9 +137,9 @@ public class CRUDImagenes_Vista extends Fragment implements CRUDImagenes.View {
     }
 
     @Override
-    public void onGetAllImagesSuccessful(final ArrayList<ImagenEstablecimiento_Modelo> imagenEstablecimiento_modelos, Boolean Existe_Imagen) {
+    public void onGetAllImagesSuccessful(final ArrayList<ImagenEstablecimiento_Modelo> Imagenes_Establecimiento, Boolean Existe_Imagen) {
 
-        Adaptador = new Imagen_Adaptador(imagenEstablecimiento_modelos, getActivity());
+        Adaptador = new Imagen_Adaptador(Imagenes_Establecimiento, getActivity());
         Adaptador.setOnItemClickListener(new Imagen_Adaptador.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -147,7 +148,7 @@ public class CRUDImagenes_Vista extends Fragment implements CRUDImagenes.View {
 
             @Override
             public void onDelete(int position) {
-                mPresenter.DeleteImage(mReference, imagenEstablecimiento_modelos.get(position).getID_Imagen_Establecimiento(), imagenEstablecimiento_modelos.get(position).getUrl_Imagen());
+                mPresenter.DeleteImage(mReference, Imagenes_Establecimiento.get(position).getID_Imagen_Establecimiento(), Imagenes_Establecimiento.get(position).getUrl_Imagen());
             }
 
             @Override
@@ -159,8 +160,8 @@ public class CRUDImagenes_Vista extends Fragment implements CRUDImagenes.View {
         Recycler_View.setLayoutManager(Layout_Manager);
         Recycler_View.setAdapter(Adaptador);
 
-        if(Existe_Imagen){
-
+        if(Existe_Imagen)
+        {
             LblNo_Imagenes.setVisibility(View.GONE);
         }
         else
@@ -176,8 +177,8 @@ public class CRUDImagenes_Vista extends Fragment implements CRUDImagenes.View {
     }
 
     @Override
-    public void onGetEstablishmentInfoSuccessful(String Id_Establecimiento) {
-        this.Id_Establecimiento=Id_Establecimiento;
+    public void onGetEstablishmentInfoSuccessful(String ID_Establecimiento) {
+        this.ID_Establecimiento=ID_Establecimiento;
 
     }
 }

@@ -27,16 +27,15 @@ public class RegistrarEstablecimiento_Interactor implements RegistrarEstablecimi
     }
 
     @Override
-    public void performCreateEstablishment(DatabaseReference reference, Establecimiento_Modelo establecimiento_modelo) {
+    public void performCreateEstablishment(DatabaseReference Database_Reference, Establecimiento_Modelo Establecimiento) {
 
-        reference.child(establecimiento_modelo.getID_Establecimiento()).setValue(establecimiento_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+        Database_Reference.child(Establecimiento.getID_Establecimiento()).setValue(Establecimiento).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
-                if(task.isSuccessful()){
-
+                if(task.isSuccessful())
+                {
                     mListener.onSuccess();
-
                 }
                 else
                 {
@@ -49,11 +48,11 @@ public class RegistrarEstablecimiento_Interactor implements RegistrarEstablecimi
     }
 
     @Override
-    public void performUploadLogo(StorageReference reference, String Id_Establecimiento, Uri Image_Uri) {
+    public void performUploadLogo(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri) {
 
-        final StorageReference filePath = reference.child(Id_Establecimiento).child("Logo").child(Image_Uri.getLastPathSegment());
+        final StorageReference filePath = Storage_Reference.child(ID_Establecimiento).child("Logo").child(Imagen_Uri.getLastPathSegment());
 
-        filePath.putFile(Image_Uri).addOnFailureListener(new OnFailureListener() {
+        filePath.putFile(Imagen_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 mListener.onFailureUploadLogo();
@@ -80,11 +79,11 @@ public class RegistrarEstablecimiento_Interactor implements RegistrarEstablecimi
     }
 
     @Override
-    public void performUploadDocument(StorageReference reference, String Id_Establecimiento, Uri Document_Uri) {
+    public void performUploadDocument(StorageReference Storage_Reference, String ID_Establecimiento, Uri Documento_Uri) {
 
-        final StorageReference filePath = reference.child(Id_Establecimiento).child("Documento").child(Document_Uri.getLastPathSegment());
+        final StorageReference filePath = Storage_Reference.child(ID_Establecimiento).child("Documento").child(Documento_Uri.getLastPathSegment());
 
-        filePath.putFile(Document_Uri).addOnFailureListener(new OnFailureListener() {
+        filePath.putFile(Documento_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 mListener.onFailureUploadDocument();
@@ -107,13 +106,14 @@ public class RegistrarEstablecimiento_Interactor implements RegistrarEstablecimi
     }
 
     @Override
-    public void performGetSessionData(Context context) {
+    public void performGetSessionData(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
-        String id_Usuario = sharedPref.getString("id_usuario","");
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
+        String ID_Usuario = sharedPref.getString("id_usuario","");
 
-        if(id_Usuario.length() != 0){
-            mListener.onSuccessGetSessionData(id_Usuario);
+        if(ID_Usuario.length() != 0)
+        {
+            mListener.onSuccessGetSessionData(ID_Usuario);
         }
         else{
             mListener.onFailure();

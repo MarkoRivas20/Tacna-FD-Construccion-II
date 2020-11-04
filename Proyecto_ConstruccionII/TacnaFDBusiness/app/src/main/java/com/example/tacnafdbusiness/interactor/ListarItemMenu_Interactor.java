@@ -23,30 +23,31 @@ public class ListarItemMenu_Interactor implements ListarItemMenu.Interactor {
 
     private ListarItemMenu.onOperationListener mListener;
 
-    private ArrayList<ItemMenu_Modelo> itemMenu_modelos = new ArrayList<>();
+    private ArrayList<ItemMenu_Modelo> Items_Menu = new ArrayList<>();
 
     public ListarItemMenu_Interactor(ListarItemMenu.onOperationListener mListener) {
         this.mListener = mListener;
     }
 
     @Override
-    public void performListItemMenu(DatabaseReference reference, String Id_Establecimiento) {
-        Query query = reference.orderByChild("id_Establecimiento").equalTo(Id_Establecimiento);
+    public void performListItemMenu(DatabaseReference Database_Reference, String ID_Establecimiento) {
+        Query query = Database_Reference.orderByChild("id_Establecimiento").equalTo(ID_Establecimiento);
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 Boolean Existe_Item_Menu = false;
-                itemMenu_modelos.clear();
+                Items_Menu.clear();
 
-                for (DataSnapshot postSnapshot : snapshot.getChildren()){
+                for (DataSnapshot postSnapshot : snapshot.getChildren())
+                {
                     Existe_Item_Menu = true;
-                    ItemMenu_Modelo itemMenu_modelo = postSnapshot.getValue(ItemMenu_Modelo.class);
-                    itemMenu_modelos.add(itemMenu_modelo);
+                    ItemMenu_Modelo Item_Menu = postSnapshot.getValue(ItemMenu_Modelo.class);
+                    Items_Menu.add(Item_Menu);
                 }
 
-                mListener.onSuccessListItemMenu(itemMenu_modelos, Existe_Item_Menu);
+                mListener.onSuccessListItemMenu(Items_Menu, Existe_Item_Menu);
             }
 
             @Override
@@ -57,9 +58,9 @@ public class ListarItemMenu_Interactor implements ListarItemMenu.Interactor {
     }
 
     @Override
-    public void performDeleteItemMenu(DatabaseReference Database_Reference, String Id_Item_Menu, String Url_Imagen) {
+    public void performDeleteItemMenu(DatabaseReference Database_Reference, String ID_Item_Menu, String Url_Imagen) {
 
-        Database_Reference.child(Id_Item_Menu).removeValue().addOnFailureListener(new OnFailureListener() {
+        Database_Reference.child(ID_Item_Menu).removeValue().addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 mListener.onFailureDeleteItemMenu();
@@ -87,13 +88,14 @@ public class ListarItemMenu_Interactor implements ListarItemMenu.Interactor {
     }
 
     @Override
-    public void performGetEstablishmentInfo(Context context) {
+    public void performGetEstablishmentInfo(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
-        String Id_Establecimiento = sharedPref.getString("id_establecimiento","");
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
+        String ID_Establecimiento = sharedPref.getString("id_establecimiento","");
 
-        if(Id_Establecimiento.length() != 0){
-            mListener.onSuccessGetEstablishmentInfo(Id_Establecimiento);
+        if(ID_Establecimiento.length() != 0)
+        {
+            mListener.onSuccessGetEstablishmentInfo(ID_Establecimiento);
         }
     }
 }

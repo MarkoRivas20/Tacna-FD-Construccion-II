@@ -21,18 +21,18 @@ public class ModificarItemMenu_Presentador implements ModificarItemMenu.Presente
     }
 
     @Override
-    public void UpdateItemMenuData(DatabaseReference reference, ItemMenu_Modelo itemMenu_modelo) {
-        mInteractor.performUpdateItemMenuData(reference, itemMenu_modelo);
+    public void UpdateItemMenuData(DatabaseReference Database_Reference, ItemMenu_Modelo Item_Menu) {
+        mInteractor.performUpdateItemMenuData(Database_Reference, Item_Menu);
     }
 
     @Override
-    public void UpdateItemMenuImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String Id_Establecimiento, String Id_Item_Menu, Uri Imagen_Uri) {
-        mInteractor.performUpdateItemMenuImage(Storage_Reference, Database_Reference, Url_Imagen_Actual, Id_Establecimiento, Id_Item_Menu, Imagen_Uri);
+    public void UpdateItemMenuImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Item_Menu, Uri Imagen_Uri) {
+        mInteractor.performUpdateItemMenuImage(Storage_Reference, Database_Reference, Url_Imagen_Actual, ID_Establecimiento, ID_Item_Menu, Imagen_Uri);
     }
 
     @Override
-    public void GetItemMenuData(DatabaseReference Database_Reference, String Id_Item_Menu) {
-        mInteractor.performGetItemMenuData(Database_Reference, Id_Item_Menu);
+    public void GetItemMenuData(DatabaseReference Database_Reference, String ID_Item_Menu) {
+        mInteractor.performGetItemMenuData(Database_Reference, ID_Item_Menu);
     }
 
     @Override
@@ -56,8 +56,8 @@ public class ModificarItemMenu_Presentador implements ModificarItemMenu.Presente
     }
 
     @Override
-    public void onSuccessGetItemMenuData(ItemMenu_Modelo itemMenu_modelo) {
-        mView.onGetItemMenuDataSuccessful(itemMenu_modelo);
+    public void onSuccessGetItemMenuData(ItemMenu_Modelo Item_Menu) {
+        mView.onGetItemMenuDataSuccessful(Item_Menu);
     }
 
     @Override

@@ -12,11 +12,11 @@ public interface OpcionesEstablecimiento {
 
     interface Presenter{
 
-        void GetEstablishmentInfo(Context context);
+        void GetEstablishmentInfo(Context Contexto);
     }
 
     interface Interactor{
-        void performGetEstablishmentInfo(Context context);
+        void performGetEstablishmentInfo(Context Contexto);
     }
 
     interface onOperationListener{

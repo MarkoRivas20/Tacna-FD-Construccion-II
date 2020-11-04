@@ -8,35 +8,31 @@ import com.google.firebase.database.DatabaseReference;
 public interface ModificarUsuario {
 
     interface View{
-        void onUpdateUserDataSuccessful();
-        void onUpdateUserDataFailure();
-        void onShowUserDataSuccessful(Usuario_Modelo usuario_modelo);
+        void onUpdateUserSuccessful();
+        void onUpdateUserFailure();
+        void onShowUserDataSuccessful(Usuario_Modelo Usuario);
         void onShowUserDataFailure();
-        void onSessionDataSuccessful(String correo_electronico);
-        void onSaveSessionSuccessful();
+        void onGetSessionDataSuccessful(String Correo_Electronico);
     }
 
     interface Presenter{
-        void UpdateUserData(DatabaseReference reference, Usuario_Modelo usuario_modelo);
-        void ShowUserData(DatabaseReference reference, String correo_electronico);
-        void SaveSession(Context context, String nombre_usuario);
-        void GetSessionData(Context context);
+        void UpdateUser(DatabaseReference Database_Reference, Usuario_Modelo Usuario);
+        void ShowUserData(DatabaseReference Database_Reference, String Correo_Electronico);
+        void GetSessionData(Context Contexto);
     }
 
     interface Interactor{
-        void performUpdateUserData(DatabaseReference reference, Usuario_Modelo usuario_modelo);
-        void performShowUserData(DatabaseReference reference, String correo_electronico);
-        void performSaveSession(Context context, String nombre_usuario);
-        void performGetSessionData(Context context);
+        void performUpdateUser(DatabaseReference Database_Reference, Usuario_Modelo Usuario);
+        void performShowUserData(DatabaseReference Database_Reference, String Correo_Electronico);
+        void performGetSessionData(Context Contexto);
     }
 
     interface onOperationListener{
-        void onSuccessUpdateUserData();
-        void onFailureUpdateUserData();
-        void onSuccessShowUserData(Usuario_Modelo usuario_modelo);
+        void onSuccessUpdateUser();
+        void onFailureUpdateUser();
+        void onSuccessShowUserData(Usuario_Modelo Usuario);
         void onFailureShowUserData();
-        void onSuccessGetSessionData(String correo_electronico);
-        void onSuccessSaveSession();
+        void onSuccessGetSessionData(String Correo_Electronico);
     }
 
 }

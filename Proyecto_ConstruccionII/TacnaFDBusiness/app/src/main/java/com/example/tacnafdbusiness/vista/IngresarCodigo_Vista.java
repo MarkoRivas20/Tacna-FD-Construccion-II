@@ -32,9 +32,9 @@ public class IngresarCodigo_Vista extends AppCompatActivity {
         this.window=getWindow();
         window.setStatusBarColor(Color.parseColor("#003152"));
 
-        Bundle datos = this.getIntent().getExtras();
-        Codigo = datos.getInt("codigo");
-        Correo_Electronico = datos.getString("correo_electronico");
+        Bundle Datos = this.getIntent().getExtras();
+        Codigo = Datos.getInt("codigo");
+        Correo_Electronico = Datos.getString("correo_electronico");
 
 
         pinView = (PinView) findViewById(R.id.PinView);
@@ -55,7 +55,8 @@ public class IngresarCodigo_Vista extends AppCompatActivity {
 
                 if(Contador == 5){
 
-                    if(s.toString().equals(String.valueOf(Codigo))){
+                    if(s.toString().equals(String.valueOf(Codigo)))
+                    {
 
                         Intent intent = new Intent(getApplicationContext(), RecuperarContrasena_Vista.class);
                         intent.putExtra("correo_electronico",Correo_Electronico);

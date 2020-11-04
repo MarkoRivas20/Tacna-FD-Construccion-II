@@ -21,25 +21,26 @@ public class RecuperarContrasena_Interactor implements RecuperarContrasena.Inter
     }
 
     @Override
-    public void performRestorePassword(final DatabaseReference reference, String correo_electronico, final String nueva_contrasena) {
+    public void performRestorePassword(final DatabaseReference Database_Reference, String Correo_Electronico, final String Nueva_Contrasena) {
 
-        Query query=reference.orderByChild("correo_Electronico").equalTo(correo_electronico);
+        Query query = Database_Reference.orderByChild("correo_Electronico").equalTo(Correo_Electronico);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                for(DataSnapshot postSnapshot : snapshot.getChildren()){
-
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
                     Usuario_Modelo usuario_modelo = postSnapshot.getValue(Usuario_Modelo.class);
 
-                    usuario_modelo.setContrasena(nueva_contrasena);
+                    usuario_modelo.setContrasena(Nueva_Contrasena);
 
-                    reference.child(usuario_modelo.getID_Usuario()).setValue(usuario_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    Database_Reference.child(usuario_modelo.getID_Usuario()).setValue(usuario_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
-                            if(task.isSuccessful()){
+                            if(task.isSuccessful())
+                            {
                                 mListener.onSuccess();
                             }
                             else

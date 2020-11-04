@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,20 +23,19 @@ import com.example.tacnafdcliente.interfaces.PantallaPrincipal;
 import com.example.tacnafdcliente.presentador.PantallaPrincipal_Presentador;
 import com.google.android.material.navigation.NavigationView;
 
-public class PantallaPrincipal_Vista extends AppCompatActivity implements PantallaPrincipal.View, NavigationView.OnNavigationItemSelectedListener {
+public class PantallaPrincipal_Vista extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, PantallaPrincipal.View{
 
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    Toolbar toolbar;
+    DrawerLayout Drawer_Layout;
+    NavigationView Navigation_View;
+    Toolbar Tool_bar;
     Window window;
+
+    ModificarUsuario_Vista modificarUsuario_vista;
 
     TextView LblNombre_Nav;
     TextView LblEmail_Nav;
 
-
     public PantallaPrincipal_Presentador mPresenter;
-
-    ModificarUsuario_Vista modificarUsuario_vista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,45 +45,46 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Pantal
         this.window=getWindow();
         window.setStatusBarColor(Color.parseColor("#0031A8"));
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
-        toolbar = findViewById(R.id.toolbar);
+        Drawer_Layout = findViewById(R.id.drawer_layout);
+        Navigation_View = findViewById(R.id.nav_view);
+        Tool_bar = findViewById(R.id.toolbar);
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(Tool_bar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setNavigationIcon(R.drawable.icon_toolbar_black);
+        Tool_bar.setNavigationIcon(R.drawable.icon_toolbar_black);
 
-        navigationView.bringToFront();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
+        Navigation_View.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,Drawer_Layout,Tool_bar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        Drawer_Layout.addDrawerListener(toggle);
 
         toggle.syncState();
 
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_establecimiento);
+        Navigation_View.setNavigationItemSelectedListener(this);
+        Navigation_View.setCheckedItem(R.id.nav_establecimiento);
+
 
         modificarUsuario_vista = new ModificarUsuario_Vista();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.fragmento, modificarUsuario_vista).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragmento,modificarUsuario_vista).commit();
 
-        View View_Navigation = navigationView.getHeaderView(0);
+
+        View View_Navigation = Navigation_View.getHeaderView(0);
         LblNombre_Nav = View_Navigation.findViewById(R.id.lblnombre_nav);
         LblEmail_Nav = View_Navigation.findViewById(R.id.lblemail_nav);
 
         mPresenter=new PantallaPrincipal_Presentador(this);
         mPresenter.GetSessionData(getApplicationContext());
-
     }
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(GravityCompat.START);
+        if(Drawer_Layout.isDrawerOpen(GravityCompat.START))
+        {
+            Drawer_Layout.closeDrawer(GravityCompat.START);
         }
-        else{
-
+        else
+        {
             super.onBackPressed();
-
         }
     }
 
@@ -96,17 +95,18 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Pantal
 
         switch (item.getItemId()){
 
+
             case R.id.nav_establecimiento:
-                toolbar.setNavigationIcon(R.drawable.icon_toolbar);
-                toolbar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
-                navigationView.setCheckedItem(R.id.nav_establecimiento);
+                Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
+                Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
+                Navigation_View.setCheckedItem(R.id.nav_establecimiento);
                 //transaction.replace(R.id.fragmento,listarEstablecimiento_vista);
                 break;
 
             case R.id.nav_datos:
-                toolbar.setNavigationIcon(R.drawable.icon_toolbar);
-                toolbar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
-                navigationView.setCheckedItem(R.id.nav_datos);
+                Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
+                Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
+                Navigation_View.setCheckedItem(R.id.nav_datos);
                 transaction.replace(R.id.fragmento,modificarUsuario_vista);
                 break;
 
@@ -118,10 +118,9 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Pantal
 
         transaction.commit();
 
-        drawerLayout.closeDrawer(GravityCompat.START);
+        Drawer_Layout.closeDrawer(GravityCompat.START);
         return false;
     }
-
 
     @Override
     public void onSessionDataSuccessful(String correo_electronico, String nombre_usuario) {

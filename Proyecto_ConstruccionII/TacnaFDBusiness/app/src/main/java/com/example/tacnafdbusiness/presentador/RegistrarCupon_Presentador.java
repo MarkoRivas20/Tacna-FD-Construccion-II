@@ -22,18 +22,18 @@ public class RegistrarCupon_Presentador implements RegistrarCupon.Presenter, Reg
     }
 
     @Override
-    public void SaveCoupon(DatabaseReference Database_Reference, Cupon_Modelo cupon_modelo) {
-        mInteractor.performSaveCoupon(Database_Reference, cupon_modelo);
+    public void SaveCoupon(DatabaseReference Database_Reference, Cupon_Modelo Cupon) {
+        mInteractor.performSaveCoupon(Database_Reference, Cupon);
     }
 
     @Override
-    public void UploadCouponImage(StorageReference Storage_Reference, String Id_Establecimiento, Uri Imagen_Uri) {
-        mInteractor.performUploadCouponImage(Storage_Reference, Id_Establecimiento, Imagen_Uri);
+    public void UploadCouponImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri) {
+        mInteractor.performUploadCouponImage(Storage_Reference, ID_Establecimiento, Imagen_Uri);
     }
 
     @Override
-    public void GetEstablishmentInfo(Context context) {
-        mInteractor.performGetEstablishmentInfo(context);
+    public void GetEstablishmentInfo(Context Contexto) {
+        mInteractor.performGetEstablishmentInfo(Contexto);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class RegistrarCupon_Presentador implements RegistrarCupon.Presenter, Reg
     }
 
     @Override
-    public void onSuccessGetEstablishmentInfo(String Id_Establecimiento) {
-        mView.onGetEstablishmentInfoSuccessful(Id_Establecimiento);
+    public void onSuccessGetEstablishmentInfo(String ID_Establecimiento) {
+        mView.onGetEstablishmentInfoSuccessful(ID_Establecimiento);
     }
 }

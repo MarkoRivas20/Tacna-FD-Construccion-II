@@ -21,7 +21,7 @@ import java.util.List;
 
 public class Imagen_Adaptador extends RecyclerView.Adapter<Imagen_Adaptador.ImagenViewHolder> {
 
-    private List<ImagenEstablecimiento_Modelo> Items;
+    private List<ImagenEstablecimiento_Modelo> Imagenes_Establecimiento;
 
     private Context Contexto;
 
@@ -38,8 +38,8 @@ public class Imagen_Adaptador extends RecyclerView.Adapter<Imagen_Adaptador.Imag
             v.setOnCreateContextMenuListener(this);
         }
 
-        public void bindData (ImagenEstablecimiento_Modelo dataModel, Context context) {
-            Picasso.with(context).load(dataModel.getUrl_Imagen()).into(Imagen);
+        public void bindData (ImagenEstablecimiento_Modelo Imagen_Establecimiento, Context Contexto) {
+            Picasso.with(Contexto).load(Imagen_Establecimiento.getUrl_Imagen()).into(Imagen);
         }
 
         @Override
@@ -96,8 +96,8 @@ public class Imagen_Adaptador extends RecyclerView.Adapter<Imagen_Adaptador.Imag
         }
     }
 
-    public Imagen_Adaptador (List<ImagenEstablecimiento_Modelo> items, Context context) {
-        this.Items = items;
+    public Imagen_Adaptador (List<ImagenEstablecimiento_Modelo> Imagenes_Establecimiento, Context context) {
+        this.Imagenes_Establecimiento = Imagenes_Establecimiento;
         Contexto = context;
     }
 
@@ -110,12 +110,12 @@ public class Imagen_Adaptador extends RecyclerView.Adapter<Imagen_Adaptador.Imag
 
     @Override
     public void onBindViewHolder(@NonNull Imagen_Adaptador.ImagenViewHolder holder, int position) {
-        holder.bindData(Items.get(position), Contexto);
+        holder.bindData(Imagenes_Establecimiento.get(position), Contexto);
     }
 
     @Override
     public int getItemCount() {
-        return Items.size();
+        return Imagenes_Establecimiento.size();
     }
 
     public interface OnItemClickListener{

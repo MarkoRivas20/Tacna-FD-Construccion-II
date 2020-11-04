@@ -11,12 +11,12 @@ public interface BuscarEmail {
     }
 
     interface Presenter{
-        void SearchEmail(DatabaseReference reference, String correo_electronico, int codigo);
+        void SearchEmail(DatabaseReference Database_Reference, String Correo_Electronico, int Codigo);
     }
 
     interface Interactor{
-        void performSearchEmail(DatabaseReference reference, String correo_electronico, int codigo);
-        void performSendEmail(String correo_electronico, int codigo);
+        void performSearchEmail(DatabaseReference Database_Reference, String Correo_Electronico, int Codigo);
+        void performSendEmail(String Correo_Electronico, int Codigo);
     }
 
     interface onOperationListener{

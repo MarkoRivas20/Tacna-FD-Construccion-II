@@ -25,11 +25,10 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
 
     private CRUDRepartidores.onOperationListener mListener;
 
-    Repartidor_Modelo repartidor_modelo = new Repartidor_Modelo();
+    Repartidor_Modelo Repartidor = new Repartidor_Modelo();
 
-    private ArrayList<Repartidor_Modelo> repartidor_modelos=new ArrayList<>();
-
-    private ArrayList<RepartidorEstablecimiento_Modelo> repartidorEstablecimiento_modelos=new ArrayList<>();
+    private ArrayList<Repartidor_Modelo> Repartidores = new ArrayList<>();
+    private ArrayList<RepartidorEstablecimiento_Modelo> Repartidores_Establecimiento = new ArrayList<>();
 
     private ValueEventListener valueEventListener;
 
@@ -38,13 +37,13 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
     }
 
     @Override
-    public void performSaveDeliveryMan(DatabaseReference Database_Reference, RepartidorEstablecimiento_Modelo repartidorEstablecimiento_modelo) {
+    public void performSaveDeliveryMan(DatabaseReference Database_Reference, RepartidorEstablecimiento_Modelo Repartidor_Establecimiento) {
 
-        Database_Reference.child(repartidorEstablecimiento_modelo.getID_Repartidor_Establecimiento()).setValue(repartidorEstablecimiento_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+        Database_Reference.child(Repartidor_Establecimiento.getID_Repartidor_Establecimiento()).setValue(Repartidor_Establecimiento).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-
+                if(task.isSuccessful())
+                {
                     mListener.onSuccessSaveDeliveryMan();
 
                 }
@@ -65,12 +64,13 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
             public void onDataChange(DataSnapshot snapshot) {
                 Boolean Existe_Repartidor = false;
 
-                for(DataSnapshot postSnapshot : snapshot.getChildren()){
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
                     Existe_Repartidor = true;
-                    repartidor_modelo = postSnapshot.getValue(Repartidor_Modelo.class);
+                    Repartidor = postSnapshot.getValue(Repartidor_Modelo.class);
                 }
 
-                mListener.onSuccessSearchDeliveryMan(repartidor_modelo, Existe_Repartidor);
+                mListener.onSuccessSearchDeliveryMan(Repartidor, Existe_Repartidor);
 
             }
 
@@ -82,22 +82,22 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
     }
 
     @Override
-    public void performSearchDeliveryManInfo(DatabaseReference Database_Reference, ArrayList<RepartidorEstablecimiento_Modelo> repartidorEstablecimiento_modelos) {
-        repartidor_modelos.clear();
-        for(int i = 0; i < repartidorEstablecimiento_modelos.size(); i++){
-            Query query = Database_Reference.orderByChild("id_Usuario_Repartidor").equalTo(repartidorEstablecimiento_modelos.get(i).getID_Usuario_Repartidor());
+    public void performSearchDeliveryManInfo(DatabaseReference Database_Reference, ArrayList<RepartidorEstablecimiento_Modelo> Repartidores_Establecimiento) {
+        Repartidores.clear();
+        for(int i = 0; i < Repartidores_Establecimiento.size(); i++){
+            Query query = Database_Reference.orderByChild("id_Usuario_Repartidor").equalTo(Repartidores_Establecimiento.get(i).getID_Usuario_Repartidor());
 
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
 
-                    for(DataSnapshot postSnapshot : snapshot.getChildren()){
-
-                        Repartidor_Modelo repartidor_modelo2 = postSnapshot.getValue(Repartidor_Modelo.class);
-                        repartidor_modelos.add(repartidor_modelo2);
+                    for(DataSnapshot postSnapshot : snapshot.getChildren())
+                    {
+                        Repartidor_Modelo Repartidor = postSnapshot.getValue(Repartidor_Modelo.class);
+                        Repartidores.add(Repartidor);
 
                     }
-                    mListener.onSuccessSearchDeliveryManInfo(repartidor_modelos);
+                    mListener.onSuccessSearchDeliveryManInfo(Repartidores);
                 }
 
                 @Override
@@ -118,12 +118,13 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot postSnapshot : snapshot.getChildren()){
-                    RepartidorEstablecimiento_Modelo repartidorEstablecimiento_modelo = postSnapshot.getValue(RepartidorEstablecimiento_Modelo.class);
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
+                    RepartidorEstablecimiento_Modelo Repartidor_Establecimiento = postSnapshot.getValue(RepartidorEstablecimiento_Modelo.class);
 
-                    if(repartidorEstablecimiento_modelo.getID_Establecimiento().equals(ID_Establecimiento))
+                    if(Repartidor_Establecimiento.getID_Establecimiento().equals(ID_Establecimiento))
                     {
-                        Database_Reference.child(repartidorEstablecimiento_modelo.getID_Repartidor_Establecimiento()).removeValue().addOnFailureListener(new OnFailureListener() {
+                        Database_Reference.child(Repartidor_Establecimiento.getID_Repartidor_Establecimiento()).removeValue().addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 mListener.onFailureTakeOutDeliveryMan();
@@ -160,17 +161,17 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
             public void onDataChange(DataSnapshot snapshot) {
 
                 Boolean Existe_Repartidor_Establecimiento = false;
-                repartidorEstablecimiento_modelos.clear();
+                Repartidores_Establecimiento.clear();
 
-                for (DataSnapshot postSnapshot : snapshot.getChildren()){
-
+                for (DataSnapshot postSnapshot : snapshot.getChildren())
+                {
                     Existe_Repartidor_Establecimiento = true;
                     RepartidorEstablecimiento_Modelo repartidorEstablecimiento_modelo = postSnapshot.getValue(RepartidorEstablecimiento_Modelo.class);
-                    repartidorEstablecimiento_modelos.add(repartidorEstablecimiento_modelo);
+                    Repartidores_Establecimiento.add(repartidorEstablecimiento_modelo);
 
                 }
 
-                mListener.onSuccessListDeliveryMen(repartidorEstablecimiento_modelos, Existe_Repartidor_Establecimiento);
+                mListener.onSuccessListDeliveryMen(Repartidores_Establecimiento, Existe_Repartidor_Establecimiento);
 
             }
 
@@ -182,13 +183,14 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
     }
 
     @Override
-    public void performGetEstablishmentInfo(Context context) {
+    public void performGetEstablishmentInfo(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
-        String Id_Establecimiento = sharedPref.getString("id_establecimiento","");
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
+        String ID_Establecimiento = sharedPref.getString("id_establecimiento","");
 
-        if(Id_Establecimiento.length() != 0){
-            mListener.onSuccessGetEstablishmentInfo(Id_Establecimiento);
+        if(ID_Establecimiento.length() != 0)
+        {
+            mListener.onSuccessGetEstablishmentInfo(ID_Establecimiento);
         }
 
     }

@@ -18,33 +18,34 @@ public class ListarEstablecimineto_Interactor implements ListarEstablecimiento.I
 
     private ListarEstablecimiento.onOperationListener mListener;
 
-    private ArrayList<Establecimiento_Modelo> establecimiento_modelos = new ArrayList<>();
+    private ArrayList<Establecimiento_Modelo> Establecimientos = new ArrayList<>();
 
-    private ArrayList<Establecimiento_Modelo> lista_filtrada;
+    private ArrayList<Establecimiento_Modelo> Lista_Filtrada;
 
-    Boolean buscar_establecimiento = false;
+    Boolean Buscar_Establecimiento = false;
 
     public ListarEstablecimineto_Interactor(ListarEstablecimiento.onOperationListener mListener) {
         this.mListener = mListener;
     }
 
     @Override
-    public void performSearchEstablishment(DatabaseReference reference, String ID_Usuario) {
+    public void performSearchEstablishment(DatabaseReference Database_Reference, String ID_Usuario) {
 
-        Query query=reference.orderByChild("id_Usuario_Propietario").startAt(ID_Usuario);
+        Query query = Database_Reference.orderByChild("id_Usuario_Propietario").startAt(ID_Usuario);
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 Boolean Existe_Establecimiento = false;
-                establecimiento_modelos.clear();
+                Establecimientos.clear();
 
-                for(DataSnapshot postSnapshot : snapshot.getChildren()){
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
                     Existe_Establecimiento = true;
-                    Establecimiento_Modelo establecimiento_modelo = postSnapshot.getValue(Establecimiento_Modelo.class);
-                    establecimiento_modelos.add(establecimiento_modelo);
+                    Establecimiento_Modelo Establecimiento = postSnapshot.getValue(Establecimiento_Modelo.class);
+                    Establecimientos.add(Establecimiento);
                 }
-                mListener.onSuccess(establecimiento_modelos, Existe_Establecimiento);
+                mListener.onSuccess(Establecimientos, Existe_Establecimiento);
 
             }
 
@@ -57,13 +58,14 @@ public class ListarEstablecimineto_Interactor implements ListarEstablecimiento.I
     }
 
     @Override
-    public void performGetSessionData(Context context) {
+    public void performGetSessionData(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
-        String id_Usuario = sharedPref.getString("id_usuario","");
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
+        String ID_Usuario = sharedPref.getString("id_usuario","");
 
-        if(id_Usuario.length() != 0){
-            mListener.onSuccessGetSessionData(id_Usuario);
+        if(ID_Usuario.length() != 0)
+        {
+            mListener.onSuccessGetSessionData(ID_Usuario);
         }
         else{
             mListener.onFailure();
@@ -72,8 +74,9 @@ public class ListarEstablecimineto_Interactor implements ListarEstablecimiento.I
     }
 
     @Override
-    public void performSaveEstablishmentInfo(Context context, String Id_Establecimiento, String Nombre_Establecimiento, String Url_Logo, String Url_Documento) {
-        SharedPreferences sharedPref = context.getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
+    public void performSaveEstablishmentInfo(Context Contexto, String Id_Establecimiento, String Nombre_Establecimiento, String Url_Logo, String Url_Documento) {
+
+        SharedPreferences sharedPref = Contexto.getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("id_establecimiento", Id_Establecimiento);
         editor.putString("nombre_establecimiento", Nombre_Establecimiento);
@@ -83,17 +86,17 @@ public class ListarEstablecimineto_Interactor implements ListarEstablecimiento.I
     }
 
     @Override
-    public void performFilterEstablishment(ArrayList<Establecimiento_Modelo> establecimientos, String Nombre_Establecimiento) {
-        lista_filtrada = new ArrayList<>();
+    public void performFilterEstablishment(ArrayList<Establecimiento_Modelo> Establecimientos, String Nombre_Establecimiento) {
+        Lista_Filtrada = new ArrayList<>();
 
-        for (Establecimiento_Modelo item:establecimientos)
+        for (Establecimiento_Modelo item:Establecimientos)
         {
             if(item.getNombre().toLowerCase().contains(Nombre_Establecimiento.toLowerCase()))
             {
-                lista_filtrada.add(item);
-                buscar_establecimiento = true;
+                Lista_Filtrada.add(item);
+                Buscar_Establecimiento = true;
             }
         }
-        mListener.onSuccessFilter(lista_filtrada, buscar_establecimiento);
+        mListener.onSuccessFilter(Lista_Filtrada, Buscar_Establecimiento);
     }
 }

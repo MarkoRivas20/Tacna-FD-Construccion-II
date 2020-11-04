@@ -48,16 +48,16 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
 
     Button BtnRegistro_Establecimiento;
 
-    String Id_Usuario = "";
+    String ID_Usuario = "";
 
     TextView LblNo_Establecimiento;
 
     EditText TxtBuscar;
 
-    ArrayList<Establecimiento_Modelo> establecimientos = new ArrayList<>();
-    ArrayList<Establecimiento_Modelo> filtrar_establecimientos = new ArrayList<>();
+    ArrayList<Establecimiento_Modelo> Establecimientos = new ArrayList<>();
+    ArrayList<Establecimiento_Modelo> Filtrar_Establecimientos = new ArrayList<>();
 
-    Boolean buscar_establecimiento;
+    Boolean Buscar_Establecimiento;
     Boolean Existe_Establecimiento = false;
 
 
@@ -67,7 +67,7 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_listar_establecimiento__vista, container, false);
 
-        buscar_establecimiento = false;
+        Buscar_Establecimiento = false;
 
         pantallaPrincipal_vista=new PantallaPrincipal_Vista();
         registrarEstablecimiento_vista = new RegistrarEstablecimiento_Vista();
@@ -83,7 +83,7 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
 
         mPresenter.GetSessionData(getActivity().getApplicationContext());
 
-        mPresenter.SearchEstablishment(mReference,Id_Usuario);
+        mPresenter.SearchEstablishment(mReference,ID_Usuario);
 
         BtnRegistro_Establecimiento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,8 +106,9 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(Existe_Establecimiento){
-                    mPresenter.FilterEstablishment(establecimientos,s.toString());
+                if(Existe_Establecimiento)
+                {
+                    mPresenter.FilterEstablishment(Establecimientos,s.toString());
                 }
 
             }
@@ -117,24 +118,25 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
     }
 
     @Override
-    public void onSearchEstablishmentSuccessful(final ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento) {
+    public void onSearchEstablishmentSuccessful(final ArrayList<Establecimiento_Modelo> Establecimientos, Boolean Existe_Establecimiento) {
 
-        establecimientos=establecimiento;
-        Adaptador = new Establecimiento_Adaptador(establecimiento, getActivity());
+        this.Establecimientos=Establecimientos;
+        Adaptador = new Establecimiento_Adaptador(Establecimientos, getActivity());
         Adaptador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(!buscar_establecimiento){
-                    mPresenter.SaveEstablishmentInfo(getActivity(),establecimiento.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento(),
-                            establecimiento.get(Recycler_View.getChildAdapterPosition(v)).getNombre(), establecimiento.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Logo(),
-                            establecimiento.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Documento());
+                if(!Buscar_Establecimiento)
+                {
+                    mPresenter.SaveEstablishmentInfo(getActivity(),Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento(),
+                            Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getNombre(), Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Logo(),
+                            Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Documento());
                 }
                 else
                 {
-                    mPresenter.SaveEstablishmentInfo(getActivity(),filtrar_establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento(),
-                            filtrar_establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getNombre(), filtrar_establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Logo(),
-                            filtrar_establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Documento());
+                    mPresenter.SaveEstablishmentInfo(getActivity(),Filtrar_Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento(),
+                            Filtrar_Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getNombre(), Filtrar_Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Logo(),
+                            Filtrar_Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Documento());
                 }
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, opcionesEstablecimiento_vista).addToBackStack(null).commit();
@@ -166,14 +168,14 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
 
     @Override
     public void onSessionDataSuccessful(String ID_Usuario) {
-        Id_Usuario = ID_Usuario;
+        this.ID_Usuario = ID_Usuario;
     }
 
     @Override
-    public void onFilterSuccessful(ArrayList<Establecimiento_Modelo> establecimientos, Boolean buscar_establecimiento) {
-        filtrar_establecimientos = establecimientos;
-        Adaptador.filterlist(establecimientos);
-        this.buscar_establecimiento = buscar_establecimiento;
+    public void onFilterSuccessful(ArrayList<Establecimiento_Modelo> Filtrar_Establecimientos, Boolean Buscar_Establecimiento) {
+        this.Filtrar_Establecimientos = Filtrar_Establecimientos;
+        Adaptador.filterlist(Filtrar_Establecimientos);
+        this.Buscar_Establecimiento = Buscar_Establecimiento;
     }
 
 

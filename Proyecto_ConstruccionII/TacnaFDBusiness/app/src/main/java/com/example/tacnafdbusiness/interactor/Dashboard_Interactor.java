@@ -21,7 +21,7 @@ public class Dashboard_Interactor implements Dashboard.Interactor {
 
     private Dashboard.onOperationListener mListener;
 
-    private ArrayList<Establecimiento_Modelo> establecimiento_modelos = new ArrayList<>();
+    private ArrayList<Establecimiento_Modelo> Establecimientos = new ArrayList<>();
 
     private int Numero_Mayor_Resenas=0;
     private int Contador_Resenas = 0;
@@ -37,24 +37,25 @@ public class Dashboard_Interactor implements Dashboard.Interactor {
     }
 
     @Override
-    public void performSearchEstablishment(DatabaseReference reference, String ID_Usuario) {
+    public void performSearchEstablishment(DatabaseReference Database_Reference, String ID_Usuario) {
 
-        Query query=reference.orderByChild("id_Usuario_Propietario").startAt(ID_Usuario);
+        Query query=Database_Reference.orderByChild("id_Usuario_Propietario").startAt(ID_Usuario);
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
                 Boolean Existe_Establecimiento = false;
-                establecimiento_modelos.clear();
+                Establecimientos.clear();
 
-                for(DataSnapshot postSnapshot : snapshot.getChildren()){
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
                     Existe_Establecimiento = true;
-                    Establecimiento_Modelo establecimiento_modelo = postSnapshot.getValue(Establecimiento_Modelo.class);
-                    establecimiento_modelos.add(establecimiento_modelo);
+                    Establecimiento_Modelo Establecimiento = postSnapshot.getValue(Establecimiento_Modelo.class);
+                    Establecimientos.add(Establecimiento);
                 }
 
-                mListener.onSuccessSearchEstablishment(establecimiento_modelos, Existe_Establecimiento);
+                mListener.onSuccessSearchEstablishment(Establecimientos, Existe_Establecimiento);
 
             }
 
@@ -66,24 +67,27 @@ public class Dashboard_Interactor implements Dashboard.Interactor {
     }
 
     @Override
-    public void performGetEstablismentWithMoreReviews(DatabaseReference reference, final ArrayList<Establecimiento_Modelo> establecimiento) {
+    public void performGetEstablismentWithMoreReviews(DatabaseReference Database_Reference, final ArrayList<Establecimiento_Modelo> Establecimientos) {
 
-        for(int i = 0; i < establecimiento.size(); i++){
-
+        for(int i = 0; i < Establecimientos.size(); i++)
+        {
             final int posicion = i;
-            Query query = reference.orderByChild("id_Establecimiento").equalTo(establecimiento.get(i).getID_Establecimiento());
+            Query query = Database_Reference.orderByChild("id_Establecimiento").equalTo(Establecimientos.get(i).getID_Establecimiento());
 
             query.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                     Contador_Resenas = 0;
-                    for(DataSnapshot postSnapshot : snapshot.getChildren()){
+                    for(DataSnapshot postSnapshot : snapshot.getChildren())
+                    {
                         Contador_Resenas++;
                     }
-                    if(Contador_Resenas > Numero_Mayor_Resenas){
+
+                    if(Contador_Resenas > Numero_Mayor_Resenas)
+                    {
                         Numero_Mayor_Resenas = Contador_Resenas;
-                        Nombre_Establecimiento_Mas_Comentarios = establecimiento.get(posicion).getNombre();
+                        Nombre_Establecimiento_Mas_Comentarios = Establecimientos.get(posicion).getNombre();
                     }
                     mListener.onSuccessGetEstablismentWithMoreReviews(Nombre_Establecimiento_Mas_Comentarios);
                 }
@@ -100,51 +104,9 @@ public class Dashboard_Interactor implements Dashboard.Interactor {
     }
 
     @Override
-    public void performGetMonthSales(DatabaseReference reference, final ArrayList<Establecimiento_Modelo> establecimiento, final String Numero_Mes) {
-/*
-        Contador_Pedidos = 0;
+    public void performGetMonthSales(DatabaseReference Database_Reference, final ArrayList<Establecimiento_Modelo> Establecimientos, final String Numero_Mes) {
 
-        for(int i = 0; i < establecimiento.size(); i++){
-
-            final int posicion = i;
-            contador = 0;
-
-            Query query = reference.orderByChild("id_Establecimiento").equalTo(establecimiento.get(i).getID_Establecimiento());
-
-            query.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot snapshot) {
-
-
-                    for(DataSnapshot postSnapshot : snapshot.getChildren()){
-
-                        Pedido_Modelo pedido_modelo = postSnapshot.getValue(Pedido_Modelo.class);
-
-                        if(pedido_modelo.getFecha().contains("/"+Numero_Mes+"/")){
-                            Contador_Pedidos++;
-                            contador++;
-                        }
-
-                    }
-
-                    if(contador > contador_mayor){
-                        contador_mayor = contador;
-                        Id_Establecimiento_Mas_Ventas = establecimiento.get(posicion).getID_Establecimiento();
-                    }
-
-
-                    mListener.onSuccessGetMonthSales(Contador_Pedidos, Id_Establecimiento_Mas_Ventas);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    mListener.onFailureGetMonthSales();
-                }
-            });
-
-        }
-        */
-        reference.addValueEventListener(new ValueEventListener() {
+        Database_Reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -152,21 +114,26 @@ public class Dashboard_Interactor implements Dashboard.Interactor {
                 contador_mayor=0;
                 Nombre_Establecimiento_Mas_Ventas = null;
 
-                for(DataSnapshot postSnapshot : snapshot.getChildren()){
-                    Pedido_Modelo pedido_modelo = postSnapshot.getValue(Pedido_Modelo.class);
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
+                    Pedido_Modelo Pedido = postSnapshot.getValue(Pedido_Modelo.class);
 
-                    for(int i = 0; i < establecimiento.size(); i++){
+                    for(int i = 0; i < Establecimientos.size(); i++)
+                    {
                         contador = 0;
-                        if(pedido_modelo.getID_Establecimiento().equals(establecimiento.get(i).getID_Establecimiento())){
-
-                            if(pedido_modelo.getFecha().contains("/"+Numero_Mes+"/")){
+                        if(Pedido.getID_Establecimiento().equals(Establecimientos.get(i).getID_Establecimiento()))
+                        {
+                            if(Pedido.getFecha().contains("/"+Numero_Mes+"/"))
+                            {
                                 Contador_Pedidos++;
                                 contador++;
                             }
-                            if(contador > contador_mayor){
+                            if(contador > contador_mayor)
+                            {
                                 contador_mayor = contador;
-                                Nombre_Establecimiento_Mas_Ventas = establecimiento.get(i).getNombre();
+                                Nombre_Establecimiento_Mas_Ventas = Establecimientos.get(i).getNombre();
                             }
+
                             break;
                         }
 
@@ -190,13 +157,14 @@ public class Dashboard_Interactor implements Dashboard.Interactor {
     }
 
     @Override
-    public void performGetSessionData(Context context) {
+    public void performGetSessionData(Context Contexto) {
 
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
-        String id_Usuario = sharedPref.getString("id_usuario","");
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
+        String ID_Usuario = sharedPref.getString("id_usuario","");
 
-        if(id_Usuario.length() != 0){
-            mListener.onSuccessGetSessionData(id_Usuario);
+        if(ID_Usuario.length() != 0)
+        {
+            mListener.onSuccessGetSessionData(ID_Usuario);
         }
         else{
             mListener.onFailureSearchEstablishment();

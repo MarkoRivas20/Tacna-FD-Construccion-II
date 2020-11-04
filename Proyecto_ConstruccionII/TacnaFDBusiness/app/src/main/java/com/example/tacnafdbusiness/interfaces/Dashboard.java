@@ -13,7 +13,7 @@ public interface Dashboard {
     interface View{
         void onGetEstablismentWithMoreReviewsSuccessful(String Nombre_Establecimiento_Mas_Comentarios);
         void onGetEstablismentWithMoreReviewsFailure();
-        void onSearchEstablishmentSuccessful(ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento);
+        void onSearchEstablishmentSuccessful(ArrayList<Establecimiento_Modelo> Establecimientos, Boolean Existe_Establecimiento);
         void onSearchEstablishmentFailure();
         void onGetMonthSalesSuccessful(int Ventas_Mes, String Nombre_Establecimiento_Mas_Ventas);
         void onGetMonthSalestFailure();
@@ -21,21 +21,21 @@ public interface Dashboard {
     }
 
     interface Presenter{
-        void SearchEstablishment(DatabaseReference reference, String ID_Usuario);
-        void GetEstablismentWithMoreReviews(DatabaseReference reference, ArrayList<Establecimiento_Modelo> establecimiento);
-        void GetMonthSales(DatabaseReference reference, ArrayList<Establecimiento_Modelo> establecimiento, String Numero_Mes);
-        void GetSessionData(Context context);
+        void SearchEstablishment(DatabaseReference Database_Reference, String ID_Usuario);
+        void GetEstablismentWithMoreReviews(DatabaseReference Database_Reference, ArrayList<Establecimiento_Modelo> Establecimientos);
+        void GetMonthSales(DatabaseReference Database_Reference, ArrayList<Establecimiento_Modelo> Establecimientos, String Numero_Mes);
+        void GetSessionData(Context Contexto);
     }
 
     interface Interactor{
-        void performSearchEstablishment(DatabaseReference reference, String ID_Usuario);
-        void performGetEstablismentWithMoreReviews(DatabaseReference reference, ArrayList<Establecimiento_Modelo> establecimiento);
-        void performGetMonthSales(DatabaseReference reference, ArrayList<Establecimiento_Modelo> establecimiento, String Numero_Mes);
-        void performGetSessionData(Context context);
+        void performSearchEstablishment(DatabaseReference Database_Reference, String ID_Usuario);
+        void performGetEstablismentWithMoreReviews(DatabaseReference Database_Reference, ArrayList<Establecimiento_Modelo> Establecimientos);
+        void performGetMonthSales(DatabaseReference Database_Reference, ArrayList<Establecimiento_Modelo> Establecimientos, String Numero_Mes);
+        void performGetSessionData(Context Contexto);
     }
 
     interface onOperationListener{
-        void onSuccessSearchEstablishment(ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento);
+        void onSuccessSearchEstablishment(ArrayList<Establecimiento_Modelo> Establecimientos, Boolean Existe_Establecimiento);
         void onFailureSearchEstablishment();
         void onSuccessGetEstablismentWithMoreReviews(String Nombre_Establecimiento_Mas_Comentarios);
         void onFailureGetEstablismentWithMoreReviews();

@@ -29,15 +29,14 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
     }
 
     @Override
-    public void performUpdateItemMenuData(DatabaseReference reference, ItemMenu_Modelo itemMenu_modelo) {
+    public void performUpdateItemMenuData(DatabaseReference Database_Reference, ItemMenu_Modelo Item_Menu) {
 
-        reference.child(itemMenu_modelo.getID_Item_Menu()).setValue(itemMenu_modelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+        Database_Reference.child(Item_Menu.getID_Item_Menu()).setValue(Item_Menu).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-
+                if(task.isSuccessful())
+                {
                     mListener.onSuccessUpdateItemMenuData();
-
                 }
                 else
                 {
@@ -49,9 +48,9 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
     }
 
     @Override
-    public void performUpdateItemMenuImage(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final String Url_Imagen_Actual, String Id_Establecimiento, final String Id_Item_Menu, Uri Imagen_Uri) {
+    public void performUpdateItemMenuImage(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final String Url_Imagen_Actual, String ID_Establecimiento, final String ID_Item_Menu, Uri Imagen_Uri) {
 
-        final StorageReference filePath = Storage_Reference.child(Id_Establecimiento).child("ItemMenu").child(Imagen_Uri.getLastPathSegment());
+        final StorageReference filePath = Storage_Reference.child(ID_Establecimiento).child("ItemMenu").child(Imagen_Uri.getLastPathSegment());
 
         filePath.putFile(Imagen_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -67,13 +66,12 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
                     @Override
                     public void onSuccess(final Uri uri) {
 
-                        Database_Reference.child(Id_Item_Menu).child("url_Imagen").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        Database_Reference.child(ID_Item_Menu).child("url_Imagen").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-
+                                if(task.isSuccessful())
+                                {
                                     mListener.onSuccessUpdateItemMenuImage(uri.toString());
-
                                 }
                                 else
                                 {
@@ -99,16 +97,16 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
     }
 
     @Override
-    public void performGetItemMenuData(final DatabaseReference Database_Reference, final String Id_Item_Menu) {
+    public void performGetItemMenuData(final DatabaseReference Database_Reference, final String ID_Item_Menu) {
 
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                ItemMenu_Modelo itemMenu_modelo = snapshot.getValue(ItemMenu_Modelo.class);
-                mListener.onSuccessGetItemMenuData(itemMenu_modelo);
+                ItemMenu_Modelo Item_Menu = snapshot.getValue(ItemMenu_Modelo.class);
+                mListener.onSuccessGetItemMenuData(Item_Menu);
 
-                Database_Reference.child(Id_Item_Menu).removeEventListener(valueEventListener);
+                Database_Reference.child(ID_Item_Menu).removeEventListener(valueEventListener);
             }
 
             @Override
@@ -116,6 +114,6 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
                 mListener.onFailureGetItemMenuData();
             }
         };
-        Database_Reference.child(Id_Item_Menu).addValueEventListener(valueEventListener);
+        Database_Reference.child(ID_Item_Menu).addValueEventListener(valueEventListener);
     }
 }

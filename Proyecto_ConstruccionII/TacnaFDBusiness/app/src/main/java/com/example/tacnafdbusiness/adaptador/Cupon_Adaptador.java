@@ -21,7 +21,7 @@ import java.util.List;
 
 public class Cupon_Adaptador extends RecyclerView.Adapter<Cupon_Adaptador.CuponViewHolder>{
 
-    private List<Cupon_Modelo> Items;
+    private List<Cupon_Modelo> Cupones;
 
     private Context Contexto;
 
@@ -40,9 +40,9 @@ public class Cupon_Adaptador extends RecyclerView.Adapter<Cupon_Adaptador.CuponV
             v.setOnCreateContextMenuListener(this);
         }
 
-        public void bindData (Cupon_Modelo dataModel, Context context) {
-            Picasso.with(context).load(dataModel.getUrl_Imagen()).into(Imagen);
-            TxtTitulo.setText(dataModel.getTitulo());
+        public void bindData (Cupon_Modelo Cupon, Context Contexto) {
+            Picasso.with(Contexto).load(Cupon.getUrl_Imagen()).into(Imagen);
+            TxtTitulo.setText(Cupon.getTitulo());
         }
 
         @Override
@@ -100,8 +100,8 @@ public class Cupon_Adaptador extends RecyclerView.Adapter<Cupon_Adaptador.CuponV
     }
 
 
-    public Cupon_Adaptador(List<Cupon_Modelo> items, Context context) {
-        this.Items = items;
+    public Cupon_Adaptador(List<Cupon_Modelo> Cupones, Context context) {
+        this.Cupones = Cupones;
         Contexto = context;
     }
 
@@ -114,12 +114,12 @@ public class Cupon_Adaptador extends RecyclerView.Adapter<Cupon_Adaptador.CuponV
 
     @Override
     public void onBindViewHolder(@NonNull Cupon_Adaptador.CuponViewHolder holder, int position) {
-        holder.bindData(Items.get(position), Contexto);
+        holder.bindData(Cupones.get(position), Contexto);
     }
 
     @Override
     public int getItemCount() {
-        return Items.size();
+        return Cupones.size();
     }
 
     public interface OnItemClickListener{

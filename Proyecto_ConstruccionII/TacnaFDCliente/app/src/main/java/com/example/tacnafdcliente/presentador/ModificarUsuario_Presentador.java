@@ -18,38 +18,33 @@ public class ModificarUsuario_Presentador implements ModificarUsuario.Presenter,
     }
 
     @Override
-    public void UpdateUserData(DatabaseReference reference, Usuario_Modelo usuario_modelo) {
-        mInteractor.performUpdateUserData(reference, usuario_modelo);
+    public void UpdateUser(DatabaseReference Database_Reference, Usuario_Modelo Usuario) {
+        mInteractor.performUpdateUser(Database_Reference, Usuario);
     }
 
     @Override
-    public void ShowUserData(DatabaseReference reference, String correo_electronico) {
-        mInteractor.performShowUserData(reference, correo_electronico);
+    public void ShowUserData(DatabaseReference Database_Reference, String Correo_Electronico) {
+        mInteractor.performShowUserData(Database_Reference, Correo_Electronico);
     }
 
     @Override
-    public void SaveSession(Context context, String nombre_usuario) {
-        mInteractor.performSaveSession(context, nombre_usuario);
+    public void GetSessionData(Context Contexto) {
+        mInteractor.performGetSessionData(Contexto);
     }
 
     @Override
-    public void GetSessionData(Context context) {
-        mInteractor.performGetSessionData(context);
+    public void onSuccessUpdateUser() {
+        mView.onUpdateUserSuccessful();
     }
 
     @Override
-    public void onSuccessUpdateUserData() {
-        mView.onUpdateUserDataSuccessful();
+    public void onFailureUpdateUser() {
+        mView.onUpdateUserFailure();
     }
 
     @Override
-    public void onFailureUpdateUserData() {
-        mView.onUpdateUserDataFailure();
-    }
-
-    @Override
-    public void onSuccessShowUserData(Usuario_Modelo usuario_modelo) {
-        mView.onShowUserDataSuccessful(usuario_modelo);
+    public void onSuccessShowUserData(Usuario_Modelo Usuario) {
+        mView.onShowUserDataSuccessful(Usuario);
     }
 
     @Override
@@ -58,12 +53,7 @@ public class ModificarUsuario_Presentador implements ModificarUsuario.Presenter,
     }
 
     @Override
-    public void onSuccessGetSessionData(String correo_electronico) {
-        mView.onSessionDataSuccessful(correo_electronico);
-    }
-
-    @Override
-    public void onSuccessSaveSession() {
-        mView.onSaveSessionSuccessful();
+    public void onSuccessGetSessionData(String Correo_Electronico) {
+        mView.onGetSessionDataSuccessful(Correo_Electronico);
     }
 }

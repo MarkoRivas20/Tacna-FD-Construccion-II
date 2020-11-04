@@ -43,7 +43,7 @@ public class RegistrarItemMenu_Vista extends Fragment implements RegistrarItemMe
     public DatabaseReference mReference;
     public StorageReference mStorageReference;
 
-    FloatingActionButton fab;
+    FloatingActionButton Fab;
     Button BtnRegistrar_Item_Menu;
 
     EditText TxtNombre;
@@ -60,10 +60,10 @@ public class RegistrarItemMenu_Vista extends Fragment implements RegistrarItemMe
 
     Boolean Imagen_Seleccionada = false;
 
-    String[] estados = {"Seleccione un Estado", "Activo", "Inactivo"};
+    String[] Estados = {"Seleccione un Estado", "Activo", "Inactivo"};
 
-    String Id_Establecimiento = "";
-    String Id_Item_Menu = "";
+    String ID_Establecimiento = "";
+    String ID_Item_Menu = "";
 
 
 
@@ -78,23 +78,23 @@ public class RegistrarItemMenu_Vista extends Fragment implements RegistrarItemMe
         mStorageReference = FirebaseStorage.getInstance().getReference();
 
         Spinner_Estado = (Spinner) view.findViewById(R.id.spinnerestado);
-        fab = (FloatingActionButton) view.findViewById(R.id.fab_item_menu);
+        Fab = (FloatingActionButton) view.findViewById(R.id.fab_item_menu);
         Imagen_Item_Menu = (ImageView) view.findViewById(R.id.imagen_item_menu);
         BtnRegistrar_Item_Menu = (Button) view.findViewById(R.id.BtnRegistrar_Item_Menu);
         TxtNombre = (EditText) view.findViewById(R.id.txtnombre);
         TxtPrecio = (EditText) view.findViewById(R.id.txtprecio);
         TxtDescripcion = (EditText) view.findViewById(R.id.txtdescripcion);
 
-        Spinner_Estado.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, estados));
+        Spinner_Estado.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Estados));
 
         mPresenter.GetEstablishmentInfo(getActivity());
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        Fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-
+                if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                {
                     Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                     startActivityForResult(gallery, PICK_IMAGE);
                 }
@@ -110,7 +110,7 @@ public class RegistrarItemMenu_Vista extends Fragment implements RegistrarItemMe
             @Override
             public void onClick(View v) {
 
-                mPresenter.UploadItemMenuImage(mStorageReference, Id_Establecimiento, Image_Uri);
+                mPresenter.UploadItemMenuImage(mStorageReference, ID_Establecimiento, Image_Uri);
             }
         });
 
@@ -119,11 +119,11 @@ public class RegistrarItemMenu_Vista extends Fragment implements RegistrarItemMe
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE)
+        {
             Image_Uri = data.getData();
             Imagen_Item_Menu.setImageURI(Image_Uri);
             Imagen_Seleccionada = true;
-
         }
     }
 
@@ -141,11 +141,11 @@ public class RegistrarItemMenu_Vista extends Fragment implements RegistrarItemMe
     @Override
     public void onUploadItemMenuImageSuccessful(String Url_Imagen) {
 
-        Id_Item_Menu = mReference.push().getKey();
-        ItemMenu_Modelo itemMenu_modelo = new ItemMenu_Modelo(Id_Item_Menu, Id_Establecimiento, TxtNombre.getText().toString(),
+        ID_Item_Menu = mReference.push().getKey();
+        ItemMenu_Modelo Item_Menu = new ItemMenu_Modelo(ID_Item_Menu, ID_Establecimiento, TxtNombre.getText().toString(),
                 TxtPrecio.getText().toString(), TxtDescripcion.getText().toString(), Url_Imagen, Spinner_Estado.getSelectedItem().toString());
 
-        mPresenter.SaveItemMenu(mReference, itemMenu_modelo);
+        mPresenter.SaveItemMenu(mReference, Item_Menu);
     }
 
     @Override
@@ -154,7 +154,7 @@ public class RegistrarItemMenu_Vista extends Fragment implements RegistrarItemMe
     }
 
     @Override
-    public void onGetEstablishmentInfoSuccessful(String Id_Establecimiento) {
-        this.Id_Establecimiento = Id_Establecimiento;
+    public void onGetEstablishmentInfoSuccessful(String ID_Establecimiento) {
+        this.ID_Establecimiento = ID_Establecimiento;
     }
 }

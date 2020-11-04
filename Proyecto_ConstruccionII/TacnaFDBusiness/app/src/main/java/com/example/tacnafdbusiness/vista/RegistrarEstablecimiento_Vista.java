@@ -56,7 +56,7 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
     public DatabaseReference mReference;
     public StorageReference mStorageReference;
 
-    FloatingActionButton fab;
+    FloatingActionButton Fab;
 
     private static final int PICK_IMAGE = 100;
     private static final int PICK_IMAGE_DOCUMENT = 200;
@@ -83,7 +83,9 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
     String ID_Establecimiento = "";
     String Url_Logo = "";
     String Url_Documento = "";
-    String Id_Usuario = "";
+    String ID_Usuario = "";
+    String[] Categorias = {"Seleccione una Categoria", "Restaurante", "Cafeteria", "Panaderia", "Cafeteria"};
+    String[] Distritos = {"Seleccione un Distrito", "Tacna", "Alto del Alianza", "Calana", "Pachia", "Palca", "Pocollay", "Ciudad Nueva"};
 
     Button BtnRegistrar_Establecimiento;
 
@@ -106,7 +108,7 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
 
         mPresenter.GetSessionData(getActivity().getApplicationContext());
 
-        fab = (FloatingActionButton) view.findViewById(R.id.fab_establecimiento);
+        Fab = (FloatingActionButton) view.findViewById(R.id.fab_establecimiento);
         Logo_Establecimiento = (ImageView) view.findViewById(R.id.logo_establecimiento);
         Spinner_Categoria = (Spinner) view.findViewById(R.id.spinnercategoria);
         Spinner_Distrito = (Spinner) view.findViewById(R.id.spinnerdistrito);
@@ -118,11 +120,9 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
         Txttelefono = (EditText) view.findViewById(R.id.txttelefono);
         Txtdescripcion = (EditText) view.findViewById(R.id.txtdescripcion);
 
-        String[] categorias = {"Seleccione una Categoria", "Restaurante", "Cafeteria", "Panaderia", "Cafeteria"};
-        Spinner_Categoria.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, categorias));
+        Spinner_Categoria.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Categorias));
 
-        String[] distritos = {"Seleccione un Distrito", "Tacna", "Alto del Alianza", "Calana", "Pachia", "Palca", "Pocollay", "Ciudad Nueva"};
-        Spinner_Distrito.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, distritos));
+        Spinner_Distrito.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Distritos));
 
         Map_View = (CustomMapView) view.findViewById(R.id.customMapView);
         Map_View.onCreate(savedInstanceState);
@@ -130,12 +130,12 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
         Map_View.getMapAsync(this);
 
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        Fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(),Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-
+                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(),Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                {
                     Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                     startActivityForResult(gallery, PICK_IMAGE);
                 }
@@ -152,8 +152,8 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
             @Override
             public void onClick(View v) {
 
-                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(),Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-
+                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(),Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                {
                     Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                     startActivityForResult(gallery, PICK_IMAGE_DOCUMENT);
                 }
@@ -183,19 +183,20 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE)
+        {
             Image_Uri = data.getData();
             Logo_Establecimiento.setImageURI(Image_Uri);
             Imagen_Seleccionada = true;
-
         }
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE_DOCUMENT){
+
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE_DOCUMENT)
+        {
             Documento_Uri = data.getData();
             String filename = Documento_Uri.getLastPathSegment();
             String mimeType = getActivity().getContentResolver().getType(Documento_Uri);
             LblDocumento.setText("Imagen: " + filename + "." + mimeType.substring(6));
             Documento_Seleccionado = true;
-
         }
     }
 
@@ -249,10 +250,10 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
     @Override
     public void onUploadDocumentSuccessful(String Url) {
         Url_Documento = Url;
-        Establecimiento_Modelo establecimiento_modelo = new Establecimiento_Modelo(ID_Establecimiento,Id_Usuario,Txtnombre.getText().toString(),
+        Establecimiento_Modelo Establecimiento = new Establecimiento_Modelo(ID_Establecimiento,ID_Usuario,Txtnombre.getText().toString(),
                 Spinner_Distrito.getSelectedItem().toString(),Spinner_Categoria.getSelectedItem().toString(),Txtdireccion.getText().toString(),Txttelefono.getText().toString(),
                 Txtdescripcion.getText().toString(),0,0.0,Url_Logo,Url_Documento,Punto_Geografico,"Activo");
-        mPresenter.CreateNewEstablishment(mReference,establecimiento_modelo);
+        mPresenter.CreateNewEstablishment(mReference,Establecimiento);
     }
 
     @Override
@@ -262,6 +263,6 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
 
     @Override
     public void onSessionDataSuccessful(String ID_Usuario) {
-        Id_Usuario=ID_Usuario;
+        this.ID_Usuario=ID_Usuario;
     }
 }

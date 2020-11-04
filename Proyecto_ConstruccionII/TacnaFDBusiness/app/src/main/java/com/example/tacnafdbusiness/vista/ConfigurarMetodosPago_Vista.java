@@ -64,7 +64,7 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
 
     CardView Cardview_Vendemas;
 
-    String Id_Establecimiento = "";
+    String ID_Establecimiento = "";
 
     Button BtnActualizar_Metodos_Pago;
 
@@ -95,7 +95,7 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
         BtnActualizar_Metodos_Pago = (Button) view.findViewById(R.id.BtnActualizar_Metodos_Pago);
 
         mPresenter.GetEstablishmentInfo(getActivity());
-        mPresenter.GetPaymentsMethods(mReference, Id_Establecimiento);
+        mPresenter.GetPaymentsMethods(mReference, ID_Establecimiento);
 
 
         RB_Paypal.setOnClickListener(new View.OnClickListener() {
@@ -182,16 +182,18 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
 
                 if(Imagen_Seleccionada){
 
-                    if(Url_Qr != null){
+                    if(Url_Qr != null)
+                    {
                         mPresenter.DeleteQRImage(Url_Qr);
                     }
-                    mPresenter.UpdateQRImage(mStorageReference, Id_Establecimiento, Image_Uri);
+                    mPresenter.UpdateQRImage(mStorageReference, ID_Establecimiento, Image_Uri);
                     Imagen_Seleccionada = false;
                 }
                 else
                 {
-                    if(Vendemas){
-                        mPresenter.UpdatePaymentsMethods(mReference, Id_Establecimiento, Codigo_Paypal, Codigo_Culqi, Url_Qr);
+                    if(Vendemas)
+                    {
+                        mPresenter.UpdatePaymentsMethods(mReference, ID_Establecimiento, Codigo_Paypal, Codigo_Culqi, Url_Qr);
                     }
                     else
                     {
@@ -200,7 +202,7 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
                         {
                             mPresenter.DeleteQRImage(Url_Qr);
                         }
-                        mPresenter.UpdatePaymentsMethods(mReference, Id_Establecimiento, Codigo_Paypal, Codigo_Culqi, null);
+                        mPresenter.UpdatePaymentsMethods(mReference, ID_Establecimiento, Codigo_Paypal, Codigo_Culqi, null);
                     }
                 }
 
@@ -214,7 +216,8 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE)
+        {
             Image_Uri = data.getData();
             QR_Vendemas.setImageURI(Image_Uri);
             Cardview_Vendemas.setVisibility(View.VISIBLE);
@@ -223,8 +226,9 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
     }
 
     @Override
-    public void onGetPaymentsMethodsSuccessful(Establecimiento_Modelo establecimiento_modelo) {
-        if(establecimiento_modelo.getCodigo_Paypal() == null){
+    public void onGetPaymentsMethodsSuccessful(Establecimiento_Modelo Establecimiento) {
+        if(Establecimiento.getCodigo_Paypal() == null)
+        {
             RB_Paypal.setChecked(false);
             TxtCodigo_Paypal.setVisibility(View.GONE);
         }
@@ -232,12 +236,13 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
         {
             RB_Paypal.setChecked(true);
             TxtCodigo_Paypal.setVisibility(View.VISIBLE);
-            TxtCodigo_Paypal.setText(establecimiento_modelo.getCodigo_Paypal());
-            Codigo_Paypal = establecimiento_modelo.getCodigo_Paypal();
+            TxtCodigo_Paypal.setText(Establecimiento.getCodigo_Paypal());
+            Codigo_Paypal = Establecimiento.getCodigo_Paypal();
         }
         Paypal = RB_Paypal.isChecked();
 
-        if(establecimiento_modelo.getCodigo_Culqi() == null){
+        if(Establecimiento.getCodigo_Culqi() == null)
+        {
             RB_Tarjetas.setChecked(false);
             TxtPublica_culqi.setVisibility(View.GONE);
             TxtSecreta_culqi.setVisibility(View.GONE);
@@ -247,14 +252,15 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
             RB_Tarjetas.setChecked(true);
             TxtPublica_culqi.setVisibility(View.VISIBLE);
             TxtSecreta_culqi.setVisibility(View.VISIBLE);
-            Codigo_Culqi = establecimiento_modelo.getCodigo_Culqi();
-            String[] Codigos_Culqi = establecimiento_modelo.getCodigo_Culqi().split("/");
+            Codigo_Culqi = Establecimiento.getCodigo_Culqi();
+            String[] Codigos_Culqi = Establecimiento.getCodigo_Culqi().split("/");
             TxtPublica_culqi.setText(Codigos_Culqi[0]);
             TxtSecreta_culqi.setText(Codigos_Culqi[1]);
         }
         Tarjetas = RB_Tarjetas.isChecked();
 
-        if(establecimiento_modelo.getUrl_Qr() == null){
+        if(Establecimiento.getUrl_Qr() == null)
+        {
             RB_Vendemas.setChecked(false);
             Cardview_Vendemas.setVisibility(View.GONE);
         }
@@ -262,8 +268,8 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
         {
             RB_Vendemas.setChecked(true);
             Cardview_Vendemas.setVisibility(View.VISIBLE);
-            Url_Qr = establecimiento_modelo.getUrl_Qr();
-            Picasso.with(getActivity()).load(establecimiento_modelo.getUrl_Qr()).into(QR_Vendemas);
+            Url_Qr = Establecimiento.getUrl_Qr();
+            Picasso.with(getActivity()).load(Establecimiento.getUrl_Qr()).into(QR_Vendemas);
         }
         Vendemas = RB_Vendemas.isChecked();
     }
@@ -286,7 +292,7 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
     @Override
     public void onUpdateQRImageSuccessful(String Url_Qr) {
         this.Url_Qr = Url_Qr;
-        mPresenter.UpdatePaymentsMethods(mReference, Id_Establecimiento, Codigo_Paypal, Codigo_Culqi, Url_Qr);
+        mPresenter.UpdatePaymentsMethods(mReference, ID_Establecimiento, Codigo_Paypal, Codigo_Culqi, Url_Qr);
     }
 
     @Override
@@ -305,7 +311,7 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
     }
 
     @Override
-    public void onGetEstablishmentInfoSuccessful(String Id_Establecimiento) {
-        this.Id_Establecimiento = Id_Establecimiento;
+    public void onGetEstablishmentInfoSuccessful(String ID_Establecimiento) {
+        this.ID_Establecimiento = ID_Establecimiento;
     }
 }

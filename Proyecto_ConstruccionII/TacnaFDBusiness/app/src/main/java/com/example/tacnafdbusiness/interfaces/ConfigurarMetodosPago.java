@@ -10,7 +10,7 @@ import com.google.firebase.storage.StorageReference;
 public interface ConfigurarMetodosPago {
 
     interface View{
-        void onGetPaymentsMethodsSuccessful(Establecimiento_Modelo establecimiento_modelo);
+        void onGetPaymentsMethodsSuccessful(Establecimiento_Modelo Establecimiento);
         void onGetPaymentsMethodsFailure();
         void onUpdatePaymentsMethodsSuccessful();
         void onUpdatePaymentsMethodsFailure();
@@ -18,27 +18,27 @@ public interface ConfigurarMetodosPago {
         void onUpdateQRImageFailure();
         void onDeleteQRImageSuccessful();
         void onDeleteQRImageFailure();
-        void onGetEstablishmentInfoSuccessful(String Id_Establecimiento);
+        void onGetEstablishmentInfoSuccessful(String ID_Establecimiento);
     }
 
     interface Presenter{
-        void GetPaymentsMethods(DatabaseReference reference, String Id_Establecimiento);
-        void UpdatePaymentsMethods(DatabaseReference reference, String Id_Establecimiento, String Codigo_Paypal, String Codigo_Culqi, String Url_Qr);
-        void UpdateQRImage(StorageReference reference, String Id_Establecimiento, Uri Imagen_Uri);
+        void GetPaymentsMethods(DatabaseReference Database_Reference, String ID_Establecimiento);
+        void UpdatePaymentsMethods(DatabaseReference Database_Reference, String ID_Establecimiento, String Codigo_Paypal, String Codigo_Culqi, String Url_Qr);
+        void UpdateQRImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri);
         void DeleteQRImage(String Url_Qr);
-        void GetEstablishmentInfo(Context context);
+        void GetEstablishmentInfo(Context Contexto);
     }
 
     interface Interactor{
-        void performGetPaymentsMethods(DatabaseReference reference, String Id_Establecimiento);
-        void performUpdatePaymentsMethods(DatabaseReference reference, String Id_Establecimiento, String Codigo_Paypal, String Codigo_Culqi, String Url_Qr);
-        void performUpdateQRImage(StorageReference reference, String Id_Establecimiento, Uri Imagen_Uri);
+        void performGetPaymentsMethods(DatabaseReference Database_Reference, String ID_Establecimiento);
+        void performUpdatePaymentsMethods(DatabaseReference Database_Reference, String ID_Establecimiento, String Codigo_Paypal, String Codigo_Culqi, String Url_Qr);
+        void performUpdateQRImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri);
         void performDeleteQRImage(String Url_Qr);
-        void performGetEstablishmentInfo(Context context);
+        void performGetEstablishmentInfo(Context Contexto);
     }
 
     interface onOperationListener{
-        void onSuccessGetPaymentsMethods(Establecimiento_Modelo establecimiento_modelo);
+        void onSuccessGetPaymentsMethods(Establecimiento_Modelo Establecimiento);
         void onFailureGetPaymentsMethods();
         void onSuccessUpdatePaymentsMethods();
         void onFailureUpdatePaymentsMethods();
@@ -46,6 +46,6 @@ public interface ConfigurarMetodosPago {
         void onFailureUpdateQRImage();
         void onSuccessDeleteQRImage();
         void onFailureDeleteQRImage();
-        void onSuccessGetEstablishmentInfo(String Id_Establecimiento);
+        void onSuccessGetEstablishmentInfo(String ID_Establecimiento);
     }
 }

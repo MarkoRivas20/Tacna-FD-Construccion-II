@@ -15,8 +15,8 @@ public class RecuperarContrasena_Presentador implements RecuperarContrasena.Pres
     }
 
     @Override
-    public void RestorePassword(DatabaseReference reference, String correo_electronico, String nueva_contrasena) {
-        mInteractor.performRestorePassword(reference,correo_electronico,nueva_contrasena);
+    public void RestorePassword(DatabaseReference Database_Reference, String Correo_Electronico, String Nueva_Contrasena) {
+        mInteractor.performRestorePassword(Database_Reference,Correo_Electronico,Nueva_Contrasena);
     }
 
     @Override

@@ -18,31 +18,31 @@ public interface ModificarEstablecimiento {
         void onUpdateEstablismentLogoSuccessful(String Url_Logo);
         void onUpdateEstablismentDocumentFailure();
         void onUpdateEstablismentDocumentSuccessful(String Url_Documento);
-        void onGetEstablishmentInfoSuccessful(String Id_Establecimiento,String Url_Logo, String Url_Documento);
-        void onGetEstablishmentDataSuccessful(Establecimiento_Modelo establecimiento);
+        void onGetEstablishmentInfoSuccessful(String ID_Establecimiento,String Url_Logo, String Url_Documento);
+        void onGetEstablishmentDataSuccessful(Establecimiento_Modelo Establecimiento);
         void onGetEstablishmentDataFailure();
-        void onGetSessionDataSuccessful(String Id_Usuario);
+        void onGetSessionDataSuccessful(String ID_Usuario);
         void onUpdateEstablishmentInfoSuccessful();
     }
 
     interface Presenter{
-        void UpdateEstablismentData(DatabaseReference reference, Establecimiento_Modelo establecimiento_modelo);
-        void UpdateEstablismentLogo(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Logo_Actual, String Id_Establecimiento, Uri Logo_Uri);
-        void UpdateEstablismentDocument(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Document_Actual, String Id_Establecimiento, Uri Documento_Uri);
-        void GetEstablishmentInfo(Context context);
-        void GetEstablishmentData(DatabaseReference reference, String Id_Establecimiento);
-        void UpdateEstablishmentInfo(Context context, String Nombre_Establecimiento, String Url_Logo, String Url_Documento);
-        void GetSessionData(Context context);
+        void UpdateEstablismentData(DatabaseReference Database_Reference, Establecimiento_Modelo Establecimiento);
+        void UpdateEstablismentLogo(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Logo_Actual, String ID_Establecimiento, Uri Logo_Uri);
+        void UpdateEstablismentDocument(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Document_Actual, String ID_Establecimiento, Uri Documento_Uri);
+        void GetEstablishmentInfo(Context Contexto);
+        void GetEstablishmentData(DatabaseReference Database_Reference, String ID_Establecimiento);
+        void UpdateEstablishmentInfo(Context Contexto, String Nombre_Establecimiento, String Url_Logo, String Url_Documento);
+        void GetSessionData(Context Contexto);
     }
 
     interface Interactor{
-        void performUpdateEstablismentData(DatabaseReference reference, Establecimiento_Modelo establecimiento_modelo);
-        void performUpdateEstablismentLogo(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Logo_Actual, String Id_Establecimiento, Uri Logo_Uri);
-        void performUpdateEstablismentDocument(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Document_Actual, String Id_Establecimiento, Uri Documento_Uri);
-        void performGetEstablishmentInfo(Context context);
-        void performGetEstablishmentData(DatabaseReference reference, String Id_Establecimiento);
-        void performUpdateEstablishmentInfo(Context context,String Nombre_Establecimiento, String Url_Logo, String Url_Documento);
-        void performGetSessionData(Context context);
+        void performUpdateEstablismentData(DatabaseReference Database_Reference, Establecimiento_Modelo Establecimiento);
+        void performUpdateEstablismentLogo(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Logo_Actual, String ID_Establecimiento, Uri Logo_Uri);
+        void performUpdateEstablismentDocument(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Document_Actual, String ID_Establecimiento, Uri Documento_Uri);
+        void performGetEstablishmentInfo(Context Contexto);
+        void performGetEstablishmentData(DatabaseReference Database_Reference, String ID_Establecimiento);
+        void performUpdateEstablishmentInfo(Context Contexto,String Nombre_Establecimiento, String Url_Logo, String Url_Documento);
+        void performGetSessionData(Context Contexto);
     }
 
     interface onOperationListener{
@@ -52,10 +52,10 @@ public interface ModificarEstablecimiento {
         void onFailureUpdateEstablismentLogo();
         void onSuccessUpdateEstablismentDocument(String Url_Documento);
         void onFailureUpdateEstablismentDocument();
-        void onSuccessGetEstablishmentInfo(String Id_Establecimiento, String Url_Logo, String Url_Documento);
-        void onSuccessGetEstablishmentData(Establecimiento_Modelo establecimiento);
+        void onSuccessGetEstablishmentInfo(String ID_Establecimiento, String Url_Logo, String Url_Documento);
+        void onSuccessGetEstablishmentData(Establecimiento_Modelo Establecimiento);
         void onFailureGetEstablishmentData();
-        void onSuccessGetSessionData(String Id_Usuario);
+        void onSuccessGetSessionData(String ID_Usuario);
         void onSuccessUpdateEstablishmentInfo();
     }
 

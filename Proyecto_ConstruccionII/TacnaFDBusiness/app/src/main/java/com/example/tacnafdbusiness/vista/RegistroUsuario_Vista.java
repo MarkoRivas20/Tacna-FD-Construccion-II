@@ -57,10 +57,10 @@ public class RegistroUsuario_Vista extends AppCompatActivity implements Registra
             @Override
             public void onClick(View v) {
                 String ID_Usuario=mReference.push().getKey();
-                Usuario_Modelo usuario_modelo=new Usuario_Modelo(ID_Usuario,TxtNombre.getText().toString(),TxtApellido.getText().toString(),
+                Usuario_Modelo Usuario=new Usuario_Modelo(ID_Usuario,TxtNombre.getText().toString(),TxtApellido.getText().toString(),
                         TxtEmail.getText().toString(),TxtClave.getText().toString(),TxtCelular.getText().toString(),
                         TxtRuc.getText().toString());
-                mPresenter.CreateNewUser(mReference,usuario_modelo);
+                mPresenter.CreateNewUser(mReference,Usuario);
             }
         });
     }
