@@ -13,7 +13,7 @@ public interface Dashboard {
     interface View{
         void onGetEstablismentWithMoreReviewsSuccessful(String Nombre_Establecimiento_Mas_Comentarios);
         void onGetEstablismentWithMoreReviewsFailure();
-        void onSearchEstablishmentSuccessful(ArrayList<Establecimiento_Modelo> establecimiento);
+        void onSearchEstablishmentSuccessful(ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento);
         void onSearchEstablishmentFailure();
         void onGetMonthSalesSuccessful(int Ventas_Mes, String Nombre_Establecimiento_Mas_Ventas);
         void onGetMonthSalestFailure();
@@ -35,7 +35,7 @@ public interface Dashboard {
     }
 
     interface onOperationListener{
-        void onSuccessSearchEstablishment(ArrayList<Establecimiento_Modelo> establecimiento);
+        void onSuccessSearchEstablishment(ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento);
         void onFailureSearchEstablishment();
         void onSuccessGetEstablismentWithMoreReviews(String Nombre_Establecimiento_Mas_Comentarios);
         void onFailureGetEstablismentWithMoreReviews();

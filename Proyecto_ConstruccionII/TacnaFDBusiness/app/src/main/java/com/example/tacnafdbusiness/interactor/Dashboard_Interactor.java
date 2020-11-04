@@ -45,13 +45,16 @@ public class Dashboard_Interactor implements Dashboard.Interactor {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
+                Boolean Existe_Establecimiento = false;
                 establecimiento_modelos.clear();
 
                 for(DataSnapshot postSnapshot : snapshot.getChildren()){
+                    Existe_Establecimiento = true;
                     Establecimiento_Modelo establecimiento_modelo = postSnapshot.getValue(Establecimiento_Modelo.class);
                     establecimiento_modelos.add(establecimiento_modelo);
                 }
-                mListener.onSuccessSearchEstablishment(establecimiento_modelos);
+
+                mListener.onSuccessSearchEstablishment(establecimiento_modelos, Existe_Establecimiento);
 
             }
 

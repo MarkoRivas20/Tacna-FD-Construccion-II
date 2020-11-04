@@ -104,7 +104,7 @@ public class Dashboard_Vista extends Fragment implements Dashboard.View {
     }
 
     @Override
-    public void onSearchEstablishmentSuccessful(ArrayList<Establecimiento_Modelo> establecimiento) {
+    public void onSearchEstablishmentSuccessful(ArrayList<Establecimiento_Modelo> establecimiento, Boolean Existe_Establecimiento) {
         establecimiento_modelos = establecimiento;
 
         TxtEstablecimientos.setText(String.valueOf(establecimiento.size()));
@@ -117,10 +117,20 @@ public class Dashboard_Vista extends Fragment implements Dashboard.View {
                 Posicion_Mejor_Establecimiento = i;
             }
         }
-        TxtEstablecimiento_Mejor_Puntuacion.setText(establecimiento.get(Posicion_Mejor_Establecimiento).getNombre());
+
+        if(Existe_Establecimiento){
+            TxtEstablecimiento_Mejor_Puntuacion.setText(establecimiento.get(Posicion_Mejor_Establecimiento).getNombre());
+        }
+        else
+        {
+            TxtEstablecimiento_Mejor_Puntuacion.setText("Ninguno");
+        }
+
 
         mPresenter.GetEstablismentWithMoreReviews(mReference_Resenas, establecimiento);
         mPresenter.GetMonthSales(mReference_Pedidos, establecimiento, Numero_Mes);
+
+
 
     }
 
