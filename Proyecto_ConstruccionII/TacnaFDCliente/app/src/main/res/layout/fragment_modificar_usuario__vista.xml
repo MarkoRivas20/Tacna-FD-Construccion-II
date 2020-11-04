@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".vista.ModificarUsuario_Vista"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/perfil"
+        android:scaleType="fitXY"
+        >
+
+    </ImageView>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="25dp">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/convergence"
+                android:text="Hola"
+                android:textColor="#fff"
+
+                android:textSize="36sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/convergence"
+                android:text="Estos son tus datos"
+                android:textColor="#fff"
+                app:layout_constraintEnd_toEndOf="@+id/textView4"
+                app:layout_constraintHorizontal_bias="0.509"
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/txtnombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:background="@drawable/shape_textboxregistro"
+                android:drawableLeft="@drawable/ic_name"
+                android:drawablePadding="10dp"
+                android:hint="Nombre"
+                android:padding="15dp"
+                android:textColor="#003152"
+                android:textColorHighlight="#0F77F6"
+                android:textColorHint="#DDDEE0"
+                android:singleLine="true"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            <EditText
+                android:id="@+id/txtapellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_textboxregistro"
+                android:drawableLeft="@drawable/ic_lastname"
+                android:drawablePadding="10dp"
+                android:hint="Apellido"
+                android:padding="15dp"
+                android:textColor="#003152"
+                android:textColorHighlight="#0F77F6"
+                android:textColorHint="#DDDEE0"
+                android:singleLine="true"
+                app:layout_constraintTop_toBottomOf="@+id/txtnombre" />
+
+            <EditText
+                android:id="@+id/txtemail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_textboxregistro"
+                android:drawableLeft="@drawable/ic_email"
+                android:drawablePadding="10dp"
+                android:enabled="false"
+                android:hint="Correo Electronico"
+                android:padding="15dp"
+                android:textColor="#003152"
+                android:textColorHighlight="#0F77F6"
+                android:textColorHint="#DDDEE0"
+                android:singleLine="true"
+                app:layout_constraintTop_toBottomOf="@+id/txtapellido" />
+
+            <EditText
+                android:id="@+id/txtclave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_textboxregistro"
+                android:drawableLeft="@drawable/ic_padlock"
+                android:drawablePadding="10dp"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:padding="15dp"
+                android:singleLine="true"
+                android:textColor="#003152"
+                android:textColorHighlight="#0F77F6"
+                android:textColorHint="#DDDEE0"
+                app:layout_constraintTop_toBottomOf="@+id/txtemail"
+                tools:layout_editor_absoluteX="25dp" />
+
+            <Button
+                android:id="@+id/btnmodificar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_botonazulclaro"
+                android:shadowColor="@android:color/transparent"
+                android:text="Actualizar Datos"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtclave" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>

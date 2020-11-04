@@ -73,11 +73,11 @@ public class Login_Vista extends AppCompatActivity  implements Login.View {
 
     @Override
     public void onLogInSuccessful(String nombre_usuario, String id_usuario) {
-       /* mPresenter.SaveSession(getApplicationContext(), TxtEmail.getText().toString(), nombre_usuario, id_usuario);
+       mPresenter.SaveSession(getApplicationContext(), TxtEmail.getText().toString(), nombre_usuario, id_usuario);
 
         Intent intent = new Intent(getApplicationContext(), PantallaPrincipal_Vista.class);
         startActivity(intent);
-        finish();*/
+        finish();
     }
 
     @Override
@@ -88,9 +88,8 @@ public class Login_Vista extends AppCompatActivity  implements Login.View {
 
     @Override
     public void onSuccessfulCheck() {
-        /*
         Intent intent = new Intent(getApplicationContext(), PantallaPrincipal_Vista.class);
         startActivity(intent);
-        finish();*/
+        finish();
     }
 }
