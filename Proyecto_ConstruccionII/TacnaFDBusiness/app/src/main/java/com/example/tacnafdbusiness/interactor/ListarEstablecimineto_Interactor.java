@@ -28,6 +28,7 @@ public class ListarEstablecimineto_Interactor implements ListarEstablecimiento.I
         this.mListener = mListener;
     }
 
+    /*Obteniendo los establecimientos registrados por el usuario*/
     @Override
     public void performSearchEstablishment(DatabaseReference Database_Reference, String ID_Usuario) {
 
@@ -57,6 +58,7 @@ public class ListarEstablecimineto_Interactor implements ListarEstablecimiento.I
 
     }
 
+    /*Obteniendo el ID de usuario del SharedPreferences*/
     @Override
     public void performGetSessionData(Context Contexto) {
 
@@ -72,7 +74,7 @@ public class ListarEstablecimineto_Interactor implements ListarEstablecimiento.I
         }
 
     }
-
+    /*Guardando el id_establecimiento, nombre_establecimiento, url_logo, url_documento en un SharedPreferences*/
     @Override
     public void performSaveEstablishmentInfo(Context Contexto, String Id_Establecimiento, String Nombre_Establecimiento, String Url_Logo, String Url_Documento) {
 
@@ -85,6 +87,7 @@ public class ListarEstablecimineto_Interactor implements ListarEstablecimiento.I
         editor.apply();
     }
 
+    /*Filtrar la lista de los establecientos por el Nombre_Establecimiento*/
     @Override
     public void performFilterEstablishment(ArrayList<Establecimiento_Modelo> Establecimientos, String Nombre_Establecimiento) {
         Lista_Filtrada = new ArrayList<>();

@@ -27,6 +27,7 @@ public class ModificarCupon_Interactor implements ModificarCupon.Interactor {
         this.mListener = mListener;
     }
 
+    /*Actualizando los datos del Cupon en la base de datos*/
     @Override
     public void performUpdateCouponData(DatabaseReference Database_Reference, Cupon_Modelo Cupon) {
 
@@ -47,11 +48,13 @@ public class ModificarCupon_Interactor implements ModificarCupon.Interactor {
 
     }
 
+    /*Actualizando la imagen del Cupon*/
     @Override
     public void performUpdateCouponImage(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final String Url_Imagen_Actual, String ID_Establecimiento, final String ID_Cupon, Uri Imagen_Uri) {
 
         final StorageReference filePath = Storage_Reference.child(ID_Establecimiento).child("Cupon").child(Imagen_Uri.getLastPathSegment());
 
+        /*Guardar la Imagen en el Storage*/
         filePath.putFile(Imagen_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -66,6 +69,7 @@ public class ModificarCupon_Interactor implements ModificarCupon.Interactor {
                     @Override
                     public void onSuccess(final Uri uri) {
 
+                        /*Actualizando la URL de la imagen del Cupon*/
                         Database_Reference.child(ID_Cupon).child("url_Imagen").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -80,6 +84,7 @@ public class ModificarCupon_Interactor implements ModificarCupon.Interactor {
                             }
                         });
 
+                        /*Eliminando la Imagen Anterior del Storage*/
                         StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(Url_Imagen_Actual);
                         reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -96,6 +101,7 @@ public class ModificarCupon_Interactor implements ModificarCupon.Interactor {
 
     }
 
+    /*Obteniendo los datos del Cupon*/
     @Override
     public void performGetCouponData(final DatabaseReference Database_Reference, final String ID_Cupon) {
 

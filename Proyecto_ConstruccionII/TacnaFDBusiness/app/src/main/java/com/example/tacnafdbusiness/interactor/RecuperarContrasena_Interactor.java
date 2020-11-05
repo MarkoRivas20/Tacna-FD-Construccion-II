@@ -20,6 +20,7 @@ public class RecuperarContrasena_Interactor implements RecuperarContrasena.Inter
         this.mListener = mListener;
     }
 
+    /*Modificando la contraseña del usuario en la base de datos*/
     @Override
     public void performRestorePassword(final DatabaseReference Database_Reference, String Correo_Electronico, final String Nueva_Contrasena) {
 

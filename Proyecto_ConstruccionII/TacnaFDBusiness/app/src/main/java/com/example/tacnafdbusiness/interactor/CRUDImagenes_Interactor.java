@@ -32,7 +32,7 @@ public class CRUDImagenes_Interactor implements CRUDImagenes.Interactor {
     public CRUDImagenes_Interactor(CRUDImagenes.onOperationListener mListener) {
         this.mListener = mListener;
     }
-
+    /*Subiendo la imagen del Establecimiento al Firebase Storage*/
     @Override
     public void performUploadImage(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final ImagenEstablecimiento_Modelo Imagen_Establecimiento, Uri Imagen_Uri) {
         final StorageReference filePath = Storage_Reference.child(Imagen_Establecimiento.getID_Establecimiento()).child("Imagenes").child(Imagen_Uri.getLastPathSegment());
@@ -50,7 +50,7 @@ public class CRUDImagenes_Interactor implements CRUDImagenes.Interactor {
                 filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-
+                        /*Guardar la URL de la imagen a la base de datos*/
                         Imagen_Establecimiento.setUrl_Imagen(uri.toString());
                         Database_Reference.child(Imagen_Establecimiento.getID_Imagen_Establecimiento()).setValue(Imagen_Establecimiento).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -71,10 +71,10 @@ public class CRUDImagenes_Interactor implements CRUDImagenes.Interactor {
             }
         });
     }
-
+    /*Borrar una imagen del establecimiento*/
     @Override
     public void performDeleteImage(DatabaseReference Database_Reference, String ID_Imagen_Establecimiento, final String Url_Imagen) {
-
+        /*Borrando el registro de la base de datos*/
         Database_Reference.child(ID_Imagen_Establecimiento).removeValue().addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -86,7 +86,7 @@ public class CRUDImagenes_Interactor implements CRUDImagenes.Interactor {
 
             }
         });
-
+        /*Borrando la imagen del Storage*/
         StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(Url_Imagen);
 
         reference.delete().addOnFailureListener(new OnFailureListener() {
@@ -102,7 +102,7 @@ public class CRUDImagenes_Interactor implements CRUDImagenes.Interactor {
         });
 
     }
-
+    /*Obteniendo todas las imagenes registradads del establecimiento*/
     @Override
     public void performGetAllImages(DatabaseReference Database_Reference, String ID_Establecimiento) {
 
@@ -134,7 +134,7 @@ public class CRUDImagenes_Interactor implements CRUDImagenes.Interactor {
 
 
     }
-
+    /*Obteniendo el ID del establecimiento del SharedPreferences*/
     @Override
     public void performGetEstablishmentInfo(Context Contexto) {
 

@@ -22,9 +22,11 @@ public class RegistroUsuario_Interactor implements RegistrarUsuario.Interactor {
         this.mListener = mListener;
     }
 
+    /*Registrando los datos de un nuevo usuario en la base de datos*/
     @Override
     public void performCreateUser(final DatabaseReference Database_Reference, final Usuario_Modelo Usuario) {
 
+        /*Primero se buscara en la base de datos un correo electronico igual al que a ingresado el usuario*/
         Query query = Database_Reference.orderByChild("correo_Electronico").equalTo(Usuario.getCorreo_Electronico());
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -37,6 +39,7 @@ public class RegistroUsuario_Interactor implements RegistrarUsuario.Interactor {
                     booleano = true;
                 }
 
+                /*Si no hay ningun correo electronico igual , se registra un nuevo usuario*/
                 if(!booleano)
                 {
                     Database_Reference.child(Usuario.getID_Usuario()).setValue(Usuario).addOnCompleteListener(new OnCompleteListener<Void>() {

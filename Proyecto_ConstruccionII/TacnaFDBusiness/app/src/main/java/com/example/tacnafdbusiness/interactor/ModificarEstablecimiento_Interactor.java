@@ -31,6 +31,7 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
         this.mListener = mListener;
     }
 
+    /*Actualizando los datos del establecimiento en la base de datos*/
     @Override
     public void performUpdateEstablismentData(DatabaseReference Database_Reference, Establecimiento_Modelo Establecimiento) {
 
@@ -52,11 +53,13 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
 
     }
 
+    /*Actualizando la Imagen del establecimientos*/
     @Override
     public void performUpdateEstablismentLogo(final StorageReference Storage_Reference, final DatabaseReference Database_Reference, final String Url_Logo_Actual, final String ID_Establecimiento, final Uri Logo_Uri) {
 
         final StorageReference filePath = Storage_Reference.child(ID_Establecimiento).child("Logo").child(Logo_Uri.getLastPathSegment());
 
+        /*Guardando la Imagen en el Storage*/
         filePath.putFile(Logo_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -71,6 +74,7 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
                     @Override
                     public void onSuccess(final Uri uri) {
 
+                        /*Actualizando la URL de la imagen del establecimiento en la base de datos*/
                         Database_Reference.child(ID_Establecimiento).child("url_Imagen_Logo").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -86,6 +90,7 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
                             }
                         });
 
+                        /*Eliminando la Imagen actual del establecimiento*/
                         StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(Url_Logo_Actual);
                         reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -101,6 +106,7 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
 
     }
 
+    /*Actualizando la Imagen del documento del establecimientos*/
     @Override
     public void performUpdateEstablismentDocument(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final String Url_Document_Actual, final String ID_Establecimiento, Uri Documento_Uri) {
 
@@ -120,6 +126,7 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
                     @Override
                     public void onSuccess(final Uri uri) {
 
+                        /*Actualizando la URL de la imagen del documento del establecimiento en la base de datos*/
                         Database_Reference.child(ID_Establecimiento).child("url_Imagen_Documento").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -135,7 +142,7 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
 
                             }
                         });
-
+                        /*Eliminando la Imagen del documento actual del establecimiento*/
                         StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(Url_Document_Actual);
                         reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -151,6 +158,7 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
         });
     }
 
+    /*Obteniendo ID_Establecimiento, Url_Documento, Url_Logo del establecimiento del SharedPreferences */
     @Override
     public void performGetEstablishmentInfo(Context Contexto) {
         SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
@@ -165,6 +173,7 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
 
     }
 
+    /*Obteniendo los datos de un establecimiento por su ID*/
     @Override
     public void performGetEstablishmentData(final DatabaseReference Database_Reference, final String ID_Establecimiento) {
 
@@ -187,6 +196,7 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
 
     }
 
+    /*Actualizando el SharedPreferences con los nuevos nombre_establecimiento,url_logo,url_documento*/
     @Override
     public void performUpdateEstablishmentInfo(Context Contexto, String Nombre_Establecimiento, String Url_Logo, String Url_Documento) {
 
@@ -199,7 +209,7 @@ public class ModificarEstablecimiento_Interactor implements ModificarEstablecimi
 
         mListener.onSuccessUpdateEstablishmentInfo();
     }
-
+    /*Obteniendo el ID usuario del SharedPreferences*/
     @Override
     public void performGetSessionData(Context Contexto) {
         SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);

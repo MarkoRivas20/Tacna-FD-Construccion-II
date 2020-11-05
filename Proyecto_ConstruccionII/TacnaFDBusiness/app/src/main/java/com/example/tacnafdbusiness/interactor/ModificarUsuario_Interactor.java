@@ -24,6 +24,7 @@ public class ModificarUsuario_Interactor  implements ModificarUsuario.Interactor
         this.mListener = mListener;
     }
 
+    /*Actualizando datos del usuario en la base de datos*/
     @Override
     public void performUpdateUser(final DatabaseReference Database_Reference, final Usuario_Modelo Usuario) {
 
@@ -63,11 +64,9 @@ public class ModificarUsuario_Interactor  implements ModificarUsuario.Interactor
 
         query.addListenerForSingleValueEvent(valueEventListener);
 
-
-
-
     }
 
+    /*Obteniendo los datos del usuario de la base de datos por su correo_Electronico*/
     @Override
     public void performShowUserData(DatabaseReference Database_Reference, String Correo_Electronico) {
 
@@ -100,6 +99,7 @@ public class ModificarUsuario_Interactor  implements ModificarUsuario.Interactor
 
     }
 
+    /*Obteniendo el correo_electronico de usuario del SharedPreferences */
     @Override
     public void performGetSessionData(Context Contexto) {
         SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);

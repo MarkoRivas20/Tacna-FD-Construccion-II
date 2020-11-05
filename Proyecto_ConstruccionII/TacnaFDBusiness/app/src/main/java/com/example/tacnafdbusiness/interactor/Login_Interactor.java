@@ -25,6 +25,7 @@ public class Login_Interactor implements Login.Interactor {
         this.mListener = mListener;
     }
 
+    /*Buscando un usuario a travez del correo_Electronico y la Contrasena*/
     @Override
     public void performLogIn(DatabaseReference Database_Reference, String Correo_Electronico, final String Contrasena) {
 
@@ -61,6 +62,7 @@ public class Login_Interactor implements Login.Interactor {
 
     }
 
+    /*Guardando el id_usuario, nombre_usuario, correo_electronico en un SharedPreferences*/
     @Override
     public void performSaveSession(Context Contexto, String Correo_Electronico, String Nombre_Usuario, String ID_Usuario) {
 
@@ -72,7 +74,7 @@ public class Login_Interactor implements Login.Interactor {
         editor.apply();
 
     }
-
+    /*Comprobando el inicio de sesion*/
     @Override
     public void performCheckSession(Context Contexto) {
 
