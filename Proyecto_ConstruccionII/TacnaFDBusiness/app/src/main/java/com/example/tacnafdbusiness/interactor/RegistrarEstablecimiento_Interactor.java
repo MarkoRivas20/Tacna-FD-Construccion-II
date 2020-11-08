@@ -27,6 +27,7 @@ public class RegistrarEstablecimiento_Interactor implements RegistrarEstablecimi
     }
 
     /*Registrando los datos de un nuevo Establecimiento en la base de datos*/
+
     @Override
     public void performCreateEstablishment(DatabaseReference Database_Reference, Establecimiento_Modelo Establecimiento) {
 
@@ -49,6 +50,7 @@ public class RegistrarEstablecimiento_Interactor implements RegistrarEstablecimi
     }
 
     /*Guardando el Logo del establecimiento en el Storage*/
+
     @Override
     public void performUploadLogo(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri) {
 
@@ -76,11 +78,10 @@ public class RegistrarEstablecimiento_Interactor implements RegistrarEstablecimi
             }
         });
 
-
-
     }
 
     /*Guardando la imagen del documento del establecimiento en el Storage*/
+
     @Override
     public void performUploadDocument(StorageReference Storage_Reference, String ID_Establecimiento, Uri Documento_Uri) {
 
@@ -109,6 +110,7 @@ public class RegistrarEstablecimiento_Interactor implements RegistrarEstablecimi
     }
 
     /*Obteniendo el ID del usuario del SharedPreferences*/
+
     @Override
     public void performGetSessionData(Context Contexto) {
 

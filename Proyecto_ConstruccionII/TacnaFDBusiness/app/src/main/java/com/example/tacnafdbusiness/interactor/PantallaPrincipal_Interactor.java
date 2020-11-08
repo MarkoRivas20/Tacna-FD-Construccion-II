@@ -14,6 +14,7 @@ public class PantallaPrincipal_Interactor implements PantallaPrincipal.Interacto
     }
 
     /*Obteniendo el Correo_Electronico, Nombre_Usuario del SharedPreferences*/
+
     @Override
     public void performGetSessionData(Context Contexto) {
 
@@ -31,6 +32,7 @@ public class PantallaPrincipal_Interactor implements PantallaPrincipal.Interacto
     }
 
     /*Actualizando correo_electronico, nombre_usuario ,id_usuario del SharedPreferences*/
+
     @Override
     public void performCloseSession(Context Contexto) {
 

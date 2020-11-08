@@ -15,6 +15,7 @@ public class OpcionesEstablecimiento_Interactor implements OpcionesEstablecimien
     }
 
     /*Obteniendo el Nombre_Establecimiento, Url_Logo del SharedPreferences*/
+
     @Override
     public void performGetEstablishmentInfo(Context Contexto) {
 

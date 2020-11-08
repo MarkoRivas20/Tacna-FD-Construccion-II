@@ -25,6 +25,7 @@ public class RegistrarCupon_Interactor implements RegistrarCupon.Interactor {
     }
 
     /*Registrando los datos de un nuevo Cupon en la base de datos*/
+
     @Override
     public void performSaveCoupon(DatabaseReference Database_Reference, Cupon_Modelo Cupon) {
 
@@ -44,6 +45,7 @@ public class RegistrarCupon_Interactor implements RegistrarCupon.Interactor {
     }
 
     /*Guardando la Imagen del Cupon en el Storage*/
+
     @Override
     public void performUploadCouponImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri) {
 
@@ -71,6 +73,7 @@ public class RegistrarCupon_Interactor implements RegistrarCupon.Interactor {
     }
 
     /*Obteniendo el ID del establecimiento del SharedPreferences*/
+
     @Override
     public void performGetEstablishmentInfo(Context Contexto) {
 

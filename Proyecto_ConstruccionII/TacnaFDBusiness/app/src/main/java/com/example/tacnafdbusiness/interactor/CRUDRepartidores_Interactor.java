@@ -37,6 +37,7 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
     }
 
     /*Registrando un repartidor al establecimiento*/
+
     @Override
     public void performSaveDeliveryMan(DatabaseReference Database_Reference, RepartidorEstablecimiento_Modelo Repartidor_Establecimiento) {
 
@@ -55,7 +56,9 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
             }
         });
     }
+
     /*Buscando un repartidor por su correo electronico*/
+
     @Override
     public void performSearchDeliveryMan(DatabaseReference Database_Reference, String Correo_Electronico_Repartidor) {
 
@@ -81,7 +84,9 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
             }
         });
     }
+
     /*Obteneniendo la información de los repartidores registrados en el establecimiento*/
+
     @Override
     public void performSearchDeliveryManInfo(DatabaseReference Database_Reference, ArrayList<RepartidorEstablecimiento_Modelo> Repartidores_Establecimiento) {
         Repartidores.clear();
@@ -108,9 +113,11 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
             });
         }
 
+
     }
 
     /*Eliminado al repartidor del establecimiento*/
+
     @Override
     public void performTakeOutDeliveryMan(final DatabaseReference Database_Reference, String ID_Repartidor_Establecimiento, final String ID_Establecimiento) {
 
@@ -150,7 +157,9 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
 
 
     }
+
     /*Buscando los repartidores que estan registrados en el establecimiento*/
+
     @Override
     public void performListDeliveryMen(DatabaseReference Database_Reference, String ID_Establecimiento) {
 
@@ -182,7 +191,9 @@ public class CRUDRepartidores_Interactor implements CRUDRepartidores.Interactor 
             }
         });
     }
+
     /*Obteniendo el ID del establecimiento del SharedPreferences*/
+
     @Override
     public void performGetEstablishmentInfo(Context Contexto) {
 

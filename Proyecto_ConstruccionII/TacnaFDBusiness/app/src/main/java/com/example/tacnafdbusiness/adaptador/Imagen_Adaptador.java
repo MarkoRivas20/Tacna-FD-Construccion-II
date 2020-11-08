@@ -50,16 +50,13 @@ public class Imagen_Adaptador extends RecyclerView.Adapter<Imagen_Adaptador.Imag
 
                 if (position != RecyclerView.NO_POSITION)
                 {
-
                     switch (item.getItemId())
                     {
                         case 1:
-
                             Listener.onDelete(position);
                             return true;
 
                         case 2:
-
                             Listener.onCancel(position);
                             return true;
 

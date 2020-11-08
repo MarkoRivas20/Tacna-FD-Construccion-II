@@ -25,6 +25,7 @@ public class RegistrarItemMenu_Interactor implements RegistrarItemMenu.Interacto
     }
 
     /*Registrando los datos de un nuevo item Menu en la base de datos*/
+
     @Override
     public void performSaveItemMenu(DatabaseReference Database_Reference, ItemMenu_Modelo Item_Menu) {
 
@@ -44,6 +45,7 @@ public class RegistrarItemMenu_Interactor implements RegistrarItemMenu.Interacto
     }
 
     /*Guardando la Imagen del Item Menu en el Storage*/
+
     @Override
     public void performUploadItemMenuImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri) {
 
@@ -72,6 +74,7 @@ public class RegistrarItemMenu_Interactor implements RegistrarItemMenu.Interacto
     }
 
     /*Obteniendo ID establecimiento del SharedPreferences*/
+
     @Override
     public void performGetEstablishmentInfo(Context Contexto) {
 

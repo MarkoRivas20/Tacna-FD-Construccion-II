@@ -12,7 +12,8 @@ public class Cupon_Modelo {
     private String Fecha_Fin;
     private String Estado;
 
-    public Cupon_Modelo(String id_Cupon, String id_Establecimiento, String titulo, String url_Imagen, String descripcion, int porcentaje_Descuento, String fecha_Inicio, String fecha_Fin, String estado) {
+    public Cupon_Modelo(String id_Cupon, String id_Establecimiento, String titulo, String url_Imagen, String descripcion,
+                        int porcentaje_Descuento, String fecha_Inicio, String fecha_Fin, String estado) {
         Id_Cupon = id_Cupon;
         Id_Establecimiento = id_Establecimiento;
         Titulo = titulo;
@@ -24,7 +25,8 @@ public class Cupon_Modelo {
         Estado = estado;
     }
 
-    public Cupon_Modelo(String id_Establecimiento, String titulo, String url_Imagen, String descripcion, int porcentaje_Descuento, String fecha_Inicio, String fecha_Fin, String estado) {
+    public Cupon_Modelo(String id_Establecimiento, String titulo, String url_Imagen, String descripcion, int porcentaje_Descuento,
+                        String fecha_Inicio, String fecha_Fin, String estado) {
         Id_Establecimiento = id_Establecimiento;
         Titulo = titulo;
         Url_Imagen = url_Imagen;

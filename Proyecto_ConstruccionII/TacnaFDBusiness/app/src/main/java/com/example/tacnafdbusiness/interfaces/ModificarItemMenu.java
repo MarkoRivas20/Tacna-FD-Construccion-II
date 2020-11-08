@@ -22,13 +22,15 @@ public interface ModificarItemMenu {
 
     interface Presenter{
         void UpdateItemMenuData(DatabaseReference Database_Reference, ItemMenu_Modelo Item_Menu);
-        void UpdateItemMenuImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Item_Menu, Uri Imagen_Uri);
+        void UpdateItemMenuImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Item_Menu,
+                                 Uri Imagen_Uri);
         void GetItemMenuData(DatabaseReference Database_Reference, String Id_Item_Menu);
     }
 
     interface Interactor{
         void performUpdateItemMenuData(DatabaseReference Database_Reference, ItemMenu_Modelo Item_Menu);
-        void performUpdateItemMenuImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Item_Menu, Uri Imagen_Uri);
+        void performUpdateItemMenuImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Item_Menu,
+                                        Uri Imagen_Uri);
         void performGetItemMenuData(DatabaseReference Database_Reference, String Id_Item_Menu);
     }
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tacnafdbusiness.R;
 import com.example.tacnafdbusiness.interfaces.Dashboard;
@@ -93,7 +94,7 @@ public class Dashboard_Vista extends Fragment implements Dashboard.View {
 
     @Override
     public void onGetEstablismentWithMoreReviewsFailure() {
-
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -131,7 +132,7 @@ public class Dashboard_Vista extends Fragment implements Dashboard.View {
 
     @Override
     public void onSearchEstablishmentFailure() {
-
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -153,7 +154,7 @@ public class Dashboard_Vista extends Fragment implements Dashboard.View {
 
     @Override
     public void onGetMonthSalestFailure() {
-
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override

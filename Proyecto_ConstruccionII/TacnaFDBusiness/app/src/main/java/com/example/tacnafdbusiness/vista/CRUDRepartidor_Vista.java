@@ -146,7 +146,7 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
 
     @Override
     public void onSaveDeliveryManFailure() {
-        Toast.makeText(getActivity(),"Algo paso...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -166,7 +166,7 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
 
     @Override
     public void onSearchDeliveryManFailure() {
-        Toast.makeText(getActivity(),"Algo paso...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -176,7 +176,7 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
 
     @Override
     public void onTakeOutDeliveryManFailure() {
-        Toast.makeText(getActivity(),"Algo paso...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -202,7 +202,7 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
 
     @Override
     public void onListDeliveryMenFailure() {
-        Toast.makeText(getActivity(),"Algo paso...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -213,7 +213,7 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
         Adaptador.setOnItemClickListener(new Repartidor_Adaptador.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(getActivity(),"Mantenga Presionado...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Mantenga presionado para ver las opciones", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -234,7 +234,7 @@ public class CRUDRepartidor_Vista extends Fragment implements CRUDRepartidores.V
 
     @Override
     public void onSearchDeliveryManInfoFailure() {
-        Toast.makeText(getActivity(),"Algo paso...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override

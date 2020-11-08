@@ -31,11 +31,14 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
     Window window;
 
     ModificarUsuario_Vista modificarUsuario_vista;
+    Inicio_Vista inicio_vista;
+    ListarEstablecimiento_Vista listarEstablecimiento_vista;
 
     TextView LblNombre_Nav;
     TextView LblEmail_Nav;
 
     public PantallaPrincipal_Presentador mPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,8 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
 
         setSupportActionBar(Tool_bar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        Tool_bar.setNavigationIcon(R.drawable.icon_toolbar_black);
+        Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
+        Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
 
         Navigation_View.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,Drawer_Layout,Tool_bar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
@@ -60,12 +64,14 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
         toggle.syncState();
 
         Navigation_View.setNavigationItemSelectedListener(this);
-        Navigation_View.setCheckedItem(R.id.nav_establecimiento);
+        Navigation_View.setCheckedItem(R.id.nav_inicio);
 
 
         modificarUsuario_vista = new ModificarUsuario_Vista();
+        inicio_vista = new Inicio_Vista();
+        listarEstablecimiento_vista = new ListarEstablecimiento_Vista();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.fragmento,modificarUsuario_vista).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragmento,inicio_vista).commit();
 
 
         View View_Navigation = Navigation_View.getHeaderView(0);
@@ -95,11 +101,31 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
 
         switch (item.getItemId()){
 
+            case R.id.nav_inicio:
+                Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
+                Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
+                Navigation_View.setCheckedItem(R.id.nav_inicio);
+                transaction.replace(R.id.fragmento,inicio_vista);
+                break;
 
             case R.id.nav_establecimiento:
                 Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
                 Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
                 Navigation_View.setCheckedItem(R.id.nav_establecimiento);
+                transaction.replace(R.id.fragmento,listarEstablecimiento_vista);
+                break;
+
+            case R.id.nav_pedido:
+                Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
+                Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
+                Navigation_View.setCheckedItem(R.id.nav_pedido);
+                //transaction.replace(R.id.fragmento,listarEstablecimiento_vista);
+                break;
+
+            case R.id.nav_cupones:
+                Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
+                Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
+                Navigation_View.setCheckedItem(R.id.nav_cupones);
                 //transaction.replace(R.id.fragmento,listarEstablecimiento_vista);
                 break;
 

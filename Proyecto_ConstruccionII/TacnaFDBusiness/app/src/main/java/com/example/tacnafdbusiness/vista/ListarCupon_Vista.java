@@ -85,7 +85,7 @@ public class ListarCupon_Vista extends Fragment implements ListarCupon.View {
         Adaptador.setOnItemClickListener(new Cupon_Adaptador.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                Toast.makeText(getActivity(),"Mantenga presionado para ver las opciones", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -118,7 +118,7 @@ public class ListarCupon_Vista extends Fragment implements ListarCupon.View {
 
     @Override
     public void onListCouponFailure() {
-        Toast.makeText(getActivity().getApplicationContext(),"Algo paso...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override

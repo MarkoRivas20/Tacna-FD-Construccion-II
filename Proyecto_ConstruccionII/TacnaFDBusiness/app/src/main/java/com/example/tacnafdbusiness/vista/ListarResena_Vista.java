@@ -124,7 +124,7 @@ public class ListarResena_Vista extends Fragment implements ListarResena.View {
 
     @Override
     public void onGetReviewsFailure() {
-        Toast.makeText(getActivity(),"Algo paso...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -188,7 +188,7 @@ public class ListarResena_Vista extends Fragment implements ListarResena.View {
 
     @Override
     public void onSearchClientNameFailure() {
-        Toast.makeText(getActivity(),"Algo paso...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override

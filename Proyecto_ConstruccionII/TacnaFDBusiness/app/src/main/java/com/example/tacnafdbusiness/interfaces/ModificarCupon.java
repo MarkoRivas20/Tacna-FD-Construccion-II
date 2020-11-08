@@ -19,13 +19,15 @@ public interface ModificarCupon {
 
     interface Presenter{
         void UpdateCouponData(DatabaseReference Database_Reference, Cupon_Modelo Cupon);
-        void UpdateCouponImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Cupon, Uri Imagen_Uri);
+        void UpdateCouponImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Cupon,
+                               Uri Imagen_Uri);
         void GetCouponData(DatabaseReference Database_Reference, String ID_Cupon);
     }
 
     interface Interactor{
         void performUpdateCouponData(DatabaseReference Database_Reference, Cupon_Modelo Cupon);
-        void performUpdateCouponImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Cupon, Uri Imagen_Uri);
+        void performUpdateCouponImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Cupon,
+                                      Uri Imagen_Uri);
         void performGetCouponData(DatabaseReference Database_Reference, String ID_Cupon);
     }
 

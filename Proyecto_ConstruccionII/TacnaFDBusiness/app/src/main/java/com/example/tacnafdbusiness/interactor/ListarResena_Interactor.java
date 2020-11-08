@@ -29,6 +29,7 @@ public class ListarResena_Interactor implements ListarResena.Interactor {
     }
 
     /*Obteniendo las Reseñas registradas a un establecimiento*/
+
     @Override
     public void performGetReviews(DatabaseReference Database_Reference, String ID_Establecimiento) {
         Query query = Database_Reference.orderByChild("id_Establecimiento").equalTo(ID_Establecimiento);
@@ -57,10 +58,12 @@ public class ListarResena_Interactor implements ListarResena.Interactor {
     }
 
     /*Buscando el nombre del cliente por el id_Usuario_Cliente*/
+
     @Override
     public void performSearchClientName(DatabaseReference Database_Reference, final ArrayList<Resena_Modelo> Resenas) {
 
         /*Recorriendo todas la reseñas registradas al establecimiento*/
+
         for(int i = 0; i < Resenas.size(); i++)
         {
             final int Posicion = i;
@@ -77,7 +80,7 @@ public class ListarResena_Interactor implements ListarResena.Interactor {
                         Resenas.get(Posicion).setNombre_Cliente(Cliente.getNombre() + " " + Cliente.getApellido());
                     }
                     mListener.onSuccessSearchClientName(Resenas);
-                    query.removeEventListener(valueEventListener); //Removiendo el evento de escucha
+                    query.removeEventListener(valueEventListener);//Removiendo el evento de escucha
                 }
 
                 @Override
@@ -90,7 +93,9 @@ public class ListarResena_Interactor implements ListarResena.Interactor {
 
         }
     }
+
     /*Obteniendo el ID del establecimiento del SharedPreferences*/
+
     @Override
     public void performGetEstablishmentInfo(Context Contexto) {
         SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);

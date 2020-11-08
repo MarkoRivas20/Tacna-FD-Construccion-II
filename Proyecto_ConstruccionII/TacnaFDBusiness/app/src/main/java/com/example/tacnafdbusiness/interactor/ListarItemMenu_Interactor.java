@@ -30,6 +30,7 @@ public class ListarItemMenu_Interactor implements ListarItemMenu.Interactor {
     }
 
     /*Obteniendo los Items del Menu registrados en el establecimiento*/
+
     @Override
     public void performListItemMenu(DatabaseReference Database_Reference, String ID_Establecimiento) {
         Query query = Database_Reference.orderByChild("id_Establecimiento").equalTo(ID_Establecimiento);
@@ -59,10 +60,12 @@ public class ListarItemMenu_Interactor implements ListarItemMenu.Interactor {
     }
 
     /*Eliminar un Item Menu de un establecimiento*/
+
     @Override
     public void performDeleteItemMenu(DatabaseReference Database_Reference, String ID_Item_Menu, String Url_Imagen) {
 
         /*Eliminando el registro de la base de datos*/
+
         Database_Reference.child(ID_Item_Menu).removeValue().addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -76,6 +79,7 @@ public class ListarItemMenu_Interactor implements ListarItemMenu.Interactor {
         });
 
         /*Eliminando la Imagen de Storage*/
+
         StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(Url_Imagen);
 
         reference.delete().addOnFailureListener(new OnFailureListener() {
@@ -90,7 +94,9 @@ public class ListarItemMenu_Interactor implements ListarItemMenu.Interactor {
             }
         });
     }
+
     /*Obteniendo el ID del establecimiento del SharedPreferences*/
+
     @Override
     public void performGetEstablishmentInfo(Context Contexto) {
 

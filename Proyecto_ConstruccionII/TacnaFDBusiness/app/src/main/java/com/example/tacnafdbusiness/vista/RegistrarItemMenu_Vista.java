@@ -65,8 +65,6 @@ public class RegistrarItemMenu_Vista extends Fragment implements RegistrarItemMe
     String ID_Establecimiento = "";
     String ID_Item_Menu = "";
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -32,7 +32,8 @@ public class ModificarEstablecimiento_Presentador implements ModificarEstablecim
     }
 
     @Override
-    public void UpdateEstablismentDocument(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Document_Actual, String ID_Establecimiento, Uri Documento_Uri) {
+    public void UpdateEstablismentDocument(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Document_Actual, String ID_Establecimiento,
+                                           Uri Documento_Uri) {
         mInteractor.performUpdateEstablismentDocument(Storage_Reference, Database_Reference, Url_Document_Actual, ID_Establecimiento, Documento_Uri);
     }
 

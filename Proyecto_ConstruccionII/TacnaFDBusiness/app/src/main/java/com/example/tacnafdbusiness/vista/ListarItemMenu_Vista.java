@@ -93,7 +93,7 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
         Adaptador.setOnItemClickListener(new ItemMenu_Adaptador.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                Toast.makeText(getActivity(),"Mantenga presionado para ver las opciones", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -130,7 +130,7 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
 
     @Override
     public void onListItemMenuFailure() {
-        Toast.makeText(getActivity().getApplicationContext(),"Algo paso...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -140,7 +140,7 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
 
     @Override
     public void onDeleteItemMenuFailure() {
-        Toast.makeText(getActivity().getApplicationContext(),"Algo paso...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override

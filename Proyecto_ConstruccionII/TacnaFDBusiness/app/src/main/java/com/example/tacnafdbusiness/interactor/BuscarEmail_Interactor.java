@@ -36,6 +36,7 @@ public class BuscarEmail_Interactor implements BuscarEmail.Interactor {
     }
 
     /*Buscar si existe un usuario con el correo electronico enviado*/
+
     @Override
     public void performSearchEmail(DatabaseReference Database_Reference, final String Correo_Electronico, final int Codigo) {
 
@@ -69,11 +70,11 @@ public class BuscarEmail_Interactor implements BuscarEmail.Interactor {
         });
 
     }
-     /*Manda el codigo de recuperacion al correo electronico*/
+
+    /*Manda el codigo de recuperacion al correo electronico*/
+
     @Override
     public void performSendEmail(String Correo_Electronico, int Codigo) {
-
-
 
         String Mensaje = "Recientemente ha solicitado restablecer la contraseña de la cuenta asociada con esta dirección de correo electrónico. " +
                 "\n Introduzca este código en página de restablecimiento de contraseñas. \n " + Codigo;
@@ -82,6 +83,7 @@ public class BuscarEmail_Interactor implements BuscarEmail.Interactor {
         StrictMode.setThreadPolicy(policy);
 
         /*configuraciones para el envio del correo*/
+
         Properties properties = new Properties();
         properties.put("mail.smtp.host","smtp.googlemail.com");
         properties.put("mail.smtp.socketFactory.port","465");
@@ -90,6 +92,7 @@ public class BuscarEmail_Interactor implements BuscarEmail.Interactor {
         properties.put("mail.smtp.port","465");
 
         /*iniciar sesion con el correo de la aplicacion*/
+
         try{
 
             Sesion = Session.getDefaultInstance(properties, new Authenticator() {
@@ -100,6 +103,7 @@ public class BuscarEmail_Interactor implements BuscarEmail.Interactor {
             });
 
             /*Aqui se envia el correo*/
+
             if (Sesion != null)
             {
                 Message message = new MimeMessage(Sesion);

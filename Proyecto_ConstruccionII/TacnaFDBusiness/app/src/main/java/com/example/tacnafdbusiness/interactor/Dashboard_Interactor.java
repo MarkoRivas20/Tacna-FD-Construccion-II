@@ -35,7 +35,9 @@ public class Dashboard_Interactor implements Dashboard.Interactor {
     public Dashboard_Interactor(Dashboard.onOperationListener mListener) {
         this.mListener = mListener;
     }
+
     /*Buscando los establecimientos que tiene registrado un usuario*/
+
     @Override
     public void performSearchEstablishment(DatabaseReference Database_Reference, String ID_Usuario) {
 
@@ -67,10 +69,12 @@ public class Dashboard_Interactor implements Dashboard.Interactor {
     }
 
     /*Buscando el establecimiento con mas comentarios*/
+
     @Override
     public void performGetEstablismentWithMoreReviews(DatabaseReference Database_Reference, final ArrayList<Establecimiento_Modelo> Establecimientos) {
 
         /*Recorrer los establecimientos que tiene el usuario*/
+
         for(int i = 0; i < Establecimientos.size(); i++)
         {
             final int posicion = i;
@@ -106,6 +110,7 @@ public class Dashboard_Interactor implements Dashboard.Interactor {
     }
 
     /*Obteniendo los pedidos del mes*/
+
     @Override
     public void performGetMonthSales(DatabaseReference Database_Reference, final ArrayList<Establecimiento_Modelo> Establecimientos, final String Numero_Mes) {
 
@@ -117,17 +122,19 @@ public class Dashboard_Interactor implements Dashboard.Interactor {
                 contador_mayor=0;
                 Nombre_Establecimiento_Mas_Ventas = null;
 
+                /*Recorriengo los establecimientos del usuario*/
+
                 for(DataSnapshot postSnapshot : snapshot.getChildren())
                 {
                     Pedido_Modelo Pedido = postSnapshot.getValue(Pedido_Modelo.class);
 
-                    /*Recorriengo los establecimientos del usuario*/
                     for(int i = 0; i < Establecimientos.size(); i++)
                     {
                         contador = 0;
                         if(Pedido.getID_Establecimiento().equals(Establecimientos.get(i).getID_Establecimiento()))
                         {
                             /*Compara la fecha del pedido con la fecha del mes actual(dispositivo)*/
+
                             if(Pedido.getFecha().contains("/"+Numero_Mes+"/"))
                             {
                                 Contador_Pedidos++;
@@ -162,6 +169,7 @@ public class Dashboard_Interactor implements Dashboard.Interactor {
     }
 
     /*Obteniendo el ID de usuario del SharedPreferences*/
+
     @Override
     public void performGetSessionData(Context Contexto) {
 

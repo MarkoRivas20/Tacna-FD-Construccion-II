@@ -94,8 +94,6 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
     EditText Txttelefono;
     EditText Txtdescripcion;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -121,7 +119,6 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
         Txtdescripcion = (EditText) view.findViewById(R.id.txtdescripcion);
 
         Spinner_Categoria.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Categorias));
-
         Spinner_Distrito.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Distritos));
 
         Map_View = (CustomMapView) view.findViewById(R.id.customMapView);

@@ -29,6 +29,7 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
     }
 
     /*Actualizando los datos del Item Menu en la base de datos*/
+
     @Override
     public void performUpdateItemMenuData(DatabaseReference Database_Reference, ItemMenu_Modelo Item_Menu) {
 
@@ -49,12 +50,15 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
     }
 
     /*Actualizando la Imagen del Item Menu*/
+
     @Override
-    public void performUpdateItemMenuImage(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final String Url_Imagen_Actual, String ID_Establecimiento, final String ID_Item_Menu, Uri Imagen_Uri) {
+    public void performUpdateItemMenuImage(StorageReference Storage_Reference, final DatabaseReference Database_Reference, final String Url_Imagen_Actual,
+                                           String ID_Establecimiento, final String ID_Item_Menu, Uri Imagen_Uri) {
 
         final StorageReference filePath = Storage_Reference.child(ID_Establecimiento).child("ItemMenu").child(Imagen_Uri.getLastPathSegment());
 
         /*Guardando la Imagen en el Storage*/
+
         filePath.putFile(Imagen_Uri).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -68,7 +72,9 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
                 filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(final Uri uri) {
+
                         /*Actualizando la URL de la Imagen del Item Menu en la base de datos */
+
                         Database_Reference.child(ID_Item_Menu).child("url_Imagen").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -84,6 +90,7 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
                         });
 
                         /*Elimienado la Imagen del Storage*/
+
                         StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(Url_Imagen_Actual);
                         reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -101,6 +108,7 @@ public class ModificarItemMenu_Interactor implements ModificarItemMenu.Interacto
     }
 
     /*Obtener los datos del Item Menu por su ID*/
+
     @Override
     public void performGetItemMenuData(final DatabaseReference Database_Reference, final String ID_Item_Menu) {
 

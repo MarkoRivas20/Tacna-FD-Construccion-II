@@ -30,11 +30,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="#0031A8"
             android:minHeight="?attr/actionBarSize"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/icon_toolbar_black" />
+            app:navigationIcon="@drawable/icon_toolbar" />
 
         <FrameLayout
             android:id="@+id/fragmento"

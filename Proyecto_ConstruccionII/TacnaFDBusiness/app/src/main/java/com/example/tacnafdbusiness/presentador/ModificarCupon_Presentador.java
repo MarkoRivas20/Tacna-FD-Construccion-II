@@ -24,7 +24,8 @@ public class ModificarCupon_Presentador implements ModificarCupon.Presenter, Mod
     }
 
     @Override
-    public void UpdateCouponImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Cupon, Uri Imagen_Uri) {
+    public void UpdateCouponImage(StorageReference Storage_Reference, DatabaseReference Database_Reference, String Url_Imagen_Actual, String ID_Establecimiento, String ID_Cupon,
+                                  Uri Imagen_Uri) {
         mInteractor.performUpdateCouponImage(Storage_Reference, Database_Reference, Url_Imagen_Actual, ID_Establecimiento, ID_Cupon, Imagen_Uri);
     }
 

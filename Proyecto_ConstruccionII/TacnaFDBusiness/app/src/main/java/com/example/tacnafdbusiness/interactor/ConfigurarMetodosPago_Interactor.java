@@ -29,7 +29,9 @@ public class ConfigurarMetodosPago_Interactor implements ConfigurarMetodosPago.I
     public ConfigurarMetodosPago_Interactor(ConfigurarMetodosPago.onOperationListener mListener) {
         this.mListener = mListener;
     }
-    /*Obtener los metodos de pago que estan registrados en ele stablecimiento*/
+
+    /*Obtener los metodos de pago que estan registrados en el establecimiento*/
+
     @Override
     public void performGetPaymentsMethods(final DatabaseReference Database_Reference, final String ID_Establecimiento) {
 
@@ -54,9 +56,12 @@ public class ConfigurarMetodosPago_Interactor implements ConfigurarMetodosPago.I
         };
         query.addListenerForSingleValueEvent(valueEventListener);
     }
+
     /*Actualizar los métodos del pago que tiene el establecimiento*/
+
     @Override
-    public void performUpdatePaymentsMethods(final DatabaseReference Database_Reference, final String ID_Establecimiento, final String Codigo_Paypal, final String Codigo_Culqi, final String Url_Qr) {
+    public void performUpdatePaymentsMethods(final DatabaseReference Database_Reference, final String ID_Establecimiento,
+                                             final String Codigo_Paypal, final String Codigo_Culqi, final String Url_Qr) {
 
         final Query query = Database_Reference.orderByChild("id_Establecimiento").equalTo(ID_Establecimiento);
 
@@ -71,7 +76,9 @@ public class ConfigurarMetodosPago_Interactor implements ConfigurarMetodosPago.I
                     Establecimiento.setCodigo_Paypal(Codigo_Paypal);
                     Establecimiento.setCodigo_Culqi(Codigo_Culqi);
                     Establecimiento.setUrl_Qr(Url_Qr);
+
                     /*Actualización del Establecimiento con los nuevos metodos de pago en la base de datos */
+
                     Database_Reference.child(ID_Establecimiento).setValue(Establecimiento).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -100,7 +107,9 @@ public class ConfigurarMetodosPago_Interactor implements ConfigurarMetodosPago.I
 
         query.addListenerForSingleValueEvent(valueEventListener);
     }
+
     /*Subir la imagen del QR al Firebase Storage*/
+
     @Override
     public void performUpdateQRImage(StorageReference Storage_Reference, String ID_Establecimiento, Uri Imagen_Uri) {
         final StorageReference filePath = Storage_Reference.child(ID_Establecimiento).child("MetodosPago").child(Imagen_Uri.getLastPathSegment());
@@ -123,7 +132,9 @@ public class ConfigurarMetodosPago_Interactor implements ConfigurarMetodosPago.I
             }
         });
     }
+
     /*Eliminar la imagen QR del Firebase Storage*/
+
     @Override
     public void performDeleteQRImage(String Url_Qr) {
 
@@ -141,7 +152,9 @@ public class ConfigurarMetodosPago_Interactor implements ConfigurarMetodosPago.I
             }
         });
     }
+
     /*Obteniendo el ID del Establecimiento del SharedPreferences*/
+
     @Override
     public void performGetEstablishmentInfo(Context Contexto) {
 

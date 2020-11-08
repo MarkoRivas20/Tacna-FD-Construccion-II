@@ -23,6 +23,7 @@ public class RegistroUsuario_Interactor implements RegistrarUsuario.Interactor {
     }
 
     /*Registrando los datos de un nuevo usuario en la base de datos*/
+
     @Override
     public void performCreateUser(final DatabaseReference Database_Reference, final Usuario_Modelo Usuario) {
 
@@ -36,10 +37,12 @@ public class RegistroUsuario_Interactor implements RegistrarUsuario.Interactor {
 
                 for(DataSnapshot postSnapshot : snapshot.getChildren())
                 {
+                    //si lo encuentra, el booleano sera true, si no lo encuentra sera false
                     booleano = true;
                 }
 
                 /*Si no hay ningun correo electronico igual , se registra un nuevo usuario*/
+
                 if(!booleano)
                 {
                     Database_Reference.child(Usuario.getID_Usuario()).setValue(Usuario).addOnCompleteListener(new OnCompleteListener<Void>() {

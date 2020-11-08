@@ -26,6 +26,7 @@ public class ListarCupon_Interactor implements ListarCupon.Interactor {
     }
 
     /*Obteniendo los cupones registrados en el establecimiento*/
+
     @Override
     public void performListCoupon(DatabaseReference Database_Reference, String ID_Establecimiento) {
 
@@ -56,6 +57,7 @@ public class ListarCupon_Interactor implements ListarCupon.Interactor {
     }
 
     /*Obteniendo el ID del establecimiento del SharedPreferences*/
+
     @Override
     public void performGetEstablishmentInfo(Context Contexto) {
 

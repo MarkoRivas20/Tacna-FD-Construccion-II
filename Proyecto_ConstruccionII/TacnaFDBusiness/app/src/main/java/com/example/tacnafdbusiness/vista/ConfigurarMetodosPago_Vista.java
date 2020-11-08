@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.tacnafdbusiness.R;
 import com.example.tacnafdbusiness.interfaces.ConfigurarMetodosPago;
@@ -276,7 +277,7 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
 
     @Override
     public void onGetPaymentsMethodsFailure() {
-
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -286,7 +287,7 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
 
     @Override
     public void onUpdatePaymentsMethodsFailure() {
-
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -297,7 +298,7 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
 
     @Override
     public void onUpdateQRImageFailure() {
-
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -307,7 +308,7 @@ public class ConfigurarMetodosPago_Vista extends Fragment implements ConfigurarM
 
     @Override
     public void onDeleteQRImageFailure() {
-
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
