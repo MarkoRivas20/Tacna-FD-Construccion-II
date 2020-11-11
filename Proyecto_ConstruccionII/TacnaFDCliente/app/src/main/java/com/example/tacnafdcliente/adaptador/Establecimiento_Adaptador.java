@@ -64,7 +64,7 @@ public class Establecimiento_Adaptador extends RecyclerView.Adapter<Establecimie
 
         public void bindData (Establecimiento_Modelo Establecimiento, Context Contexto) {
 
-            Picasso.with(Contexto).load(Establecimiento.getUrl_Imagen_Logo()).into(Imagen_Recycler_Establecimiento);
+            Picasso.get().load(Establecimiento.getUrl_Imagen_Logo()).into(Imagen_Recycler_Establecimiento);
             Imagen_Circle.setImageDrawable(ContextCompat.getDrawable(Contexto, R.drawable.circle_rating));
             Imagen_Comentarios.setImageDrawable(ContextCompat.getDrawable(Contexto, R.drawable.ic_person));
             Txtnombre_Recycler_Establecimiento.setText(Establecimiento.getNombre());

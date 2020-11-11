@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="No se encontro ningun establecimiento"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:visibility="gone"
             android:fontFamily="@font/convergence"
             app:layout_constraintEnd_toEndOf="parent"

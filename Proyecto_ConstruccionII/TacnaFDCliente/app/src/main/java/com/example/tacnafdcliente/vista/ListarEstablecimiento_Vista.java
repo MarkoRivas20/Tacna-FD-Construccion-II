@@ -1,5 +1,6 @@
 package com.example.tacnafdcliente.vista;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,7 +62,9 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
     ArrayList<Establecimiento_Modelo> Filtrar_Establecimientos = new ArrayList<>();
 
     Boolean Existe_Establecimiento = false;
-    Boolean Buscar_Establecimiento;
+    Boolean Buscar_Establecimiento = false;
+
+    OpcionesEstablecimiento_Vista opcionesEstablecimiento_vista;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,6 +88,8 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
 
         mPresenter.GetAllEstablishment(mReference);
 
+        opcionesEstablecimiento_vista = new OpcionesEstablecimiento_Vista();
+
 
         TxtBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +103,12 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
             @Override
             public void onClick(View v) {
                 Opciones_Busqueda.setVisibility(View.GONE);
+
+                /*ocultar teclado*/
+                
+                InputMethodManager Input_Method_Manager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                Input_Method_Manager.hideSoftInputFromWindow(BtnBuscar.getWindowToken(), 0);
+
                 mPresenter.FilterEstablishment(Establecimientos, TxtBuscar.getText().toString(), Spinner_Categoria.getSelectedItem().toString(),
                         Spinner_Distrito.getSelectedItem().toString());
             }
@@ -115,18 +127,14 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
 
                 if(!Buscar_Establecimiento)
                 {
-                    mPresenter.SaveEstablishmentInfo(getActivity(),Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento(),
-                            Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getNombre(), Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Logo(),
-                            Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Documento());
+                    mPresenter.SaveEstablishmentInfo(getActivity(),Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento());
                 }
                 else
                 {
-                    mPresenter.SaveEstablishmentInfo(getActivity(),Filtrar_Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento(),
-                            Filtrar_Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getNombre(), Filtrar_Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Logo(),
-                            Filtrar_Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getUrl_Imagen_Documento());
+                    mPresenter.SaveEstablishmentInfo(getActivity(),Filtrar_Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento());
                 }
 
-                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, opcionesEstablecimiento_vista).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, opcionesEstablecimiento_vista).addToBackStack(null).commit();
                 TxtBuscar.setText("");
             }
         });

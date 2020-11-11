@@ -17,13 +17,13 @@ public interface ListarEstablecimiento {
 
     interface Presenter{
         void GetAllEstablishment(DatabaseReference Database_Reference);
-        void SaveEstablishmentInfo(Context Contexto, String ID_Establecimiento, String Nombre_Establecimiento, String Url_Logo, String Url_Documento);
+        void SaveEstablishmentInfo(Context Contexto, String ID_Establecimiento);
         void FilterEstablishment(ArrayList<Establecimiento_Modelo> Establecimientos, String Nombre_Establecimiento, String Categoria_Establecimiento, String Distrito_Establecimiento);
     }
 
     interface Interactor{
         void performGetAllEstablishment(DatabaseReference Database_Reference);
-        void performSaveEstablishmentInfo(Context Contexto, String ID_Establecimiento, String Nombre_Establecimiento, String Url_Logo, String Url_Documento);
+        void performSaveEstablishmentInfo(Context Contexto, String ID_Establecimiento);
         void performFilterEstablishment(ArrayList<Establecimiento_Modelo> Establecimientos, String Nombre_Establecimiento, String Categoria_Establecimiento, String Distrito_Establecimiento);
     }
 

@@ -109,8 +109,8 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
                 break;
 
             case R.id.nav_establecimiento:
-                Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
-                Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
+                Tool_bar.setNavigationIcon(R.drawable.icon_toolbar_black);
+                Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#E3E3E3")));
                 Navigation_View.setCheckedItem(R.id.nav_establecimiento);
                 transaction.replace(R.id.fragmento,listarEstablecimiento_vista);
                 break;

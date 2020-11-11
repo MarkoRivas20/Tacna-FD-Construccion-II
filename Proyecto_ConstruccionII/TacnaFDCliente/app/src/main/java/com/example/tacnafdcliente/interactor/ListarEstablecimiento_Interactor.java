@@ -54,14 +54,11 @@ public class ListarEstablecimiento_Interactor implements ListarEstablecimiento.I
     }
 
     @Override
-    public void performSaveEstablishmentInfo(Context Contexto, String ID_Establecimiento, String Nombre_Establecimiento, String Url_Logo, String Url_Documento) {
+    public void performSaveEstablishmentInfo(Context Contexto, String ID_Establecimiento) {
 
         SharedPreferences sharedPref = Contexto.getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("id_establecimiento", ID_Establecimiento);
-        editor.putString("nombre_establecimiento", Nombre_Establecimiento);
-        editor.putString("url_logo", Url_Logo);
-        editor.putString("url_documento", Url_Documento);
         editor.apply();
 
     }
