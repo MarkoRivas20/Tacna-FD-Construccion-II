@@ -6,6 +6,7 @@ public class Pedido_Modelo {
     private String ID_Establecimiento;
     private String ID_Usuario_Cliente;
     private String ID_Repartidor;
+    private String Nombre_Cliente;
     private String Descripcion;
     private String Fecha;
     private Double Precio_Total;
@@ -74,6 +75,14 @@ public class Pedido_Modelo {
 
     public void setID_Repartidor(String ID_Repartidor) {
         this.ID_Repartidor = ID_Repartidor;
+    }
+
+    public String getNombre_Cliente() {
+        return Nombre_Cliente;
+    }
+
+    public void setNombre_Cliente(String nombre_Cliente) {
+        Nombre_Cliente = nombre_Cliente;
     }
 
     public String getDescripcion() {
