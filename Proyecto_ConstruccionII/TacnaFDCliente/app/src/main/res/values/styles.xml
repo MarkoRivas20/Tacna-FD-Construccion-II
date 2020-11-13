@@ -7,4 +7,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#CBCBCB</item>
+        <item name="colorControlActivated">#0052CF</item>
+
+        <item name="colorControlHighlight">#0052CF</item>
+    </style>
+
+    <style name="RatingBar2" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#CBCBCB</item>
+        <item name="colorControlActivated">#FF8000</item>
+
+        <item name="colorControlHighlight">#FF8000</item>
+    </style>
+
 </resources>

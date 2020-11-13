@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.tacnafdbusiness.R;
 import com.example.tacnafdbusiness.adaptador.Pedido_Adaptador;
+import com.example.tacnafdbusiness.adaptador.Resena_Adaptador;
 import com.example.tacnafdbusiness.interfaces.ListarPedido;
 import com.example.tacnafdbusiness.modelo.Pedido_Modelo;
 import com.example.tacnafdbusiness.presentador.ListarPedido_Presentador;
@@ -22,7 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class ListarPedido_Vista extends Fragment implements ListarPedido.View {
+
+public class ListarPedido_Vista extends Fragment  implements ListarPedido.View {
+
 
     public ListarPedido_Vista() {
         // Required empty public constructor
@@ -35,11 +38,11 @@ public class ListarPedido_Vista extends Fragment implements ListarPedido.View {
     public ListarPedido_Presentador mPresenter;
     public DatabaseReference mReference;
 
-    String ID_Establecimiento = "";
-
     TextView LblNo_Pedidos;
 
-    ArrayList<Pedido_Modelo> Pedidos = new ArrayList<>();
+    String ID_Establecimiento = "";
+
+    ArrayList <Pedido_Modelo> Pedidos = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,46 +57,49 @@ public class ListarPedido_Vista extends Fragment implements ListarPedido.View {
         mReference = FirebaseDatabase.getInstance().getReference().child("Pedido");
 
         mPresenter.GetEstablishmentInfo(getActivity());
-        mPresenter.GetReviews(mReference, ID_Establecimiento);
+        mPresenter.GetOrders(mReference, ID_Establecimiento);
 
         return view;
     }
 
     @Override
-    public void onGetReviewsSuccessful(ArrayList<Pedido_Modelo> Pedidos, Boolean Existe_Pedido) {
+    public void onGetOrdersSuccessful(ArrayList<Pedido_Modelo> Pedidos, Boolean Existe_Resena) {
         this.Pedidos = Pedidos;
 
-        if (Existe_Pedido) {
+        if(Existe_Resena)
+        {
             LblNo_Pedidos.setVisibility(View.GONE);
-            mReference = FirebaseDatabase.getInstance().getReference().child("Usuario_Cliente");
-            mPresenter.SearchClientName(mReference, Pedidos);
-        } else {
+            mReference= FirebaseDatabase.getInstance().getReference().child("Usuario_Cliente");
+            mPresenter.SearchClientName(mReference,Pedidos);
+        }
+        else
+        {
             LblNo_Pedidos.setVisibility(View.VISIBLE);
             Pedidos.clear();
             Adaptador = new Pedido_Adaptador(Pedidos, getActivity());
-            Layout_Manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+            Layout_Manager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
             Recycler_View.setLayoutManager(Layout_Manager);
             Recycler_View.setAdapter(Adaptador);
         }
     }
 
     @Override
-    public void onGetReviewsFailure() {
-        Toast.makeText(getActivity(), "Algo paso...", Toast.LENGTH_SHORT).show();
+    public void onGetOrdersFailure() {
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onSearchClientNameSuccessful(ArrayList<Pedido_Modelo> Pedidos) {
+
         Adaptador = new Pedido_Adaptador(Pedidos, getActivity());
-        Layout_Manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        Layout_Manager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         Recycler_View.setLayoutManager(Layout_Manager);
         Recycler_View.setAdapter(Adaptador);
-
     }
 
     @Override
     public void onSearchClientNameFailure() {
-        Toast.makeText(getActivity(), "Algo paso...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 
     @Override

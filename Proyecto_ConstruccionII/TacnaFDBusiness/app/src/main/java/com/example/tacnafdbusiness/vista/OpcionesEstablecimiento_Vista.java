@@ -17,7 +17,7 @@ import com.example.tacnafdbusiness.presentador.OpcionesEstablecimiento_Presentad
 import com.squareup.picasso.Picasso;
 
 
-public class    OpcionesEstablecimiento_Vista extends Fragment implements OpcionesEstablecimiento.View {
+public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesEstablecimiento.View {
 
     public OpcionesEstablecimiento_Vista() {
         // Required empty public constructor
@@ -34,8 +34,8 @@ public class    OpcionesEstablecimiento_Vista extends Fragment implements Opcion
     ImageView ImgResenas;
     ImageView ImgMenu;
     ImageView ImgCupon;
-    ImageView ImgPedidos;
     ImageView ImgMetodosPago;
+    ImageView ImgPedidos;
 
     ModificarEstablecimiento_Vista modificarEstablecimiento_vista;
     CRUDImagenes_Vista crudImagenes_vista;
@@ -43,8 +43,8 @@ public class    OpcionesEstablecimiento_Vista extends Fragment implements Opcion
     ListarResena_Vista listarResena_vista;
     ListarItemMenu_Vista listarItemMenu_vista;
     ListarCupon_Vista listarCupon_vista;
-    ListarPedido_Vista listarPedido_vista;
     ConfigurarMetodosPago_Vista configurarMetodosPago_vista;
+    ListarPedido_Vista listarPedido_vista;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,8 +60,8 @@ public class    OpcionesEstablecimiento_Vista extends Fragment implements Opcion
         ImgResenas = (ImageView) view.findViewById(R.id.ImgResenas);
         ImgMenu = (ImageView) view.findViewById(R.id.ImgMenu);
         ImgCupon = (ImageView) view.findViewById(R.id.ImgCupon);
-        ImgPedidos = (ImageView) view.findViewById(R.id.ImgPedidos);
         ImgMetodosPago = (ImageView) view.findViewById(R.id.ImgMetodosPago);
+        ImgPedidos = (ImageView) view.findViewById(R.id.ImgPedidos);
 
         modificarEstablecimiento_vista = new ModificarEstablecimiento_Vista();
         crudImagenes_vista = new CRUDImagenes_Vista();
@@ -69,8 +69,8 @@ public class    OpcionesEstablecimiento_Vista extends Fragment implements Opcion
         listarResena_vista = new ListarResena_Vista();
         listarItemMenu_vista = new ListarItemMenu_Vista();
         listarCupon_vista = new ListarCupon_Vista();
-        listarPedido_vista = new ListarPedido_Vista();
         configurarMetodosPago_vista = new ConfigurarMetodosPago_Vista();
+        listarPedido_vista = new ListarPedido_Vista();
 
         mPresenter=new OpcionesEstablecimiento_Presentador(this);
 
@@ -118,16 +118,17 @@ public class    OpcionesEstablecimiento_Vista extends Fragment implements Opcion
             }
         });
 
-        ImgPedidos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, listarPedido_vista).addToBackStack(null).commit();
-            }
-        });
         ImgMetodosPago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, configurarMetodosPago_vista).addToBackStack(null).commit();
+            }
+        });
+
+        ImgPedidos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, listarPedido_vista).addToBackStack(null).commit();
             }
         });
 

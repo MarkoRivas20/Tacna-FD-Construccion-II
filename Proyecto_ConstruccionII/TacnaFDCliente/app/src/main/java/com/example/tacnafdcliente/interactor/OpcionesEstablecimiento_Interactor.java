@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.example.tacnafdcliente.interfaces.OpcionesEstablecimiento;
 import com.example.tacnafdcliente.modelo.Establecimiento_Modelo;
 import com.example.tacnafdcliente.modelo.ImagenEstablecimiento_Modelo;
+import com.example.tacnafdcliente.modelo.Resena_Modelo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,10 +18,13 @@ import com.google.firebase.database.ValueEventListener;
 public class OpcionesEstablecimiento_Interactor implements OpcionesEstablecimiento.Interactor {
 
     private OpcionesEstablecimiento.onOperationListener mListener;
+    private ValueEventListener valueEventListener;
 
     int Contador_Imagenes = 0;
 
     String[] Imagenes_Urls;
+
+    Boolean Existe_Resena = false;
 
     public OpcionesEstablecimiento_Interactor(OpcionesEstablecimiento.onOperationListener mListener) {
         this.mListener = mListener;
@@ -92,6 +96,39 @@ public class OpcionesEstablecimiento_Interactor implements OpcionesEstablecimien
     }
 
     @Override
+    public void performGetUserReview(DatabaseReference Database_Reference, final String ID_Establecimiento, String ID_Usuario) {
+        final Query query = Database_Reference.orderByChild("id_Usuario_Cliente").equalTo(ID_Usuario);
+
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                Existe_Resena = false;
+
+                for(DataSnapshot postSnapShot : snapshot.getChildren()){
+
+                    Resena_Modelo Resena = postSnapShot.getValue(Resena_Modelo.class);
+
+                    if(Resena.getID_Establecimiento().equals(ID_Establecimiento)){
+
+                        Existe_Resena = true;
+                    }
+                }
+                query.removeEventListener(valueEventListener);
+                mListener.onSuccessGetUserReview(Existe_Resena);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                mListener.onFailureGetUserReview();
+            }
+        };
+
+        query.addValueEventListener(valueEventListener);
+
+    }
+
+    @Override
     public void performGetEstablishmentInfo(Context Contexto) {
         SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);
         String ID_Establecimiento = sharedPref.getString("id_establecimiento","");
@@ -103,6 +140,17 @@ public class OpcionesEstablecimiento_Interactor implements OpcionesEstablecimien
         else
         {
             mListener.onFailureGetEstablishmentInfo();
+        }
+    }
+
+    @Override
+    public void performGetSessionData(Context Contexto) {
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("login_usuario", Context.MODE_PRIVATE);
+        String ID_Usuario = sharedPref.getString("id_usuario","");
+
+        if(ID_Usuario.length() != 0)
+        {
+            mListener.onSuccessGetSessionData(ID_Usuario);
         }
     }
 }

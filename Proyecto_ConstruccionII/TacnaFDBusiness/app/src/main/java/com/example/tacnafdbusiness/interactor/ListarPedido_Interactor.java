@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.example.tacnafdbusiness.interfaces.ListarPedido;
 import com.example.tacnafdbusiness.modelo.Cliente_Modelo;
 import com.example.tacnafdbusiness.modelo.Pedido_Modelo;
+import com.example.tacnafdbusiness.modelo.Resena_Modelo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,9 +29,9 @@ public class ListarPedido_Interactor implements ListarPedido.Interactor {
         this.mListener = mListener;
     }
 
-    /*Obteniendo los Pedidos registradas en un establecimiento*/
     @Override
-    public void performGetReviews(DatabaseReference Database_Reference, String ID_Establecimiento) {
+    public void performGetOrders(DatabaseReference Database_Reference, String ID_Establecimiento) {
+
         Query query = Database_Reference.orderByChild("id_Establecimiento").equalTo(ID_Establecimiento);
 
         query.addValueEventListener(new ValueEventListener() {
@@ -46,21 +47,20 @@ public class ListarPedido_Interactor implements ListarPedido.Interactor {
                     Pedido_Modelo Pedido = postSnapshot.getValue(Pedido_Modelo.class);
                     Pedidos.add(Pedido);
                 }
-                mListener.onSuccessGetReviews(Pedidos, Existe_Pedido);
+                mListener.onSuccessGetOrders(Pedidos, Existe_Pedido);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                mListener.onFailureGetReviews();
+                mListener.onFailureGetOrders();
             }
         });
+
     }
 
-    /*Buscando el nombre del cliente por el id_Usuario_Cliente*/
     @Override
     public void performSearchClientName(DatabaseReference Database_Reference, final ArrayList<Pedido_Modelo> Pedidos) {
 
-        /*Recorriendo todas los Pedidos registradas al establecimiento*/
         for(int i = 0; i < Pedidos.size(); i++)
         {
             final int Posicion = i;
@@ -77,7 +77,7 @@ public class ListarPedido_Interactor implements ListarPedido.Interactor {
                         Pedidos.get(Posicion).setNombre_Cliente(Cliente.getNombre() + " " + Cliente.getApellido());
                     }
                     mListener.onSuccessSearchClientName(Pedidos);
-                    query.removeEventListener(valueEventListener); //Removiendo el evento de escucha
+                    query.removeEventListener(valueEventListener);//Removiendo el evento de escucha
                 }
 
                 @Override
@@ -89,8 +89,10 @@ public class ListarPedido_Interactor implements ListarPedido.Interactor {
             query.addListenerForSingleValueEvent(valueEventListener);
 
         }
+
+
     }
-    /*Obteniendo el ID del establecimiento del SharedPreferences*/
+
     @Override
     public void performGetEstablishmentInfo(Context Contexto) {
         SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_establecimiento", Context.MODE_PRIVATE);

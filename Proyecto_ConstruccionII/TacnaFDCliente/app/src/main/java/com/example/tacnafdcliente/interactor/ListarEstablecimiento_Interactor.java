@@ -41,7 +41,12 @@ public class ListarEstablecimiento_Interactor implements ListarEstablecimiento.I
                 {
                     Existe_Establecimiento = true;
                     Establecimiento_Modelo Establecimiento = postSnapshot.getValue(Establecimiento_Modelo.class);
-                    Establecimientos.add(Establecimiento);
+
+                    if(Establecimiento.getEstado().equals("Activo"))
+                    {
+                        Establecimientos.add(Establecimiento);
+                    }
+
                 }
                 mListener.onSuccessGetAllEstablishment(Establecimientos, Existe_Establecimiento);
             }

@@ -74,12 +74,12 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
         if(Existe_Item_Menu)
         {
             LblNo_Items_Menu.setVisibility(View.GONE);
-            BtnRealizar_Pedido.setVisibility(View.GONE);
+            BtnRealizar_Pedido.setVisibility(View.VISIBLE);
         }
         else
         {
             LblNo_Items_Menu.setVisibility(View.VISIBLE);
-            BtnRealizar_Pedido.setVisibility(View.VISIBLE);
+            BtnRealizar_Pedido.setVisibility(View.GONE);
         }
     }
 

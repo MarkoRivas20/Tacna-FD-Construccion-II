@@ -28,8 +28,18 @@ public class OpcionesEstablecimiento_Presentador implements OpcionesEstablecimie
     }
 
     @Override
+    public void GetUserReview(DatabaseReference Database_Reference, String ID_Establecimiento, String ID_Usuario) {
+        mInteractor.performGetUserReview(Database_Reference, ID_Establecimiento, ID_Usuario);
+    }
+
+    @Override
     public void GetEstablishmentInfo(Context Contexto) {
         mInteractor.performGetEstablishmentInfo(Contexto);
+    }
+
+    @Override
+    public void GetSessionData(Context Contexto) {
+        mInteractor.performGetSessionData(Contexto);
     }
 
     @Override
@@ -53,6 +63,16 @@ public class OpcionesEstablecimiento_Presentador implements OpcionesEstablecimie
     }
 
     @Override
+    public void onSuccessGetUserReview(Boolean Existe_Resena) {
+        mView.onGetUserReviewSuccessful(Existe_Resena);
+    }
+
+    @Override
+    public void onFailureGetUserReview() {
+        mView.onGetUserReviewFailure();
+    }
+
+    @Override
     public void onSuccessGetEstablishmentInfo(String Id_Establecimiento) {
         mView.onGetEstablishmentInfoSuccessful(Id_Establecimiento);
     }
@@ -60,5 +80,10 @@ public class OpcionesEstablecimiento_Presentador implements OpcionesEstablecimie
     @Override
     public void onFailureGetEstablishmentInfo() {
         mView.onGetEstablishmentInfoFailure();
+    }
+
+    @Override
+    public void onSuccessGetSessionData(String ID_Usuario) {
+        mView.onGetSessionDataSuccessful(ID_Usuario);
     }
 }

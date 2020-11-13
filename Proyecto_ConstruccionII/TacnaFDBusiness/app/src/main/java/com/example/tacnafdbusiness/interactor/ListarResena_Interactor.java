@@ -89,7 +89,7 @@ public class ListarResena_Interactor implements ListarResena.Interactor {
                 }
             };
 
-            query.addValueEventListener(valueEventListener);
+            query.addListenerForSingleValueEvent(valueEventListener);
 
         }
     }

@@ -2,6 +2,7 @@ package com.example.tacnafdbusiness.adaptador;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class Pedido_Adaptador extends RecyclerView.Adapter <Pedido_Adaptador.Ped
         public TextView TxtDescripcion_Recycler_Pedido;
         public TextView TxtFecha_Recycler_Pedido;
         public TextView TxtPrecio_Recycler_Pedido;
-        public ImageView Imagen_Recycler_Color;
+        public ImageView ImgEstado;
 
         public PedidoViewHolder (View v) {
             super(v);
@@ -36,7 +37,7 @@ public class Pedido_Adaptador extends RecyclerView.Adapter <Pedido_Adaptador.Ped
             TxtDescripcion_Recycler_Pedido = (TextView) v.findViewById(R.id.TxtDescripcion_Recycler_Pedido);
             TxtFecha_Recycler_Pedido = (TextView) v.findViewById(R.id.TxtFecha_Recycler_Pedido);
             TxtPrecio_Recycler_Pedido = (TextView) v.findViewById(R.id.TxtPrecio_Recycler_Pedido);
-            Imagen_Recycler_Color = (ImageView) v.findViewById(R.id.Imagen_Recycler_Color);
+            ImgEstado = (ImageView) v.findViewById(R.id.ImgEstado);
         }
 
         public void bindData (Pedido_Modelo Pedido, Context Contexto) {
@@ -44,23 +45,20 @@ public class Pedido_Adaptador extends RecyclerView.Adapter <Pedido_Adaptador.Ped
             TxtNombre_Recycler_Pedido.setText(Pedido.getNombre_Cliente());
             TxtDescripcion_Recycler_Pedido.setText(Pedido.getDescripcion());
             TxtFecha_Recycler_Pedido.setText(Pedido.getFecha());
-            TxtPrecio_Recycler_Pedido.setText("S/ " + Pedido.getPrecio_Total());
-
-            switch (Pedido.getEstado()) {
+            TxtPrecio_Recycler_Pedido.setText("S/. " + Pedido.getPrecio_Total());
+            switch (Pedido.getEstado())
+            {
                 case "Pendiente":
-                    Imagen_Recycler_Color.setBackgroundColor(Color.parseColor("#F1C40F"));
+                    ImgEstado.setBackground(new ColorDrawable(Color.parseColor("#FFC900")));
                     break;
-                case "En camino":
-                    Imagen_Recycler_Color.setBackgroundColor(Color.parseColor("#00B0D9"));
+                case "En Camino":
+                    ImgEstado.setBackground(new ColorDrawable(Color.parseColor("#00BDFF")));
                     break;
                 case "Entregado":
-                    Imagen_Recycler_Color.setBackgroundColor(Color.parseColor("#5FB238"));
+                    ImgEstado.setBackground(new ColorDrawable(Color.parseColor("#1BDF00")));
                     break;
                 case "Separado":
-                    Imagen_Recycler_Color.setBackgroundColor(Color.parseColor("#8B4EEA"));
-                    break;
-                default:
-                    Imagen_Recycler_Color.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    ImgEstado.setBackground(new ColorDrawable(Color.parseColor("#5500FF")));
                     break;
             }
         }
@@ -73,7 +71,7 @@ public class Pedido_Adaptador extends RecyclerView.Adapter <Pedido_Adaptador.Ped
 
     @Override
     public Pedido_Adaptador.PedidoViewHolder onCreateViewHolder (ViewGroup parent, int i) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_pedidos, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_pedido, parent, false);
 
         return new Pedido_Adaptador.PedidoViewHolder(v);
     }

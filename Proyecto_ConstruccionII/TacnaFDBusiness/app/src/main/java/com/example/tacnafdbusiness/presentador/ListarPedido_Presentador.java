@@ -3,6 +3,7 @@ package com.example.tacnafdbusiness.presentador;
 import android.content.Context;
 
 import com.example.tacnafdbusiness.interactor.ListarPedido_Interactor;
+import com.example.tacnafdbusiness.interactor.ListarResena_Interactor;
 import com.example.tacnafdbusiness.interfaces.ListarPedido;
 import com.example.tacnafdbusiness.modelo.Pedido_Modelo;
 import com.google.firebase.database.DatabaseReference;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class ListarPedido_Presentador implements ListarPedido.Presenter, ListarPedido.onOperationListener {
 
     private ListarPedido.View mView;
-    private ListarPedido.Interactor mInteractor;
+    private ListarPedido_Interactor mInteractor;
 
     public ListarPedido_Presentador(ListarPedido.View mView) {
         this.mView = mView;
@@ -20,8 +21,8 @@ public class ListarPedido_Presentador implements ListarPedido.Presenter, ListarP
     }
 
     @Override
-    public void GetReviews(DatabaseReference Database_Reference, String Id_Establecimiento) {
-        mInteractor.performGetReviews(Database_Reference, Id_Establecimiento);
+    public void GetOrders(DatabaseReference Database_Reference, String ID_Establecimiento) {
+        mInteractor.performGetOrders(Database_Reference, ID_Establecimiento);
     }
 
     @Override
@@ -35,13 +36,13 @@ public class ListarPedido_Presentador implements ListarPedido.Presenter, ListarP
     }
 
     @Override
-    public void onSuccessGetReviews(ArrayList<Pedido_Modelo> Pedidos, Boolean Existe_Pedido) {
-        mView.onGetReviewsSuccessful(Pedidos, Existe_Pedido);
+    public void onSuccessGetOrders(ArrayList<Pedido_Modelo> Pedidos, Boolean Existe_Resena) {
+        mView.onGetOrdersSuccessful(Pedidos, Existe_Resena);
     }
 
     @Override
-    public void onFailureGetReviews() {
-        mView.onGetReviewsFailure();
+    public void onFailureGetOrders() {
+        mView.onGetOrdersFailure();
     }
 
     @Override

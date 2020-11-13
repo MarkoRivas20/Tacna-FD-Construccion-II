@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.tacnafdcliente.R;
 import com.example.tacnafdcliente.adaptador.ViewPager_Adaptador;
+import com.example.tacnafdcliente.interfaces.GestionarResena;
 import com.example.tacnafdcliente.interfaces.InformacionEstablecimiento;
 import com.example.tacnafdcliente.interfaces.OpcionesEstablecimiento;
 import com.example.tacnafdcliente.modelo.Establecimiento_Modelo;
@@ -42,8 +43,12 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
     public OpcionesEstablecimiento_Presentador mPresenter;
     public DatabaseReference mReference_ImagenEstablecimiento;
     public DatabaseReference mReference_Establecimiento;
+    public DatabaseReference mReference_Resena;
 
     String ID_Establecimiento = "";
+    String ID_Usuario = "";
+
+    Boolean Existe_Resena = false;
 
     TextView LblNombre_Establecimiento;
 
@@ -59,6 +64,10 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
     ListarItemMenu_Vista listarItemMenu_vista;
     ListarCupon_Vista listarCupon_vista;
     InformacionEstablecimiento_Vista informacionEstablecimiento_vista;
+    RegistrarResena_Vista registrarResena_vista;
+    GestionarResena_Vista gestionarResena_vista;
+
+    Bundle Datos_Resena = new Bundle();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +79,7 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
         mPresenter = new OpcionesEstablecimiento_Presentador(this);
         mReference_ImagenEstablecimiento = FirebaseDatabase.getInstance().getReference().child("Imagen_Establecimiento");
         mReference_Establecimiento = FirebaseDatabase.getInstance().getReference().child("Establecimiento");
+        mReference_Resena = FirebaseDatabase.getInstance().getReference().child("Resena");
 
         View_Pager = view.findViewById(R.id.View_Pager);
         LblNombre_Establecimiento = (TextView) view.findViewById(R.id.LblNombre_Establecimiento);
@@ -82,10 +92,14 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
         listarItemMenu_vista = new ListarItemMenu_Vista();
         listarCupon_vista = new ListarCupon_Vista();
         informacionEstablecimiento_vista = new InformacionEstablecimiento_Vista();
+        registrarResena_vista = new RegistrarResena_Vista();
+        gestionarResena_vista = new GestionarResena_Vista();
 
         mPresenter.GetEstablishmentInfo(getActivity());
         mPresenter.GetImagesEstablishment(mReference_ImagenEstablecimiento, ID_Establecimiento);
         mPresenter.GetEstablishmentData(mReference_Establecimiento, ID_Establecimiento);
+        mPresenter.GetSessionData(getActivity());
+        mPresenter.GetUserReview(mReference_Resena, ID_Establecimiento, ID_Usuario);
 
         ImgDatos_Generales.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +129,22 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, listarCupon_vista).addToBackStack(null).commit();
+            }
+        });
+
+        ImgResenas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(Existe_Resena)
+                {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, gestionarResena_vista).addToBackStack(null).commit();
+                }
+                else
+                {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, registrarResena_vista).addToBackStack(null).commit();
+                }
+
             }
         });
 
@@ -148,6 +178,16 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
     }
 
     @Override
+    public void onGetUserReviewSuccessful(Boolean Existe_Resena) {
+        this.Existe_Resena = Existe_Resena;
+    }
+
+    @Override
+    public void onGetUserReviewFailure() {
+        Toast.makeText(getActivity(),"Algo salio mal",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onGetEstablishmentInfoSuccessful(String Id_Establecimiento) {
         ID_Establecimiento = Id_Establecimiento;
     }
@@ -155,5 +195,10 @@ public class OpcionesEstablecimiento_Vista extends Fragment implements OpcionesE
     @Override
     public void onGetEstablishmentInfoFailure() {
         Toast.makeText(getActivity(),"Algo salio mal",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onGetSessionDataSuccessful(String ID_Usuario) {
+        this.ID_Usuario = ID_Usuario;
     }
 }

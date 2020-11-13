@@ -30,21 +30,9 @@
                 tools:layout_editor_absoluteX="0dp" />
 
             <TextView
-                android:id="@+id/LblEstado1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="76dp"
-                android:text="Pendiente"
-                android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@+id/LblImage_Color1"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:fontFamily="@font/convergence"
                 android:text="Pedidos"
                 android:textColor="#fff"
@@ -56,94 +44,100 @@
 
             </TextView>
 
-
-
             <ImageView
-                android:id="@+id/LblImage_Color1"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginStart="24dp"
-                android:background="#F1C40F"
-                android:scaleType="fitXY"
+                android:id="@+id/imageView11"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="25dp"
+                android:background="#FFC900"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/LblEstado1" />
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
             <TextView
-                android:id="@+id/LblEstado2"
+                android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="En camino"
-                android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@+id/LblImage_Color2"
-                app:layout_constraintTop_toTopOf="@+id/LblEstado1" />
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/convergence"
+                android:text="Pendiente"
+                android:textColor="#fff"
+                app:layout_constraintStart_toEndOf="@+id/imageView11"
+                app:layout_constraintTop_toTopOf="@+id/imageView11" />
 
             <ImageView
-                android:id="@+id/LblImage_Color4"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginStart="160dp"
-                android:layout_marginTop="24dp"
-                android:background="#8B4EEA"
-                android:scaleType="fitXY"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/LblImage_Color2" />
-
-            <ImageView
-                android:id="@+id/LblImage_Color2"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginStart="160dp"
-                android:background="#00B0D9"
-                android:scaleType="fitXY"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/LblEstado1" />
-
-            <ImageView
-                android:id="@+id/LblImage_Color3"
-                android:layout_width="11dp"
-                android:layout_height="13dp"
-                android:layout_marginStart="300dp"
-                android:layout_marginTop="4dp"
-                android:background="#5FB238"
-                android:scaleType="fitXY"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/LblEstado2" />
+                android:id="@+id/imageView12"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:background="#00BDFF"
+                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintTop_toTopOf="@+id/imageView11" />
 
             <TextView
-                android:id="@+id/LblEstado3"
+                android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/convergence"
+                android:text="En Camino"
+                android:textColor="#fff"
+                app:layout_constraintStart_toEndOf="@+id/imageView12"
+                app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:background="#1BDF00"
+                app:layout_constraintStart_toEndOf="@+id/textView13"
+                app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/convergence"
                 android:text="Entregado"
-                android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@+id/LblImage_Color3"
-                app:layout_constraintTop_toTopOf="@+id/LblEstado2" />
+                android:textColor="#fff"
+                app:layout_constraintStart_toEndOf="@+id/imageView13"
+                app:layout_constraintTop_toTopOf="@+id/imageView13" />
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="20dp"
+                android:background="#5500FF"
+                app:layout_constraintStart_toStartOf="@+id/imageView12"
+                app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
             <TextView
-                android:id="@+id/LblEstado4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:fontFamily="@font/convergence"
                 android:text="Separado"
-                android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@+id/LblImage_Color4"
-                app:layout_constraintTop_toBottomOf="@+id/LblEstado3" />
+                android:layout_marginStart="10dp"
+                android:textColor="#fff"
+                app:layout_constraintStart_toEndOf="@+id/imageView14"
+                app:layout_constraintTop_toTopOf="@+id/imageView14" />
 
             <TextView
                 android:id="@+id/LblNo_Pedidos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:fontFamily="@font/convergence"
-                android:text="Su pedido esta vacio"
+                android:text="No hay pedidos realizados"
                 android:textColor="#000"
+                android:layout_marginTop="130dp"
                 android:visibility="gone"
+                android:fontFamily="@font/convergence"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/LblEstado4" />
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -151,7 +145,7 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="150dp"
             app:layout_constraintTop_toTopOf="parent">
 
 
@@ -160,13 +154,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="10dp"
-                android:paddingTop="25dp"
+                android:paddingTop="30dp"
                 android:paddingRight="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 tools:layout_editor_absoluteX="0dp">
-
 
             </androidx.recyclerview.widget.RecyclerView>
 
