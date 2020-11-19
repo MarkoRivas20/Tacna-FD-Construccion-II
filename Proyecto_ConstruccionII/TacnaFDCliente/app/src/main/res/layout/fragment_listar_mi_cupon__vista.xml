@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".vista.ListarMiCupon_Vista">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/perfil"
+        android:scaleType="fitXY"
+        >
+
+    </ImageView>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="25dp"
+            android:paddingLeft="25dp">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/convergence"
+                android:text="Mis Cupones"
+                android:textColor="#fff"
+                android:textSize="36sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/convergence"
+                android:textAlignment="center"
+                android:text="Cuando realizas una reseña a un establecimiento ganaras 1 punto y cada 5 puntos acumulados generara un cupon al azar de cualquier establecimiento"
+                android:textColor="#fff"
+                app:layout_constraintEnd_toEndOf="@+id/textView4"
+                app:layout_constraintHorizontal_bias="0.509"
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            </TextView>
+
+            <com.marcinmoskala.arcseekbar.ArcSeekBar
+                android:id="@+id/Seekbar"
+                android:layout_width="230dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7"
+                app:progressBackgroundColor="@color/slider_background"
+                app:progressBackgroundWidth="20dp"
+                app:progressColor="#E96D53"
+                app:progressWidth="20dp"
+                app:progress="2"
+                app:maxProgress="5"
+                app:roundEdges="true"
+                app:thumb="@color/slider_background">
+
+            </com.marcinmoskala.arcseekbar.ArcSeekBar>
+
+            <TextView
+                android:id="@+id/TxtContador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:text="5"
+                android:textColor="#000"
+                android:textSize="30dp"
+                android:fontFamily="@font/convergence"
+                app:layout_constraintEnd_toEndOf="@+id/Seekbar"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="@+id/Seekbar"
+                app:layout_constraintTop_toTopOf="@+id/Seekbar" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Punto(s)"
+                android:textSize="20dp"
+                android:fontFamily="@font/convergence"
+                android:textColor="#000"
+                app:layout_constraintBottom_toBottomOf="@+id/Seekbar"
+                app:layout_constraintEnd_toEndOf="@+id/Seekbar"
+                app:layout_constraintStart_toStartOf="@+id/Seekbar" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:fontFamily="@font/convergence"
+                android:text="Lista de Cupones"
+                android:textColor="#000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Seekbar">
+
+            </TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Recycler_Mis_Cupones"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:paddingRight="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView24"
+                tools:layout_editor_absoluteX="25dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</FrameLayout>

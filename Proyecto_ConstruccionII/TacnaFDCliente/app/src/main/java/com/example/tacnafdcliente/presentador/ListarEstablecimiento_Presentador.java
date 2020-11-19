@@ -25,8 +25,8 @@ public class ListarEstablecimiento_Presentador implements ListarEstablecimiento.
     }
 
     @Override
-    public void SaveEstablishmentInfo(Context Contexto, String ID_Establecimiento) {
-        mInteractor.performSaveEstablishmentInfo(Contexto, ID_Establecimiento);
+    public void SaveEstablishmentInfo(Context Contexto, String ID_Establecimiento, String Nombre_Establecimiento) {
+        mInteractor.performSaveEstablishmentInfo(Contexto, ID_Establecimiento, Nombre_Establecimiento);
     }
 
     @Override

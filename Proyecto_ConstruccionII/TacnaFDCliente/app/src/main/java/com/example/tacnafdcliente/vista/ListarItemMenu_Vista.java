@@ -45,6 +45,8 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
 
     Button BtnRealizar_Pedido;
 
+    RealizarPedidoDatos_Vista realizarPedidoDatos_vista;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,11 +57,20 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
         LblNo_Items_Menu = (TextView) view.findViewById(R.id.LblNo_Items_Menu);
         BtnRealizar_Pedido = (Button) view.findViewById(R.id.BtnRealizar_Pedido);
 
+        realizarPedidoDatos_vista = new RealizarPedidoDatos_Vista();
+
         mPresenter =new ListarItemMenu_Presentador(this);
         mReference = FirebaseDatabase.getInstance().getReference().child("ItemMenu");
 
         mPresenter.GetEstablishmentInfo(getActivity());
         mPresenter.ListItemMenu(mReference, ID_Establecimiento);
+
+        BtnRealizar_Pedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, realizarPedidoDatos_vista).addToBackStack(null).commit();
+            }
+        });
 
         return view;
     }

@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".vista.RealizarPedidoPago_Vista">
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="6dp">
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/listar"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/convergence"
+                android:text="Detalle Pedido"
+                android:textColor="#000"
+                android:layout_marginTop="5dp"
+                android:textSize="40sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView9">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/LblNo_Items_Menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="90dp"
+                android:fontFamily="@font/convergence"
+                android:text="Este menú esta vacio"
+                android:textColor="#000"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="100dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingTop="40dp"
+                android:layout_marginBottom="10dp"
+                android:fillViewport="true"
+                app:layout_constraintBottom_toTopOf="@+id/BtnPedir"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp">
+
+                    <com.kofigyan.stateprogressbar.StateProgressBar
+                        android:id="@+id/State_ProgressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:spb_animateToCurrentProgressState="true"
+                        app:spb_checkStateCompleted="true"
+                        app:spb_currentStateDescriptionColor="#FF6901"
+                        app:spb_currentStateNumber="three"
+                        app:spb_maxStateNumber="three"
+                        app:spb_stateBackgroundColor="#BDBDBD"
+                        app:spb_stateDescriptionColor="#808080"
+                        app:spb_stateForegroundColor="#FF6901"
+                        app:spb_stateNumberBackgroundColor="#808080"
+                        app:spb_stateNumberForegroundColor="#eee">
+
+                    </com.kofigyan.stateprogressbar.StateProgressBar>
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/convergence"
+                        android:text="Cliente:"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/State_ProgressBar">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/LblNombre_Cliente"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/convergence"
+                        android:singleLine="false"
+                        android:textColor="#000"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textView18"
+                        app:layout_constraintTop_toTopOf="@+id/textView18">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/convergence"
+                        android:text="Establecimiento :"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/textView18"
+                        app:layout_constraintTop_toBottomOf="@+id/textView18">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/LblNombre_Establecimiento"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/convergence"
+                        android:singleLine="false"
+                        android:textColor="#000"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textView19"
+                        app:layout_constraintTop_toTopOf="@+id/textView19">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/convergence"
+                        android:text="Direccion :"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/textView19"
+                        app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/LblDireccion_Destino"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/convergence"
+                        android:singleLine="false"
+                        android:textColor="#000"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textView20"
+                        app:layout_constraintTop_toTopOf="@+id/textView20">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/convergence"
+                        android:text="Usted esta pidiendo :"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/textView20"
+                        app:layout_constraintTop_toBottomOf="@+id/textView20">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/LblOrden_Pedido"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/convergence"
+                        android:singleLine="false"
+                        android:text="Pedido"
+                        android:textColor="#000"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/textView21"
+                        app:layout_constraintTop_toBottomOf="@+id/textView21">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/convergence"
+                        android:text="Seleccione el método de envio :"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/LblOrden_Pedido"
+                        app:layout_constraintTop_toBottomOf="@+id/LblOrden_Pedido">
+
+                    </TextView>
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="@+id/textView22"
+                        app:layout_constraintTop_toBottomOf="@+id/textView22">
+
+                        <RadioButton
+                            android:id="@+id/RD_Repartidor_Tercero"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:buttonTint="#0031A8"
+                            android:checked="true">
+
+                        </RadioButton>
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:fontFamily="@font/convergence"
+                            android:text="Otros\nRepartidores"
+                            android:textAlignment="center"
+                            android:textColor="#000" />
+
+                        <RadioButton
+                            android:id="@+id/RD_Nuestros_Repartidores"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:visibility="gone"
+                            android:buttonTint="#0031A8">
+
+                        </RadioButton>
+
+                        <TextView
+                            android:id="@+id/LblRepartidores"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:fontFamily="@font/convergence"
+                            android:text="Nuestros\nRepartidores"
+                            android:textAlignment="center"
+                            android:textColor="#000"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/RD_Repartidor_Tercero"
+                            app:layout_constraintStart_toEndOf="@+id/RD_Repartidor_Tercero"
+                            app:layout_constraintTop_toTopOf="@+id/RD_Repartidor_Tercero" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/LblMetodo_Pago"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/convergence"
+                        android:text="Seleccione el método de pago :"
+                        android:textColor="#000"
+                        android:visibility="gone"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/radioGroup"
+                        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+                    </TextView>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/Constraint_Layout_Medios_Pago"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="@+id/LblMetodo_Pago"
+                        app:layout_constraintTop_toBottomOf="@+id/LblMetodo_Pago">
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout_Paypal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <RadioButton
+                                android:id="@+id/RD_Paypal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="#0031A8"
+                                android:checked="true">
+
+                            </RadioButton>
+
+                            <ImageView
+                                android:id="@+id/imageView10"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/paypal" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout_Tarjeta"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="@+id/LinearLayout_Paypal"
+                            app:layout_constraintTop_toBottomOf="@+id/LinearLayout_Paypal">
+
+                            <RadioButton
+                                android:id="@+id/RD_Tarjetas"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="#0031A8">
+
+                            </RadioButton>
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="45dp"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/tarjeta" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout_Contraentrega"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="@+id/LinearLayout_Tarjeta"
+                            app:layout_constraintTop_toBottomOf="@+id/LinearLayout_Tarjeta">
+
+                            <RadioButton
+                                android:id="@+id/RD_Vendemas"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:buttonTint="#0031A8">
+
+                            </RadioButton>
+
+                            <TextView
+                                android:id="@+id/textView11"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:fontFamily="@font/convergence"
+                                android:text="Pago contraentrega:"
+                                android:textColor="#000">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayout_Opciones"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/LinearLayout_Contraentrega"
+                            app:layout_constraintTop_toBottomOf="@+id/LinearLayout_Contraentrega">
+
+                            <ImageView
+                                android:id="@+id/imageView6"
+                                android:layout_width="50dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/yape" />
+
+                            <ImageView
+                                android:id="@+id/imageView7"
+                                android:layout_width="50dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/tunki" />
+
+                            <ImageView
+                                android:id="@+id/imageView8"
+                                android:layout_width="50dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/lukita" />
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/TxtSubTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/convergence"
+                        android:layout_marginTop="10dp"
+                        android:text="SubTotal: S/.0.0"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/LblMetodo_Pago">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/TxtEnvio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/convergence"
+                        android:text="Envio: S/.0.0"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        app:layout_constraintEnd_toEndOf="@+id/TxtSubTotal"
+                        app:layout_constraintTop_toBottomOf="@+id/TxtSubTotal">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/TxtTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:fontFamily="@font/convergence"
+                        android:text="Total: S/.0.0"
+                        android:textColor="#E96D53"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/TxtEnvio"
+                        app:layout_constraintTop_toBottomOf="@+id/TxtEnvio">
+
+                    </TextView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </ScrollView>
+
+            <Button
+                android:id="@+id/BtnPedir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/shape_botonnaranja"
+                android:fontFamily="@font/convergence"
+                android:text="Pedir"
+                android:textColor="#fff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

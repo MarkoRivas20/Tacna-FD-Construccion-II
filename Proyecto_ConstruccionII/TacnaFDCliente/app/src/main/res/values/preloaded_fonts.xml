@@ -2,5 +2,7 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/convergence</item>
+        <item>@font/playfair_display_sc</item>
+        <item>@font/vesper_libre</item>
     </array>
 </resources>

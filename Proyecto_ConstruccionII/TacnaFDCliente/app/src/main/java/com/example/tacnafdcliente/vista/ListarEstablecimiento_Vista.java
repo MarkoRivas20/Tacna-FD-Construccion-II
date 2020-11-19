@@ -127,11 +127,13 @@ public class ListarEstablecimiento_Vista extends Fragment implements ListarEstab
 
                 if(!Buscar_Establecimiento)
                 {
-                    mPresenter.SaveEstablishmentInfo(getActivity(),Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento());
+                    mPresenter.SaveEstablishmentInfo(getActivity(),Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento(),
+                            Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getNombre());
                 }
                 else
                 {
-                    mPresenter.SaveEstablishmentInfo(getActivity(),Filtrar_Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento());
+                    mPresenter.SaveEstablishmentInfo(getActivity(),Filtrar_Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento(),
+                            Filtrar_Establecimientos.get(Recycler_View.getChildAdapterPosition(v)).getNombre());
                 }
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, opcionesEstablecimiento_vista).addToBackStack(null).commit();

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayout_Tarjeta_Delante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_card_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/ic_chip"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="@+id/imageView3">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/tv_card_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:fontFamily="sans-serif"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                app:layout_constraintStart_toStartOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+            <TextView
+                android:id="@+id/tv_member_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="15dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/ImgTarjeta"
+                app:layout_constraintStart_toStartOf="@+id/tv_card_number"
+                app:layout_constraintTop_toBottomOf="@+id/tv_card_number" />
+
+            <TextView
+                android:id="@+id/tv_card_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                app:layout_constraintBottom_toTopOf="@+id/tv_member_name"
+                app:layout_constraintEnd_toEndOf="@+id/tv_member_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_card_number" />
+
+            <ImageView
+                android:id="@+id/ImgTarjeta"
+                android:layout_width="55dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                app:layout_constraintEnd_toEndOf="@+id/imageView3">
+
+            </ImageView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayout_Tarjeta_Atras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_card_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/tv_card_cvv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="1dp"
+                android:textColor="#000"
+                android:layout_marginTop="38dp"
+                android:layout_marginRight="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView6">
+
+            </TextView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.uphyca.creditcardedittext.CreditCardNumberEditText
+            android:id="@+id/credit_CardNumber_EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_textboxregistro"
+            android:hint="Numero de la Tarjeta"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#003152"
+            android:textColorHighlight="#0F77F6"
+            app:layout_constraintEnd_toEndOf="@+id/ConstraintLayout_Tarjeta_Delante"
+            app:layout_constraintStart_toStartOf="@+id/ConstraintLayout_Tarjeta_Delante"
+            app:layout_constraintTop_toBottomOf="@+id/ConstraintLayout_Tarjeta_Delante">
+
+        </com.uphyca.creditcardedittext.CreditCardNumberEditText>
+
+        <EditText
+            android:id="@+id/Credit_CardName_EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Nombre del Cliente"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/shape_textboxregistro"
+            android:padding="10dp"
+            android:textColor="#003152"
+            android:textColorHighlight="#0F77F6"
+            app:layout_constraintEnd_toEndOf="@+id/credit_CardNumber_EditText"
+            app:layout_constraintStart_toStartOf="@+id/credit_CardNumber_EditText"
+            app:layout_constraintTop_toBottomOf="@+id/credit_CardNumber_EditText" />
+
+        <EditText
+            android:id="@+id/TxtCorreo_Electronico"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Correo Electronico"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/shape_textboxregistro"
+            android:padding="10dp"
+            android:textColor="#003152"
+            android:textColorHighlight="#0F77F6"
+            app:layout_constraintEnd_toEndOf="@+id/Credit_CardName_EditText"
+            app:layout_constraintStart_toStartOf="@+id/Credit_CardName_EditText"
+            app:layout_constraintTop_toBottomOf="@+id/Credit_CardName_EditText" />
+
+        <com.uphyca.creditcardedittext.CreditCardDateEditText
+            android:id="@+id/Credit_CardDate_EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_textboxregistro"
+            android:hint="Fecha de Vencimiento"
+            android:padding="10dp"
+            android:textColor="#003152"
+            android:textColorHighlight="#0F77F6"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="@+id/TxtCorreo_Electronico"
+            app:layout_constraintTop_toBottomOf="@+id/TxtCorreo_Electronico">
+
+        </com.uphyca.creditcardedittext.CreditCardDateEditText>
+
+        <EditText
+            android:id="@+id/Credit_CardCVV_EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape_textboxregistro"
+            android:hint="CVV"
+            android:textColor="#003152"
+            android:textColorHighlight="#0F77F6"
+            android:padding="10dp"
+            android:maxLength="3"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/credit_CardNumber_EditText"
+            app:layout_constraintStart_toEndOf="@+id/Credit_CardDate_EditText"
+            app:layout_constraintTop_toTopOf="@+id/Credit_CardDate_EditText">
+
+        </EditText>
+
+        <Button
+            android:id="@+id/BtnPagar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_botonnaranja"
+            android:fontFamily="@font/convergence"
+            android:text="Pagar"
+            android:textColor="#fff"
+            app:layout_constraintEnd_toEndOf="@+id/Credit_CardCVV_EditText"
+            app:layout_constraintStart_toStartOf="@+id/Credit_CardDate_EditText"
+            app:layout_constraintTop_toBottomOf="@+id/Credit_CardDate_EditText">
+
+        </Button>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/BtnPagar"
+            app:layout_constraintStart_toStartOf="@+id/BtnPagar"
+            app:layout_constraintTop_toBottomOf="@+id/BtnPagar">
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

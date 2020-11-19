@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -33,6 +34,8 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
     ModificarUsuario_Vista modificarUsuario_vista;
     Inicio_Vista inicio_vista;
     ListarEstablecimiento_Vista listarEstablecimiento_vista;
+    ListarPedido_Vista listarPedido_vista;
+    ListarMiCupon_Vista listarMiCupon_vista;
 
     TextView LblNombre_Nav;
     TextView LblEmail_Nav;
@@ -47,6 +50,9 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
 
         this.window=getWindow();
         window.setStatusBarColor(Color.parseColor("#0031A8"));
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         Drawer_Layout = findViewById(R.id.drawer_layout);
         Navigation_View = findViewById(R.id.nav_view);
@@ -70,6 +76,8 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
         modificarUsuario_vista = new ModificarUsuario_Vista();
         inicio_vista = new Inicio_Vista();
         listarEstablecimiento_vista = new ListarEstablecimiento_Vista();
+        listarPedido_vista = new ListarPedido_Vista();
+        listarMiCupon_vista = new ListarMiCupon_Vista();
 
         getSupportFragmentManager().beginTransaction().add(R.id.fragmento,inicio_vista).commit();
 
@@ -119,14 +127,14 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Naviga
                 Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
                 Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
                 Navigation_View.setCheckedItem(R.id.nav_pedido);
-                //transaction.replace(R.id.fragmento,listarEstablecimiento_vista);
+                transaction.replace(R.id.fragmento,listarPedido_vista);
                 break;
 
             case R.id.nav_cupones:
                 Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
                 Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
                 Navigation_View.setCheckedItem(R.id.nav_cupones);
-                //transaction.replace(R.id.fragmento,listarEstablecimiento_vista);
+                transaction.replace(R.id.fragmento,listarMiCupon_vista);
                 break;
 
             case R.id.nav_datos:

@@ -19,7 +19,7 @@ public class Login_Interactor implements Login.Interactor {
 
     private Login.onOperationListener mListener;
 
-    private ArrayList<Usuario_Modelo> usuario_modelos=new ArrayList<>();
+    private ArrayList<Usuario_Modelo> usuario_modelos = new ArrayList<>();
 
     private String Nombre_Usuario = "";
 
