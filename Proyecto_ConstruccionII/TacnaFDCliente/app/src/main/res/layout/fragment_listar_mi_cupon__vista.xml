@@ -70,7 +70,7 @@
                 app:progressBackgroundWidth="20dp"
                 app:progressColor="#E96D53"
                 app:progressWidth="20dp"
-                app:progress="2"
+                app:progress="0"
                 app:maxProgress="5"
                 app:roundEdges="true"
                 app:thumb="@color/slider_background">
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
-                android:text="5"
+                android:text="0"
                 android:textColor="#000"
                 android:textSize="30dp"
                 android:fontFamily="@font/convergence"
@@ -116,14 +116,26 @@
 
             </TextView>
 
+            <TextView
+                android:id="@+id/LblNo_Cupon_Usuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/convergence"
+                android:text="Usted no tiene cupones"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView24">
+
+            </TextView>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Recycler_Mis_Cupones"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:paddingLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                android:paddingRight="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView24"
                 tools:layout_editor_absoluteX="25dp">

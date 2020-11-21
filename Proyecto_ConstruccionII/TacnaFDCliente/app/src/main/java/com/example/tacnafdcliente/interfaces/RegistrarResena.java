@@ -2,6 +2,8 @@ package com.example.tacnafdcliente.interfaces;
 
 import android.content.Context;
 
+import com.example.tacnafdcliente.modelo.CuponUsuario_Modelo;
+import com.example.tacnafdcliente.modelo.Cupon_Modelo;
 import com.example.tacnafdcliente.modelo.Resena_Modelo;
 import com.google.firebase.database.DatabaseReference;
 
@@ -22,6 +24,11 @@ public interface RegistrarResena {
         void onGetCurrentReviewsFailure();
         void onGetEstablishmentInfoSuccessful(String ID_Establecimiento);
         void onGetSessionDataSuccessful(String ID_Usuario);
+        void onGetNumberOfCouponsSuccessful(int Numero_Cupones);
+        void onGetActiveCouponsSuccessful(ArrayList<Cupon_Modelo> Cupones);
+        void onGetActiveCouponsFailure();
+        void onSaveCouponUserSuccessful();
+        void onSaveCouponUserFailure();
     }
 
     interface Presenter{
@@ -32,7 +39,10 @@ public interface RegistrarResena {
         void GetCurrentReviews(DatabaseReference Database_Reference, String ID_Establecimiento);
         void GetEstablishmentInfo(Context Contexto);
         void GetSessionData(Context Contexto);
-
+        void SaveNumberOfCoupons(Context Contexto, int Numero_Cupones);
+        void GetNumberOfCoupons(Context Contexto);
+        void GetActiveCoupons(DatabaseReference Database_Reference);
+        void SaveCouponUser(DatabaseReference Database_Reference, CuponUsuario_Modelo Cupon_Usuario);
     }
 
     interface Interactor{
@@ -43,7 +53,10 @@ public interface RegistrarResena {
         void performGetCurrentReviews(DatabaseReference Database_Reference, String ID_Establecimiento);
         void performGetEstablishmentInfo(Context Contexto);
         void performGetSessionData(Context Contexto);
-
+        void performSaveNumberOfCoupons(Context Contexto, int Numero_Cupones);
+        void performGetNumberOfCoupons(Context Contexto);
+        void performGetActiveCoupons(DatabaseReference Database_Reference);
+        void performSaveCouponUser(DatabaseReference Database_Reference, CuponUsuario_Modelo Cupon_Usuario);
     }
 
     interface onOperationListener{
@@ -59,6 +72,11 @@ public interface RegistrarResena {
         void onFailureGetCurrentReviews();
         void onSuccessGetEstablishmentInfo(String ID_Establecimiento);
         void onSuccessGetSessionData(String ID_Usuario);
+        void onSuccessGetNumberOfCoupons(int Numero_Cupones);
+        void onSuccessGetActiveCoupons(ArrayList<Cupon_Modelo> Cupones);
+        void onFailureGetActiveCoupons();
+        void onSuccessSaveCouponUser();
+        void onFailureSaveCouponUser();
     }
 
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.example.tacnafdcliente.interactor.RegistrarResena_Interactor;
 import com.example.tacnafdcliente.interfaces.RegistrarResena;
+import com.example.tacnafdcliente.modelo.CuponUsuario_Modelo;
+import com.example.tacnafdcliente.modelo.Cupon_Modelo;
 import com.example.tacnafdcliente.modelo.Resena_Modelo;
 import com.google.firebase.database.DatabaseReference;
 
@@ -52,6 +54,26 @@ public class RegistrarResena_Presentador implements RegistrarResena.Presenter, R
     @Override
     public void GetSessionData(Context Contexto) {
         mInteractor.performGetSessionData(Contexto);
+    }
+
+    @Override
+    public void SaveNumberOfCoupons(Context Contexto, int Numero_Cupones) {
+        mInteractor.performSaveNumberOfCoupons(Contexto, Numero_Cupones);
+    }
+
+    @Override
+    public void GetNumberOfCoupons(Context Contexto) {
+        mInteractor.performGetNumberOfCoupons(Contexto);
+    }
+
+    @Override
+    public void GetActiveCoupons(DatabaseReference Database_Reference) {
+        mInteractor.performGetActiveCoupons(Database_Reference);
+    }
+
+    @Override
+    public void SaveCouponUser(DatabaseReference Database_Reference, CuponUsuario_Modelo Cupon_Usuario) {
+        mInteractor.performSaveCouponUser(Database_Reference, Cupon_Usuario);
     }
 
     @Override
@@ -112,5 +134,30 @@ public class RegistrarResena_Presentador implements RegistrarResena.Presenter, R
     @Override
     public void onSuccessGetSessionData(String ID_Usuario) {
         mView.onGetSessionDataSuccessful(ID_Usuario);
+    }
+
+    @Override
+    public void onSuccessGetNumberOfCoupons(int Numero_Cupones) {
+        mView.onGetNumberOfCouponsSuccessful(Numero_Cupones);
+    }
+
+    @Override
+    public void onSuccessGetActiveCoupons(ArrayList<Cupon_Modelo> Cupones) {
+        mView.onGetActiveCouponsSuccessful(Cupones);
+    }
+
+    @Override
+    public void onFailureGetActiveCoupons() {
+        mView.onGetActiveCouponsFailure();
+    }
+
+    @Override
+    public void onSuccessSaveCouponUser() {
+        mView.onSaveCouponUserSuccessful();
+    }
+
+    @Override
+    public void onFailureSaveCouponUser() {
+        mView.onSaveCouponUserFailure();
     }
 }

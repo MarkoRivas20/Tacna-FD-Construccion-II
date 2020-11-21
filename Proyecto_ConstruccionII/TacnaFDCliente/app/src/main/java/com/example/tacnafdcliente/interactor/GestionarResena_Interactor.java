@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
 
 import com.example.tacnafdcliente.interfaces.GestionarResena;
+import com.example.tacnafdcliente.modelo.CuponUsuario_Modelo;
 import com.example.tacnafdcliente.modelo.Establecimiento_Modelo;
 import com.example.tacnafdcliente.modelo.Resena_Modelo;
 import com.example.tacnafdcliente.modelo.Usuario_Modelo;
@@ -26,11 +27,13 @@ public class GestionarResena_Interactor implements GestionarResena.Interactor {
     private GestionarResena.onOperationListener mListener;
 
     private ArrayList<Resena_Modelo> Resenas = new ArrayList<>();
+    private ArrayList<CuponUsuario_Modelo> Cupones_Usuario = new ArrayList<>();
 
     private ValueEventListener valueEventListener;
     private ValueEventListener valueEventListener_Get_Reviews;
     private ValueEventListener valueEventListener_Get_Current_Review;
     private ValueEventListener valueEventListener_Update_Establishment;
+    private ValueEventListener valueEventListener_Get_Coupon_User;
 
     public GestionarResena_Interactor(GestionarResena.onOperationListener mListener) {
         this.mListener = mListener;
@@ -263,5 +266,69 @@ public class GestionarResena_Interactor implements GestionarResena.Interactor {
         {
             mListener.onSuccessGetSessionData(ID_Usuario);
         }
+    }
+
+    @Override
+    public void performSaveNumberOfCoupons(Context Contexto, int Numero_Cupones) {
+        SharedPreferences sharedPref = Contexto.getSharedPreferences("numero_cupones", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("numero_cupones", Numero_Cupones);
+
+        editor.apply();
+    }
+
+    @Override
+    public void performGetNumberOfCoupons(Context Contexto) {
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("numero_cupones", Context.MODE_PRIVATE);
+        int Numero_Cupones = sharedPref.getInt("numero_cupones",0);
+
+        mListener.onSuccessGetNumberOfCoupons(Numero_Cupones);
+    }
+
+    @Override
+    public void performGetCouponUserFromUser(DatabaseReference Database_Reference, String ID_Usuario) {
+        final Query query = Database_Reference.orderByChild("id_Usuario_Cliente").equalTo(ID_Usuario);
+
+        valueEventListener_Get_Coupon_User = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                Cupones_Usuario.clear();
+
+                for(DataSnapshot postSnapshot : snapshot.getChildren())
+                {
+                    CuponUsuario_Modelo Cupon_Usuario = postSnapshot.getValue(CuponUsuario_Modelo.class);
+                    if(Cupon_Usuario.getEstado().equals("Activo"))
+                    {
+                        Cupones_Usuario.add(Cupon_Usuario);
+                    }
+
+                }
+                mListener.onSuccessGetCouponUserFromUser(Cupones_Usuario);
+                query.removeEventListener(valueEventListener_Get_Coupon_User);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                mListener.onFailureGetCouponUserFromUser();
+            }
+        };
+
+        query.addValueEventListener(valueEventListener_Get_Coupon_User);
+    }
+
+    @Override
+    public void performDeleteCouponUser(DatabaseReference Database_Reference, String ID_Cupon_Usuario) {
+        Database_Reference.child(ID_Cupon_Usuario).removeValue().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                mListener.onFailureDeleteCouponUser();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                mListener.onSuccessDeleteCouponUser();
+            }
+        });
     }
 }

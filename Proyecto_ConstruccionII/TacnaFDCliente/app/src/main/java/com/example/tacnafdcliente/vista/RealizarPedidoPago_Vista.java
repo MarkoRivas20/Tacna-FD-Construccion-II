@@ -112,7 +112,7 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
     String Patron_Fecha = "dd/MM/yyyy hh:mm:ss";
     String Fecha_Actual = "";
     String Codigo_Paypal = "";
-    String Url_Fixer = "YOUR_API_FIXER";
+    String Url_Fixer = "https://data.fixer.io/api/latest?access_key=Your Api KeY&base=PEN&symbols=USD&format=1";
     String Codigo_Culqi = "";
     String Statement_Descriptor = null;
 
@@ -566,7 +566,7 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
                 if(confirmation!=null){
                     try{
 
-                        String paymentDetails=confirmation.toJSONObject().toString(4);
+                        String paymentDetails = confirmation.toJSONObject().toString(4);
 
                         Pedido_Modelo Pedido = new Pedido_Modelo(ID_Pedido,ID_Establecimiento,ID_Usuario, Descripcion_Pedido, Fecha_Actual,
                                 Total, LblDireccion_Destino.getText().toString(), "Pendiente", "PayPal", Punto_Geografico_Destino);

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.tacnafdcliente.interactor.GestionarResena_Interactor;
 import com.example.tacnafdcliente.interfaces.GestionarResena;
+import com.example.tacnafdcliente.modelo.CuponUsuario_Modelo;
 import com.example.tacnafdcliente.modelo.Resena_Modelo;
 import com.google.firebase.database.DatabaseReference;
 
@@ -62,6 +63,26 @@ public class GestionarResena_Presentador implements GestionarResena.Presenter, G
     @Override
     public void GetSessionData(Context Contexto) {
         mInteractor.performGetSessionData(Contexto);
+    }
+
+    @Override
+    public void SaveNumberOfCoupons(Context Contexto, int Numero_Cupones) {
+        mInteractor.performSaveNumberOfCoupons(Contexto, Numero_Cupones);
+    }
+
+    @Override
+    public void GetNumberOfCoupons(Context Contexto) {
+        mInteractor.performGetNumberOfCoupons(Contexto);
+    }
+
+    @Override
+    public void GetCouponUserFromUser(DatabaseReference Database_Reference, String ID_Usuario) {
+        mInteractor.performGetCouponUserFromUser(Database_Reference, ID_Usuario);
+    }
+
+    @Override
+    public void DeleteCouponUser(DatabaseReference Database_Reference, String ID_Cupon_Usuario) {
+        mInteractor.performDeleteCouponUser(Database_Reference, ID_Cupon_Usuario);
     }
 
     @Override
@@ -142,5 +163,30 @@ public class GestionarResena_Presentador implements GestionarResena.Presenter, G
     @Override
     public void onSuccessGetSessionData(String ID_Usuario) {
         mView.onGetSessionDataSuccessful(ID_Usuario);
+    }
+
+    @Override
+    public void onSuccessGetNumberOfCoupons(int Numero_Cupones) {
+        mView.onGetNumberOfCouponsSuccessful(Numero_Cupones);
+    }
+
+    @Override
+    public void onSuccessGetCouponUserFromUser(ArrayList<CuponUsuario_Modelo> Cupones_Usuario) {
+        mView.onGetCouponUserFromUserSuccessful(Cupones_Usuario);
+    }
+
+    @Override
+    public void onFailureGetCouponUserFromUser() {
+        mView.onGetCouponUserFromUserFailure();
+    }
+
+    @Override
+    public void onSuccessDeleteCouponUser() {
+        mView.onDeleteCouponUserSuccessful();
+    }
+
+    @Override
+    public void onFailureDeleteCouponUser() {
+        mView.onDeleteCouponUserFailure();
     }
 }

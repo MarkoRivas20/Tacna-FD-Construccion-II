@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.example.tacnafdcliente.R;
 import com.example.tacnafdcliente.adaptador.Resena_Adaptador;
 import com.example.tacnafdcliente.interfaces.RegistrarResena;
+import com.example.tacnafdcliente.modelo.CuponUsuario_Modelo;
+import com.example.tacnafdcliente.modelo.Cupon_Modelo;
 import com.example.tacnafdcliente.modelo.Resena_Modelo;
 import com.example.tacnafdcliente.presentador.RegistrarResena_Presentador;
 import com.google.firebase.database.DatabaseReference;
@@ -44,10 +46,14 @@ public class RegistrarResena_Vista extends Fragment implements RegistrarResena.V
     public DatabaseReference mReference_Resena;
     public DatabaseReference mReference_Cliente;
     public DatabaseReference mReference_Establecimiento;
+    public DatabaseReference mReference_Cupon;
+    public DatabaseReference mReference_Cupon_Usuario;
 
     String ID_Establecimiento = "";
     String ID_Resena = "";
     String ID_Usuario = "";
+    String ID_Cupon = "";
+    String ID_Cupon_Usuario = "";
     String Patron_Fecha = "dd/MM/yyyy";
     String Fecha_Actual = "";
 
@@ -73,6 +79,8 @@ public class RegistrarResena_Vista extends Fragment implements RegistrarResena.V
     int Contador_Numero_Tres = 0;
     int Contador_Numero_Cuatro = 0;
     int Contador_Numero_Cinco = 0;
+    int Numero_Cupones = 0;
+    int Random = 0;
 
     Double total_puntuacion = 0.0;
     Double Puntuacion_Resena = 0.0;
@@ -111,10 +119,14 @@ public class RegistrarResena_Vista extends Fragment implements RegistrarResena.V
         gestionarResena_vista = new GestionarResena_Vista();
 
         mPresenter=new RegistrarResena_Presentador(this);
-        mReference_Resena= FirebaseDatabase.getInstance().getReference().child("Resena");
-        mReference_Cliente= FirebaseDatabase.getInstance().getReference().child("Usuario_Cliente");
-        mReference_Establecimiento= FirebaseDatabase.getInstance().getReference().child("Establecimiento");
+        mReference_Resena = FirebaseDatabase.getInstance().getReference().child("Resena");
+        mReference_Cliente = FirebaseDatabase.getInstance().getReference().child("Usuario_Cliente");
+        mReference_Establecimiento = FirebaseDatabase.getInstance().getReference().child("Establecimiento");
+        mReference_Cupon = FirebaseDatabase.getInstance().getReference().child("Cupon");
+        mReference_Cupon_Usuario = FirebaseDatabase.getInstance().getReference().child("Cupon_Usuario");
 
+
+        mPresenter.GetNumberOfCoupons(getActivity());
         mPresenter.GetEstablishmentInfo(getActivity());
         mPresenter.GetSessionData(getActivity());
         mPresenter.GetReviews(mReference_Resena,ID_Establecimiento);
@@ -240,8 +252,22 @@ public class RegistrarResena_Vista extends Fragment implements RegistrarResena.V
 
     @Override
     public void onUpdateEstablishmentSuccessful() {
-        getActivity().getSupportFragmentManager().popBackStack();
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, gestionarResena_vista).addToBackStack(null).commit();
+
+        Numero_Cupones++;
+        mPresenter.SaveNumberOfCoupons(getActivity(), Numero_Cupones);
+
+        if(Numero_Cupones >= 5)
+        {
+            Numero_Cupones = 0;
+            mPresenter.GetActiveCoupons(mReference_Cupon);
+        }
+        else
+        {
+            getActivity().getSupportFragmentManager().popBackStack();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, gestionarResena_vista).addToBackStack(null).commit();
+        }
+
+
     }
 
     @Override
@@ -274,5 +300,40 @@ public class RegistrarResena_Vista extends Fragment implements RegistrarResena.V
     @Override
     public void onGetSessionDataSuccessful(String ID_Usuario) {
         this.ID_Usuario = ID_Usuario;
+    }
+
+    @Override
+    public void onGetNumberOfCouponsSuccessful(int Numero_Cupones) {
+        this.Numero_Cupones = Numero_Cupones;
+    }
+
+    @Override
+    public void onGetActiveCouponsSuccessful(ArrayList<Cupon_Modelo> Cupones) {
+
+        mPresenter.SaveNumberOfCoupons(getActivity(), Numero_Cupones);
+
+        Random = (int) (Math.random() * Cupones.size());
+        ID_Cupon = Cupones.get(Random).getId_Cupon();
+
+        ID_Cupon_Usuario = mReference_Cupon_Usuario.push().getKey();
+        CuponUsuario_Modelo Cupon_Usuario = new CuponUsuario_Modelo(ID_Cupon_Usuario, ID_Cupon, ID_Usuario, Fecha_Actual, "Activo");
+        mPresenter.SaveCouponUser(mReference_Cupon_Usuario, Cupon_Usuario);
+    }
+
+    @Override
+    public void onGetActiveCouponsFailure() {
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSaveCouponUserSuccessful() {
+        Toast.makeText(getActivity(),"Usted gano un cupon de descuento", Toast.LENGTH_SHORT).show();
+        getActivity().getSupportFragmentManager().popBackStack();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, gestionarResena_vista).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void onSaveCouponUserFailure() {
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 }

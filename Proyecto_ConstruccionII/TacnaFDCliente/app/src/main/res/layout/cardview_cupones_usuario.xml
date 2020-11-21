@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="5dp"
+    android:layout_margin="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/TxtEstablecimiento_Recycler_Cupon_Usuario"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/convergence"
+            android:singleLine="false"
+            android:text="Nombre Item"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/Imagen_Recycler_Cupon_Usuario"
+            android:layout_width="190dp"
+            android:layout_height="170dp"
+            android:layout_alignParentTop="true"
+            android:adjustViewBounds="true"
+            android:src="@drawable/informacion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TxtEstablecimiento_Recycler_Cupon_Usuario" />
+
+        <TextView
+            android:id="@+id/TxtTitulo_Recycler_Cupon_Usuario"
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/convergence"
+            android:singleLine="false"
+            android:textAlignment="center"
+            android:text="Titulo"
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Imagen_Recycler_Cupon_Usuario" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

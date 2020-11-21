@@ -2,6 +2,7 @@ package com.example.tacnafdcliente.interfaces;
 
 import android.content.Context;
 
+import com.example.tacnafdcliente.modelo.CuponUsuario_Modelo;
 import com.example.tacnafdcliente.modelo.Resena_Modelo;
 import com.google.firebase.database.DatabaseReference;
 
@@ -26,6 +27,11 @@ public interface GestionarResena {
         void onGetCurrentReviewsFailure();
         void onGetEstablishmentInfoSuccessful(String ID_Establecimiento);
         void onGetSessionDataSuccessful(String ID_Usuario);
+        void onGetNumberOfCouponsSuccessful(int Numero_Cupones);
+        void onGetCouponUserFromUserSuccessful(ArrayList<CuponUsuario_Modelo> Cupones_Usuario);
+        void onGetCouponUserFromUserFailure();
+        void onDeleteCouponUserSuccessful();
+        void onDeleteCouponUserFailure();
     }
 
     interface Presenter{
@@ -38,6 +44,11 @@ public interface GestionarResena {
         void GetCurrentReviews(DatabaseReference Database_Reference, String ID_Establecimiento);
         void GetEstablishmentInfo(Context Contexto);
         void GetSessionData(Context Contexto);
+        void SaveNumberOfCoupons(Context Contexto, int Numero_Cupones);
+        void GetNumberOfCoupons(Context Contexto);
+        void GetCouponUserFromUser(DatabaseReference Database_Reference, String ID_Usuario);
+        void DeleteCouponUser(DatabaseReference Database_Reference, String ID_Cupon_Usuario);
+
     }
 
     interface Interactor{
@@ -50,6 +61,10 @@ public interface GestionarResena {
         void performGetCurrentReviews(DatabaseReference Database_Reference, String ID_Establecimiento);
         void performGetEstablishmentInfo(Context Contexto);
         void performGetSessionData(Context Contexto);
+        void performSaveNumberOfCoupons(Context Contexto, int Numero_Cupones);
+        void performGetNumberOfCoupons(Context Contexto);
+        void performGetCouponUserFromUser(DatabaseReference Database_Reference, String ID_Usuario);
+        void performDeleteCouponUser(DatabaseReference Database_Reference, String ID_Cupon_Usuario);
     }
 
     interface onOperationListener{
@@ -69,6 +84,11 @@ public interface GestionarResena {
         void onFailureGetCurrentReviews();
         void onSuccessGetEstablishmentInfo(String ID_Establecimiento);
         void onSuccessGetSessionData(String ID_Usuario);
+        void onSuccessGetNumberOfCoupons(int Numero_Cupones);
+        void onSuccessGetCouponUserFromUser(ArrayList<CuponUsuario_Modelo> Cupones_Usuario);
+        void onFailureGetCouponUserFromUser();
+        void onSuccessDeleteCouponUser();
+        void onFailureDeleteCouponUser();
     }
 
 }
