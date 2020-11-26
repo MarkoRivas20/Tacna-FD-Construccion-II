@@ -21,12 +21,14 @@ public interface ListarPedido {
         void GetOrders(DatabaseReference Database_Reference, String ID_Usuario);
         void SearchEstablishmentName(DatabaseReference Database_Reference, ArrayList<Pedido_Modelo> Pedidos);
         void GetSessionData(Context Contexto);
+        void SaveIDOrderAndIDEstablishment(Context Contexto, String ID_Pedido, String ID_Establecimiento);
     }
 
     interface Interactor{
         void performGetOrders(DatabaseReference Database_Reference, String ID_Usuario);
         void performSearchEstablishmentName(DatabaseReference Database_Reference, ArrayList<Pedido_Modelo> Pedidos);
         void performGetSessionData(Context Contexto);
+        void performSaveIDOrderAndIDEstablishment(Context Contexto, String ID_Pedido, String ID_Establecimiento);
     }
 
     interface onOperationListener{

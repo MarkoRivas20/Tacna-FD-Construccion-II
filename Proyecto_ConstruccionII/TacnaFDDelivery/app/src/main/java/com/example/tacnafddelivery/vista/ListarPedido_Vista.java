@@ -53,7 +53,7 @@ public class ListarPedido_Vista extends Fragment implements ListarPedido.View {
 
     String ID_Establecimiento = "";
 
-    //DetallePedido_Vista detallePedido_vista;
+    DetallePedido_Vista detallePedido_vista;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,7 +72,7 @@ public class ListarPedido_Vista extends Fragment implements ListarPedido.View {
         mReference_Establecimiento = FirebaseDatabase.getInstance().getReference().child("Establecimiento");
         mReference_Cliente = FirebaseDatabase.getInstance().getReference().child("Usuario_Cliente");
 
-        //detallePedido_vista = new DetallePedido_Vista();
+        detallePedido_vista = new DetallePedido_Vista();
 
         mPresenter.GetIDEstablishment(getActivity());
         mPresenter.GetEstablishmentInfo(mReference_Establecimiento, ID_Establecimiento);
@@ -113,10 +113,10 @@ public class ListarPedido_Vista extends Fragment implements ListarPedido.View {
             public void onClick(View v) {
 
                 if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                        && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+                && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
                 {
                     mPresenter.SaveIDOrder(getActivity(), Pedidos.get(Recycler_View.getChildAdapterPosition(v)).getID_Pedido());
-                    //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, detallePedido_vista).addToBackStack(null).commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, detallePedido_vista).addToBackStack(null).commit();
                 }
                 else
                 {

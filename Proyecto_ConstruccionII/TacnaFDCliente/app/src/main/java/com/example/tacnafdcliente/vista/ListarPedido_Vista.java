@@ -44,6 +44,8 @@ public class ListarPedido_Vista extends Fragment implements ListarPedido.View {
 
     ArrayList<Pedido_Modelo> Pedidos = new ArrayList<>();
 
+    SeguimientoPedido_Vista seguimientoPedido_vista;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class ListarPedido_Vista extends Fragment implements ListarPedido.View {
         mPresenter = new ListarPedido_Presentador(this);
         mReference_Pedido = FirebaseDatabase.getInstance().getReference().child("Pedido");
         mReference_Establecimiento= FirebaseDatabase.getInstance().getReference().child("Establecimiento");
+
+        seguimientoPedido_vista = new SeguimientoPedido_Vista();
 
         mPresenter.GetSessionData(getActivity());
         mPresenter.GetOrders(mReference_Pedido, ID_Usuario);
@@ -96,7 +100,10 @@ public class ListarPedido_Vista extends Fragment implements ListarPedido.View {
             public void onClick(View v) {
                 if(Pedidos.get(Recycler_View.getChildAdapterPosition(v)).getEstado().equals("En Camino"))
                 {
-                    Toast.makeText(getActivity(),"Exito", Toast.LENGTH_SHORT).show();
+                    mPresenter.SaveIDOrderAndIDEstablishment(getActivity(), Pedidos.get(Recycler_View.getChildAdapterPosition(v)).getID_Pedido(),
+                            Pedidos.get(Recycler_View.getChildAdapterPosition(v)).getID_Establecimiento());
+
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, seguimientoPedido_vista).addToBackStack(null).commit();
                 }
                 else
                 {

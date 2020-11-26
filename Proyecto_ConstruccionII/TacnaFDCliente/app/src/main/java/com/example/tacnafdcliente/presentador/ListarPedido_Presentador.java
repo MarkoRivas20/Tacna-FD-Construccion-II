@@ -35,6 +35,11 @@ public class ListarPedido_Presentador implements ListarPedido.Presenter, ListarP
     }
 
     @Override
+    public void SaveIDOrderAndIDEstablishment(Context Contexto, String ID_Pedido, String ID_Establecimiento) {
+        mInteractor.performSaveIDOrderAndIDEstablishment(Contexto, ID_Pedido, ID_Establecimiento);
+    }
+
+    @Override
     public void onSuccessGetOrders(ArrayList<Pedido_Modelo> Pedidos, Boolean Existe_Resena) {
         mView.onGetOrdersSuccessful(Pedidos, Existe_Resena);
     }

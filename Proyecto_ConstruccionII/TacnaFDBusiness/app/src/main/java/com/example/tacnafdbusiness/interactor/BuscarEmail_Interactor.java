@@ -27,7 +27,7 @@ public class BuscarEmail_Interactor implements BuscarEmail.Interactor {
     Session Sesion;
 
     private String Correo = "no.reply.tacnafyd@gmail.com";
-    private String Clave  = "Aqui_Contrasena";
+    private String Clave  = "Ronald2018.";
 
     private BuscarEmail.onOperationListener mListener;
 

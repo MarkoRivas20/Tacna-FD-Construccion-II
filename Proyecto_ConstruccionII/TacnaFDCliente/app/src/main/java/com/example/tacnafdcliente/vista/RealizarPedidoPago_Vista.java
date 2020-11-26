@@ -112,7 +112,7 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
     String Patron_Fecha = "dd/MM/yyyy hh:mm:ss";
     String Fecha_Actual = "";
     String Codigo_Paypal = "";
-    String Url_Fixer = "https://data.fixer.io/api/latest?access_key=Your Api KeY&base=PEN&symbols=USD&format=1";
+    String Url_Fixer = "https://data.fixer.io/api/latest?access_key=Your_Api_Key&base=PEN&symbols=USD&format=1";
     String Codigo_Culqi = "";
     String Statement_Descriptor = null;
 
@@ -160,8 +160,10 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
         final Bundle Detalle_Pedido = getArguments();
 
         mBuilder = new AlertDialog.Builder(getActivity());
+        mBuilder.setCancelable(true);
         Tarjeta_Layout = getLayoutInflater().inflate(R.layout.dialog_tarjeta,null);
         mBuilder.setView(Tarjeta_Layout);
+        dialog = mBuilder.create();
 
         mPresenter = new RealizarPedidoPago_Presentador(this);
         mReference_Cliente = FirebaseDatabase.getInstance().getReference().child("Usuario_Cliente");
@@ -252,7 +254,6 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
                     }
                     if(RD_Tarjetas.isChecked())
                     {
-                        dialog = mBuilder.create();
                         dialog.show();
                     }
                 }

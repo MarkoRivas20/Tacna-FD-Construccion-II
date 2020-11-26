@@ -102,4 +102,13 @@ public class ListarPedido_Interactor implements ListarPedido.Interactor {
             mListener.onSuccessGetSessionData(Id_Usuario);
         }
     }
+
+    @Override
+    public void performSaveIDOrderAndIDEstablishment(Context Contexto, String ID_Pedido, String ID_Establecimiento) {
+        SharedPreferences sharedPref = Contexto.getSharedPreferences("info_seguimiento_pedido", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("id_pedido", ID_Pedido);
+        editor.putString("id_establecimiento", ID_Establecimiento);
+        editor.apply();
+    }
 }
