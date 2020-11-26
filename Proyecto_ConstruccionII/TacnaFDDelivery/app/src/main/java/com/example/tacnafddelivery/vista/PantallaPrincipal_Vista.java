@@ -40,6 +40,7 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Pantal
     public PantallaPrincipal_Presentador mPresenter;
 
     ModificarUsuario_Vista modificarUsuario_vista;
+    ListarEstablecimiento_Vista listarEstablecimiento_vista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,8 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Pantal
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setNavigationIcon(R.drawable.icon_toolbar_black);
+        toolbar.setNavigationIcon(R.drawable.icon_toolbar);
+        toolbar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
@@ -67,8 +69,9 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Pantal
         navigationView.setCheckedItem(R.id.nav_establecimiento);
 
         modificarUsuario_vista = new ModificarUsuario_Vista();
+        listarEstablecimiento_vista = new ListarEstablecimiento_Vista();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.fragmento, modificarUsuario_vista).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragmento, listarEstablecimiento_vista).commit();
 
         View View_Navigation = navigationView.getHeaderView(0);
         LblNombre_Nav = View_Navigation.findViewById(R.id.lblnombre_nav);
@@ -103,7 +106,7 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Pantal
                 toolbar.setNavigationIcon(R.drawable.icon_toolbar);
                 toolbar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
                 navigationView.setCheckedItem(R.id.nav_establecimiento);
-                //transaction.replace(R.id.fragmento,listarEstablecimiento_vista);
+                transaction.replace(R.id.fragmento,listarEstablecimiento_vista);
                 break;
 
             case R.id.nav_datos:
