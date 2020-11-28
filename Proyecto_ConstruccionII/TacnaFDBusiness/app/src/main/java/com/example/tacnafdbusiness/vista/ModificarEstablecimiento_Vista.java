@@ -158,11 +158,23 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
         BtnModificar_Establecimiento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Establecimiento_Modelo Establecimiento = new Establecimiento_Modelo(ID_Establecimiento, ID_Usuario,Txtnombre.getText().toString(),
-                        Spinner_Distrito.getSelectedItem().toString(),Spinner_Categoria.getSelectedItem().toString(),Txtdireccion.getText().toString(),Txttelefono.getText().toString(),
-                        Txtdescripcion.getText().toString(),Total_Resenas,Puntuacion,Url_Logo_Actual, Url_Documento_Actual, Punto_Geografico, Spinner_Estado.getSelectedItem().toString());
 
-                mPresenter.UpdateEstablismentData(mReference, Establecimiento);
+                if(Txtnombre.getText().toString() != "" && Txtdireccion.getText().toString() != "" && Txttelefono.getText().toString() != "" &&
+                        Txtdescripcion.getText().toString() != "" && Punto_Geografico != "" && Spinner_Categoria.getSelectedItemPosition() != 0
+                        && Spinner_Distrito.getSelectedItemPosition() != 0)
+                {
+                    Establecimiento_Modelo Establecimiento = new Establecimiento_Modelo(ID_Establecimiento, ID_Usuario,Txtnombre.getText().toString(),
+                            Spinner_Distrito.getSelectedItem().toString(),Spinner_Categoria.getSelectedItem().toString(),Txtdireccion.getText().toString(),Txttelefono.getText().toString(),
+                            Txtdescripcion.getText().toString(),Total_Resenas,Puntuacion,Url_Logo_Actual, Url_Documento_Actual, Punto_Geografico, Spinner_Estado.getSelectedItem().toString());
+
+                    mPresenter.UpdateEstablismentData(mReference, Establecimiento);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Debe completar todos los campos",Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

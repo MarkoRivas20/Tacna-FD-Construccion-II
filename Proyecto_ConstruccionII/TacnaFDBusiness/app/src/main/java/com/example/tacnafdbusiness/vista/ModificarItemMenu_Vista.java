@@ -114,9 +114,20 @@ public class ModificarItemMenu_Vista extends Fragment implements ModificarItemMe
         BtnModificar_Item_Menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ItemMenu_Modelo Item_Menu = new ItemMenu_Modelo(ID_Item_Menu,ID_Establecimiento, TxtNombre.getText().toString(),
-                        TxtPrecio.getText().toString(), TxtDescripcion.getText().toString(), Url_Imagen, Spinner_Estado.getSelectedItem().toString());
-                mPresenter.UpdateItemMenuData(mReference,Item_Menu);
+
+                if(TxtNombre.getText().toString() != "" && TxtPrecio.getText().toString() != "" && TxtDescripcion.getText().toString() != "" &&
+                        Spinner_Estado.getSelectedItemPosition() != 0)
+                {
+                    ItemMenu_Modelo Item_Menu = new ItemMenu_Modelo(ID_Item_Menu,ID_Establecimiento, TxtNombre.getText().toString(),
+                            TxtPrecio.getText().toString(), TxtDescripcion.getText().toString(), Url_Imagen, Spinner_Estado.getSelectedItem().toString());
+                    mPresenter.UpdateItemMenuData(mReference,Item_Menu);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Debe completar todos los campos",Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

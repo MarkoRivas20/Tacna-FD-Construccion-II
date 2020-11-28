@@ -168,7 +168,18 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
         BtnRegistrar_Cupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.UploadCouponImage(mStorageReference, ID_Establecimiento, Image_Uri);
+
+                if(TxtFecha_Inicio.getText().toString() != "" && TxtFecha_Final.getText().toString() != "" && TxtDescripcion.getText().toString() != "" &&
+                        TxtTitulo.getText().toString() != "" && TxtPorcentaje_Descuento.getText().toString() != "" && Spinner_Estado.getSelectedItemPosition() != 0 &&
+                        !Imagen_Seleccionada)
+                {
+                    mPresenter.UploadCouponImage(mStorageReference, ID_Establecimiento, Image_Uri);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Debe completar todos los campos",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

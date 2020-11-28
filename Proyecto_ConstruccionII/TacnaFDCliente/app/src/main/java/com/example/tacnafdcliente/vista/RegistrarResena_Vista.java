@@ -134,10 +134,20 @@ public class RegistrarResena_Vista extends Fragment implements RegistrarResena.V
         BtnPublicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 ID_Resena = mReference_Resena.push().getKey();
-                 Puntuacion_Resena = (double) Ratingbar_Calificacion.getRating();
-                 Resena_Modelo Resena = new Resena_Modelo(ID_Resena, ID_Usuario, ID_Establecimiento, TxtComentario.getText().toString(), Puntuacion_Resena, Fecha_Actual);
-                 mPresenter.SaveReview(mReference_Resena, Resena);
+
+                if(TxtComentario.getText().toString() != "")
+                {
+                    ID_Resena = mReference_Resena.push().getKey();
+                    Puntuacion_Resena = (double) Ratingbar_Calificacion.getRating();
+                    Resena_Modelo Resena = new Resena_Modelo(ID_Resena, ID_Usuario, ID_Establecimiento, TxtComentario.getText().toString(), Puntuacion_Resena, Fecha_Actual);
+                    mPresenter.SaveReview(mReference_Resena, Resena);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Debe completar todos los campos", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

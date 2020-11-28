@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.tacnafdcliente.CustomMapView;
 import com.example.tacnafdcliente.R;
@@ -83,8 +84,15 @@ public class RealizarPedidoDatos_Vista extends Fragment implements OnMapReadyCal
         BtnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.SaveOrderDataSharedPreference(getActivity(),ID_Usuario, ID_Establecimiento, TxtDireccion_Destino.getText().toString(), Punto_Geografico);
 
+                if(TxtDireccion_Destino.getText().toString() != "" && Punto_Geografico != "")
+                {
+                    mPresenter.SaveOrderDataSharedPreference(getActivity(),ID_Usuario, ID_Establecimiento, TxtDireccion_Destino.getText().toString(), Punto_Geografico);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Debe completar todos los campos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

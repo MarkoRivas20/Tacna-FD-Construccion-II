@@ -108,7 +108,16 @@ public class RegistrarItemMenu_Vista extends Fragment implements RegistrarItemMe
             @Override
             public void onClick(View v) {
 
-                mPresenter.UploadItemMenuImage(mStorageReference, ID_Establecimiento, Image_Uri);
+                if(TxtNombre.getText().toString() != "" && TxtPrecio.getText().toString() != "" && TxtDescripcion.getText().toString() != "" &&
+                        Spinner_Estado.getSelectedItemPosition() != 0 && !Imagen_Seleccionada)
+                {
+                    mPresenter.UploadItemMenuImage(mStorageReference, ID_Establecimiento, Image_Uri);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Debe completar todos los campos",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

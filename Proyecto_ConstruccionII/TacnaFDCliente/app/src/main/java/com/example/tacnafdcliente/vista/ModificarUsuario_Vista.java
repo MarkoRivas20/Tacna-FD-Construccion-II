@@ -65,9 +65,18 @@ public class ModificarUsuario_Vista extends Fragment implements ModificarUsuario
             @Override
             public void onClick(View v) {
 
-                Usuario_Modelo Usuario = new Usuario_Modelo(ID_Usuario,TxtNombre.getText().toString(),TxtApellido.getText().toString(),
-                        TxtEmail.getText().toString(),TxtClave.getText().toString());
-                mPresenter.UpdateUser(mReference, Usuario);
+                if(TxtEmail.getText().toString() != "" && TxtNombre.getText().toString() != "" && TxtApellido.getText().toString() != "" && TxtClave.getText().toString() != "")
+                {
+                    Usuario_Modelo Usuario = new Usuario_Modelo(ID_Usuario,TxtNombre.getText().toString(),TxtApellido.getText().toString(),
+                            TxtEmail.getText().toString(),TxtClave.getText().toString());
+                    mPresenter.UpdateUser(mReference, Usuario);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Debe completar todos los campos", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

@@ -254,7 +254,17 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
                     }
                     if(RD_Tarjetas.isChecked())
                     {
-                        dialog.show();
+                        if(credit_CardNumber_EditText.getText().toString() != "" && Credit_CardDate_EditText.getText().toString() != "" &&
+                                Credit_CardCVV_EditText.getText().toString() != "" && Credit_CardName_EditText.getText().toString() != "" &&
+                                TxtCorreo_Electronico.getText().toString() != "")
+                        {
+                            dialog.show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(),"Debe completar todos los campos", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 }
 

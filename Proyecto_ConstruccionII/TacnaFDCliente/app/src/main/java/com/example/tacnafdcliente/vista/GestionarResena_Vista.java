@@ -137,9 +137,18 @@ public class GestionarResena_Vista extends Fragment implements GestionarResena.V
             @Override
             public void onClick(View v) {
 
-                Puntuacion_Resena = (double) Ratingbar_Calificacion.getRating();
-                Resena_Modelo Resena = new Resena_Modelo(ID_Resena, ID_Usuario, ID_Establecimiento, TxtComentario_Resena.getText().toString(), Puntuacion_Resena, Fecha_Actual);
-                mPresenter.UpdateReview(mReference_Resena, Resena);
+                if(TxtComentario_Resena.getText().toString() != "")
+                {
+                    Puntuacion_Resena = (double) Ratingbar_Calificacion.getRating();
+                    Resena_Modelo Resena = new Resena_Modelo(ID_Resena, ID_Usuario, ID_Establecimiento, TxtComentario_Resena.getText().toString(), Puntuacion_Resena, Fecha_Actual);
+                    mPresenter.UpdateReview(mReference_Resena, Resena);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Debe completar todos los campos", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

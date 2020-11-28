@@ -49,9 +49,18 @@ public class BuscarEmail_Vista extends AppCompatActivity implements BuscarEmail.
             @Override
             public void onClick(View v) {
 
-                Codigo = (int) (Math.random() * (100000-10000)) + 10000;
+                if(TxtEmail.getText().toString() != "")
+                {
+                    Codigo = (int) (Math.random() * (100000-10000)) + 10000;
 
-                mPresenter.SearchEmail(mReference, TxtEmail.getText().toString(), Codigo);
+                    mPresenter.SearchEmail(mReference, TxtEmail.getText().toString(), Codigo);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Debe completar todos los campos", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

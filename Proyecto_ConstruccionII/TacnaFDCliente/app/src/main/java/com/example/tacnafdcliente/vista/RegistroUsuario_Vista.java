@@ -52,10 +52,20 @@ public class RegistroUsuario_Vista extends AppCompatActivity implements Registra
         BtnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ID_Usuario=mReference.push().getKey();
-                Usuario_Modelo usuario_modelo=new Usuario_Modelo(ID_Usuario,TxtNombre.getText().toString(),TxtApellido.getText().toString(),
-                        TxtEmail.getText().toString(),TxtClave.getText().toString());
-                mPresenter.CreateNewUser(mReference,usuario_modelo);
+
+                if(TxtEmail.getText().toString() != "" && TxtNombre.getText().toString() != "" && TxtApellido.getText().toString() != "" && TxtClave.getText().toString() != "")
+                {
+                    String ID_Usuario=mReference.push().getKey();
+                    Usuario_Modelo usuario_modelo=new Usuario_Modelo(ID_Usuario,TxtNombre.getText().toString(),TxtApellido.getText().toString(),
+                            TxtEmail.getText().toString(),TxtClave.getText().toString());
+                    mPresenter.CreateNewUser(mReference,usuario_modelo);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Debe completar todos los campos", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

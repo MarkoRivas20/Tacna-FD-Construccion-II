@@ -166,14 +166,19 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
             @Override
             public void onClick(View v) {
 
-                ID_Establecimiento=mReference.push().getKey();
-                mPresenter.UploadLogo(mStorageReference,ID_Establecimiento,Image_Uri);
-
+                if(Txtnombre.getText().toString() != "" && Txtdireccion.getText().toString() != "" && Txttelefono.getText().toString() != "" &&
+                        Txtdescripcion.getText().toString() != "" && Punto_Geografico != "" && Spinner_Categoria.getSelectedItemPosition() != 0
+                        && Spinner_Distrito.getSelectedItemPosition() != 0 && !Imagen_Seleccionada && !Documento_Seleccionado)
+                {
+                    ID_Establecimiento=mReference.push().getKey();
+                    mPresenter.UploadLogo(mStorageReference,ID_Establecimiento,Image_Uri);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Debe completar todos los campos",Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
-
-
 
         return view;
     }

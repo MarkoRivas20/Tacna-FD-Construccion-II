@@ -173,11 +173,22 @@ public class ModificarCupon_Vista extends Fragment implements ModificarCupon.Vie
         BtnModificar_Cupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cupon_Modelo Cupon = new Cupon_Modelo(ID_Cupon, ID_Establecimiento, TxtTitulo.getText().toString(), Url_Imagen, TxtDescripcion.getText().toString(),
-                        Integer.parseInt(TxtPorcentaje_Descuento.getText().toString()) ,TxtFecha_Inicio.getText().toString(), TxtFecha_Final.getText().toString(),
-                        Spinner_Estado.getSelectedItem().toString());
 
-                mPresenter.UpdateCouponData(mReference, Cupon);
+                if(TxtFecha_Inicio.getText().toString() != "" && TxtFecha_Final.getText().toString() != "" && TxtDescripcion.getText().toString() != "" &&
+                        TxtTitulo.getText().toString() != "" && TxtPorcentaje_Descuento.getText().toString() != "" && Spinner_Estado.getSelectedItemPosition() != 0)
+                {
+                    Cupon_Modelo Cupon = new Cupon_Modelo(ID_Cupon, ID_Establecimiento, TxtTitulo.getText().toString(), Url_Imagen, TxtDescripcion.getText().toString(),
+                            Integer.parseInt(TxtPorcentaje_Descuento.getText().toString()) ,TxtFecha_Inicio.getText().toString(), TxtFecha_Final.getText().toString(),
+                            Spinner_Estado.getSelectedItem().toString());
+
+                    mPresenter.UpdateCouponData(mReference, Cupon);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Debe completar todos los campos",Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
