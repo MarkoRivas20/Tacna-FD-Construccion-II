@@ -1,5 +1,6 @@
 package com.example.tacnafdbusiness.modelo;
 
+
 public class Cliente_Modelo {
 
     private String ID_Usuario_Cliente;
