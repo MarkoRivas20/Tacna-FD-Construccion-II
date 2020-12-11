@@ -1,5 +1,8 @@
 package com.example.tacnafdbusiness;
 
+import android.view.View;
+
+import com.example.tacnafdbusiness.interfaces.Login;
 import com.example.tacnafdbusiness.modelo.Cliente_Modelo;
 import com.example.tacnafdbusiness.modelo.Cupon_Modelo;
 import com.example.tacnafdbusiness.modelo.Establecimiento_Modelo;
@@ -10,6 +13,7 @@ import com.example.tacnafdbusiness.modelo.RepartidorEstablecimiento_Modelo;
 import com.example.tacnafdbusiness.modelo.Repartidor_Modelo;
 import com.example.tacnafdbusiness.modelo.Resena_Modelo;
 import com.example.tacnafdbusiness.modelo.Usuario_Modelo;
+import com.example.tacnafdbusiness.presentador.Login_Presentador;
 import com.github.javafaker.Crypto;
 import com.github.javafaker.Faker;
 
@@ -27,7 +31,7 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
 
-    Faker faker = new Faker(new Locale("en"));
+    Faker faker = new Faker(new Locale("es"));
     Boolean aBoolean = false;
 
     @Test
@@ -36,12 +40,16 @@ public class ExampleUnitTest {
         aBoolean = false;
 
         try {
-            Cliente_Modelo Cliente = new Cliente_Modelo(faker.idNumber().valid(), faker.internet().emailAddress(),faker.internet().password(),faker.name().firstName(),faker.name().lastName());
+            Cliente_Modelo Cliente = new Cliente_Modelo(faker.idNumber().valid(), faker.internet().emailAddress(), faker.internet().password(),faker.name().firstName(),faker.name().lastName());
+
+
             aBoolean = true;
         }catch (Exception e){
             aBoolean = false;
         }
+
         assertTrue(aBoolean);
+
     }
 
     @Test
@@ -50,6 +58,7 @@ public class ExampleUnitTest {
         aBoolean = false;
 
         try {
+
             Cupon_Modelo Cupon = new Cupon_Modelo(faker.idNumber().valid(), faker.idNumber().valid(), faker.book().title(), faker.company().url(), faker.dune().quote(), faker.number().randomDigit(),
                     faker.backToTheFuture().date(), faker.backToTheFuture().date(), faker.expression("Activo"));
 

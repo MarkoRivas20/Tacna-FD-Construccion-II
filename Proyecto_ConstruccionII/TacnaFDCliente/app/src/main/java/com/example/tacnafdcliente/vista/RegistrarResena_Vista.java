@@ -135,7 +135,7 @@ public class RegistrarResena_Vista extends Fragment implements RegistrarResena.V
             @Override
             public void onClick(View v) {
 
-                if(TxtComentario.getText().toString() != "")
+                if(!TxtComentario.getText().toString().equals(""))
                 {
                     ID_Resena = mReference_Resena.push().getKey();
                     Puntuacion_Resena = (double) Ratingbar_Calificacion.getRating();

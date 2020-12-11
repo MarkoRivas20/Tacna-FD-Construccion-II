@@ -84,7 +84,7 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
     String Url_Logo = "";
     String Url_Documento = "";
     String ID_Usuario = "";
-    String[] Categorias = {"Seleccione una Categoria", "Restaurante", "Cafeteria", "Panaderia", "Cafeteria"};
+    String[] Categorias = {"Seleccione una Categoria", "Restaurante", "Cafeteria", "Panaderia", "Food Truck"};
     String[] Distritos = {"Seleccione un Distrito", "Tacna", "Alto del Alianza", "Calana", "Pachia", "Palca", "Pocollay", "Ciudad Nueva"};
 
     Button BtnRegistrar_Establecimiento;
@@ -166,9 +166,9 @@ public class RegistrarEstablecimiento_Vista extends Fragment implements OnMapRea
             @Override
             public void onClick(View v) {
 
-                if(Txtnombre.getText().toString() != "" && Txtdireccion.getText().toString() != "" && Txttelefono.getText().toString() != "" &&
-                        Txtdescripcion.getText().toString() != "" && Punto_Geografico != "" && Spinner_Categoria.getSelectedItemPosition() != 0
-                        && Spinner_Distrito.getSelectedItemPosition() != 0 && !Imagen_Seleccionada && !Documento_Seleccionado)
+                if(!Txtnombre.getText().toString().equals("") && !Txtdireccion.getText().toString().equals("") && !Txttelefono.getText().toString().equals("") &&
+                        !Txtdescripcion.getText().toString().equals("") && !Punto_Geografico.equals("") && Spinner_Categoria.getSelectedItemPosition() != 0
+                        && Spinner_Distrito.getSelectedItemPosition() != 0 && Imagen_Seleccionada && Documento_Seleccionado)
                 {
                     ID_Establecimiento=mReference.push().getKey();
                     mPresenter.UploadLogo(mStorageReference,ID_Establecimiento,Image_Uri);

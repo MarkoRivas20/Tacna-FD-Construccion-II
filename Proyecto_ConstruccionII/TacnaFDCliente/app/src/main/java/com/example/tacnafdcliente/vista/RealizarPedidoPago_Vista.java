@@ -112,7 +112,7 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
     String Patron_Fecha = "dd/MM/yyyy hh:mm:ss";
     String Fecha_Actual = "";
     String Codigo_Paypal = "";
-    String Url_Fixer = "https://data.fixer.io/api/latest?access_key=Your_Api_Key&base=PEN&symbols=USD&format=1";
+    String Url_Fixer = "https://data.fixer.io/api/latest?access_key=YOUR API KEY&base=PEN&symbols=USD&format=1";
     String Codigo_Culqi = "";
     String Statement_Descriptor = null;
 
@@ -254,16 +254,8 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
                     }
                     if(RD_Tarjetas.isChecked())
                     {
-                        if(credit_CardNumber_EditText.getText().toString() != "" && Credit_CardDate_EditText.getText().toString() != "" &&
-                                Credit_CardCVV_EditText.getText().toString() != "" && Credit_CardName_EditText.getText().toString() != "" &&
-                                TxtCorreo_Electronico.getText().toString() != "")
-                        {
-                            dialog.show();
-                        }
-                        else
-                        {
-                            Toast.makeText(getActivity(),"Debe completar todos los campos", Toast.LENGTH_SHORT).show();
-                        }
+                        dialog.show();
+
 
                     }
                 }
@@ -413,8 +405,10 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+
                         mPresenter.MakeCardPayment(getActivity(), Codigo_Culqi, ID_Pedido, Total, TxtCorreo_Electronico.getText().toString(), credit_CardNumber_EditText.getText().toString(),
                                 Credit_CardCVV_EditText.getText().toString(), Credit_CardDate_EditText.getText().toString());
+
                     }
                 }).start();
 
@@ -552,13 +546,13 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
     @Override
     public void onMakeCardPaymentSuccessful() {
 
-        Pedido_Modelo Pedido = new Pedido_Modelo(ID_Pedido,ID_Establecimiento,ID_Usuario, Descripcion_Pedido, Fecha_Actual,
-                Total, LblDireccion_Destino.getText().toString(), "Pendiente", "Tarjeta de Credito o Debito", Punto_Geografico_Destino);
 
-        mPresenter.SaveOrder(mReference_Pedido, Pedido);
+            Pedido_Modelo Pedido = new Pedido_Modelo(ID_Pedido,ID_Establecimiento,ID_Usuario, Descripcion_Pedido, Fecha_Actual,
+                    Total, LblDireccion_Destino.getText().toString(), "Pendiente", "Tarjeta de Credito o Debito", Punto_Geografico_Destino);
 
-        dialog.dismiss();
+            mPresenter.SaveOrder(mReference_Pedido, Pedido);
 
+            dialog.dismiss();
 
     }
 

@@ -73,6 +73,11 @@ public class SeguimientoPedido_Presentador implements SeguimientoPedido.Presente
     }
 
     @Override
+    public void UpdateTrackingOrderSharedPreference(Context Contexto, String Seguimiento) {
+        mInteractor.performUpdateTrackingOrderSharedPreference(Contexto, Seguimiento);
+    }
+
+    @Override
     public void onSuccessSaveTrackingOrder() {
         mView.onSaveTrackingOrderSuccessful();
     }

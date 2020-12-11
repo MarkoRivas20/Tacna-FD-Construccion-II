@@ -115,7 +115,7 @@ public class ModificarItemMenu_Vista extends Fragment implements ModificarItemMe
             @Override
             public void onClick(View v) {
 
-                if(TxtNombre.getText().toString() != "" && TxtPrecio.getText().toString() != "" && TxtDescripcion.getText().toString() != "" &&
+                if(!TxtNombre.getText().toString().equals("") && !TxtPrecio.getText().toString().equals("") && !TxtDescripcion.getText().toString().equals("") &&
                         Spinner_Estado.getSelectedItemPosition() != 0)
                 {
                     ItemMenu_Modelo Item_Menu = new ItemMenu_Modelo(ID_Item_Menu,ID_Establecimiento, TxtNombre.getText().toString(),

@@ -52,8 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:elevation="6dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_place_gray" />
+                        android:scaleType="centerCrop" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -66,7 +65,7 @@
                     android:layout_marginEnd="20dp"
                     android:elevation="1dp"
                     android:fontFamily="@font/convergence"
-                    android:text="Nombre Establecimiento"
+                    android:text=""
                     android:textColor="#000"
                     android:textSize="23sp"
                     app:layout_constraintBottom_toBottomOf="@+id/cardView2"

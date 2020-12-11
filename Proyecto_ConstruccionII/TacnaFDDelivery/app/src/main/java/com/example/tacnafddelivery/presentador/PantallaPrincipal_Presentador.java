@@ -26,6 +26,11 @@ public class PantallaPrincipal_Presentador implements PantallaPrincipal.onOperat
     }
 
     @Override
+    public void CheckTrackingOrderSharedPreference(Context Contexto) {
+        mInteractor.performCheckTrackingOrderSharedPreference(Contexto);
+    }
+
+    @Override
     public void onSuccess(String correo_electronico, String nombre_usuario, String url_foto) {
         mView.onSessionDataSuccessful(correo_electronico, nombre_usuario, url_foto);
     }
@@ -38,5 +43,10 @@ public class PantallaPrincipal_Presentador implements PantallaPrincipal.onOperat
     @Override
     public void onSuccessCloseSession() {
         mView.onCloseSessionSuccessful();
+    }
+
+    @Override
+    public void onSuccessCheckTrackingOrderSharedPreference(String Seguimiento) {
+        mView.onCheckTrackingOrderSharedPreferenceSuccessful(Seguimiento);
     }
 }

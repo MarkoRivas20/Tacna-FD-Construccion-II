@@ -42,4 +42,13 @@ public class PantallaPrincipal_Interactor implements PantallaPrincipal.Interacto
 
         mListener.onSuccessCloseSession();
     }
+
+    @Override
+    public void performCheckTrackingOrderSharedPreference(Context Contexto) {
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("seguimiento_pedido", Context.MODE_PRIVATE);
+        String Seguimiento = sharedPref.getString("seguimiento_pedido","");
+
+        mListener.onSuccessCheckTrackingOrderSharedPreference(Seguimiento);
+
+    }
 }

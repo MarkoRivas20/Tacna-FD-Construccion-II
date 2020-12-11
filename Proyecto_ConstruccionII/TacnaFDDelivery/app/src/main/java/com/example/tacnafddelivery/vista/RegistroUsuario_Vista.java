@@ -92,8 +92,6 @@ public class RegistroUsuario_Vista extends AppCompatActivity implements Registra
             }
         });
 
-
-
         BtnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

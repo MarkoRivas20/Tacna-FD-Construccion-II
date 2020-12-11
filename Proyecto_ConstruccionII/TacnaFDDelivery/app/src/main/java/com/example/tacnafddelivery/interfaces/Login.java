@@ -22,11 +22,13 @@ public interface Login {
         void performLogIn(DatabaseReference reference, String correo_electronico, String contrasena);
         void performSaveSession(Context context, String correo_electronico, String nombre_usuario, String id_usuario, String Url_Foto);
         void performCheckSession(Context context);
+
     }
 
     interface onOperationListener{
         void onSuccessCheck();
         void onSuccess(String nombre_usuario, String id_usuario, String Url_Foto);
         void onFailure();
+
     }
 }

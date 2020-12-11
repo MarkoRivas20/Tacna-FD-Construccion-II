@@ -30,6 +30,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 
 public class ListarPedido_Vista extends Fragment implements ListarPedido.View {
 
@@ -112,16 +116,15 @@ public class ListarPedido_Vista extends Fragment implements ListarPedido.View {
             @Override
             public void onClick(View v) {
 
-                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+                if(ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
                 {
                     mPresenter.SaveIDOrder(getActivity(), Pedidos.get(Recycler_View.getChildAdapterPosition(v)).getID_Pedido());
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, detallePedido_vista).addToBackStack(null).commit();
                 }
                 else
                 {
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},1);
+                    requestPermissions(new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION},1);
                 }
 
 

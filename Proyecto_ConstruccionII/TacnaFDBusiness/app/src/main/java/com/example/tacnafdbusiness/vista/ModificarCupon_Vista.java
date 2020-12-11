@@ -92,7 +92,7 @@ public class ModificarCupon_Vista extends Fragment implements ModificarCupon.Vie
         Cupon_Info = getArguments();
         ID_Cupon = Cupon_Info.getString("Id_Cupon");
 
-        mPresenter =new ModificarCupon_Presentador(this);
+        mPresenter = new ModificarCupon_Presentador(this);
         mReference = FirebaseDatabase.getInstance().getReference().child("Cupon");
         mStorageReference = FirebaseStorage.getInstance().getReference();
 
@@ -174,8 +174,8 @@ public class ModificarCupon_Vista extends Fragment implements ModificarCupon.Vie
             @Override
             public void onClick(View v) {
 
-                if(TxtFecha_Inicio.getText().toString() != "" && TxtFecha_Final.getText().toString() != "" && TxtDescripcion.getText().toString() != "" &&
-                        TxtTitulo.getText().toString() != "" && TxtPorcentaje_Descuento.getText().toString() != "" && Spinner_Estado.getSelectedItemPosition() != 0)
+                if(!TxtFecha_Inicio.getText().toString().equals("") && !TxtFecha_Final.getText().toString().equals("") && !TxtDescripcion.getText().toString().equals("") &&
+                        !TxtTitulo.getText().toString().equals("") && !TxtPorcentaje_Descuento.getText().toString().equals("") && Spinner_Estado.getSelectedItemPosition() != 0)
                 {
                     Cupon_Modelo Cupon = new Cupon_Modelo(ID_Cupon, ID_Establecimiento, TxtTitulo.getText().toString(), Url_Imagen, TxtDescripcion.getText().toString(),
                             Integer.parseInt(TxtPorcentaje_Descuento.getText().toString()) ,TxtFecha_Inicio.getText().toString(), TxtFecha_Final.getText().toString(),

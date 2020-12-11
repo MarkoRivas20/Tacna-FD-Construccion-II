@@ -42,6 +42,7 @@ public interface SeguimientoPedido {
         void GetIDEstablishment(Context Contexto);
         void GetIDOrder(Context Contexto);
         void SetBackPressed(android.view.View view);
+        void UpdateTrackingOrderSharedPreference(Context Contexto, String Seguimiento);
     }
 
     interface Interactor{
@@ -54,6 +55,7 @@ public interface SeguimientoPedido {
         void performGetIDEstablishment(Context Contexto);
         void performGetIDOrder(Context Contexto);
         void performSetBackPressed(android.view.View view);
+        void performUpdateTrackingOrderSharedPreference(Context Contexto, String Seguimiento);
     }
 
     interface onOperationListener{

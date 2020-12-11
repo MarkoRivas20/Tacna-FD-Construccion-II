@@ -63,6 +63,11 @@ public class DetallePedido_Presentador implements DetallePedido.Presenter, Detal
     }
 
     @Override
+    public void SaveTrackingOrderSharedPreference(Context Contexto, String Seguimiento) {
+        mInteractor.performSaveTrackingOrderSharedPreference(Contexto, Seguimiento);
+    }
+
+    @Override
     public void onSuccessGetOrderInfo(Pedido_Modelo Pedido) {
         mView.onGetOrderInfoSuccessful(Pedido);
     }

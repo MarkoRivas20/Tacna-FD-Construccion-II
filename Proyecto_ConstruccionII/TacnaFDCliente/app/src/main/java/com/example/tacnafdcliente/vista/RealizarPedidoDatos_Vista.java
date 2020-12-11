@@ -85,7 +85,7 @@ public class RealizarPedidoDatos_Vista extends Fragment implements OnMapReadyCal
             @Override
             public void onClick(View v) {
 
-                if(TxtDireccion_Destino.getText().toString() != "" && Punto_Geografico != "")
+                if(!TxtDireccion_Destino.getText().toString().equals("") && !Punto_Geografico.equals(""))
                 {
                     mPresenter.SaveOrderDataSharedPreference(getActivity(),ID_Usuario, ID_Establecimiento, TxtDireccion_Destino.getText().toString(), Punto_Geografico);
                 }

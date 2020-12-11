@@ -168,6 +168,7 @@
                         android:drawablePadding="10dp"
                         android:hint="Telefono"
                         android:layout_marginTop="12dp"
+                        android:inputType="number"
                         android:padding="10dp"
                         android:singleLine="true"
                         android:textColor="#003152"

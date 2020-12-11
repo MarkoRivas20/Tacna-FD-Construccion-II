@@ -169,9 +169,9 @@ public class RegistrarCupon_Vista extends Fragment implements RegistrarCupon.Vie
             @Override
             public void onClick(View v) {
 
-                if(TxtFecha_Inicio.getText().toString() != "" && TxtFecha_Final.getText().toString() != "" && TxtDescripcion.getText().toString() != "" &&
-                        TxtTitulo.getText().toString() != "" && TxtPorcentaje_Descuento.getText().toString() != "" && Spinner_Estado.getSelectedItemPosition() != 0 &&
-                        !Imagen_Seleccionada)
+                if(!TxtFecha_Inicio.getText().toString().equals("") && !TxtFecha_Final.getText().toString().equals("") && !TxtDescripcion.getText().toString().equals("") &&
+                        !TxtTitulo.getText().toString().equals("") && !TxtPorcentaje_Descuento.getText().toString().equals("") && Spinner_Estado.getSelectedItemPosition() != 0 &&
+                        Imagen_Seleccionada)
                 {
                     mPresenter.UploadCouponImage(mStorageReference, ID_Establecimiento, Image_Uri);
                 }

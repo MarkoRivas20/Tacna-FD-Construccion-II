@@ -49,7 +49,7 @@ public class BuscarEmail_Vista extends AppCompatActivity implements BuscarEmail.
             @Override
             public void onClick(View v) {
 
-                if(TxtEmail.getText().toString() != "")
+                if(!TxtEmail.getText().toString().equals(""))
                 {
                     Codigo = (int) (Math.random() * (100000-10000)) + 10000;
 

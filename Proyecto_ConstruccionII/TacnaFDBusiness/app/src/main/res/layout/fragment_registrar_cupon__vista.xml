@@ -194,6 +194,7 @@
                         android:singleLine="true"
                         android:drawableLeft="@drawable/ic_sale"
                         android:textColor="#003152"
+                        android:inputType="number"
                         android:textColorHighlight="#0F77F6"
                         android:textColorHint="#DDDEE0"
                         app:layout_constraintEnd_toEndOf="parent"

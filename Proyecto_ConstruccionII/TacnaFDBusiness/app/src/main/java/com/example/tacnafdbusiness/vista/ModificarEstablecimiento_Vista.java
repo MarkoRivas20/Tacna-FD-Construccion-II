@@ -93,7 +93,7 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
 
     TextView LblDocumento;
 
-    String[] Categorias = {"Seleccione una Categoria", "Restaurante", "Cafeteria", "Panaderia", "Cafeteria"};
+    String[] Categorias = {"Seleccione una Categoria", "Restaurante", "Cafeteria", "Panaderia", "Food Truck"};
     String[] Distritos = {"Seleccione un Distrito", "Tacna", "Alto del Alianza", "Calana", "Pachia", "Palca", "Pocollay", "Ciudad Nueva"};
     String[] Estados = {"Seleccione un estado", "Activo", "Inactivo"};
 
@@ -159,8 +159,8 @@ public class ModificarEstablecimiento_Vista extends Fragment implements Modifica
             @Override
             public void onClick(View v) {
 
-                if(Txtnombre.getText().toString() != "" && Txtdireccion.getText().toString() != "" && Txttelefono.getText().toString() != "" &&
-                        Txtdescripcion.getText().toString() != "" && Punto_Geografico != "" && Spinner_Categoria.getSelectedItemPosition() != 0
+                if(!Txtnombre.getText().toString().equals("") && !Txtdireccion.getText().toString().equals("") && !Txttelefono.getText().toString().equals("") &&
+                        !Txtdescripcion.getText().toString().equals("") && !Punto_Geografico.equals("") && Spinner_Categoria.getSelectedItemPosition() != 0
                         && Spinner_Distrito.getSelectedItemPosition() != 0)
                 {
                     Establecimiento_Modelo Establecimiento = new Establecimiento_Modelo(ID_Establecimiento, ID_Usuario,Txtnombre.getText().toString(),

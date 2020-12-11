@@ -122,6 +122,20 @@
                     </TextView>
 
                     <TextView
+                        android:id="@+id/TxtPrecio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/convergence"
+                        android:text="Precio"
+                        android:textColor="#000"
+                        android:layout_marginTop="10dp"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="@+id/TxtDireccion_Destino"
+                        app:layout_constraintTop_toBottomOf="@+id/TxtDireccion_Destino">
+
+                    </TextView>
+
+                    <TextView
                         android:id="@+id/TxtDescripcion_Pedido"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -133,8 +147,8 @@
                         android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/TxtDireccion_Destino"
-                        app:layout_constraintTop_toBottomOf="@+id/TxtDireccion_Destino">
+                        app:layout_constraintStart_toStartOf="@+id/TxtPrecio"
+                        app:layout_constraintTop_toBottomOf="@+id/TxtPrecio">
 
                     </TextView>
 

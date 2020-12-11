@@ -30,7 +30,8 @@ public class Login_Interactor implements Login.Interactor {
     @Override
     public void performLogIn(DatabaseReference Database_Reference, String Correo_Electronico, final String Contrasena) {
 
-        Query query=Database_Reference.orderByChild("correo_Electronico").equalTo(Correo_Electronico);
+
+        Query query = Database_Reference.orderByChild("correo_Electronico").equalTo(Correo_Electronico);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

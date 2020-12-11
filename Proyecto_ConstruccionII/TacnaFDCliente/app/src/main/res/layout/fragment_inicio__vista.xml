@@ -3,12 +3,173 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".vista.Inicio_Vista">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/listarestablecimiento_blue"
+        android:scaleType="fitXY"
+        >
+
+    </ImageView>
+
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="25dp"
+            android:paddingLeft="25dp">
+
+
+            <ImageView
+                android:id="@+id/ImgRestaurant"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="15sp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_restaurant"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ImgRestaurant_Barra"
+                android:layout_width="70dp"
+                android:layout_height="2dp"
+                android:backgroundTint="#E96D53"
+                android:layout_marginTop="5dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/ImgRestaurant"
+                app:layout_constraintStart_toStartOf="@+id/ImgRestaurant"
+                app:layout_constraintTop_toBottomOf="@+id/ImgRestaurant" />
+
+            <ImageView
+                android:id="@+id/ImgCoffee"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="25dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_coffee"
+                app:layout_constraintStart_toEndOf="@+id/ImgRestaurant"
+                app:layout_constraintTop_toTopOf="@+id/ImgRestaurant" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ImgCoffee_Barra"
+                android:layout_width="70dp"
+                android:layout_height="2dp"
+                android:backgroundTint="#E96D53"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/ImgCoffee"
+                app:layout_constraintStart_toStartOf="@+id/ImgCoffee"
+                app:layout_constraintTop_toBottomOf="@+id/ImgCoffee" />
+
+            <ImageView
+                android:id="@+id/ImgBakery"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="25dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_bakery"
+                app:layout_constraintStart_toEndOf="@+id/ImgCoffee"
+                app:layout_constraintTop_toTopOf="@+id/ImgCoffee" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ImgBakery_Barra"
+                android:layout_width="70dp"
+                android:layout_height="2dp"
+                android:backgroundTint="#E96D53"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/ImgBakery"
+                app:layout_constraintStart_toStartOf="@+id/ImgBakery"
+                app:layout_constraintTop_toBottomOf="@+id/ImgBakery" />
+
+            <ImageView
+                android:id="@+id/ImgFoodTruck"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="25dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_foodtruck"
+                app:layout_constraintStart_toEndOf="@+id/ImgBakery"
+                app:layout_constraintTop_toTopOf="@+id/ImgBakery" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ImgFoodTruck_Barra"
+                android:layout_width="70dp"
+                android:layout_height="2dp"
+                android:backgroundTint="#E96D53"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/ImgFoodTruck"
+                app:layout_constraintStart_toStartOf="@+id/ImgFoodTruck"
+                app:layout_constraintTop_toBottomOf="@+id/ImgFoodTruck" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:fontFamily="@font/convergence"
+                android:text="Establecimientos mas populares"
+                android:textColor="#fff"
+                android:textSize="19sp"
+                app:layout_constraintStart_toStartOf="@+id/ImgRestaurant"
+                app:layout_constraintTop_toBottomOf="@+id/ImgRestaurant" />
+
+            <TextView
+                android:id="@+id/LblNo_Establecimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/convergence"
+                android:layout_marginTop="15dp"
+                android:textColor="#000"
+                android:visibility="gone"
+                android:text="No hay establecimientos en esta categoria"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Recycler_Establecimiento_Inicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/convergence"
+                android:text="Platos que tal vez te gusten"
+                android:layout_marginTop="20dp"
+                android:textColor="#000"
+                android:textSize="19sp"
+                app:layout_constraintStart_toStartOf="@+id/Recycler_Establecimiento_Inicio"
+                app:layout_constraintTop_toBottomOf="@+id/Recycler_Establecimiento_Inicio" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Recycler_Items_Menu_Inicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </FrameLayout>

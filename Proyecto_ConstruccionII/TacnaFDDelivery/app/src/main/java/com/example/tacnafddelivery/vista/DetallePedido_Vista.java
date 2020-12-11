@@ -184,6 +184,7 @@ public class DetallePedido_Vista extends Fragment implements DetallePedido.View,
     @Override
     public void onUpdateOrderStatusSuccess() {
         Location_Manager.removeUpdates(locationListenerNetwork);
+        mPresenter.SaveTrackingOrderSharedPreference(getActivity(),"Activo");
         getActivity().getSupportFragmentManager().popBackStack();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, seguimientoPedido_vista).addToBackStack(null).commit();
     }

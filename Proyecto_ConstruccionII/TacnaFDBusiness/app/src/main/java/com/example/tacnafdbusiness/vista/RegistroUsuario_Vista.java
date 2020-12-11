@@ -2,6 +2,7 @@ package com.example.tacnafdbusiness.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -57,8 +58,9 @@ public class RegistroUsuario_Vista extends AppCompatActivity implements Registra
             @Override
             public void onClick(View v) {
 
-                if(TxtEmail.getText().toString() != "" && TxtClave.getText().toString() != "" && TxtNombre.getText().toString() != "" &&
-                        TxtApellido.getText().toString() != "" && TxtCelular.getText().toString() != "" && TxtRuc.getText().toString() != "")
+                if(!TxtEmail.getText().toString().equals("") && !TxtClave.getText().toString().equals("") && !TxtNombre.getText().toString().equals("") &&
+                        !TxtApellido.getText().toString().equals("") && !TxtCelular.getText().toString().equals("") && !TxtRuc.getText().toString().equals("") &&
+                        TxtRuc.getText().length() == 11)
                 {
                     String ID_Usuario=mReference.push().getKey();
                     Usuario_Modelo Usuario=new Usuario_Modelo(ID_Usuario,TxtNombre.getText().toString(),TxtApellido.getText().toString(),
@@ -79,6 +81,9 @@ public class RegistroUsuario_Vista extends AppCompatActivity implements Registra
     @Override
     public void onCreateUserSuccessful() {
         Toast.makeText(getApplicationContext(),"Nuevo Usuario creado",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(),Login_Vista.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

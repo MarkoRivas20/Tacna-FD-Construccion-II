@@ -73,8 +73,9 @@ public class ModificarUsuario_Vista extends Fragment implements ModificarUsuario
             @Override
             public void onClick(View v) {
 
-                if(TxtEmail.getText().toString() != "" && TxtClave.getText().toString() != "" && TxtNombre.getText().toString() != "" &&
-                        TxtApellido.getText().toString() != "" && TxtCelular.getText().toString() != "" && TxtRuc.getText().toString() != "")
+                if(!TxtEmail.getText().toString().equals("") && !TxtClave.getText().toString().equals("") && !TxtNombre.getText().toString().equals("") &&
+                        !TxtApellido.getText().toString().equals("") && !TxtCelular.getText().toString().equals("") && !TxtRuc.getText().toString().equals("") &&
+                        TxtRuc.getText().length() == 11)
                 {
                     Usuario_Modelo Usuario = new Usuario_Modelo(ID_Usuario,TxtNombre.getText().toString(),TxtApellido.getText().toString(),
                             TxtEmail.getText().toString(),TxtClave.getText().toString(),TxtCelular.getText().toString(),

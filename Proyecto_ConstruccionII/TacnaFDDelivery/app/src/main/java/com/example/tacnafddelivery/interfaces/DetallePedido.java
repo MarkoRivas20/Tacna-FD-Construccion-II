@@ -38,6 +38,7 @@ public interface DetallePedido {
         void GetIDEstablishment(Context Contexto);
         void GetIDOrder(Context Contexto);
         void SetBackPressed(android.view.View view);
+        void SaveTrackingOrderSharedPreference(Context Contexto, String Seguimiento);
     }
 
     interface Interactor{
@@ -49,6 +50,7 @@ public interface DetallePedido {
         void performGetIDEstablishment(Context Contexto);
         void performGetIDOrder(Context Contexto);
         void performSetBackPressed(android.view.View view);
+        void performSaveTrackingOrderSharedPreference(Context Contexto, String Seguimiento);
     }
 
     interface onOperationListener{

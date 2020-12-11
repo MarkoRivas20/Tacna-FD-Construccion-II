@@ -102,6 +102,7 @@
         android:drawablePadding="10dp"
         android:hint="Celular"
         android:padding="15dp"
+        android:inputType="number"
         android:textColor="#003152"
         android:textColorHighlight="#0F77F6"
         android:textColorHint="#DDDEE0"
@@ -112,13 +113,13 @@
         android:id="@+id/txtruc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="12dp"
         android:background="@drawable/shape_textboxregistro"
         android:drawableLeft="@drawable/ic_ruc"
         android:drawablePadding="10dp"
         android:hint="Ruc"
         android:padding="15dp"
+        android:inputType="number"
         android:textColor="#003152"
         android:textColorHighlight="#0F77F6"
         android:textColorHint="#DDDEE0"
@@ -163,11 +164,12 @@
         android:shadowColor="@android:color/transparent"
         android:text="Crear Cuenta"
         android:textColor="#FFFFFF"
-        android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.271" />
+        app:layout_constraintTop_toBottomOf="@+id/txtruc"
+        app:layout_constraintVertical_bias="0.926" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

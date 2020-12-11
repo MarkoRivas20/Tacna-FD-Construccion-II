@@ -172,6 +172,7 @@
                         android:hint="Telefono"
                         android:layout_marginTop="12dp"
                         android:padding="10dp"
+                        android:inputType="number"
                         android:singleLine="true"
                         android:textColor="#003152"
                         android:textColorHighlight="#0F77F6"

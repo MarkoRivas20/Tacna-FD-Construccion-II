@@ -31,6 +31,7 @@ public class Login_Presentador implements Login.Presenter, Login.onOperationList
         mInteractor.performCheckSession(context);
     }
 
+
     @Override
     public void onSuccessCheck() {
         mView.onSuccessfulCheck();
@@ -45,4 +46,5 @@ public class Login_Presentador implements Login.Presenter, Login.onOperationList
     public void onFailure() {
         mView.onLogInFailure();
     }
+
 }

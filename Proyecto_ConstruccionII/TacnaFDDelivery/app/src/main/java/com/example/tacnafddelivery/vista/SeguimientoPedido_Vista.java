@@ -1,8 +1,10 @@
 package com.example.tacnafddelivery.vista;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -10,7 +12,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -35,6 +39,7 @@ import com.example.tacnafddelivery.modelo.Establecimiento_Modelo;
 import com.example.tacnafddelivery.modelo.Pedido_Modelo;
 import com.example.tacnafddelivery.modelo.SeguimientoPedido_Modelo;
 import com.example.tacnafddelivery.presentador.SeguimientoPedido_Presentador;
+import com.example.tacnafddelivery.servicios.LocationService;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -74,6 +79,7 @@ public class SeguimientoPedido_Vista extends Fragment implements SeguimientoPedi
     TextView TxtNombre_Cliente;
     TextView TxtTiempo;
     TextView TxtDistancia;
+    TextView TxtPrecio;
 
     ImageView ImgLogo_Establecimiento;
     ImageView ImgQR;
@@ -85,11 +91,10 @@ public class SeguimientoPedido_Vista extends Fragment implements SeguimientoPedi
     String ID_Pedido = "";
     String Punto_Geografico_Establecimiento = "";
     String Punto_Geografico_Pedido = "";
-
-    double Latitude = 0.0;
-    double Longitud = 0.0;
-
-    LocationManager Location_Manager;
+    
+    private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
+    static final String ACTION_START_LOCATION_SERVICE = "startLocationService";
+    static final String ACTION_STOP_LOCATION_SERVICE = "stopLocationService";
 
     JSONObject JSON_Object;
 
@@ -113,12 +118,12 @@ public class SeguimientoPedido_Vista extends Fragment implements SeguimientoPedi
         TxtDireccion_Destino = (TextView) view.findViewById(R.id.TxtDireccion_Destino);
         TxtNombre_Cliente = (TextView) view.findViewById(R.id.TxtNombre_Cliente);
         TxtTiempo = (TextView) view.findViewById(R.id.TxtTiempo);
+        TxtPrecio = (TextView) view.findViewById(R.id.TxtPrecio);
         TxtDistancia = (TextView) view.findViewById(R.id.TxtDistancia);
         ImgLogo_Establecimiento = (ImageView) view.findViewById(R.id.ImgLogo_Establecimiento);
         BtnMostrar_QR = (Button) view.findViewById(R.id.BtnMostrar_QR);
         BtnTerminar_Seguimiento = (Button) view.findViewById(R.id.BtnTerminar_Seguimiento);
         ImgQR = (ImageView) Qr_View.findViewById(R.id.ImgQR);
-        Location_Manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         mPresenter = new SeguimientoPedido_Presentador(this);
         mReference_Pedido = FirebaseDatabase.getInstance().getReference().child("Pedido");
@@ -171,13 +176,19 @@ public class SeguimientoPedido_Vista extends Fragment implements SeguimientoPedi
         TxtDireccion_Destino.setText(Pedido.getDireccion_Destino());
         Punto_Geografico_Pedido = Pedido.getPunto_Geografico_Destino();
 
-        mPresenter.GetClientName(mReference_Cliente, Pedido.getID_Usuario_Cliente());
-
         if (Pedido.getMetodo_Pago().equals("Contraentrega")) {
             BtnMostrar_QR.setVisibility(View.VISIBLE);
-        } else {
-            BtnMostrar_QR.setVisibility(View.GONE);
+            TxtPrecio.setText("S/. " + Pedido.getPrecio_Total() + " - Pendiente");
         }
+        else
+        {
+            BtnMostrar_QR.setVisibility(View.GONE);
+            TxtPrecio.setText("S/. " + Pedido.getPrecio_Total() + " - Cancelado");
+        }
+
+        mPresenter.GetClientName(mReference_Cliente, Pedido.getID_Usuario_Cliente());
+
+
     }
 
     @Override
@@ -196,13 +207,14 @@ public class SeguimientoPedido_Vista extends Fragment implements SeguimientoPedi
             Picasso.with(getActivity()).load(Establecimiento.getUrl_Qr()).into(ImgQR);
         }
 
-        if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Location_Manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3000, 0, locationListenerNetwork);
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_LOCATION_PERMISSION);
+
+        }
+        else {
             Map_View.onResume();
             Map_View.getMapAsync(this);
-        } else {
-            getActivity().getSupportFragmentManager().popBackStack();
+            startLocationService();
         }
     }
 
@@ -233,7 +245,9 @@ public class SeguimientoPedido_Vista extends Fragment implements SeguimientoPedi
 
     @Override
     public void onUpdateOrderStatusSuccess() {
-        Location_Manager.removeUpdates(locationListenerNetwork);
+        stopLocationService();
+
+        mPresenter.UpdateTrackingOrderSharedPreference(getActivity(),"Inactivo");
         getActivity().getSupportFragmentManager().popBackStack();
     }
 
@@ -276,7 +290,7 @@ public class SeguimientoPedido_Vista extends Fragment implements SeguimientoPedi
                 final LatLng Punto_Destino = new LatLng(Double.parseDouble(hastapuntos[0]), Double.parseDouble(hastapuntos[1]));
                 Mapa.addMarker(new MarkerOptions().position(Punto_Destino).title("Destino").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
-                String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + desde + "&destination=" + hasta + "&key=Your_Api_Key";
+                String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + desde + "&destination=" + hasta + "&key=YOUR API KEY";
 
                 RequestQueue queue = Volley.newRequestQueue(getActivity());
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -329,32 +343,53 @@ public class SeguimientoPedido_Vista extends Fragment implements SeguimientoPedi
 
     }
 
-    private final LocationListener locationListenerNetwork = new LocationListener() {
-        public void onLocationChanged(Location location) {
-            Longitud = location.getLongitude();
-            Latitude = location.getLatitude();
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+        if(requestCode == REQUEST_CODE_LOCATION_PERMISSION && grantResults.length>0){
+            if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                startLocationService();
+            }else
+            {
+                Toast.makeText(getActivity(),"Permiso denegado",Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
-                    SeguimientoPedido_Modelo Seguimiento_Pedido = new SeguimientoPedido_Modelo(ID_Pedido,Latitude+"/"+Longitud);
-                    mPresenter.SaveTrackingOrder(mReference_Seguimiento_Pedido, Seguimiento_Pedido);
+    private boolean isLocationServiceRunning(){
+        ActivityManager activityManager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+
+        if(activityManager != null){
+            for(ActivityManager.RunningServiceInfo service: activityManager.getRunningServices(Integer.MAX_VALUE)){
+                if(LocationService.class.getName().equals(service.service.getClassName())){
+                    if(service.foreground){
+                        return true;
+                    }
                 }
-            });
+            }
+            return false;
         }
+        return false;
+    }
 
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
+    private void startLocationService(){
+        if(!isLocationServiceRunning()){
+            Intent intent = new Intent(getActivity(),LocationService.class);
+            intent.setAction(ACTION_START_LOCATION_SERVICE);
+            intent.putExtra("ID_Pedido", ID_Pedido);
+            getActivity().startService(intent);
+            Toast.makeText(getActivity(),"Location service started",Toast.LENGTH_SHORT).show();
         }
+    }
 
-        @Override
-        public void onProviderEnabled(String s) {
-
+    private void stopLocationService(){
+        if(isLocationServiceRunning()){
+            Intent intent = new Intent(getActivity(),LocationService.class);
+            intent.setAction(ACTION_STOP_LOCATION_SERVICE);
+            intent.putExtra("ID_Pedido", ID_Pedido);
+            getActivity().startService(intent);
+            Toast.makeText(getActivity(),"Location service stopped",Toast.LENGTH_SHORT).show();
         }
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
+    }
 }

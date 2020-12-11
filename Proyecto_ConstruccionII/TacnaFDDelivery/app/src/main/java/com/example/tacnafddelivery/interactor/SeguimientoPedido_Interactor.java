@@ -232,4 +232,12 @@ public class SeguimientoPedido_Interactor implements SeguimientoPedido.Interacto
             }
         });
     }
+
+    @Override
+    public void performUpdateTrackingOrderSharedPreference(Context Contexto, String Seguimiento) {
+        SharedPreferences sharedPref = Contexto.getSharedPreferences("seguimiento_pedido", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("seguimiento_pedido", Seguimiento);
+        editor.apply();
+    }
 }

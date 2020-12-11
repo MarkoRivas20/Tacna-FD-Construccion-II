@@ -196,4 +196,12 @@ public class DetallePedido_Interactor implements DetallePedido.Interactor {
             }
         });
     }
+
+    @Override
+    public void performSaveTrackingOrderSharedPreference(Context Contexto, String Seguimiento) {
+        SharedPreferences sharedPref = Contexto.getSharedPreferences("seguimiento_pedido", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("seguimiento_pedido", Seguimiento);
+        editor.apply();
+    }
 }

@@ -41,6 +41,7 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Pantal
 
     ModificarUsuario_Vista modificarUsuario_vista;
     ListarEstablecimiento_Vista listarEstablecimiento_vista;
+    SeguimientoPedido_Vista seguimientoPedido_vista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Pantal
 
         modificarUsuario_vista = new ModificarUsuario_Vista();
         listarEstablecimiento_vista = new ListarEstablecimiento_Vista();
+        seguimientoPedido_vista = new SeguimientoPedido_Vista();
 
         getSupportFragmentManager().beginTransaction().add(R.id.fragmento, listarEstablecimiento_vista).commit();
 
@@ -79,7 +81,11 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Pantal
         ImgFoto_Usuario = View_Navigation.findViewById(R.id.ImgFoto_Usuario);
 
         mPresenter=new PantallaPrincipal_Presentador(this);
+
+        mPresenter.CheckTrackingOrderSharedPreference(getApplicationContext());
+
         mPresenter.GetSessionData(getApplicationContext());
+
 
     }
 
@@ -147,4 +153,14 @@ public class PantallaPrincipal_Vista extends AppCompatActivity implements Pantal
         startActivity(intent);
         finishAffinity();
     }
+
+    @Override
+    public void onCheckTrackingOrderSharedPreferenceSuccessful(String Seguimiento) {
+
+        if(Seguimiento.equals("Activo"))
+        {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, seguimientoPedido_vista).addToBackStack(null).commit();
+        }
+    }
+
 }

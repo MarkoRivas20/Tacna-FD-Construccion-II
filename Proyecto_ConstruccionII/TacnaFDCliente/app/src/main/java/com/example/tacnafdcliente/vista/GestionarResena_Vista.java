@@ -137,7 +137,7 @@ public class GestionarResena_Vista extends Fragment implements GestionarResena.V
             @Override
             public void onClick(View v) {
 
-                if(TxtComentario_Resena.getText().toString() != "")
+                if(!TxtComentario_Resena.getText().toString().equals(""))
                 {
                     Puntuacion_Resena = (double) Ratingbar_Calificacion.getRating();
                     Resena_Modelo Resena = new Resena_Modelo(ID_Resena, ID_Usuario, ID_Establecimiento, TxtComentario_Resena.getText().toString(), Puntuacion_Resena, Fecha_Actual);
