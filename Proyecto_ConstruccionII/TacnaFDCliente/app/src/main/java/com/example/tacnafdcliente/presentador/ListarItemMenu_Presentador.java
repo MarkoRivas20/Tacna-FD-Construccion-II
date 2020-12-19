@@ -30,6 +30,11 @@ public class ListarItemMenu_Presentador implements ListarItemMenu.Presenter, Lis
     }
 
     @Override
+    public void SaveCouponInfo(Context Contexto, String ID_Cupon, String ID_Cupon_Pedido, int Descuento) {
+        mInteractor.performSaveCouponInfo(Contexto, ID_Cupon, ID_Cupon_Pedido, Descuento);
+    }
+
+    @Override
     public void onSuccessListItemMenu(ArrayList<ItemMenu_Modelo> Items_Menu, Boolean Existe_Item_Menu) {
         mView.onListItemMenuSuccessful(Items_Menu, Existe_Item_Menu);
     }

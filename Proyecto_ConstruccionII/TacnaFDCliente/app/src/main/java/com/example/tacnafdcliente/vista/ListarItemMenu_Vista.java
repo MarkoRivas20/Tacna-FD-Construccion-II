@@ -68,6 +68,7 @@ public class ListarItemMenu_Vista extends Fragment implements ListarItemMenu.Vie
         BtnRealizar_Pedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mPresenter.SaveCouponInfo(getActivity(),"","",0);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, realizarPedidoDatos_vista).addToBackStack(null).commit();
             }
         });

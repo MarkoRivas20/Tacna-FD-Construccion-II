@@ -3,6 +3,8 @@ package com.example.tacnafdcliente.interactor;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.StrictMode;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import com.example.tacnafdcliente.interfaces.RealizarPedidoPago;
 import com.example.tacnafdcliente.modelo.Establecimiento_Modelo;
 import com.example.tacnafdcliente.modelo.Pedido_Modelo;
 import com.example.tacnafdcliente.modelo.Usuario_Modelo;
+import com.example.tacnafdcliente.vista.RealizarPedidoDatos_Vista;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -281,5 +284,71 @@ public class RealizarPedidoPago_Interactor implements RealizarPedidoPago.Interac
                 mListener.onFailureMakeCardPayment();
             }
         });
+    }
+
+    @Override
+    public void performGetCouponInfo(Context Contexto) {
+        SharedPreferences sharedPref = Contexto.getApplicationContext().getSharedPreferences("info_cupon", Context.MODE_PRIVATE);
+        String ID_Cupon = sharedPref.getString("id_cupon","");
+        int Descuento = sharedPref.getInt("descuento",0);
+        String ID_Cupon_Usuario = sharedPref.getString("id_cupon_usuario","");
+
+        if(ID_Cupon.length() != 0)
+        {
+            mListener.onSuccessGetCouponInfo(ID_Cupon, ID_Cupon_Usuario, Descuento);
+        }
+        else
+        {
+            mListener.onFailureGetCouponInfo();
+        }
+    }
+
+    @Override
+    public void performUpdateStatusCoupon(DatabaseReference Database_Reference, String ID_Cupon_Usuario) {
+        Database_Reference.child(ID_Cupon_Usuario).child("estado").setValue("Inactivo").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if(task.isSuccessful())
+                {
+                    mListener.onSuccessUpdateStatusCoupon();
+                }
+                else
+                {
+                    mListener.onFailureUpdateStatusCoupon();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void performUpdateCouponInfo(Context Contexto, String ID_Cupon, String ID_Cupon_Usuario, int Descuento) {
+
+        SharedPreferences sharedPref = Contexto.getSharedPreferences("info_cupon", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("id_cupon", ID_Cupon);
+        editor.putString("id_cupon_usuario", ID_Cupon_Usuario);
+        editor.putInt("descuento", Descuento);
+        editor.apply();
+    }
+
+    @Override
+    public void performCheckInternet(Context Contexto) {
+
+        ConnectivityManager Connectivity_Manager = (ConnectivityManager) Contexto.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo Wifi = Connectivity_Manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo Datos_Moviles = Connectivity_Manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if((Wifi != null && Wifi.isConnected()) || (Datos_Moviles != null && Datos_Moviles.isConnected()))
+        {
+            mListener.onSuccessCheckInternet();
+        }
+        else
+        {
+            mListener.onFailureCheckInternet();
+        }
+
+
     }
 }

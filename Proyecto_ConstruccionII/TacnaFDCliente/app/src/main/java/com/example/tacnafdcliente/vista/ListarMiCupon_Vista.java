@@ -119,6 +119,7 @@ public class ListarMiCupon_Vista extends Fragment implements ListarMiCupon.View 
                 MiCupon_Info.putString("nombre_establecimiento",Cupones_Usuario.get(Recycler_View.getChildAdapterPosition(v)).getNombre_Establecimiento());
                 MiCupon_Info.putString("id_cupon",Cupones_Usuario.get(Recycler_View.getChildAdapterPosition(v)).getID_Cupon());
                 MiCupon_Info.putString("fecha_obtencion",Cupones_Usuario.get(Recycler_View.getChildAdapterPosition(v)).getFecha());
+                MiCupon_Info.putString("id_cupon_usuario",Cupones_Usuario.get(Recycler_View.getChildAdapterPosition(v)).getID_Cupon_Usuario());
 
                 utilizarCupon_vista.setArguments(MiCupon_Info);
 

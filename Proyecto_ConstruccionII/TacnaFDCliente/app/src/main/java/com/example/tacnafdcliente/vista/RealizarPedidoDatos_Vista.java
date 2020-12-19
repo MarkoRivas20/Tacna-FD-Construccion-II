@@ -1,6 +1,8 @@
 package com.example.tacnafdcliente.vista;
 
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,6 +25,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kofigyan.stateprogressbar.StateProgressBar;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 
 public class RealizarPedidoDatos_Vista extends Fragment implements OnMapReadyCallback, RealizarPedidoDatos.View {
@@ -47,11 +53,15 @@ public class RealizarPedidoDatos_Vista extends Fragment implements OnMapReadyCal
     String ID_Establecimiento = "";
     String ID_Usuario = "";
 
+    List<Address> Direcciones;
+
     Button BtnSiguiente;
 
     RealizarPedidoDetalle_Vista realizarPedidoDetalle_vista;
 
     InputMethodManager Input_Method_Manager;
+
+    Geocoder geocoder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +76,7 @@ public class RealizarPedidoDatos_Vista extends Fragment implements OnMapReadyCal
         TxtNombre_Cliente = (EditText) view.findViewById(R.id.TxtNombre_Cliente);
         TxtDireccion_Destino = (EditText) view.findViewById(R.id.TxtDireccion_Destino);
         BtnSiguiente = (Button) view.findViewById(R.id.BtnSiguiente);
+        geocoder = new Geocoder(getActivity(), Locale.getDefault());
 
         realizarPedidoDetalle_vista = new RealizarPedidoDetalle_Vista();
 
@@ -119,6 +130,19 @@ public class RealizarPedidoDatos_Vista extends Fragment implements OnMapReadyCal
                 Mapa.addMarker(marker);
 
                 Punto_Geografico = latitud + "/" + longitud;
+
+                try {
+
+                    Direcciones = geocoder.getFromLocation(Double.parseDouble(latitud), Double.parseDouble(longitud), 1);
+
+                    String [] Direccion = Direcciones.get(0).getAddressLine(0).split(",");
+
+                    TxtDireccion_Destino.setText(Direccion[0]);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 

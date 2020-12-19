@@ -18,11 +18,13 @@ public interface ListarItemMenu {
     interface Presenter{
         void ListItemMenu(DatabaseReference Database_Reference, String ID_Establecimiento);
         void GetEstablishmentInfo(Context Contexto);
+        void SaveCouponInfo(Context Contexto, String ID_Cupon, String ID_Cupon_Pedido, int Descuento);
     }
 
     interface Interactor{
         void performListItemMenu(DatabaseReference Database_Reference, String ID_Establecimiento);
         void performGetEstablishmentInfo(Context Contexto);
+        void performSaveCouponInfo(Context Contexto, String ID_Cupon, String ID_Cupon_Pedido, int Descuento);
     }
 
     interface onOperationListener{

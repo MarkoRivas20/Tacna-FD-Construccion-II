@@ -121,7 +121,7 @@ public class SeguimientoPedido_Vista extends Fragment implements SeguimientoPedi
 
         Mapa.addMarker(new MarkerOptions().position(Ubicacion_Pedido).title("Destino").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
-        String url="https://maps.googleapis.com/maps/api/directions/json?origin="+desde+"&destination="+hasta+"&key=YOUR API KEY";
+        String url="https://maps.googleapis.com/maps/api/directions/json?origin="+desde+"&destination="+hasta+"&key=AIzaSyA_dSBzocOdVEoFBJHVEMknjn6w4c9skrE";
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {

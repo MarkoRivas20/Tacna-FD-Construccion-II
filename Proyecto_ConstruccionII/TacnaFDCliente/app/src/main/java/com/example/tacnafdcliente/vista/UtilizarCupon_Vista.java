@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.tacnafdcliente.R;
 import com.example.tacnafdcliente.interfaces.UtilizarCupon;
 import com.example.tacnafdcliente.modelo.Cupon_Modelo;
+import com.example.tacnafdcliente.modelo.Establecimiento_Modelo;
 import com.example.tacnafdcliente.presentador.UtilizarCupon_Presentador;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -28,7 +29,8 @@ public class UtilizarCupon_Vista extends Fragment implements UtilizarCupon.View 
     }
 
     public UtilizarCupon_Presentador mPresenter;
-    public DatabaseReference mReference;
+    public DatabaseReference mReference_Cupon;
+    public DatabaseReference mReference_Establecimiento;
 
     ImageView ImgCupon;
     TextView TxtDescripcion;
@@ -40,6 +42,10 @@ public class UtilizarCupon_Vista extends Fragment implements UtilizarCupon.View 
     Button BtnUtilizar_Cupon;
 
     String ID_Cupon = "";
+    String ID_Establecimiento = "";
+    String ID_Cupon_Usuario = "";
+
+    RealizarPedidoDatos_Vista realizarPedidoDatos_vista;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +54,8 @@ public class UtilizarCupon_Vista extends Fragment implements UtilizarCupon.View 
         View view = inflater.inflate(R.layout.fragment_utilizar_cupon__vista, container, false);
 
         mPresenter = new UtilizarCupon_Presentador(this);
-        mReference = FirebaseDatabase.getInstance().getReference().child("Cupon");
+        mReference_Cupon = FirebaseDatabase.getInstance().getReference().child("Cupon");
+        mReference_Establecimiento = FirebaseDatabase.getInstance().getReference().child("Establecimiento");
 
         ImgCupon = (ImageView) view.findViewById(R.id.ImgCupon);
         TxtDescripcion = (TextView) view.findViewById(R.id.TxtDescripcion);
@@ -60,12 +67,22 @@ public class UtilizarCupon_Vista extends Fragment implements UtilizarCupon.View 
         BtnUtilizar_Cupon = (Button) view.findViewById(R.id.BtnUtilizar_Cupon);
 
         Bundle MiCupon_Info = getArguments();
+        realizarPedidoDatos_vista = new RealizarPedidoDatos_Vista();
 
         TxtFecha_Obtenido.setText(MiCupon_Info.getString("fecha_obtencion"));
         TxtNombre_Establecimiento.setText(MiCupon_Info.getString("nombre_establecimiento"));
         ID_Cupon = MiCupon_Info.getString("id_cupon");
+        ID_Cupon_Usuario = MiCupon_Info.getString("id_cupon_usuario");
 
-        mPresenter.GetCouponInfo(mReference, ID_Cupon);
+        mPresenter.GetCouponInfo(mReference_Cupon, ID_Cupon);
+
+
+        BtnUtilizar_Cupon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.GetEstablishmentByID(mReference_Establecimiento, ID_Establecimiento);
+            }
+        });
 
         return view;
     }
@@ -77,10 +94,24 @@ public class UtilizarCupon_Vista extends Fragment implements UtilizarCupon.View 
         TxtFecha_Final.setText(Cupon.getFecha_Fin());
         TxtFecha_Inicio.setText(Cupon.getFecha_Inicio());
         TxtPorcentaje_Descuento.setText(Cupon.getPorcentaje_Descuento() + " %");
+        ID_Establecimiento = Cupon.getId_Establecimiento();
+
+        mPresenter.SaveCouponInfo(getActivity(),ID_Cupon, ID_Cupon_Usuario, Cupon.getPorcentaje_Descuento());
     }
 
     @Override
     public void onGetCouponInfoFailure() {
+        Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onGetEstablishmentByIDSuccessful(Establecimiento_Modelo Establecimiento) {
+        mPresenter.SaveEstablishmentInfo(getActivity(), ID_Establecimiento, Establecimiento.getNombre());
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, realizarPedidoDatos_vista).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void onGetEstablishmentByIDFailure() {
         Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
     }
 }

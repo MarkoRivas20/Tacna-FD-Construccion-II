@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.tacnafdcliente.modelo.Establecimiento_Modelo;
 import com.example.tacnafdcliente.modelo.Pedido_Modelo;
 import com.example.tacnafdcliente.modelo.Usuario_Modelo;
+import com.example.tacnafdcliente.vista.RealizarPedidoDatos_Vista;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.Map;
@@ -26,6 +27,12 @@ public interface RealizarPedidoPago {
         void onGetPaymentWithCommissionSuccessful(Double Total_Con_Comision);
         void onMakeCardPaymentSuccessful();
         void onMakeCardPaymentFailure();
+        void onGetCouponInfoSuccessful(String ID_Cupon, String ID_Cupon_Usuario, int Descuento);
+        void onGetCouponInfoFailure();
+        void onUpdateStatusCouponSuccess();
+        void onUpdateStatusCouponFailure();
+        void onCheckInternetFailure();
+        void onCheckInternetSuccessful();
     }
 
     interface Presenter{
@@ -38,6 +45,10 @@ public interface RealizarPedidoPago {
         void GetPaymentWithCommission(String Precio_Dolar, Double Total);
         void MakeCardPayment(Context Contexto ,String Codigo_Culqi, String ID_Pedido, Double Total_Pagar, String Correo_Electronico,
                              String Numero_Tarjeta, String CVV_Tarjeta, String Fecha_Vencimiento_Tarjeta);
+        void GetCouponInfo(Context Contexto);
+        void UpdateStatusCoupon(DatabaseReference Database_Reference, String ID_Cupon_Usuario);
+        void UpdateCouponInfo(Context Contexto, String ID_Cupon, String ID_Cupon_Usuario, int Descuento);
+        void CheckInternet(Context Contexto);
     }
 
     interface Interactor{
@@ -50,6 +61,10 @@ public interface RealizarPedidoPago {
         void performGetPaymentWithCommission(String Precio_Dolar, Double Total);
         void performMakeCardPayment(Context Contexto, String Codigo_Culqi, String ID_Pedido, Double Total_Pagar, String Correo_Electronico,
                              String Numero_Tarjeta, String CVV_Tarjeta, String Fecha_Vencimiento_Tarjeta);
+        void performGetCouponInfo(Context Contexto);
+        void performUpdateStatusCoupon(DatabaseReference Database_Reference, String ID_Cupon_Usuario);
+        void performUpdateCouponInfo(Context Contexto, String ID_Cupon, String ID_Cupon_Usuario, int Descuento);
+        void performCheckInternet(Context Contexto);
     }
 
     interface onOperationListener{
@@ -67,6 +82,12 @@ public interface RealizarPedidoPago {
         void onSuccessGetPaymentWithCommission(Double Total_Con_Comision);
         void onSuccessMakeCardPayment();
         void onFailureMakeCardPayment();
+        void onSuccessGetCouponInfo(String ID_Cupon, String ID_Cupon_Usuario, int Descuento);
+        void onFailureGetCouponInfo();
+        void onSuccessUpdateStatusCoupon();
+        void onFailureUpdateStatusCoupon();
+        void onFailureCheckInternet();
+        void onSuccessCheckInternet();
     }
 
 }

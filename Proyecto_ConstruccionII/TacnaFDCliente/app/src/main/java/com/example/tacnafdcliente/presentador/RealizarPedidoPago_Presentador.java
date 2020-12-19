@@ -65,6 +65,26 @@ public class RealizarPedidoPago_Presentador implements RealizarPedidoPago.Presen
     }
 
     @Override
+    public void GetCouponInfo(Context Contexto) {
+        mInteractor.performGetCouponInfo(Contexto);
+    }
+
+    @Override
+    public void UpdateStatusCoupon(DatabaseReference Database_Reference, String ID_Cupon) {
+        mInteractor.performUpdateStatusCoupon(Database_Reference, ID_Cupon);
+    }
+
+    @Override
+    public void UpdateCouponInfo(Context Contexto, String ID_Cupon, String ID_Cupon_Usuario, int Descuento) {
+        mInteractor.performUpdateCouponInfo(Contexto, ID_Cupon, ID_Cupon_Usuario, Descuento);
+    }
+
+    @Override
+    public void CheckInternet(Context Contexto) {
+        mInteractor.performCheckInternet(Contexto);
+    }
+
+    @Override
     public void onSuccessSaveOrder() {
         mView.onSaveOrderSuccessful();
     }
@@ -132,5 +152,35 @@ public class RealizarPedidoPago_Presentador implements RealizarPedidoPago.Presen
     @Override
     public void onFailureMakeCardPayment() {
         mView.onMakeCardPaymentFailure();
+    }
+
+    @Override
+    public void onSuccessGetCouponInfo(String ID_Cupon, String ID_Cupon_Usuario, int Descuento) {
+        mView.onGetCouponInfoSuccessful(ID_Cupon, ID_Cupon_Usuario, Descuento);
+    }
+
+    @Override
+    public void onFailureGetCouponInfo() {
+        mView.onGetCouponInfoFailure();
+    }
+
+    @Override
+    public void onSuccessUpdateStatusCoupon() {
+        mView.onUpdateStatusCouponSuccess();
+    }
+
+    @Override
+    public void onFailureUpdateStatusCoupon() {
+        mView.onUpdateStatusCouponFailure();
+    }
+
+    @Override
+    public void onFailureCheckInternet() {
+        mView.onCheckInternetFailure();
+    }
+
+    @Override
+    public void onSuccessCheckInternet() {
+        mView.onCheckInternetSuccessful();
     }
 }

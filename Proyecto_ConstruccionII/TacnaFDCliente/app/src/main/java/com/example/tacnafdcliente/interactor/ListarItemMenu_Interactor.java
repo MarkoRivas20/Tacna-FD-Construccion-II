@@ -69,4 +69,14 @@ public class ListarItemMenu_Interactor implements ListarItemMenu.Interactor {
             mListener.onSuccessGetEstablishmentInfo(ID_Establecimiento);
         }
     }
+
+    @Override
+    public void performSaveCouponInfo(Context Contexto, String ID_Cupon, String ID_Cupon_Usuario, int Descuento) {
+        SharedPreferences sharedPref = Contexto.getSharedPreferences("info_cupon", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("id_cupon", ID_Cupon);
+        editor.putString("id_cupon_usuario", ID_Cupon_Usuario);
+        editor.putInt("descuento", Descuento);
+        editor.apply();
+    }
 }

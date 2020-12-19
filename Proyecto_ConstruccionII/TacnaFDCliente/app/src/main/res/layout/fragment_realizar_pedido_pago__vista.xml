@@ -255,7 +255,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:fontFamily="@font/convergence"
-                            android:text="Otros\nRepartidores"
+                            android:text="Recojo en\nTienda"
                             android:textAlignment="center"
                             android:textColor="#000" />
 
@@ -275,7 +275,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:fontFamily="@font/convergence"
-                            android:text="Nuestros\nRepartidores"
+                            android:text="Delivery"
                             android:textAlignment="center"
                             android:textColor="#000"
                             android:visibility="gone"
@@ -306,7 +306,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:visibility="gone"
                         app:layout_constraintStart_toStartOf="@+id/LblMetodo_Pago"
                         app:layout_constraintTop_toBottomOf="@+id/LblMetodo_Pago">
 
@@ -427,6 +426,35 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:id="@+id/LinearLayout_Efectivo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:visibility="visible"
+                            android:layout_marginTop="20dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/LinearLayout_Opciones">
+
+                            <RadioButton
+                                android:id="@+id/RD_Efectivo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="#0031A8"
+                                android:checked="false">
+
+                            </RadioButton>
+
+                            <ImageView
+                                android:id="@+id/imageView13"
+                                android:layout_width="50dp"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/cash" />
+
+                        </LinearLayout>
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
@@ -444,6 +472,20 @@
                     </TextView>
 
                     <TextView
+                        android:id="@+id/TxtDescuento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/convergence"
+                        android:text="Descuento: -S/.0.0"
+                        android:textColor="#E96D53"
+                        android:textSize="20dp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/TxtSubTotal"
+                        app:layout_constraintTop_toBottomOf="@+id/TxtSubTotal">
+
+                    </TextView>
+
+                    <TextView
                         android:id="@+id/TxtEnvio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -451,8 +493,8 @@
                         android:text="Envio: S/.0.0"
                         android:textColor="#000000"
                         android:textSize="20dp"
-                        app:layout_constraintEnd_toEndOf="@+id/TxtSubTotal"
-                        app:layout_constraintTop_toBottomOf="@+id/TxtSubTotal">
+                        app:layout_constraintEnd_toEndOf="@+id/TxtDescuento"
+                        app:layout_constraintTop_toBottomOf="@+id/TxtDescuento">
 
                     </TextView>
 

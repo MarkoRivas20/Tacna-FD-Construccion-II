@@ -2,6 +2,7 @@ package com.example.tacnafdcliente.vista;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.os.StrictMode;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -55,6 +57,7 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -70,6 +73,7 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
     public DatabaseReference mReference_Cliente;
     public DatabaseReference mReference_Establecimiento;
     public DatabaseReference mReference_Pedido;
+    public DatabaseReference mReference_Cupon;
 
     private static final int PAYPAL_REQUEST_CODE=7171;
     private static PayPalConfiguration CONFIG;
@@ -79,6 +83,7 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
     TextView LblDireccion_Destino;
     TextView LblOrden_Pedido;
     TextView LblSubTotal;
+    TextView LblDescuento;
     TextView LblEnvio;
     TextView LblTotal;
     TextView LblRepartidores;
@@ -112,8 +117,10 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
     String Patron_Fecha = "dd/MM/yyyy hh:mm:ss";
     String Fecha_Actual = "";
     String Codigo_Paypal = "";
-    String Url_Fixer = "https://data.fixer.io/api/latest?access_key=YOUR API KEY&base=PEN&symbols=USD&format=1";
+    String Url_Fixer = "https://data.fixer.io/api/latest?access_key=Api Key&base=PEN&symbols=USD&format=1";
     String Codigo_Culqi = "";
+    String ID_Cupon = "";
+    String ID_Cupon_Usuario = "";
     String Statement_Descriptor = null;
 
     Double SubTotal = 0.0;
@@ -124,11 +131,13 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
     RadioButton RD_Paypal;
     RadioButton RD_Tarjetas;
     RadioButton RD_Vendemas;
+    RadioButton RD_Efectivo;
 
     LinearLayout LinearLayout_Opciones;
     LinearLayout LinearLayout_Contraentrega;
     LinearLayout LinearLayout_Tarjeta;
     LinearLayout LinearLayout_Paypal;
+    LinearLayout LinearLayout_Efectivo;
 
     ConstraintLayout Constraint_Layout_Medios_Pago;
     ConstraintLayout ConstraintLayout_Tarjeta_Delante;
@@ -142,11 +151,13 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
 
     View Tarjeta_Layout;
 
-    AlertDialog dialog;
+    AlertDialog Dialog_Tarjeta;
 
     NavigationView Navigation_View;
 
     Toolbar Tool_bar;
+
+    Establecimiento_Modelo Establecimiento = new Establecimiento_Modelo();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -163,12 +174,14 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
         mBuilder.setCancelable(true);
         Tarjeta_Layout = getLayoutInflater().inflate(R.layout.dialog_tarjeta,null);
         mBuilder.setView(Tarjeta_Layout);
-        dialog = mBuilder.create();
+        Dialog_Tarjeta = mBuilder.create();
+
 
         mPresenter = new RealizarPedidoPago_Presentador(this);
         mReference_Cliente = FirebaseDatabase.getInstance().getReference().child("Usuario_Cliente");
         mReference_Establecimiento = FirebaseDatabase.getInstance().getReference().child("Establecimiento");
         mReference_Pedido = FirebaseDatabase.getInstance().getReference().child("Pedido");
+        mReference_Cupon = FirebaseDatabase.getInstance().getReference().child("Cupon_Usuario");
 
         tv_card_number = (TextView) Tarjeta_Layout.findViewById(R.id.tv_card_number);
         tv_member_name = (TextView) Tarjeta_Layout.findViewById(R.id.tv_member_name);
@@ -193,13 +206,16 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
         RD_Paypal = (RadioButton) view.findViewById(R.id.RD_Paypal);
         RD_Tarjetas = (RadioButton) view.findViewById(R.id.RD_Tarjetas);
         RD_Vendemas = (RadioButton) view.findViewById(R.id.RD_Vendemas);
+        RD_Efectivo = (RadioButton) view.findViewById(R.id.RD_Efectivo);
         LblSubTotal = (TextView) view.findViewById(R.id.TxtSubTotal);
         LblEnvio = (TextView) view.findViewById(R.id.TxtEnvio);
         LblTotal = (TextView) view.findViewById(R.id.TxtTotal);
+        LblDescuento = (TextView) view.findViewById(R.id.TxtDescuento);
         LinearLayout_Opciones = (LinearLayout) view.findViewById(R.id.LinearLayout_Opciones);
         LinearLayout_Contraentrega = (LinearLayout) view.findViewById(R.id.LinearLayout_Contraentrega);
         LinearLayout_Tarjeta = (LinearLayout) view.findViewById(R.id.LinearLayout_Tarjeta);
         LinearLayout_Paypal = (LinearLayout) view.findViewById(R.id.LinearLayout_Paypal);
+        LinearLayout_Efectivo = (LinearLayout) view.findViewById(R.id.LinearLayout_Efectivo);
         LblRepartidores = (TextView) view.findViewById(R.id.LblRepartidores);
         LblMetodo_Pago = (TextView) view.findViewById(R.id.LblMetodo_Pago);
         BtnPedir = (Button) view.findViewById(R.id.BtnPedir);
@@ -213,14 +229,11 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
         LblOrden_Pedido.setText(Descripcion_Pedido.replace(", ","\n"));
 
         SubTotal = Detalle_Pedido.getDouble("sub_total");
-        LblSubTotal.setText("SubTotal: " + SubTotal);
-
-        Total = SubTotal;
-        LblTotal.setText("Total: " + Total);
 
         mPresenter.GetOrderDataSharedPreference(getActivity());
         mPresenter.GetClientName(mReference_Cliente, ID_Usuario);
         mPresenter.GetEstablishmentData(mReference_Establecimiento, ID_Establecimiento);
+        mPresenter.GetCouponInfo(getActivity());
 
         State_ProgressBar = (StateProgressBar) view.findViewById(R.id.State_ProgressBar);
 
@@ -230,35 +243,7 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
             @Override
             public void onClick(View v) {
 
-                ID_Pedido = mReference_Pedido.push().getKey();
-
-                if(RD_Repartidor_Tercero.isChecked())
-                {
-                    Pedido_Modelo Pedido = new Pedido_Modelo(ID_Pedido, ID_Establecimiento, ID_Usuario, Descripcion_Pedido, Fecha_Actual,
-                            Total, LblDireccion_Destino.getText().toString(), "Separado", Punto_Geografico_Destino);
-
-                    mPresenter.SaveOrder(mReference_Pedido, Pedido);
-                }
-                else
-                {
-                    if(RD_Paypal.isChecked())
-                    {
-                        mPresenter.GetJsonResultFixer(Url_Fixer);
-                    }
-                    if(RD_Vendemas.isChecked())
-                    {
-                        Pedido_Modelo Pedido = new Pedido_Modelo(ID_Pedido,ID_Establecimiento,ID_Usuario, Descripcion_Pedido, Fecha_Actual,
-                                Total, LblDireccion_Destino.getText().toString(), "Pendiente", "Contraentrega", Punto_Geografico_Destino);
-
-                        mPresenter.SaveOrder(mReference_Pedido, Pedido);
-                    }
-                    if(RD_Tarjetas.isChecked())
-                    {
-                        dialog.show();
-
-
-                    }
-                }
+                mPresenter.CheckInternet(getActivity());
 
             }
         });
@@ -272,6 +257,17 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
                     Constraint_Layout_Medios_Pago.setVisibility(View.VISIBLE);
                     LblEnvio.setText("Envio: S/. 5.0");
                     LblTotal.setText("Total: " + Total);
+
+                    if(Establecimiento.getUrl_Qr() == null){
+                        LinearLayout_Contraentrega.setVisibility(View.GONE);
+                        LinearLayout_Opciones.setVisibility(View.GONE);
+                    }
+                    else
+                    {
+                        LinearLayout_Contraentrega.setVisibility(View.VISIBLE);
+                        LinearLayout_Opciones.setVisibility(View.VISIBLE);
+                    }
+                    LinearLayout_Efectivo.setVisibility(View.GONE);
                 }
             }
         });
@@ -282,9 +278,12 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
                 if(RD_Repartidor_Tercero.isChecked())
                 {
                     Total = SubTotal;
-                    Constraint_Layout_Medios_Pago.setVisibility(View.GONE);
+                    Constraint_Layout_Medios_Pago.setVisibility(View.VISIBLE);
                     LblEnvio.setText("Envio: S/. 0.0");
                     LblTotal.setText("Total: " + SubTotal);
+                    LinearLayout_Efectivo.setVisibility(View.VISIBLE);
+                    LinearLayout_Contraentrega.setVisibility(View.GONE);
+                    LinearLayout_Opciones.setVisibility(View.GONE);
                 }
             }
         });
@@ -294,6 +293,7 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
             public void onClick(View v) {
                 RD_Tarjetas.setChecked(false);
                 RD_Vendemas.setChecked(false);
+                RD_Efectivo.setChecked(false);
             }
         });
 
@@ -302,6 +302,7 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
             public void onClick(View v) {
                 RD_Paypal.setChecked(false);
                 RD_Vendemas.setChecked(false);
+                RD_Efectivo.setChecked(false);
             }
         });
 
@@ -310,6 +311,16 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
             public void onClick(View v) {
                 RD_Paypal.setChecked(false);
                 RD_Tarjetas.setChecked(false);
+                RD_Efectivo.setChecked(true);
+            }
+        });
+
+        RD_Efectivo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RD_Paypal.setChecked(false);
+                RD_Tarjetas.setChecked(false);
+                RD_Vendemas.setChecked(true);
             }
         });
 
@@ -426,6 +437,13 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
         Navigation_View.setCheckedItem(R.id.nav_pedido);
         Tool_bar.setNavigationIcon(R.drawable.icon_toolbar);
         Tool_bar.setBackground(new ColorDrawable(Color.parseColor("#0031A8")));
+
+        if(ID_Cupon.length() != 0)
+        {
+            mPresenter.UpdateCouponInfo(getActivity(),"","",0);
+            mPresenter.UpdateStatusCoupon(mReference_Cupon, ID_Cupon_Usuario);
+        }
+
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmento, listarPedido_vista).addToBackStack("ListarItemMenu_Vista").commit();
     }
 
@@ -457,6 +475,9 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
 
     @Override
     public void onGetEstablishmentDataSuccessful(Establecimiento_Modelo Establecimiento) {
+
+        this.Establecimiento = Establecimiento;
+
         LblNombre_Establecimiento.setText(Establecimiento.getNombre());
         Codigo_Paypal = Establecimiento.getCodigo_Paypal();
         Codigo_Culqi = Establecimiento.getCodigo_Culqi();
@@ -481,16 +502,6 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
         else
         {
             LinearLayout_Tarjeta.setVisibility(View.VISIBLE);
-        }
-
-        if(Establecimiento.getUrl_Qr() == null){
-            LinearLayout_Contraentrega.setVisibility(View.GONE);
-            LinearLayout_Opciones.setVisibility(View.GONE);
-        }
-        else
-        {
-            LinearLayout_Contraentrega.setVisibility(View.VISIBLE);
-            LinearLayout_Opciones.setVisibility(View.VISIBLE);
         }
 
         if(Establecimiento.getCodigo_Paypal() == null && Establecimiento.getCodigo_Culqi() == null && Establecimiento.getUrl_Qr() == null)
@@ -546,20 +557,98 @@ public class RealizarPedidoPago_Vista extends Fragment implements RealizarPedido
     @Override
     public void onMakeCardPaymentSuccessful() {
 
+        Pedido_Modelo Pedido = new Pedido_Modelo(ID_Pedido,ID_Establecimiento,ID_Usuario, Descripcion_Pedido, Fecha_Actual,
+                Total, LblDireccion_Destino.getText().toString(), "Pendiente", "Tarjeta de Credito o Debito", Punto_Geografico_Destino);
 
-            Pedido_Modelo Pedido = new Pedido_Modelo(ID_Pedido,ID_Establecimiento,ID_Usuario, Descripcion_Pedido, Fecha_Actual,
-                    Total, LblDireccion_Destino.getText().toString(), "Pendiente", "Tarjeta de Credito o Debito", Punto_Geografico_Destino);
+        mPresenter.SaveOrder(mReference_Pedido, Pedido);
 
-            mPresenter.SaveOrder(mReference_Pedido, Pedido);
-
-            dialog.dismiss();
+        Dialog_Tarjeta.dismiss();
 
     }
 
     @Override
     public void onMakeCardPaymentFailure() {
         Toast.makeText(getActivity(),"Algo salio mal", Toast.LENGTH_SHORT).show();
-        dialog.dismiss();
+        Dialog_Tarjeta.dismiss();
+    }
+
+    @Override
+    public void onGetCouponInfoSuccessful(String ID_Cupon, String ID_Cupon_Usuario, int Descuento) {
+
+        this.ID_Cupon = ID_Cupon;
+        this.ID_Cupon_Usuario = ID_Cupon_Usuario;
+        LblDescuento.setVisibility(View.VISIBLE);
+
+        Double Cantidad_Descontada = (SubTotal * Descuento)/100;
+
+        LblSubTotal.setText("SubTotal: S/." + SubTotal);
+        LblDescuento.setText("Descuento: -S/." + Cantidad_Descontada);
+        SubTotal = SubTotal - Cantidad_Descontada;
+        Total = SubTotal;
+        LblTotal.setText("Total: S/." + Total);
+    }
+
+    @Override
+    public void onGetCouponInfoFailure() {
+
+        this.ID_Cupon = "";
+        this.ID_Cupon_Usuario = "";
+        LblDescuento.setVisibility(View.GONE);
+
+        LblSubTotal.setText("SubTotal: S/." + SubTotal);
+
+        Total = SubTotal;
+        LblTotal.setText("Total: S/." + Total);
+    }
+
+    @Override
+    public void onUpdateStatusCouponSuccess() {
+
+    }
+
+    @Override
+    public void onUpdateStatusCouponFailure() {
+
+    }
+
+    @Override
+    public void onCheckInternetFailure() {
+        Toast.makeText(getActivity(),"Por favor, conéctese a Internet para continuar con el pago",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCheckInternetSuccessful() {
+
+        ID_Pedido = mReference_Pedido.push().getKey();
+
+
+        if(RD_Paypal.isChecked())
+        {
+            mPresenter.GetJsonResultFixer(Url_Fixer);
+        }
+        if(RD_Tarjetas.isChecked())
+        {
+            Dialog_Tarjeta.show();
+        }
+        if(RD_Repartidor_Tercero.isChecked())
+        {
+            if(RD_Efectivo.isChecked()){
+                Pedido_Modelo Pedido = new Pedido_Modelo(ID_Pedido, ID_Establecimiento, ID_Usuario, Descripcion_Pedido, Fecha_Actual,
+                        Total, LblDireccion_Destino.getText().toString(), "Separado","Efectivo", Punto_Geografico_Destino);
+
+                mPresenter.SaveOrder(mReference_Pedido, Pedido);
+            }
+        }
+        else
+        {
+            if(RD_Vendemas.isChecked())
+            {
+                Pedido_Modelo Pedido = new Pedido_Modelo(ID_Pedido,ID_Establecimiento,ID_Usuario, Descripcion_Pedido, Fecha_Actual,
+                        Total, LblDireccion_Destino.getText().toString(), "Pendiente", "Contraentrega", Punto_Geografico_Destino);
+
+                mPresenter.SaveOrder(mReference_Pedido, Pedido);
+            }
+        }
     }
 
     @Override

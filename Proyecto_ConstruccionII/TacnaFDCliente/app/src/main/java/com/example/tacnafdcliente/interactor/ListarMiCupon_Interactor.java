@@ -52,7 +52,12 @@ public class ListarMiCupon_Interactor implements ListarMiCupon.Interactor {
                 for(DataSnapshot postSnapshot : snapshot.getChildren())
                 {
                     CuponUsuario_Modelo Cupon_Usuario = postSnapshot.getValue(CuponUsuario_Modelo.class);
-                    Cupones_Usuario.add(Cupon_Usuario);
+
+                    if(Cupon_Usuario.getEstado().equals("Activo"))
+                    {
+                        Cupones_Usuario.add(Cupon_Usuario);
+                    }
+
                 }
                 mListener.onSuccessGetCouponUser(Cupones_Usuario);
                 query.removeEventListener(valueEventListener_Get_Coupon_User);
@@ -116,6 +121,7 @@ public class ListarMiCupon_Interactor implements ListarMiCupon.Interactor {
                     for(DataSnapshot postSnapshot : snapshot.getChildren())
                     {
                         Cupon_Modelo Cupon = postSnapshot.getValue(Cupon_Modelo.class);
+
                         Cupones_Usuario.get(Posicion).setTitulo_Cupon(Cupon.getTitulo());
                         Cupones_Usuario.get(Posicion).setUrl_Imagen_Cupon(Cupon.getUrl_Imagen());
                         Cupones_Usuario.get(Posicion).setID_Establecimiento(Cupon.getId_Establecimiento());
